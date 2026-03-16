@@ -202,7 +202,7 @@ jobs:
           key_file=${OCI_KEY_FILE}
           EOF
 
-          echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" | base64 -d > ${OCI_KEY_FILE}
+          echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
 
           docker run -v ${{ github.workspace}}/.oci:/root/.oci \
             ${{ needs.build-cloudrunner-images.outputs.image }} \
