@@ -146,6 +146,7 @@ jobs:
 
   # Test the published image by running it and see if the VM is created.
   test-image:
+    if: ${{ github.event_name != 'pull_request' }}
     needs: build-cloudrunner-images
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -205,7 +206,7 @@ jobs:
           echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
 
           docker run -v ${{ github.workspace}}/.oci:/root/.oci \
-            ${{ needs.build-cloudrunner-images.outputs.image }} \
+            ${{ needs.build-cloudrunner-images.outputs.image }}@${{ needs.build-cloudrunner-images.outputs.digest }} \
             --arch=${{ matrix.arch }} \
             --shape=${{ matrix.shape }} \
             --shape-ocpus=${{ matrix.ocpus }} \
