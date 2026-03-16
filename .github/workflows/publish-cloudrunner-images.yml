@@ -149,12 +149,6 @@ jobs:
     needs: build-cloudrunner-images
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    env:
-      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
-      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
-      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
-      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
-      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
     strategy:
       fail-fast: false
       matrix:
@@ -195,12 +189,22 @@ jobs:
     steps:
       - name: Test the published Cloudrunner Docker image
         run: |
-          docker run \
-            -e OCI_CLI_USER=${{ env.OCI_CLI_USER }} \
-            -e OCI_CLI_TENANCY=${{ env.OCI_CLI_TENANCY }} \
-            -e OCI_CLI_FINGERPRINT=${{ env.OCI_CLI_FINGERPRINT }} \
-            -e OCI_CLI_KEY_CONTENT=${{ env.OCI_CLI_KEY_CONTENT }} \
-            -e OCI_CLI_REGION=${{ env.OCI_CLI_REGION }} \
+          OCI_CONFIG_FILE="${{ github.workspace}}/.oci/config"
+          OCI_KEY_FILE="${{ github.workspace}}/.oci/oci_api_key.pem"
+          mkdir -p "${{ github.workspace}}/.oci"
+
+          cat > ${OCI_CONFIG_FILE} << EOF
+          [DEFAULT]
+          user=${{ secrets.OCI_CLI_USER }}
+          fingerprint=${{ secrets.OCI_CLI_FINGERPRINT }}
+          tenancy=${{ secrets.OCI_CLI_TENANCY }}
+          region=${{ secrets.OCI_CLI_REGION }}
+          key_file=${OCI_KEY_FILE}
+          EOF
+
+          echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" | base64 -d > ${OCI_KEY_FILE}
+
+          docker run -v ${{ github.workspace}}/.oci:/root/.oci \
             ${{ needs.build-cloudrunner-images.outputs.image }} \
             --arch=${{ matrix.arch }} \
             --shape=${{ matrix.shape }} \
