@@ -143,3 +143,69 @@ jobs:
             --type slsaprovenance "${{ env.IMAGE_NAME }}@${{env.IMAGE_DIGEST}}"
       # TODO (github.com/slsa-framework/slsa-verifier/issues/92):
       #       Add step to verify using slsa-verifier
+
+  # Test the published image by running it and see if the VM is created.
+  test-image:
+    needs: build-cloudrunner-images
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: ["amd64", "arm64", "gpu-a10-1", "gpu-a10-2"]
+        include:
+          - runner: "amd64"
+            arch: "amd64"
+            shape: "VM.Standard.E6.Flex"
+            ocpus: 2
+            memory: 8.0
+            region: "us-sanjose-1"
+            availability-domain: bzBe:US-SANJOSE-1-AD-1
+            subnet-id: ocid1.subnet.oc1.us-sanjose-1.aaaaaaaahgdslvujnywu3hvhqbvgz23souseseozvypng7ehnxgcotislubq
+          - runner: "arm64"
+            arch: "arm64"
+            shape: "VM.Standard.A1.Flex"
+            ocpus: 2
+            memory: 8.0
+            region: "us-sanjose-1"
+            availability-domain: bzBe:US-SANJOSE-1-AD-1
+            subnet-id: ocid1.subnet.oc1.us-sanjose-1.aaaaaaaahgdslvujnywu3hvhqbvgz23souseseozvypng7ehnxgcotislubq
+          - runner: "gpu-a10-1"
+            arch: "amd64"
+            shape: "VM.GPU.A10.1"
+            ocpus: 0   # Not a flex type, so ocpus and memory are determined by the shape
+            memory: 0  # Not a flex type, so ocpus and memory are determined by the shape
+            region: "us-sanjose-1"
+            availability-domain: bzBe:US-SANJOSE-1-AD-1
+            subnet-id: ocid1.subnet.oc1.us-sanjose-1.aaaaaaaahgdslvujnywu3hvhqbvgz23souseseozvypng7ehnxgcotislubq
+          - runner: "gpu-a10-2"
+            arch: "amd64"
+            shape: "VM.GPU.A10.2"
+            ocpus: 0   # Not a flex type, so ocpus and memory are determined by the shape
+            memory: 0  # Not a flex type, so ocpus and memory are determined by the shape
+            region: "us-ashburn-1"
+            availability-domain: bzBe:US-ASHBURN-AD-2
+            subnet-id: ocid1.subnet.oc1.iad.aaaaaaaagygdzd4xgbz4xhqhvnbxnoemhjd5ick7vodx4ghk4kg6a6c4xh5q
+    steps:
+      - name: Test the published Cloudrunner Docker image
+        run: |
+          docker run \
+            -e OCI_CLI_USER=${{ env.OCI_CLI_USER }} \
+            -e OCI_CLI_TENANCY=${{ env.OCI_CLI_TENANCY }} \
+            -e OCI_CLI_FINGERPRINT=${{ env.OCI_CLI_FINGERPRINT }} \
+            -e OCI_CLI_KEY_CONTENT=${{ env.OCI_CLI_KEY_CONTENT }} \
+            -e OCI_CLI_REGION=${{ env.OCI_CLI_REGION }} \
+            ${{ needs.build-cloudrunner-images.outputs.image }} \
+            --arch=${{ matrix.arch }} \
+            --shape=${{ matrix.shape }} \
+            --shape-ocpus=${{ matrix.ocpus }} \
+            --shape-memory-in-gbs=${{ matrix.memory }} \
+            --region=${{ matrix.region}} \
+            --availability-domain=${{ matrix.availability-domain }} \
+            --subnet-id=${{ matrix.subnet-id }}
