@@ -392,7 +392,7 @@ jobs:
 
       - name: Upload SBOMs
         if: steps.check-go.outputs.is_go_project == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sbom-cncf-${{ matrix.owner }}-${{ matrix.repo }}
           path: supply-chain/sbom/
