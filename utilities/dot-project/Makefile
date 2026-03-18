@@ -2,7 +2,7 @@
 
 REPO_ROOT := $(abspath ../..)
 
-.PHONY: all build test clean install run help
+.PHONY: all build test clean install run help provision
 
 # Default target
 all: build
@@ -87,6 +87,21 @@ test-setup:
 test-run: test-setup build
 	REPO_ROOT=$(REPO_ROOT) ./bin/validator --config testdata/test-projectlist.yaml
 
+# Provision a .project repo (prints usage if no args given)
+provision: build
+	@if [ -z "$(ORG)" ]; then \
+		echo "Usage: make provision ORG=<org> NAME=<name> [REPO=<repo>] [DRY_RUN=1]"; \
+		echo "       make provision BATCH=<file> [DRY_RUN=1]"; \
+		echo ""; \
+		echo "Examples:"; \
+		echo "  make provision ORG=project-copacetic NAME=Copacetic DRY_RUN=1"; \
+		echo "  make provision BATCH=scripts/example-batch.txt DRY_RUN=1"; \
+	elif [ -n "$(BATCH)" ]; then \
+		./scripts/provision.sh --batch "$(BATCH)" --bootstrap-bin bin/bootstrap $(if $(DRY_RUN),--dry-run); \
+	else \
+		./scripts/provision.sh --org "$(ORG)" --name "$(NAME)" $(if $(REPO),--repo "$(REPO)") --bootstrap-bin bin/bootstrap $(if $(DRY_RUN),--dry-run); \
+	fi
+
 # Show help
 help:
 	@echo "Available targets:"
@@ -103,4 +118,5 @@ help:
 	@echo "  security      - Run security checks"
 	@echo "  test-setup    - Create test environment"
 	@echo "  test-run      - Run with test setup"
+	@echo "  provision     - Provision a .project repo (see: make provision)"
 	@echo "  help          - Show this help message"

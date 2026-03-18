@@ -492,6 +492,14 @@ func mergeBootstrapData(slug string, landscape *LandscapeData, clomonitor *CLOMo
 		Sources: make(map[string]string),
 	}
 
+	// GitHub context for scaffold generation (org/repo)
+	if github != nil && github.Org != nil {
+		result.GitHubOrg = github.Org.Login
+	}
+	if github != nil && github.Repo != nil {
+		result.GitHubRepo = github.Repo.Name
+	}
+
 	// Name: landscape > clomonitor > github > slug
 	if landscape != nil && landscape.Name != "" {
 		result.Name = landscape.Name

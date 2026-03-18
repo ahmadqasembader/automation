@@ -122,6 +122,14 @@ func main() {
 	fmt.Fprintf(os.Stderr, "  Merging data sources...\n")
 	result := projects.MergeBootstrapData(slug, landscapeData, cloProject, ghData)
 
+	// Ensure org/repo are set even if GitHub fetch was skipped
+	if result.GitHubOrg == "" && org != "" {
+		result.GitHubOrg = org
+	}
+	if result.GitHubRepo == "" && repo != "" {
+		result.GitHubRepo = repo
+	}
+
 	// Phase 5: Generate output
 	if *dryRun {
 		fmt.Fprintln(os.Stderr, "\n--- project.yaml ---")
@@ -148,7 +156,12 @@ func main() {
 		fmt.Fprintf(os.Stderr, "\nScaffold written to %s:\n", *outputDir)
 		fmt.Fprintf(os.Stderr, "  - project.yaml\n")
 		fmt.Fprintf(os.Stderr, "  - maintainers.yaml\n")
+		fmt.Fprintf(os.Stderr, "  - README.md\n")
+		fmt.Fprintf(os.Stderr, "  - SECURITY.md\n")
+		fmt.Fprintf(os.Stderr, "  - CODEOWNERS\n")
+		fmt.Fprintf(os.Stderr, "  - .gitignore\n")
 		fmt.Fprintf(os.Stderr, "  - .github/workflows/validate.yaml\n")
+		fmt.Fprintf(os.Stderr, "  - .github/workflows/update-landscape.yml\n")
 	}
 
 	// Show TODOs

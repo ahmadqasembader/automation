@@ -15,6 +15,8 @@ func TestGenerateProjectYAML(t *testing.T) {
 			Slug:                 "test-project",
 			Name:                 "Test Project",
 			Description:          "A test project description",
+			GitHubOrg:            "test-org",
+			GitHubRepo:           "test-project",
 			Website:              "https://test-project.io",
 			Repositories:         []string{"https://github.com/test-org/test-project"},
 			Artwork:              "https://github.com/cncf/artwork/tree/master/projects/test-project",
@@ -46,6 +48,26 @@ func TestGenerateProjectYAML(t *testing.T) {
 		}
 		if !strings.Contains(yamlStr, "schema_version: \"1.0.0\"") {
 			t.Error("output should contain schema_version")
+		}
+
+		// Should always have type: "project"
+		if !strings.Contains(yamlStr, `type: "project"`) {
+			t.Error("output should always contain type: project")
+		}
+
+		// Should use full GitHub URLs for paths
+		if !strings.Contains(yamlStr, "https://github.com/test-org/test-project/blob/main/") {
+			t.Error("output should contain full GitHub URLs for paths")
+		}
+
+		// Should reference CNCF Code of Conduct
+		if !strings.Contains(yamlStr, "cncf/foundation/blob/main/code-of-conduct.md") {
+			t.Error("output should reference CNCF Code of Conduct")
+		}
+
+		// Should always include identity_type defaults
+		if !strings.Contains(yamlStr, "has_dco: true") {
+			t.Error("output should include has_dco: true default")
 		}
 
 		// Should be parseable YAML (after stripping comments)
@@ -86,6 +108,8 @@ func TestGenerateProjectYAML(t *testing.T) {
 			Slug:          "roundtrip-test",
 			Name:          "Roundtrip Test",
 			Description:   "Testing round trip",
+			GitHubOrg:     "test-org",
+			GitHubRepo:    "roundtrip",
 			MaturityPhase: "sandbox",
 			Repositories:  []string{"https://github.com/test/roundtrip"},
 		}
@@ -115,6 +139,7 @@ func TestGenerateMaintainersYAML(t *testing.T) {
 	t.Run("generates valid maintainers YAML", func(t *testing.T) {
 		result := &BootstrapResult{
 			Slug:        "test-project",
+			GitHubOrg:   "test-org",
 			Maintainers: []string{"alice", "bob", "carol"},
 		}
 
@@ -129,6 +154,9 @@ func TestGenerateMaintainersYAML(t *testing.T) {
 		}
 		if !strings.Contains(yamlStr, "alice") {
 			t.Error("output should contain maintainer alice")
+		}
+		if !strings.Contains(yamlStr, `org: "test-org"`) {
+			t.Error("output should contain org field from GitHubOrg")
 		}
 
 		// Should be parseable
@@ -164,14 +192,16 @@ func TestGenerateMaintainersYAML(t *testing.T) {
 }
 
 func TestWriteScaffold(t *testing.T) {
-	t.Run("writes all scaffold files", func(t *testing.T) {
+	t.Run("writes all 8 scaffold files", func(t *testing.T) {
 		dir := t.TempDir()
 		result := &BootstrapResult{
 			Slug:          "test-project",
 			Name:          "Test Project",
 			Description:   "A test project",
+			GitHubOrg:     "test-org",
+			GitHubRepo:    "test-project",
 			MaturityPhase: "sandbox",
-			Repositories:  []string{"https://github.com/test/test-project"},
+			Repositories:  []string{"https://github.com/test-org/test-project"},
 			Maintainers:   []string{"alice"},
 		}
 
@@ -180,20 +210,71 @@ func TestWriteScaffold(t *testing.T) {
 			t.Fatalf("WriteScaffold() error = %v", err)
 		}
 
-		// Check project.yaml exists
-		if _, err := os.Stat(filepath.Join(dir, "project.yaml")); os.IsNotExist(err) {
-			t.Error("project.yaml not created")
+		// All 8 files must exist
+		expectedFiles := []string{
+			"project.yaml",
+			"maintainers.yaml",
+			"README.md",
+			"SECURITY.md",
+			"CODEOWNERS",
+			".gitignore",
+			filepath.Join(".github", "workflows", "validate.yaml"),
+			filepath.Join(".github", "workflows", "update-landscape.yml"),
+		}
+		for _, f := range expectedFiles {
+			if _, err := os.Stat(filepath.Join(dir, f)); os.IsNotExist(err) {
+				t.Errorf("%s not created", f)
+			}
 		}
 
-		// Check maintainers.yaml exists
-		if _, err := os.Stat(filepath.Join(dir, "maintainers.yaml")); os.IsNotExist(err) {
-			t.Error("maintainers.yaml not created")
+		// Spot-check README content
+		readmeData, _ := os.ReadFile(filepath.Join(dir, "README.md"))
+		if !strings.Contains(string(readmeData), "Test Project") {
+			t.Error("README.md should contain project name")
 		}
 
-		// Check workflow file exists
-		workflowPath := filepath.Join(dir, ".github", "workflows", "validate.yaml")
-		if _, err := os.Stat(workflowPath); os.IsNotExist(err) {
-			t.Error("validate.yaml workflow not created")
+		// Spot-check SECURITY.md uses advisory URL
+		secData, _ := os.ReadFile(filepath.Join(dir, "SECURITY.md"))
+		if !strings.Contains(string(secData), "test-org/test-project/security/advisories/new") {
+			t.Error("SECURITY.md should contain advisory URL")
+		}
+
+		// Spot-check CODEOWNERS contains maintainer
+		coData, _ := os.ReadFile(filepath.Join(dir, "CODEOWNERS"))
+		if !strings.Contains(string(coData), "@alice") {
+			t.Error("CODEOWNERS should contain @alice")
+		}
+
+		// Spot-check validate.yaml uses SHA-pinned refs
+		valData, _ := os.ReadFile(filepath.Join(dir, ".github", "workflows", "validate.yaml"))
+		valStr := string(valData)
+		if !strings.Contains(valStr, "@de0fac2e4500dabe0009e67214ff5f5447ce83dd") {
+			t.Error("validate.yaml should SHA-pin actions/checkout")
+		}
+		if !strings.Contains(valStr, "@979abb1e07fa1b6f2b4e77200f6a698cdd86e59c") {
+			t.Error("validate.yaml should SHA-pin cncf/automation actions")
+		}
+		if strings.Contains(valStr, "@main") {
+			t.Error("validate.yaml should not reference @main for cncf/automation actions")
+		}
+
+		// Spot-check update-landscape.yml uses correct secret and SHA-pinned refs
+		lsData, _ := os.ReadFile(filepath.Join(dir, ".github", "workflows", "update-landscape.yml"))
+		lsStr := string(lsData)
+		if !strings.Contains(lsStr, "LANDSCAPE_REPO_TOKEN") {
+			t.Error("update-landscape.yml should use LANDSCAPE_REPO_TOKEN secret")
+		}
+		if !strings.Contains(lsStr, "landscape-update@979abb1e07fa1b6f2b4e77200f6a698cdd86e59c") {
+			t.Error("update-landscape.yml should SHA-pin landscape-update action")
+		}
+		if strings.Contains(lsStr, "uses: cncf/automation/.github/workflows/") {
+			t.Error("update-landscape.yml should use composite action pattern, not reusable workflow")
+		}
+
+		// Spot-check .gitignore content
+		giData, _ := os.ReadFile(filepath.Join(dir, ".gitignore"))
+		if !strings.Contains(string(giData), ".DS_Store") {
+			t.Error(".gitignore should contain .DS_Store")
 		}
 	})
 

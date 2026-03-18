@@ -19,6 +19,10 @@ type BootstrapResult struct {
 	Name        string `json:"name" yaml:"name"`
 	Description string `json:"description" yaml:"description"`
 
+	// GitHub context (used for scaffold generation)
+	GitHubOrg  string `json:"github_org,omitempty" yaml:"github_org,omitempty"`
+	GitHubRepo string `json:"github_repo,omitempty" yaml:"github_repo,omitempty"`
+
 	// URLs
 	Website      string            `json:"website,omitempty" yaml:"website,omitempty"`
 	Repositories []string          `json:"repositories,omitempty" yaml:"repositories,omitempty"`
