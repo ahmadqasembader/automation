@@ -4,8 +4,8 @@
 
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) |
 |---|---|---|---|---|---|---|
-| Kyverno | graduated | graduated | graduated | graduated | incubating | incubating |
-| Agones | sandbox | - | - | - | - | - |
+| Kyverno | graduated | graduated | graduated | graduated | incubating | graduated |
+| Agones | sandbox | - | - | - | sandbox | - |
 | CoHDI | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | Copa | sandbox | sandbox | sandbox | sandbox | sandbox | - |
@@ -99,7 +99,7 @@
 | Knative | graduated | graduated | graduated | graduated | graduated | graduated |
 | KubeEdge | graduated | graduated | graduated | graduated | graduated | graduated |
 | Kubernetes | graduated | graduated | graduated | graduated | graduated | graduated |
-| Kyverno | graduated | graduated | graduated | graduated | incubating | incubating |
+| Kyverno | graduated | graduated | graduated | graduated | incubating | graduated |
 | Linkerd | graduated | graduated | graduated | graduated | graduated | graduated |
 | Open Policy Agent | graduated | graduated | graduated | graduated | graduated | graduated |
 | Prometheus | graduated | graduated | graduated | graduated | graduated | graduated |
@@ -156,7 +156,7 @@
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) |
 |---|---|---|---|---|---|---|
 | Aeraki Mesh | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox |
-| Agones | sandbox | - | - | - | - | - |
+| Agones | sandbox | - | - | - | sandbox | - |
 | Akri | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox |
 | Antrea | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox |
 | Armada | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox |

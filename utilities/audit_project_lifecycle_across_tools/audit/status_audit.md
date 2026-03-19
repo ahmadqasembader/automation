@@ -2,8 +2,8 @@
 
 | Project | [PCC status](./pcc_projects.yaml) | [Landscape status](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor status](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers CSV status](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats status](https://devstats.cncf.io/) | [Artwork status](https://github.com/cncf/artwork/blob/main/README.md) |
 |---|---|---|---|---|---|---|
-| Kyverno | graduated | graduated | graduated | graduated | incubating | incubating |
-| Agones | sandbox | - | - | - | - | - |
+| Kyverno | graduated | graduated | graduated | graduated | incubating | graduated |
+| Agones | sandbox | - | - | - | sandbox | - |
 | CoHDI | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | Copa | sandbox | sandbox | sandbox | sandbox | sandbox | - |

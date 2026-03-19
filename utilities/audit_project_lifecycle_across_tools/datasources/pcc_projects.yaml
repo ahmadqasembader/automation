@@ -1387,7 +1387,7 @@ forming_projects:
   repository_url: https://github.com/nmstate/nmstate
 - name: OpenEverest
   status: Formation - Exploratory
-  project_logo: null
+  project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/openeverest/openeverest-logo.svg?v=1773851195647
   repository_url: https://github.com/openeverest/
 - name: OptiFlow (AI‑OrchestrateX)
   status: Formation - Exploratory
