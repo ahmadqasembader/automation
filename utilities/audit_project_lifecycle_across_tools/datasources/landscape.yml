@@ -4559,6 +4559,14 @@ landscape:
             logo: open-nebula.svg
             crunchbase: https://www.crunchbase.com/organization/opennebula
           - item:
+            name: OpenSandbox
+            description: >-
+              OpenSandbox is a general-purpose sandbox platform for AI applications, offering multi-language SDKs, unified sandbox APIs, and Docker/Kubernetes runtimes for scenarios like Coding Agents, GUI Agents, Agent Evaluation, AI Code Execution, and RL Training.
+            homepage_url: https://open-sandbox.ai/
+            repo_url: https://github.com/alibaba/OpenSandbox
+            logo: opensandbox.svg
+            crunchbase: https://www.crunchbase.com/organization/alibaba-cloud
+          - item:
             name: Prefect
             homepage_url: https://docs.prefect.io/
             repo_url: https://github.com/PrefectHQ/prefect
@@ -5984,9 +5992,12 @@ landscape:
             name: OpenEverest
             description: The open-source platform for automated database provisioning and management. It supports multiple database technologies and can be hosted on any Kubernetes infrastructure, in the cloud or on-premises.
             homepage_url: https://openeverest.io/
+            project: sandbox
             repo_url: https://github.com/openeverest/openeverest
             logo: openeverest.svg
-            crunchbase: https://www.crunchbase.com/organization/openeverest
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            extra:
+              accepted: '2026-03-15'
           - item:
             name: openGauss
             homepage_url: https://opengauss.org/
@@ -15737,12 +15748,6 @@ landscape:
             logo: metalbear.svg
             crunchbase: https://www.crunchbase.com/organization/metalbear
             joined: '2024-07-01'
-          - item:
-            name: Metoro (member)
-            homepage_url: https://metoro.io
-            logo: metoro.svg
-            crunchbase: https://www.crunchbase.com/organization/metoro
-            joined: '2024-09-01'
           - item:
             name: Mezmo (member)
             homepage_url: https://www.mezmo.com/
