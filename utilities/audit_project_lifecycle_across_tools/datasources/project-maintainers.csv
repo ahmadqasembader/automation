@@ -1627,6 +1627,10 @@ Sandbox,Headlamp,Joaquim Rocha,Microsoft,joaquimrocha,https://github.com/headlam
 ,,Kautilya Tripathi,Microsoft,knrt10,
 Sandbox,Microcks,Laurent Broudoux,Postman,lbroudoux,https://github.com/microcks/.github/blob/main/MAINTAINERS.md
 ,,Yacine Kheddache,Postman,yada,
+,,Sebastien Degodez,AXA France,SebastienDegodez,
+,Steering Committee,Hugo Guerrero,Kong,hguerrero, 
+,,Ludovic Pourrat,Lombard Odier,ludovic-pourrat,
+,,Kin Lane,Naftiko,kinlane,
 Sandbox,SOPS,Hidde Beydals,Independent,hiddeco,https://github.com/getsops/community/blob/main/MAINTAINERS.md
 ,,Andrew Block,Red Hat,sabre1041,
 ,,Devin Buhl,Individual,onedr0p,
@@ -1992,17 +1996,20 @@ Sandbox,k0s,Jussi Nummelin,Mirantis,jnummelin,https://github.com/k0sproject/k0s/
 ,,Kimmo Lehto,Mirantis,kke,
 ,,Ethan Mosbaugh,Replicated,emosbaugh,
 Sandbox,kgateway,Art Berger,Solo.io,artberger,https://github.com/kgateway-dev/community/blob/main/MAINTAINERS.md
-,,Ashley Wang,Solo.io,ashleywang1,
+,,Andy Fong,Solo.io,andy-fong,
+,,Ashley Wang,GEICO Insurance,ashleywang1,
 ,,Christian Posta,Solo.io,christian-posta,
 ,,Craig Box,Solo.io,craigbox,
 ,,Daneyon Hansen,Solo.io,danehans,
+,,David Chandler,Solo.io,chandler-solo,
 ,,David Jumani,Solo.io,davidjumani,
 ,,Eitan Yarmush,Solo.io,EItanya,
 ,,Ian Rudie,Solo.io,ilrudie,
 ,,Jacob Bohanon,Coinbase,jbohanon,
 ,,Jahvon Dockery,CarGurus,jahvon,
 ,,Jenny Shu,Solo.io,jenshu,
-,,Kevin Dorosh,,kdorosh,
+,,John Howard,Solo.io,howardjohn,
+,,Kevin Dorosh,Unaffiliated,kdorosh,
 ,,Lawrence Gadban,Solo.io,lgadban,
 ,,Lin Sun,Solo.io,linsun,
 ,,Nadine Spies,Solo.io,Nadine2016,
@@ -2022,6 +2029,7 @@ Sandbox,kgateway,Art Berger,Solo.io,artberger,https://github.com/kgateway-dev/co
 ,,Tyler Schade,GEICO Insurance,tjons,
 ,,Wendie Cheung,Solo.io,wendeh,
 ,,Will Rigby-Hall,Solo.io,williamgrh,
+,,Yossi Mesika,Solo.io,ymesika,
 ,,Yuval Kohavi,Solo.io,yuval-k,
 Sandbox,KubeFleet,Ryan Zhang,Microsoft,ryanzhang-oss,https://github.com/Azure/fleet/blob/main/MAINTAINERS.md
 ,,Zhiying Lin,Microsoft,zhiying-lin,
@@ -2177,6 +2185,7 @@ Sandbox,CoHDI,Naoki Oguchi,Fsas Technologies Inc.,oguchinaoki,https://github.com
 ,,Masaharu Kanda,NTT,kanlkan,
 ,,Michele Gazzetti,IBM research,mgazz,
 ,,Toshihiro Iwamoto,VA Linux,toshiiw,
+,,Kensuke Koda,NTT,dakensuk,
 Sandbox,Cedar,Darin McAdams,SPIRL,D-McAdams,https://github.com/cedar-policy/.github/blob/main/MAINTAINERS.md
 ,,Emina Torlak,Amazon,emina,
 ,,Shaobo He,Amazon,shaobo-he-aws,
@@ -2237,6 +2246,8 @@ Sandbox,KAI Scheduler,Roman Baron,NVIDIA,romanbaron,https://github.com/NVIDIA/KA
 ,,Hagay Sharon,NVIDIA,Hagay-RunAI,
 ,,Sior Meir,NVIDIA,siormeir,
 ,,Guy Shaibi,NVIDIA,gshaibi,
-
-
-
+Sandbox,OpenEverest,Sergey Pronin,Solanica,spron-in,https://github.com/openeverest/governance/blob/main/MAINTAINERS.md
+,,Chisato Fujii,Solanica,chilagrow,
+,,Diogo Recharte,Solanica,recharte,
+,,Iaroslavna Soloveva,Solanica,solovevayaroslavna,
+,,Oksana Grishchenko,Percona,oksana-grishchenko,

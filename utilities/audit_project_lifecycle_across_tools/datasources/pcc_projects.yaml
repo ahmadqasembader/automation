@@ -748,6 +748,12 @@ categories:
     status: Active
     project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/kagent/kagent-logo.svg?v=1752776092793
     repository_url: https://github.com/kagent-dev/
+  - name: KAI Scheduler
+    slug: kai-scheduler
+    category: Sandbox
+    status: Active
+    project_logo: null
+    repository_url: https://github.com/kai-scheduler/
   - name: Kairos
     slug: kairos
     category: Sandbox
@@ -1357,10 +1363,6 @@ forming_projects:
   status: Formation - Exploratory
   project_logo: null
   repository_url: https://github.com/higress-group
-- name: KAI Scheduler
-  status: Formation - Exploratory
-  project_logo: null
-  repository_url: https://github.com/NVIDIA/KAI-Scheduler
 - name: Kmesh
   status: Formation - Exploratory
   project_logo: null
@@ -1383,7 +1385,7 @@ forming_projects:
   repository_url: https://github.com/llm-d
 - name: NMstate
   status: Formation - Exploratory
-  project_logo: null
+  project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/nmstate/nmstate-logo.svg?v=1774279171272
   repository_url: https://github.com/nmstate/nmstate
 - name: OpenEverest
   status: Formation - Exploratory
