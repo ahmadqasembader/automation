@@ -1,0 +1,67 @@
+name: Sync LFX Insights health scores
+
+on:
+  schedule:
+    # Weekly, Sunday 07:00 UTC (low traffic); no LFX_TOKEN required
+    - cron: "0 7 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pyyaml
+
+      - name: Generate lfx_insights_health.yaml
+        run: |
+          test -f datasources/pcc_projects.yaml || (
+            echo "datasources/pcc_projects.yaml is missing. Run Sync PCC workflow first or merge a branch that includes it." >&2
+            exit 1
+          )
+          python scripts/fetch_lfx_insights_health.py
+        working-directory: ./utilities/audit_project_lifecycle_across_tools
+
+      - name: Clean up git credentials
+        run: |
+          git config --local  --unset-all http.https://github.com/.extraheader || true
+          git config --global --unset-all http.https://github.com/.extraheader || true
+          git config --local  --unset-all http.extraheader || true
+          git config --global --unset-all http.extraheader || true
+          git config --local  --unset-all url."https://github.com/".insteadOf || true
+          git config --global --unset-all url."https://github.com/".insteadOf || true
+          git remote set-url origin https://github.com/${{ github.repository }}.git
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          signoff: true
+          author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          commit-message: "Update LFX Insights health snapshot"
+          title: "Update LFX Insights health snapshot"
+          body: |
+            Weekly snapshot of [LFX Insights](https://insights.linuxfoundation.org/) data for projects listed in `pcc_projects.yaml`.
+
+            - Output: `utilities/audit_project_lifecycle_across_tools/datasources/lfx_insights_health.yaml` (`health_tier` → **Insights Health** column, `overall_score` → **Health Score** column in the audit tables)
+            - No `LFX_TOKEN` (public badge + project page)
+          branch: automation/lfx-insights-health
+          add-paths: |
+            utilities/audit_project_lifecycle_across_tools/datasources/lfx_insights_health.yaml

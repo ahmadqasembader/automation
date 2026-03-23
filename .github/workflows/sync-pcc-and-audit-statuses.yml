@@ -87,6 +87,7 @@ jobs:
             - Foundation Maintainers CSV
             - DevStats
             - Artwork README
+            - [LFX Insights](https://insights.linuxfoundation.org/) **Insights Health** tier and numeric **Health Score** (from `datasources/lfx_insights_health.yaml` when present; weekly workflow can populate it)
           branch: automation/update-pcc-projects
           add-paths: |
             utilities/audit_project_lifecycle_across_tools/datasources/pcc_projects.yaml
