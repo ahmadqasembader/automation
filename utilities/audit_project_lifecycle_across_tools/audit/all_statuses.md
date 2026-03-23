@@ -5,13 +5,14 @@
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|---|---|---|---|---|
 | Agones | sandbox | - | - | - | sandbox | - | - | - |
-| CoHDI | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| Copa | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| kube-vip | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| Oxia | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| Service Mesh Performance | sandbox | archived | - | - | - | archived | - | - |
-| TrestleGRC | sandbox | sandbox | - | - | sandbox | - | - | - |
+| CoHDI | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 60 |
+| composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 74 |
+| Copa | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 77 |
+| KAI Scheduler | sandbox | sandbox | - | sandbox | sandbox | - | - | - |
+| kube-vip | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 73 |
+| Oxia | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 69 |
+| Service Mesh Performance | sandbox | archived | - | - | - | archived | Healthy | 67 |
+| TrestleGRC | sandbox | sandbox | - | - | sandbox | - | Healthy | 76 |
 | Velero | sandbox | - | - | - | sandbox | - | - | - |
 | <QHTTPX> | forming | - | - | - | - | - | - | - |
 | AIBrix | forming | - | - | - | - | - | - | - |
@@ -21,284 +22,284 @@
 | CNCF Standards & Specifications | forming | - | - | - | - | - | - | - |
 | CNCF Toolbox | forming | - | - | - | - | - | - | - |
 | Conveyor CI | forming | - | - | - | - | - | - | - |
-| Cruise | forming | - | - | - | - | - | - | - |
+| Cruise | forming | - | - | - | - | - | Stable | 58 |
 | CubeCOS | forming | - | - | - | - | - | - | - |
 | Curvine | forming | - | - | - | - | - | - | - |
 | DevOps AI Toolkit | forming | - | - | - | - | - | - | - |
 | Dexfile | forming | - | - | - | - | - | - | - |
-| Gthulhu | forming | - | - | - | - | - | - | - |
+| Gthulhu | forming | - | - | - | - | - | Healthy | 68 |
 | Higress | forming | sandbox | - | - | - | - | - | - |
-| KAI Scheduler | forming | sandbox | - | sandbox | sandbox | - | - | - |
-| Kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
+| Kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
 | ksctl | forming | - | - | - | - | - | - | - |
 | kube-bind | forming | - | - | - | - | - | - | - |
 | KubeElasti | forming | sandbox | - | sandbox | sandbox | - | - | - |
-| llm-d | forming | - | - | - | - | - | - | - |
-| NMstate | forming | - | - | - | - | - | - | - |
-| OpenEverest | forming | sandbox | - | - | - | - | - | - |
+| llm-d | forming | - | - | - | - | - | Excellent | 84 |
+| NMstate | forming | - | - | - | - | - | Healthy | 76 |
+| OpenEverest | forming | sandbox | - | sandbox | - | - | - | - |
 | OptiFlow (AI‑OrchestrateX) | forming | - | - | - | - | - | - | - |
 | Schema Driven Configuration | forming | - | - | - | - | - | - | - |
 | SecureBuild | forming | - | - | - | - | - | - | - |
 | SemaMesh | forming | - | - | - | - | - | - | - |
-| Sermant | forming | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
+| Sermant | forming | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
 | ServiceRadar | forming | - | - | - | - | - | - | - |
 | Terrascan | forming | - | - | - | - | - | - | - |
-| Brigade | archived | archived | - | - | - | archived | - | - |
-| CNI-Genie | archived | archived | - | - | - | - | - | - |
-| Curiefense | archived | archived | - | - | - | archived | - | - |
-| Curve | archived | archived | - | - | - | archived | - | - |
-| Devstream | archived | archived | - | - | - | archived | - | - |
-| FabEdge | archived | archived | - | - | - | archived | - | - |
+| Brigade | archived | archived | - | - | - | archived | Unsteady | - |
+| CNI-Genie | archived | archived | - | - | - | - | Unsteady | - |
+| Curiefense | archived | archived | - | - | - | archived | Unsteady | - |
+| Curve | archived | archived | - | - | - | archived | Stable | - |
+| Devstream | archived | archived | - | - | - | archived | Stable | - |
+| FabEdge | archived | archived | - | - | - | archived | Stable | - |
 | Fonio | archived | archived | - | - | - | archived | - | - |
-| Keptn | archived | archived | - | - | - | archived | - | - |
-| Krator | archived | archived | - | - | - | archived | - | - |
-| Krustlet | archived | archived | - | - | - | archived | - | - |
-| KubeDL | archived | archived | - | - | - | archived | - | - |
-| Merbridge | archived | archived | - | - | - | archived | - | - |
-| Nocalhost | archived | archived | - | - | - | archived | - | - |
+| Keptn | archived | archived | - | - | - | archived | Stable | - |
+| Krator | archived | archived | - | - | - | archived | Unsteady | - |
+| Krustlet | archived | archived | - | - | - | archived | Stable | - |
+| KubeDL | archived | archived | - | - | - | archived | Stable | - |
+| Merbridge | archived | archived | - | - | - | archived | Stable | - |
+| Nocalhost | archived | archived | - | - | - | archived | Healthy | - |
 | Open Service Mesh | archived | archived | - | - | - | archived | - | - |
-| OpenELB | archived | archived | - | - | - | archived | - | - |
-| OpenMetrics | archived | archived | - | - | - | archived | - | - |
-| OpenTracing | archived | archived | - | - | - | archived | - | - |
-| Pravega | archived | archived | - | - | - | archived | - | - |
-| RKT | archived | archived | - | - | - | archived | - | - |
-| sealer | archived | archived | - | - | - | archived | - | - |
+| OpenELB | archived | archived | - | - | - | archived | Healthy | - |
+| OpenMetrics | archived | archived | - | - | - | archived | Critical | - |
+| OpenTracing | archived | archived | - | - | - | archived | Critical | - |
+| Pravega | archived | archived | - | - | - | archived | Stable | - |
+| RKT | archived | archived | - | - | - | archived | Stable | - |
+| sealer | archived | archived | - | - | - | archived | Stable | - |
 | Service Mesh Interface | archived | archived | - | - | - | archived | - | - |
 | skooner | archived | archived | - | - | - | archived | - | - |
-| SuperEdge | archived | archived | - | - | - | archived | - | - |
-| Teller | archived | archived | - | - | - | archived | - | - |
-| Xline | archived | archived | - | - | - | archived | - | - |
+| SuperEdge | archived | archived | - | - | - | archived | Stable | - |
+| Teller | archived | archived | - | - | - | archived | Healthy | - |
+| Xline | archived | archived | - | - | - | archived | Stable | - |
 
 ## Graduated
 
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|---|---|---|---|---|
-| Argo | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| cert-manager | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Cilium | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| CloudEvents | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Containerd | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| CoreDNS | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| CRI-O | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Crossplane | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| CubeFS | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Dapr | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Dragonfly | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Envoy | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Etcd | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Falco | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Fluentd | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Flux | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Harbor | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Helm | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| in-toto | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Istio | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Jaeger | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| KEDA | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Knative | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| KubeEdge | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Kubernetes | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Kyverno | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Linkerd | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Open Policy Agent | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Prometheus | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Rook | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| SPIFFE | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| SPIRE | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| The Update Framework (TUF) | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| TiKV | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
-| Vitess | graduated | graduated | graduated | graduated | graduated | graduated | - | - |
+| Argo | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 83 |
+| cert-manager | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 82 |
+| Cilium | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 82 |
+| CloudEvents | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 86 |
+| Containerd | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 87 |
+| CoreDNS | graduated | graduated | graduated | graduated | graduated | graduated | Healthy | 78 |
+| CRI-O | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 80 |
+| Crossplane | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 86 |
+| CubeFS | graduated | graduated | graduated | graduated | graduated | graduated | Healthy | 77 |
+| Dapr | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 82 |
+| Dragonfly | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 80 |
+| Envoy | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 86 |
+| Etcd | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 83 |
+| Falco | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 82 |
+| Fluentd | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 84 |
+| Flux | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 82 |
+| Harbor | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 84 |
+| Helm | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 84 |
+| in-toto | graduated | graduated | graduated | graduated | graduated | graduated | Healthy | 72 |
+| Istio | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 85 |
+| Jaeger | graduated | graduated | graduated | graduated | graduated | graduated | Healthy | 78 |
+| KEDA | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 85 |
+| Knative | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 85 |
+| KubeEdge | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 80 |
+| Kubernetes | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 88 |
+| Kyverno | graduated | graduated | graduated | graduated | graduated | graduated | Healthy | 78 |
+| Linkerd | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 80 |
+| Open Policy Agent | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 81 |
+| Prometheus | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 86 |
+| Rook | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 85 |
+| SPIFFE | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 80 |
+| SPIRE | graduated | graduated | graduated | graduated | graduated | graduated | Critical | - |
+| The Update Framework (TUF) | graduated | graduated | graduated | graduated | graduated | graduated | Healthy | 79 |
+| TiKV | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 82 |
+| Vitess | graduated | graduated | graduated | graduated | graduated | graduated | Excellent | 83 |
 
 ## Incubating
 
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|---|---|---|---|---|
-| Artifact Hub | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Backstage | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Buildpacks | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Chaos Mesh | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Cloud Custodian | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| CNI | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Contour | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Cortex | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| emissary-ingress | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Flatcar | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Fluid Project | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| gRPC | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| karmada | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Keycloak | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Kserve | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Kubeflow | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Kubescape | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| KubeVela | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| KubeVirt | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Lima | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| LitmusChaos | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Longhorn | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| metal3-io | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| NATS | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Notary | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| OpenCost | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| OpenFeature | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| OpenFGA | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| OpenKruise | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| OpenTelemetry | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| OpenYurt | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Operator Framework | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Strimzi | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Thanos | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| Volcano | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
-| wasmCloud | incubating | incubating | incubating | incubating | incubating | incubating | - | - |
+| Artifact Hub | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 74 |
+| Backstage | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 82 |
+| Buildpacks | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 82 |
+| Chaos Mesh | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 74 |
+| Cloud Custodian | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 73 |
+| CNI | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 82 |
+| Contour | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 79 |
+| Cortex | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 79 |
+| emissary-ingress | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 77 |
+| Flatcar | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 80 |
+| Fluid Project | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 78 |
+| gRPC | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 82 |
+| karmada | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 78 |
+| Keycloak | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 86 |
+| Kserve | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 81 |
+| Kubeflow | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 86 |
+| Kubescape | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 76 |
+| KubeVela | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 81 |
+| KubeVirt | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 86 |
+| Lima | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 81 |
+| LitmusChaos | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 77 |
+| Longhorn | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 75 |
+| metal3-io | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 80 |
+| NATS | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 83 |
+| Notary | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 80 |
+| OpenCost | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 80 |
+| OpenFeature | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 80 |
+| OpenFGA | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 84 |
+| OpenKruise | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 81 |
+| OpenTelemetry | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 89 |
+| OpenYurt | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 80 |
+| Operator Framework | incubating | incubating | incubating | incubating | incubating | incubating | Critical | - |
+| Strimzi | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 86 |
+| Thanos | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 84 |
+| Volcano | incubating | incubating | incubating | incubating | incubating | incubating | Excellent | 86 |
+| wasmCloud | incubating | incubating | incubating | incubating | incubating | incubating | Healthy | 77 |
 
 ## Sandbox
 
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|---|---|---|---|---|
-| Aeraki Mesh | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
+| Aeraki Mesh | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 62 |
 | Agones | sandbox | - | - | - | sandbox | - | - | - |
-| Akri | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Antrea | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Armada | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Athenz | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Atlantis | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Bank-Vaults | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| BFE | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| bootc | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| bpfman | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Cadence | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Capsule | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Carina | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Cartography | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Carvel | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| cdk8s | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| ChaosBlade | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| CloudNativePG | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Clusternet | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Clusterpedia | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| CoHDI | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| Confidential Containers | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Connect RPC | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| container2wasm | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| ContainerSSH | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Copa | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| Cozystack | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Dalec | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Devfile | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| DevSpace | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Dex | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Distribution | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Drasi | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| easegress | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Eraser | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| External Secrets Operator | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| HAMi | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Headlamp | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Hexa | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| HolmesGPT | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| HwameiStor | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Hyperlight | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Inclavare Containers | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Inspektor Gadget | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| interLink | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| k0s | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| k3s | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| k8gb | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| K8sGPT | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| K8up | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| kagent | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kairos | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kanister | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| KCL | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| kcp | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kepler | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Keylime | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| kgateway | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| KitOps | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| ko | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Konveyor | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Koordinator | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| kpt | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| krkn | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kuadrant | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kuasar | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| kube-burner | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kube-OVN | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| kube-rs | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| kube-vip | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| Kubean | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| KubeArmor | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kubeclipper | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| KubeFleet | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kuberhealthy | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kubernetes AI Toolchain Operator (KAITO) | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| KubeSlice | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| KubeStellar | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| kubewarden | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| KUDO | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kuma | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Kured | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| KusionStack | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Logging Operator | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| LoxiLB | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Meshery | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| MetalLB | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Microcks | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| ModelPack | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Network Service Mesh | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| OAuth2 Proxy | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Open Cluster Management | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Open Policy Registry (OPCR) | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| OpenChoreo | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| OpenEBS | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| OpenFunction | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| openGemini | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| OpenGitOps | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| OpenTofu | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| ORAS (OCI Registry as Storage) | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| OVN-Kubernetes | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Oxia | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
-| Paralus | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| PARSEC | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Perses | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| PipeCD | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Piraeus-Datastore | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Pixie | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Podman Container Tools | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Podman Desktop | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Porter | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Radius | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Ratify | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Runme Notebooks | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| SchemaHero | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Score | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Serverless Devs | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Serverless Workflow Specification | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Service Mesh Performance | sandbox | archived | - | - | - | archived | - | - |
-| Shipwright | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| SlimFaaS | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| SlimToolkit | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| SOPS | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Spiderpool | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Spin | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| stacker | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Submariner | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Telepresence | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Tinkerbell | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Tokenetes | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Tremor | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| TrestleGRC | sandbox | sandbox | - | - | sandbox | - | - | - |
-| Trickster | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| urunc | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
+| Akri | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| Antrea | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
+| Armada | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
+| Athenz | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| Atlantis | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
+| Bank-Vaults | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| BFE | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| bootc | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
+| bpfman | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| Cadence | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 87 |
+| Capsule | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
+| Carina | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Stable | 54 |
+| Cartography | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| Carvel | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
+| cdk8s | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
+| ChaosBlade | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| CloudNativePG | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
+| Clusternet | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
+| Clusterpedia | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
+| CoHDI | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 60 |
+| composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 74 |
+| Confidential Containers | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
+| Connect RPC | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 85 |
+| container2wasm | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
+| ContainerSSH | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 64 |
+| Copa | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 77 |
+| Cozystack | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| Dalec | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| Devfile | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| DevSpace | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
+| Dex | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
+| Distribution | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 79 |
+| Drasi | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| easegress | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 63 |
+| Eraser | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 64 |
+| External Secrets Operator | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
+| HAMi | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 83 |
+| Headlamp | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
+| Hexa | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Stable | 56 |
+| HolmesGPT | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| HwameiStor | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
+| Hyperlight | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
+| Inclavare Containers | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
+| Inspektor Gadget | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| interLink | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 60 |
+| k0s | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| k3s | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| k8gb | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| K8sGPT | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| K8up | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
+| kagent | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
+| KAI Scheduler | sandbox | sandbox | - | sandbox | sandbox | - | - | - |
+| Kairos | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 79 |
+| Kanister | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| KCL | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
+| kcp | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
+| Kepler | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| Keylime | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
+| kgateway | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
+| KitOps | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
+| ko | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
+| Konveyor | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| Koordinator | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| kpt | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| krkn | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| Kuadrant | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| Kuasar | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 62 |
+| kube-burner | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 71 |
+| Kube-OVN | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
+| kube-rs | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
+| kube-vip | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 73 |
+| Kubean | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| KubeArmor | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| Kubeclipper | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 71 |
+| KubeFleet | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
+| Kuberhealthy | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 65 |
+| Kubernetes AI Toolchain Operator (KAITO) | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
+| KubeSlice | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| KubeStellar | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
+| kubewarden | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 83 |
+| KUDO | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| Kuma | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
+| Kured | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| KusionStack | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
+| Logging Operator | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| LoxiLB | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
+| Meshery | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
+| MetalLB | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
+| Microcks | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
+| ModelPack | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| Network Service Mesh | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
+| OAuth2 Proxy | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| Open Cluster Management | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 86 |
+| Open Policy Registry (OPCR) | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Stable | 54 |
+| OpenChoreo | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
+| OpenEBS | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| OpenFunction | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 60 |
+| openGemini | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| OpenGitOps | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Stable | 56 |
+| OpenTofu | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
+| ORAS (OCI Registry as Storage) | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
+| OVN-Kubernetes | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
+| Oxia | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 69 |
+| Paralus | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
+| PARSEC | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
+| Perses | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 85 |
+| PipeCD | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
+| Piraeus-Datastore | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| Pixie | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| Podman Container Tools | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
+| Podman Desktop | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
+| Porter | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
+| Radius | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
+| Ratify | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 64 |
+| Runme Notebooks | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| SchemaHero | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
+| Score | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| Serverless Devs | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| Serverless Workflow Specification | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 83 |
+| Service Mesh Performance | sandbox | archived | - | - | - | archived | Healthy | 67 |
+| Shipwright | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| SlimFaaS | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 65 |
+| SlimToolkit | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 69 |
+| SOPS | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
+| Spiderpool | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
+| Spin | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
+| stacker | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
+| Submariner | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 79 |
+| Telepresence | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| Tinkerbell | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| Tokenetes | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Stable | 48 |
+| Tremor | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
+| TrestleGRC | sandbox | sandbox | - | - | sandbox | - | Healthy | 76 |
+| Trickster | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| urunc | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
 | Velero | sandbox | - | - | - | sandbox | - | - | - |
-| Vineyard | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Virtual Kubelet | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| VS Code Kubernetes Tools | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| WasmEdge Runtime | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| werf | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| xRegistry | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| Youki | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
-| zot | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
+| Vineyard | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
+| Virtual Kubelet | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 71 |
+| VS Code Kubernetes Tools | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
+| WasmEdge Runtime | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
+| werf | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
+| xRegistry | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Stable | 58 |
+| Youki | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
+| zot | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
 
 ## Forming
 
@@ -312,26 +313,25 @@
 | CNCF Standards & Specifications | forming | - | - | - | - | - | - | - |
 | CNCF Toolbox | forming | - | - | - | - | - | - | - |
 | Conveyor CI | forming | - | - | - | - | - | - | - |
-| Cruise | forming | - | - | - | - | - | - | - |
+| Cruise | forming | - | - | - | - | - | Stable | 58 |
 | CubeCOS | forming | - | - | - | - | - | - | - |
 | Curvine | forming | - | - | - | - | - | - | - |
 | DevOps AI Toolkit | forming | - | - | - | - | - | - | - |
 | Dexfile | forming | - | - | - | - | - | - | - |
-| Gthulhu | forming | - | - | - | - | - | - | - |
+| Gthulhu | forming | - | - | - | - | - | Healthy | 68 |
 | Higress | forming | sandbox | - | - | - | - | - | - |
-| KAI Scheduler | forming | sandbox | - | sandbox | sandbox | - | - | - |
-| Kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
+| Kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
 | ksctl | forming | - | - | - | - | - | - | - |
 | kube-bind | forming | - | - | - | - | - | - | - |
 | KubeElasti | forming | sandbox | - | sandbox | sandbox | - | - | - |
-| llm-d | forming | - | - | - | - | - | - | - |
-| NMstate | forming | - | - | - | - | - | - | - |
-| OpenEverest | forming | sandbox | - | - | - | - | - | - |
+| llm-d | forming | - | - | - | - | - | Excellent | 84 |
+| NMstate | forming | - | - | - | - | - | Healthy | 76 |
+| OpenEverest | forming | sandbox | - | sandbox | - | - | - | - |
 | OptiFlow (AI‑OrchestrateX) | forming | - | - | - | - | - | - | - |
 | Schema Driven Configuration | forming | - | - | - | - | - | - | - |
 | SecureBuild | forming | - | - | - | - | - | - | - |
 | SemaMesh | forming | - | - | - | - | - | - | - |
-| Sermant | forming | sandbox | sandbox | sandbox | sandbox | sandbox | - | - |
+| Sermant | forming | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
 | ServiceRadar | forming | - | - | - | - | - | - | - |
 | Terrascan | forming | - | - | - | - | - | - | - |
 
@@ -339,31 +339,31 @@
 
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|---|---|---|---|---|
-| Brigade | archived | archived | - | - | - | archived | - | - |
-| CNI-Genie | archived | archived | - | - | - | - | - | - |
-| Curiefense | archived | archived | - | - | - | archived | - | - |
-| Curve | archived | archived | - | - | - | archived | - | - |
-| Devstream | archived | archived | - | - | - | archived | - | - |
-| FabEdge | archived | archived | - | - | - | archived | - | - |
+| Brigade | archived | archived | - | - | - | archived | Unsteady | - |
+| CNI-Genie | archived | archived | - | - | - | - | Unsteady | - |
+| Curiefense | archived | archived | - | - | - | archived | Unsteady | - |
+| Curve | archived | archived | - | - | - | archived | Stable | - |
+| Devstream | archived | archived | - | - | - | archived | Stable | - |
+| FabEdge | archived | archived | - | - | - | archived | Stable | - |
 | Fonio | archived | archived | - | - | - | archived | - | - |
-| Keptn | archived | archived | - | - | - | archived | - | - |
-| Krator | archived | archived | - | - | - | archived | - | - |
-| Krustlet | archived | archived | - | - | - | archived | - | - |
-| KubeDL | archived | archived | - | - | - | archived | - | - |
-| Merbridge | archived | archived | - | - | - | archived | - | - |
-| Nocalhost | archived | archived | - | - | - | archived | - | - |
+| Keptn | archived | archived | - | - | - | archived | Stable | - |
+| Krator | archived | archived | - | - | - | archived | Unsteady | - |
+| Krustlet | archived | archived | - | - | - | archived | Stable | - |
+| KubeDL | archived | archived | - | - | - | archived | Stable | - |
+| Merbridge | archived | archived | - | - | - | archived | Stable | - |
+| Nocalhost | archived | archived | - | - | - | archived | Healthy | - |
 | Open Service Mesh | archived | archived | - | - | - | archived | - | - |
-| OpenELB | archived | archived | - | - | - | archived | - | - |
-| OpenMetrics | archived | archived | - | - | - | archived | - | - |
-| OpenTracing | archived | archived | - | - | - | archived | - | - |
-| Pravega | archived | archived | - | - | - | archived | - | - |
-| RKT | archived | archived | - | - | - | archived | - | - |
-| sealer | archived | archived | - | - | - | archived | - | - |
+| OpenELB | archived | archived | - | - | - | archived | Healthy | - |
+| OpenMetrics | archived | archived | - | - | - | archived | Critical | - |
+| OpenTracing | archived | archived | - | - | - | archived | Critical | - |
+| Pravega | archived | archived | - | - | - | archived | Stable | - |
+| RKT | archived | archived | - | - | - | archived | Stable | - |
+| sealer | archived | archived | - | - | - | archived | Stable | - |
 | Service Mesh Interface | archived | archived | - | - | - | archived | - | - |
 | skooner | archived | archived | - | - | - | archived | - | - |
-| SuperEdge | archived | archived | - | - | - | archived | - | - |
-| Teller | archived | archived | - | - | - | archived | - | - |
-| Xline | archived | archived | - | - | - | archived | - | - |
+| SuperEdge | archived | archived | - | - | - | archived | Stable | - |
+| Teller | archived | archived | - | - | - | archived | Healthy | - |
+| Xline | archived | archived | - | - | - | archived | Stable | - |
 
 ## Prospect
 
