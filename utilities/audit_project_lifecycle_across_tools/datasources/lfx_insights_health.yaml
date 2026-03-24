@@ -1,6 +1,6 @@
-source: LFX Insights (badge API + project page SSR)
+source: LFX Insights (project page SSR + badge; archived status from page)
 pcc_source_file: datasources/pcc_projects.yaml
-generated_at: '2026-03-23T22:34:21+00:00'
+generated_at: '2026-03-24T11:29:09+00:00'
 projects:
 - name: Argo
   pcc_slug: argo
@@ -747,6 +747,13 @@ projects:
   health_tier: Healthy
   overall_score: 77
   error: null
+- name: KAI Scheduler
+  pcc_slug: kai-scheduler
+  insights_slug_used: null
+  health_tier: null
+  overall_score: null
+  error: not_found
+  http_status_last: 404
 - name: Kairos
   pcc_slug: kairos
   insights_slug_used: kairos
@@ -1396,13 +1403,6 @@ projects:
   overall_score: null
   error: not_found
   http_status_last: 404
-- name: KAI Scheduler
-  pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
-  overall_score: null
-  error: not_found
-  http_status_last: 404
 - name: Kmesh
   pcc_slug: null
   insights_slug_used: kmesh
@@ -1500,7 +1500,7 @@ projects:
 - name: Brigade
   pcc_slug: null
   insights_slug_used: brigade
-  health_tier: Unsteady
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Cluster API Provider for CloudStack(CAPC)
@@ -1520,19 +1520,19 @@ projects:
 - name: CNI-Genie
   pcc_slug: null
   insights_slug_used: cni-genie
-  health_tier: Unsteady
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Curiefense
   pcc_slug: null
   insights_slug_used: curiefense
-  health_tier: Unsteady
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Curve
   pcc_slug: null
   insights_slug_used: curve
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: deploy-sh
@@ -1545,7 +1545,7 @@ projects:
 - name: Devstream
   pcc_slug: null
   insights_slug_used: devstream
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: EGo
@@ -1557,7 +1557,7 @@ projects:
 - name: FabEdge
   pcc_slug: null
   insights_slug_used: fabedge
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Fonio
@@ -1591,7 +1591,7 @@ projects:
 - name: Keptn
   pcc_slug: null
   insights_slug_used: keptn
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Ketch
@@ -1609,13 +1609,13 @@ projects:
 - name: Krator
   pcc_slug: null
   insights_slug_used: krator
-  health_tier: Unsteady
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Krustlet
   pcc_slug: null
   insights_slug_used: krustlet
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: KSail
@@ -1628,7 +1628,7 @@ projects:
 - name: KubeDL
   pcc_slug: null
   insights_slug_used: kubedl
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Lagoon
@@ -1652,13 +1652,13 @@ projects:
 - name: Merbridge
   pcc_slug: null
   insights_slug_used: merbridge
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Nocalhost
   pcc_slug: null
   insights_slug_used: nocalhost
-  health_tier: Healthy
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Open Service Mesh
@@ -1671,19 +1671,19 @@ projects:
 - name: OpenELB
   pcc_slug: null
   insights_slug_used: openelb
-  health_tier: Healthy
+  health_tier: Archived
   overall_score: null
   error: null
 - name: OpenMetrics
   pcc_slug: null
   insights_slug_used: openmetrics
-  health_tier: Critical
+  health_tier: Archived
   overall_score: null
   error: null
 - name: OpenTracing
   pcc_slug: null
   insights_slug_used: opentracing
-  health_tier: Critical
+  health_tier: Archived
   overall_score: null
   error: null
 - name: pallet
@@ -1695,7 +1695,7 @@ projects:
 - name: Pravega
   pcc_slug: null
   insights_slug_used: pravega
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: rainforest
@@ -1708,13 +1708,13 @@ projects:
 - name: RKT
   pcc_slug: null
   insights_slug_used: rkt
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: sealer
   pcc_slug: null
   insights_slug_used: sealer
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Service Mesh Interface
@@ -1741,7 +1741,7 @@ projects:
 - name: SuperEdge
   pcc_slug: null
   insights_slug_used: superedge
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Tarian
@@ -1753,7 +1753,7 @@ projects:
 - name: Teller
   pcc_slug: null
   insights_slug_used: teller
-  health_tier: Healthy
+  health_tier: Archived
   overall_score: null
   error: null
 - name: test
@@ -1779,7 +1779,7 @@ projects:
 - name: Xline
   pcc_slug: null
   insights_slug_used: xline
-  health_tier: Stable
+  health_tier: Archived
   overall_score: null
   error: null
 - name: Yoke
