@@ -43,31 +43,31 @@
 | Sermant | forming | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
 | ServiceRadar | forming | - | - | - | - | - | - | - |
 | Terrascan | forming | - | - | - | - | - | - | - |
-| Brigade | archived | archived | - | - | - | archived | Unsteady | - |
-| CNI-Genie | archived | archived | - | - | - | - | Unsteady | - |
-| Curiefense | archived | archived | - | - | - | archived | Unsteady | - |
-| Curve | archived | archived | - | - | - | archived | Stable | - |
-| Devstream | archived | archived | - | - | - | archived | Stable | - |
-| FabEdge | archived | archived | - | - | - | archived | Stable | - |
+| Brigade | archived | archived | - | - | - | archived | Archived | - |
+| CNI-Genie | archived | archived | - | - | - | - | Archived | - |
+| Curiefense | archived | archived | - | - | - | archived | Archived | - |
+| Curve | archived | archived | - | - | - | archived | Archived | - |
+| Devstream | archived | archived | - | - | - | archived | Archived | - |
+| FabEdge | archived | archived | - | - | - | archived | Archived | - |
 | Fonio | archived | archived | - | - | - | archived | - | - |
-| Keptn | archived | archived | - | - | - | archived | Stable | - |
-| Krator | archived | archived | - | - | - | archived | Unsteady | - |
-| Krustlet | archived | archived | - | - | - | archived | Stable | - |
-| KubeDL | archived | archived | - | - | - | archived | Stable | - |
-| Merbridge | archived | archived | - | - | - | archived | Stable | - |
-| Nocalhost | archived | archived | - | - | - | archived | Healthy | - |
+| Keptn | archived | archived | - | - | - | archived | Archived | - |
+| Krator | archived | archived | - | - | - | archived | Archived | - |
+| Krustlet | archived | archived | - | - | - | archived | Archived | - |
+| KubeDL | archived | archived | - | - | - | archived | Archived | - |
+| Merbridge | archived | archived | - | - | - | archived | Archived | - |
+| Nocalhost | archived | archived | - | - | - | archived | Archived | - |
 | Open Service Mesh | archived | archived | - | - | - | archived | - | - |
-| OpenELB | archived | archived | - | - | - | archived | Healthy | - |
-| OpenMetrics | archived | archived | - | - | - | archived | Critical | - |
-| OpenTracing | archived | archived | - | - | - | archived | Critical | - |
-| Pravega | archived | archived | - | - | - | archived | Stable | - |
-| RKT | archived | archived | - | - | - | archived | Stable | - |
-| sealer | archived | archived | - | - | - | archived | Stable | - |
+| OpenELB | archived | archived | - | - | - | archived | Archived | - |
+| OpenMetrics | archived | archived | - | - | - | archived | Archived | - |
+| OpenTracing | archived | archived | - | - | - | archived | Archived | - |
+| Pravega | archived | archived | - | - | - | archived | Archived | - |
+| RKT | archived | archived | - | - | - | archived | Archived | - |
+| sealer | archived | archived | - | - | - | archived | Archived | - |
 | Service Mesh Interface | archived | archived | - | - | - | archived | - | - |
 | skooner | archived | archived | - | - | - | archived | - | - |
-| SuperEdge | archived | archived | - | - | - | archived | Stable | - |
-| Teller | archived | archived | - | - | - | archived | Healthy | - |
-| Xline | archived | archived | - | - | - | archived | Stable | - |
+| SuperEdge | archived | archived | - | - | - | archived | Archived | - |
+| Teller | archived | archived | - | - | - | archived | Archived | - |
+| Xline | archived | archived | - | - | - | archived | Archived | - |
 
 ## Graduated
 
@@ -339,31 +339,31 @@
 
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|---|---|---|---|---|
-| Brigade | archived | archived | - | - | - | archived | Unsteady | - |
-| CNI-Genie | archived | archived | - | - | - | - | Unsteady | - |
-| Curiefense | archived | archived | - | - | - | archived | Unsteady | - |
-| Curve | archived | archived | - | - | - | archived | Stable | - |
-| Devstream | archived | archived | - | - | - | archived | Stable | - |
-| FabEdge | archived | archived | - | - | - | archived | Stable | - |
+| Brigade | archived | archived | - | - | - | archived | Archived | - |
+| CNI-Genie | archived | archived | - | - | - | - | Archived | - |
+| Curiefense | archived | archived | - | - | - | archived | Archived | - |
+| Curve | archived | archived | - | - | - | archived | Archived | - |
+| Devstream | archived | archived | - | - | - | archived | Archived | - |
+| FabEdge | archived | archived | - | - | - | archived | Archived | - |
 | Fonio | archived | archived | - | - | - | archived | - | - |
-| Keptn | archived | archived | - | - | - | archived | Stable | - |
-| Krator | archived | archived | - | - | - | archived | Unsteady | - |
-| Krustlet | archived | archived | - | - | - | archived | Stable | - |
-| KubeDL | archived | archived | - | - | - | archived | Stable | - |
-| Merbridge | archived | archived | - | - | - | archived | Stable | - |
-| Nocalhost | archived | archived | - | - | - | archived | Healthy | - |
+| Keptn | archived | archived | - | - | - | archived | Archived | - |
+| Krator | archived | archived | - | - | - | archived | Archived | - |
+| Krustlet | archived | archived | - | - | - | archived | Archived | - |
+| KubeDL | archived | archived | - | - | - | archived | Archived | - |
+| Merbridge | archived | archived | - | - | - | archived | Archived | - |
+| Nocalhost | archived | archived | - | - | - | archived | Archived | - |
 | Open Service Mesh | archived | archived | - | - | - | archived | - | - |
-| OpenELB | archived | archived | - | - | - | archived | Healthy | - |
-| OpenMetrics | archived | archived | - | - | - | archived | Critical | - |
-| OpenTracing | archived | archived | - | - | - | archived | Critical | - |
-| Pravega | archived | archived | - | - | - | archived | Stable | - |
-| RKT | archived | archived | - | - | - | archived | Stable | - |
-| sealer | archived | archived | - | - | - | archived | Stable | - |
+| OpenELB | archived | archived | - | - | - | archived | Archived | - |
+| OpenMetrics | archived | archived | - | - | - | archived | Archived | - |
+| OpenTracing | archived | archived | - | - | - | archived | Archived | - |
+| Pravega | archived | archived | - | - | - | archived | Archived | - |
+| RKT | archived | archived | - | - | - | archived | Archived | - |
+| sealer | archived | archived | - | - | - | archived | Archived | - |
 | Service Mesh Interface | archived | archived | - | - | - | archived | - | - |
 | skooner | archived | archived | - | - | - | archived | - | - |
-| SuperEdge | archived | archived | - | - | - | archived | Stable | - |
-| Teller | archived | archived | - | - | - | archived | Healthy | - |
-| Xline | archived | archived | - | - | - | archived | Stable | - |
+| SuperEdge | archived | archived | - | - | - | archived | Archived | - |
+| Teller | archived | archived | - | - | - | archived | Archived | - |
+| Xline | archived | archived | - | - | - | archived | Archived | - |
 
 ## Prospect
 
