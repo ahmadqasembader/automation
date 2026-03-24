@@ -10,7 +10,7 @@ This utility generates a canonical list of CNCF project statuses from the LFX PC
   - `archived_projects` (anything not Active or Forming)
 - Downloads a reproducible snapshot of public sources into `datasources/`:
   - `landscape.yml`, `clomonitor.yaml`, `project-maintainers.csv`, `devstats.html`, `artwork.md`
-- Optionally uses **`datasources/lfx_insights_health.yaml`** when present (from the weekly Insights workflow): **Insights Health** (tier label, e.g. Excellent) and **Health Score** (numeric, e.g. 82). Missing file or per-project gaps show “-”; these columns are **informational only** and **never** affect anomaly detection.
+- Optionally uses **`datasources/lfx_insights_health.yaml`** when present (from the weekly Insights workflow): **Insights Health** (tier label, e.g. Excellent, or **Archived** when LFX Insights shows the project archived) and **Health Score** (numeric when applicable). Missing file or per-project gaps show “-”; these columns are **informational only** and **never** affect anomaly detection.
 - Audits and writes:
   - `audit/status_audit.md` — anomalies only; sorted Graduated → Incubating → Sandbox → Forming → Archived, A–Z within each
   - `audit/all_statuses.md` — all projects; anomalies section first, then the same status sections
@@ -23,7 +23,7 @@ This utility generates a canonical list of CNCF project statuses from the LFX PC
 | Path | Role |
 |------|------|
 | `scripts/fetch_pcc_projects.py` | Calls LFX PCC API; writes `pcc_projects.yaml` (requires `LFX_TOKEN`) |
-| `scripts/fetch_lfx_insights_health.py` | Builds `lfx_insights_health.yaml` from public LFX Insights endpoints (no token) |
+| `scripts/fetch_lfx_insights_health.py` | Builds `lfx_insights_health.yaml` from Insights project pages + badge (no token; archived status from page) |
 | `scripts/audit_landscape_status.py` | Compares sources and writes `audit/*.md` |
 | `.github/workflows/sync-pcc-and-audit-statuses.yml` | Manual workflow: PCC + snapshots + audit → PR |
 | `.github/workflows/sync-lfx-insights-health.yml` | Weekly (Sunday UTC) + manual: refresh `lfx_insights_health.yaml` → PR |
@@ -41,7 +41,7 @@ This utility generates a canonical list of CNCF project statuses from the LFX PC
 - **Foundation Maintainers CSV:** `https://raw.githubusercontent.com/cncf/foundation/main/project-maintainers.csv`
 - **DevStats:** `https://devstats.cncf.io/`
 - **Artwork README:** `https://raw.githubusercontent.com/cncf/artwork/main/README.md`
-- **LFX Insights:** Public badge redirect and project overview HTML ([insights.linuxfoundation.org](https://insights.linuxfoundation.org/)); slugs align with PCC `slug` where available.
+- **LFX Insights:** Project overview HTML ([insights.linuxfoundation.org](https://insights.linuxfoundation.org/)) plus the public badge; slug candidates follow PCC **name** then **`slug`** when they differ (see Notes).
 
 ## GitHub Actions (recommended)
 
@@ -96,3 +96,4 @@ Outputs: `audit/status_audit.md`, `audit/all_statuses.md`, and any missing `data
 - PCC entries with `status: Formation - Engaged` are treated as **Forming** in the audit.
 - Landscape matching uses aliases (parentheticals, suffix trimming, Unicode normalization, `lfx_slug`, hyphen/space variants) — see `audit_landscape_status.py`.
 - DevStats parsing uses page row headings (“Graduated”, “Incubating”, “Sandbox”, “Archived”).
+- LFX Insights fetch loads each project’s Insights **page** first. If the page shows the project as **Archived** there, we store **Insights Health** = `Archived` and no score (the public badge alone can still show another label and is not used in that case). URL slugs are tried as: slug derived from PCC **name** (same as the audit “Project” column), then PCC **`slug`** when it differs (e.g. CubeFS → `chubaofs`).

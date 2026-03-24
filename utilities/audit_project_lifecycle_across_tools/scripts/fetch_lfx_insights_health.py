@@ -3,9 +3,13 @@
 Fetch LFX Insights health tier (and optional numeric score) for CNCF projects listed in
 datasources/pcc_projects.yaml.
 
-Uses the public badge endpoint (302 to shields.io with message=<tier>) — no LFX_TOKEN.
-Project keys match Insights `/project/{slug}` using the PCC `slug` field when present; when
-absent, a slug is derived from the PCC `name` (same string shown in audit "Project" column).
+Uses the public project page (SSR) as the source of truth for whether a project is archived
+on Insights; in that case we record tier "Archived" and no score — not the badge tier (e.g.
+"Stable") which can be misleading for archived projects.
+
+Slug candidates: first a slug derived from the PCC project `name` (same as the audit "Project"
+column), then the PCC `slug` when present (covers cases where the LF slug differs, e.g. CubeFS →
+chubaofs). No LFX_TOKEN required.
 """
 
 from __future__ import annotations
@@ -45,6 +49,38 @@ SESSION.headers.update(
 
 OVERALL_SCORE_RE = re.compile(r'overall-score="(\d+)"')
 SLEEP_SECONDS = 0.35
+
+
+def is_archived_insights_page(html: str) -> bool:
+    """True when Insights marks the project archived (health score not shown for current period)."""
+    if "Archived project are excluded from" in html:
+        return True
+    if 'font-bold text-neutral-500">Archived Project</' in html:
+        return True
+    if re.search(r'text-nowrap">Archived</span>', html):
+        return True
+    return False
+
+
+def fetch_project_page_html(slug: str) -> Optional[str]:
+    url = PROJECT_PAGE_URL.format(slug=requests.utils.quote(slug, safe=""))
+    try:
+        r = SESSION.get(url, timeout=45)
+    except requests.RequestException:
+        return None
+    if r.status_code != 200:
+        return None
+    return r.text
+
+
+def overall_score_from_page_html(html: str) -> Optional[int]:
+    m = OVERALL_SCORE_RE.search(html)
+    if not m:
+        return None
+    try:
+        return int(m.group(1))
+    except ValueError:
+        return None
 
 
 def slugify_from_name(name: str) -> str:
@@ -96,17 +132,21 @@ def iter_pcc_projects(
 
 
 def resolve_slugs_to_try(name: str, pcc_slug: Optional[str]) -> List[str]:
-    """Insights is case-sensitive per project; try PCC slug first, then derived."""
+    """
+    Insights URLs use /project/{slug}. Try slug from PCC display name first (matches user-facing
+    search), then PCC slug when it differs (e.g. CubeFS → chubaofs, KEDA casing).
+    """
     seen: set[str] = set()
     ordered: List[str] = []
+    derived = slugify_from_name(name)
+    if derived and derived not in seen:
+        seen.add(derived)
+        ordered.append(derived)
     if pcc_slug:
         for s in (pcc_slug, pcc_slug.lower()):
             if s and s not in seen:
                 seen.add(s)
                 ordered.append(s)
-    derived = slugify_from_name(name)
-    if derived and derived not in seen:
-        ordered.append(derived)
     return ordered
 
 
@@ -135,24 +175,6 @@ def tier_from_badge_head(slug: str) -> Tuple[Optional[str], int]:
     return None, r.status_code
 
 
-def overall_score_from_project_page(slug: str) -> Optional[int]:
-    """Fetch SSR project page and read overall-score=\"N\" if present."""
-    url = PROJECT_PAGE_URL.format(slug=requests.utils.quote(slug, safe=""))
-    try:
-        r = SESSION.get(url, timeout=45)
-    except requests.RequestException:
-        return None
-    if r.status_code != 200:
-        return None
-    m = OVERALL_SCORE_RE.search(r.text)
-    if not m:
-        return None
-    try:
-        return int(m.group(1))
-    except ValueError:
-        return None
-
-
 def fetch_one(name: str, pcc_slug: Optional[str]) -> Dict[str, Any]:
     slugs = resolve_slugs_to_try(name, pcc_slug)
     row: Dict[str, Any] = {
@@ -163,21 +185,41 @@ def fetch_one(name: str, pcc_slug: Optional[str]) -> Dict[str, Any]:
         "overall_score": None,
         "error": None,
     }
-    last_status: Optional[int] = None
+    last_badge_status: Optional[int] = None
+
+    # 1) Prefer project page: authoritative for "Archived" and numeric score.
     for slug in slugs:
-        tier, status = tier_from_badge_head(slug)
-        last_status = status
+        time.sleep(SLEEP_SECONDS)
+        html = fetch_project_page_html(slug)
+        if not html:
+            continue
+        if is_archived_insights_page(html):
+            row["insights_slug_used"] = slug
+            row["health_tier"] = "Archived"
+            row["overall_score"] = None
+            return row
+        score = overall_score_from_page_html(html)
+        time.sleep(SLEEP_SECONDS)
+        tier, last_badge_status = tier_from_badge_head(slug)
         if tier:
             row["insights_slug_used"] = slug
             row["health_tier"] = tier
-            time.sleep(SLEEP_SECONDS)
-            row["overall_score"] = overall_score_from_project_page(slug)
+            row["overall_score"] = score
             return row
+
+    # 2) Fallback: badge-only (no successful project page).
+    for slug in slugs:
+        tier, last_badge_status = tier_from_badge_head(slug)
         time.sleep(SLEEP_SECONDS)
+        if tier:
+            row["insights_slug_used"] = slug
+            row["health_tier"] = tier
+            row["overall_score"] = None
+            return row
 
     row["error"] = "not_found"
-    if last_status is not None:
-        row["http_status_last"] = last_status
+    if last_badge_status is not None:
+        row["http_status_last"] = last_badge_status
     return row
 
 
@@ -208,7 +250,7 @@ def main() -> None:
         time.sleep(SLEEP_SECONDS)
 
     out_doc: Dict[str, Any] = {
-        "source": "LFX Insights (badge API + project page SSR)",
+        "source": "LFX Insights (project page SSR + badge; archived status from page)",
         "pcc_source_file": "datasources/pcc_projects.yaml",
         "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "projects": results,
