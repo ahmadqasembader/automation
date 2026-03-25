@@ -139,7 +139,7 @@ func run(cmd *cobra.Command, argv []string) error {
 	installRunnerPackage(baseDir)
 
 	//temp for the maven error, probably will be fixed on the next action-runner release
-	replaceArmPackageLinks(baseDir, "/images/ubuntu/toolsets/toolset-2404.json", "\"maven\": \"3.9.11\"", "\"maven\": \"3.9.12\"")
+	replaceArmPackageLinks(baseDir, "/images/ubuntu/toolsets/toolset-2404.json", "\"maven\": \"3.9.13\"", "\"maven\": \"3.9.14\"")
 
 	if args.arch == "arm64" {
 		replaceArmPackageLinks(baseDir, "/images/ubuntu/scripts/build/install-azcopy.sh", "https://aka.ms/downloadazcopy-v10-linux", "https://github.com/Azure/azure-storage-azcopy/releases/download/v10.29.1/azcopy_linux_arm64_10.29.1.tar.gz")

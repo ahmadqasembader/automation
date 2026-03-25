@@ -205,6 +205,8 @@ jobs:
 
           echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
 
+          chmod 600 ${OCI_KEY_FILE} ${OCI_CONFIG_FILE}
+
           docker run -v ${{ github.workspace}}/.oci:/root/.oci \
             ${{ needs.build-cloudrunner-images.outputs.image }}@${{ needs.build-cloudrunner-images.outputs.digest }} \
             --arch=${{ matrix.arch }} \
