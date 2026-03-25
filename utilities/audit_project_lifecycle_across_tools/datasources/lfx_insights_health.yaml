@@ -1,6 +1,6 @@
 source: LFX Insights (project page SSR + badge; archived status from page)
 pcc_source_file: datasources/pcc_projects.yaml
-generated_at: '2026-03-24T12:28:35+00:00'
+generated_at: '2026-03-25T11:10:54+00:00'
 projects:
 - name: Argo
   pcc_slug: argo
@@ -78,7 +78,7 @@ projects:
   pcc_slug: etcd
   insights_slug_used: etcd
   health_tier: Excellent
-  overall_score: 83
+  overall_score: 82
   error: null
 - name: Falco
   pcc_slug: falco
@@ -258,7 +258,7 @@ projects:
   pcc_slug: cortex
   insights_slug_used: cortex
   health_tier: Healthy
-  overall_score: 79
+  overall_score: 78
   error: null
 - name: emissary-ingress
   pcc_slug: emissary
@@ -306,7 +306,7 @@ projects:
   pcc_slug: kubeflow
   insights_slug_used: kubeflow
   health_tier: Excellent
-  overall_score: 86
+  overall_score: 85
   error: null
 - name: Kubescape
   pcc_slug: kubescape
@@ -342,7 +342,7 @@ projects:
   pcc_slug: longhorn
   insights_slug_used: longhorn
   health_tier: Healthy
-  overall_score: 76
+  overall_score: 75
   error: null
 - name: metal3-io
   pcc_slug: metal3
@@ -697,7 +697,7 @@ projects:
   pcc_slug: inclavarecontainers
   insights_slug_used: inclavarecontainers
   health_tier: Healthy
-  overall_score: 75
+  overall_score: 74
   error: null
 - name: Inspektor Gadget
   pcc_slug: inspektorgadget
@@ -708,8 +708,8 @@ projects:
 - name: interLink
   pcc_slug: interlink
   insights_slug_used: interlink
-  health_tier: Healthy
-  overall_score: 60
+  health_tier: Stable
+  overall_score: 57
   error: null
 - name: k0s
   pcc_slug: k0s
@@ -1058,7 +1058,7 @@ projects:
   pcc_slug: oxia
   insights_slug_used: oxia
   health_tier: Healthy
-  overall_score: 69
+  overall_score: 70
   error: null
 - name: Paralus
   pcc_slug: paralus
@@ -1124,7 +1124,7 @@ projects:
   pcc_slug: ratify
   insights_slug_used: ratify
   health_tier: Healthy
-  overall_score: 64
+  overall_score: 66
   error: null
 - name: Runme Notebooks
   pcc_slug: runme-notebooks
@@ -1287,13 +1287,13 @@ projects:
   pcc_slug: werf
   insights_slug_used: werf
   health_tier: Healthy
-  overall_score: 75
+  overall_score: 76
   error: null
 - name: xRegistry
   pcc_slug: xregistry
   insights_slug_used: xregistry
   health_tier: Stable
-  overall_score: 58
+  overall_score: 59
   error: null
 - name: Youki
   pcc_slug: youki
