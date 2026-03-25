@@ -8,7 +8,7 @@
 | Copa | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 77 |
 | KAI Scheduler | sandbox | sandbox | - | sandbox | sandbox | - | - | - |
 | kube-vip | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 73 |
-| Oxia | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 69 |
+| Oxia | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 70 |
 | Service Mesh Performance | sandbox | archived | - | - | - | archived | Healthy | 67 |
 | TrestleGRC | sandbox | sandbox | - | - | sandbox | - | Healthy | 76 |
 | Velero | sandbox | - | - | - | sandbox | - | - | - |
@@ -25,14 +25,14 @@
 | Curvine | forming | - | - | - | - | - | - | - |
 | DevOps AI Toolkit | forming | - | - | - | - | - | - | - |
 | Dexfile | forming | - | - | - | - | - | - | - |
-| Gthulhu | forming | - | - | - | - | - | Healthy | 68 |
+| Gthulhu | forming | - | - | - | - | - | Healthy | 70 |
 | Higress | forming | sandbox | - | - | - | - | - | - |
 | Kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
 | ksctl | forming | - | - | - | - | - | - | - |
 | kube-bind | forming | - | - | - | - | - | - | - |
 | KubeElasti | forming | sandbox | - | sandbox | sandbox | - | - | - |
 | llm-d | forming | - | - | - | - | - | Excellent | 84 |
-| NMstate | forming | - | - | - | - | - | Healthy | 76 |
+| NMstate | forming | - | - | sandbox | - | - | Healthy | 76 |
 | OpenEverest | forming | sandbox | - | sandbox | - | - | - | - |
 | OptiFlow (AI‑OrchestrateX) | forming | - | - | - | - | - | - | - |
 | Schema Driven Configuration | forming | - | - | - | - | - | - | - |
