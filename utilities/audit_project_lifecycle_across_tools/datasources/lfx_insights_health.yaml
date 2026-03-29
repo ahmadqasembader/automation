@@ -1,6 +1,6 @@
 source: LFX Insights (project page SSR + badge; archived status from page)
 pcc_source_file: datasources/pcc_projects.yaml
-generated_at: '2026-03-25T11:10:54+00:00'
+generated_at: '2026-03-29T07:31:24+00:00'
 projects:
 - name: Argo
   pcc_slug: argo
@@ -78,7 +78,7 @@ projects:
   pcc_slug: etcd
   insights_slug_used: etcd
   health_tier: Excellent
-  overall_score: 82
+  overall_score: 83
   error: null
 - name: Falco
   pcc_slug: falco
@@ -210,7 +210,7 @@ projects:
   pcc_slug: vitess
   insights_slug_used: vitess
   health_tier: Excellent
-  overall_score: 83
+  overall_score: 82
   error: null
 - name: Artifact Hub
   pcc_slug: artifact-hub
@@ -240,7 +240,7 @@ projects:
   pcc_slug: c7n
   insights_slug_used: c7n
   health_tier: Healthy
-  overall_score: 73
+  overall_score: 74
   error: null
 - name: CNI
   pcc_slug: cni
@@ -257,8 +257,8 @@ projects:
 - name: Cortex
   pcc_slug: cortex
   insights_slug_used: cortex
-  health_tier: Healthy
-  overall_score: 78
+  health_tier: Excellent
+  overall_score: 80
   error: null
 - name: emissary-ingress
   pcc_slug: emissary
@@ -306,7 +306,7 @@ projects:
   pcc_slug: kubeflow
   insights_slug_used: kubeflow
   health_tier: Excellent
-  overall_score: 85
+  overall_score: 86
   error: null
 - name: Kubescape
   pcc_slug: kubescape
@@ -360,7 +360,7 @@ projects:
   pcc_slug: notary
   insights_slug_used: notary
   health_tier: Excellent
-  overall_score: 80
+  overall_score: 81
   error: null
 - name: OpenCost
   pcc_slug: opencost
@@ -378,7 +378,7 @@ projects:
   pcc_slug: openfga
   insights_slug_used: openfga
   health_tier: Excellent
-  overall_score: 84
+  overall_score: 85
   error: null
 - name: OpenKruise
   pcc_slug: openkruise
@@ -426,7 +426,7 @@ projects:
   pcc_slug: wasmcloud
   insights_slug_used: wasmcloud
   health_tier: Healthy
-  overall_score: 77
+  overall_score: 76
   error: null
 - name: Aeraki Mesh
   pcc_slug: aerakimesh
@@ -469,7 +469,7 @@ projects:
   pcc_slug: atlantis
   insights_slug_used: atlantis
   health_tier: Excellent
-  overall_score: 81
+  overall_score: 82
   error: null
 - name: Bank-Vaults
   pcc_slug: bank-vaults
@@ -589,7 +589,7 @@ projects:
   pcc_slug: containerssh
   insights_slug_used: containerssh
   health_tier: Healthy
-  overall_score: 64
+  overall_score: 65
   error: null
 - name: Copa
   pcc_slug: copacetic
@@ -619,7 +619,7 @@ projects:
   pcc_slug: devspace
   insights_slug_used: devspace
   health_tier: Healthy
-  overall_score: 77
+  overall_score: 76
   error: null
 - name: Dex
   pcc_slug: dex
@@ -661,7 +661,7 @@ projects:
   pcc_slug: hami
   insights_slug_used: hami
   health_tier: Excellent
-  overall_score: 83
+  overall_score: 84
   error: null
 - name: Headlamp
   pcc_slug: headlamp
@@ -679,7 +679,7 @@ projects:
   pcc_slug: holmesgpt
   insights_slug_used: holmesgpt
   health_tier: Healthy
-  overall_score: 78
+  overall_score: 80
   error: null
 - name: HwameiStor
   pcc_slug: hwameistor
@@ -709,13 +709,13 @@ projects:
   pcc_slug: interlink
   insights_slug_used: interlink
   health_tier: Stable
-  overall_score: 57
+  overall_score: 55
   error: null
 - name: k0s
   pcc_slug: k0s
   insights_slug_used: k0s
   health_tier: Healthy
-  overall_score: 76
+  overall_score: 77
   error: null
 - name: k3s
   pcc_slug: k3s
@@ -800,7 +800,7 @@ projects:
   pcc_slug: kitops
   insights_slug_used: kitops
   health_tier: Healthy
-  overall_score: 75
+  overall_score: 76
   error: null
 - name: ko
   pcc_slug: ko
@@ -872,7 +872,7 @@ projects:
   pcc_slug: kubean
   insights_slug_used: kubean
   health_tier: Healthy
-  overall_score: 72
+  overall_score: 73
   error: null
 - name: KubeArmor
   pcc_slug: kubearmor
@@ -980,13 +980,13 @@ projects:
   pcc_slug: modelpack
   insights_slug_used: modelpack
   health_tier: Healthy
-  overall_score: 72
+  overall_score: 73
   error: null
 - name: Network Service Mesh
   pcc_slug: nsm
   insights_slug_used: nsm
   health_tier: Healthy
-  overall_score: 77
+  overall_score: 76
   error: null
 - name: OAuth2 Proxy
   pcc_slug: oauth2-proxy
@@ -1106,19 +1106,19 @@ projects:
   pcc_slug: podman-desktop
   insights_slug_used: podman-desktop
   health_tier: Excellent
-  overall_score: 82
+  overall_score: 83
   error: null
 - name: Porter
   pcc_slug: porter
   insights_slug_used: porter
   health_tier: Healthy
-  overall_score: 75
+  overall_score: 74
   error: null
 - name: Radius
   pcc_slug: radius
   insights_slug_used: radius
   health_tier: Excellent
-  overall_score: 80
+  overall_score: 81
   error: null
 - name: Ratify
   pcc_slug: ratify
@@ -1130,7 +1130,7 @@ projects:
   pcc_slug: runme-notebooks
   insights_slug_used: runme-notebooks
   health_tier: Healthy
-  overall_score: 76
+  overall_score: 75
   error: null
 - name: SchemaHero
   pcc_slug: schemahero
@@ -1166,7 +1166,7 @@ projects:
   pcc_slug: shipwright
   insights_slug_used: shipwright
   health_tier: Healthy
-  overall_score: 78
+  overall_score: 77
   error: null
 - name: SlimFaaS
   pcc_slug: slimfaas
@@ -1178,7 +1178,7 @@ projects:
   pcc_slug: slimtoolkit
   insights_slug_used: slimtoolkit
   health_tier: Healthy
-  overall_score: 69
+  overall_score: 70
   error: null
 - name: SOPS
   pcc_slug: sops
@@ -1263,7 +1263,7 @@ projects:
   pcc_slug: vineyard
   insights_slug_used: vineyard
   health_tier: Healthy
-  overall_score: 68
+  overall_score: 73
   error: null
 - name: Virtual Kubelet
   pcc_slug: virtualkubelet
@@ -1287,7 +1287,7 @@ projects:
   pcc_slug: werf
   insights_slug_used: werf
   health_tier: Healthy
-  overall_score: 76
+  overall_score: 75
   error: null
 - name: xRegistry
   pcc_slug: xregistry
