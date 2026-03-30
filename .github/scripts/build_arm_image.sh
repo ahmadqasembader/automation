@@ -54,13 +54,13 @@ pipx install oci-cli
 export PATH="$PATH:$HOME/.local/bin"
 
 oci compute image list \
-  --compartment-id ocid1.compartment.oc1..aaaaaaaa22icap66vxktktubjlhf6oxvfhev6n7udgje2chahyrtq65ga63a \
+  --compartment-id ${COMPARTMENT_ID} \
   --operating-system runner-images \
   --operating-system-version 123456
 
 git clone https://github.com/cncf/automation
 cd automation/ci/gha-runner-vm
 
-PACKER_LOG=1 GITHUB_PERIODIC=true go run main.go \
+PACKER_LOG=1 go run main.go \
   --isoURL https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-arm64.img \
   --arch arm64

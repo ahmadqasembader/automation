@@ -194,7 +194,12 @@ func run(cmd *cobra.Command, argv []string) error {
 
 	timestamp := strconv.FormatInt(time.Now().UTC().UnixNano(), 10)
 
-	command = exec.Command("oci", "os", "object", "put", "--parallel-upload-count", "100", "--bucket-name", args.bucketName, "--name", fmt.Sprintf("ubuntu-gha-image-%s", timestamp), "--file", imageFile)
+	objectName := fmt.Sprintf("ubuntu-gha-image-%s", timestamp)
+	command = exec.Command("oci", "os", "object", "put", "--parallel-upload-count", "100", "--bucket-name", args.bucketName, "--name", objectName, "--file", imageFile)
+	// expose object name to GitHub action
+	f1, _ := os.OpenFile("/tmp/object_name", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0600)
+	defer f1.Close()
+	fmt.Fprintln(f1, objectName)
 
 	command.Stdout = os.Stdout
 	if err := command.Run(); err != nil {
@@ -203,7 +208,7 @@ func run(cmd *cobra.Command, argv []string) error {
 	}
 
 	// Import image name starting with rc- (release-candidate) -- github action will update it if tests are successful.
-	command = exec.Command("oci", "compute", "image", "import", "from-object", "--bucket-name", args.bucketName, "--compartment-id", args.compartmentId, "--namespace", args.namespace, "--operating-system", "rc-" + imageName, "--display-name", "rc-" + imageName, "--name", fmt.Sprintf("ubuntu-gha-image-%s", timestamp), "--operating-system-version", *selectedRelease.TagName, "--launch-mode", "PARAVIRTUALIZED")
+	command = exec.Command("oci", "compute", "image", "import", "from-object", "--bucket-name", args.bucketName, "--compartment-id", args.compartmentId, "--namespace", args.namespace, "--operating-system", "rc-" + imageName, "--display-name", "rc-" + imageName, "--name", objectName, "--operating-system-version", *selectedRelease.TagName, "--launch-mode", "PARAVIRTUALIZED")
 	output, err := command.Output()
 	if err != nil {
 		log.Fatal("failed to run OCI command: ", err)
@@ -221,9 +226,14 @@ func run(cmd *cobra.Command, argv []string) error {
 	imageID := result.Data.ID
 
 	// expose Image Id to GitHub action
-	f, _ := os.OpenFile("/tmp/image_ocid", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0600)
-	defer f.Close()
-	fmt.Fprintln(f, imageID)
+	f2, _ := os.OpenFile("/tmp/image_ocid", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0600)
+	defer f2.Close()
+	fmt.Fprintln(f2, imageID)
+
+	// expose OS Image Tag to GitHub action
+	f3, _ := os.OpenFile("/tmp/image_tag", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0600)
+	defer f3.Close()
+	fmt.Fprintln(f3, *selectedRelease.TagName)
 
 	for {
 		state, err := getImageState(imageID)
@@ -634,7 +644,7 @@ source "qemu" "img" {
   cpus                 = 6
   output_directory     = "build/"
   accelerator          = "kvm"
-  disk_size            = "80G"
+  disk_size            = "60G"
   disk_interface       = "virtio"
   format               = "raw"
   net_device           = "virtio-net"
@@ -718,7 +728,9 @@ build {
       "sleep 30",
       "export HISTSIZE=0 && sync",
       "usermod -aG docker ubuntu",
-      "apt install -y libelf-dev"
+      "apt install -y libelf-dev",
+      "apt-get clean",
+      "rm -rf /var/lib/apt/lists/*"
     ]`
 
 	// At this point this is the only Ubuntu-specific hard coded blocks we have left.
