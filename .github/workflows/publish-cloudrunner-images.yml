@@ -128,6 +128,8 @@ jobs:
     if: ${{ github.event_name != 'pull_request' }}
     steps:
       - uses: sigstore/cosign-installer@ba7bc0a3fef59531c69a25acd34668d6d3fe6f22 # v4.1.0
+        with:
+          cosign-release: 'v2.2.3'
       - env:
           REGISTRY_USERNAME: ${{ github.actor }}
           REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -137,8 +139,8 @@ jobs:
           cosign version
           cosign verify-attestation \
             --certificate-oidc-issuer="https://token.actions.githubusercontent.com" \
-            --certificate-identity-regexp="https://github.com/cncf/automation/.*" \
-            --type slsaprovenance1 "${{ env.IMAGE_NAME }}@${{env.IMAGE_DIGEST}}"
+            --certificate-identity-regexp="^https://github.com/slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@refs/tags/v[0-9]+.*$" \
+            --type slsaprovenance "${{ env.IMAGE_NAME }}@${{env.IMAGE_DIGEST}}"
       # TODO (github.com/slsa-framework/slsa-verifier/issues/92):
       #       Add step to verify using slsa-verifier
 
