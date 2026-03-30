@@ -32,8 +32,8 @@
 | kube-bind | forming | - | - | - | - | - | - | - |
 | KubeElasti | forming | sandbox | sandbox | sandbox | sandbox | - | - | - |
 | llm-d | forming | - | - | - | - | - | Excellent | 84 |
-| NMstate | forming | - | sandbox | sandbox | - | - | Healthy | 76 |
-| OpenEverest | forming | sandbox | - | sandbox | - | - | - | - |
+| NMstate | forming | - | sandbox | sandbox | sandbox | - | Healthy | 76 |
+| OpenEverest | forming | sandbox | sandbox | sandbox | sandbox | - | - | - |
 | OptiFlow (AI‑OrchestrateX) | forming | - | - | - | - | - | - | - |
 | Schema Driven Configuration | forming | - | - | - | - | - | - | - |
 | SecureBuild | forming | - | - | - | - | - | - | - |
