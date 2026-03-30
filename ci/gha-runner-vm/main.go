@@ -644,7 +644,7 @@ source "qemu" "img" {
   cpus                 = 6
   output_directory     = "build/"
   accelerator          = "kvm"
-  disk_size            = "60G"
+  disk_size            = "80G"
   disk_interface       = "virtio"
   format               = "raw"
   net_device           = "virtio-net"
