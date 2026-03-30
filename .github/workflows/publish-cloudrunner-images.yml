@@ -27,19 +27,10 @@ env:
 
 jobs:
   build-cloudrunner-images:
-    strategy:
-      fail-fast: false
-      matrix:
-        arch: ["x86-64", "arm64"]
-        include:
-          - arch: "x86-64"
-            platform: "linux/amd64"
-          - arch: "arm64"
-            platform: "linux/arm64"
     outputs:
       image: ${{ steps.image.outputs.image }}
       digest: ${{ steps.build-and-push.outputs.digest }}
-    runs-on: oracle-vm-4cpu-16gb-${{ matrix.arch }}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -91,7 +82,7 @@ jobs:
         uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 # v7.0.0
         with:
           context: ./ci/cloudrunners/
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           labels: ${{ steps.meta.outputs.labels }}
           file: ./ci/cloudrunners/Dockerfile
