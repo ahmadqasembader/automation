@@ -198,7 +198,7 @@ jobs:
           fingerprint=${{ secrets.OCI_CLI_FINGERPRINT }}
           tenancy=${{ secrets.OCI_CLI_TENANCY }}
           region=${{ secrets.OCI_CLI_REGION }}
-          key_file=${OCI_KEY_FILE}
+          key_file=/root/.oci/oci_api_key.pem
           EOF
 
           echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
