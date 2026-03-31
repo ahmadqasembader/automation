@@ -309,6 +309,7 @@ jobs:
               sleep 30
             fi
           done
+          echo "IMAGE_ID=${IMAGE_ID}" >> $GITHUB_ENV
 
       - name: Enable A10 shapes on Ashburn
         run: |

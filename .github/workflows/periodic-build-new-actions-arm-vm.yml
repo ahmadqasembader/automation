@@ -304,11 +304,11 @@ jobs:
               sleep 30
             fi
           done
+          echo "IMAGE_ID=${IMAGE_ID}" >> $GITHUB_ENV
 
       - name: Enable VM.Standard.A1.Flex in Ashburn and update image capabilities
         run: |
           set -euo pipefail
-          IMAGE_TAG=$(cat image_tag)
           export OCI_CONFIG_FILE="${{ github.workspace }}/.oci/config"
           export OCI_KEY_FILE="${{ github.workspace }}/.oci/oci_api_key.pem"
           mkdir -p ${{ github.workspace }}/.oci

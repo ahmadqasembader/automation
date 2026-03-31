@@ -208,7 +208,7 @@ func run(cmd *cobra.Command, argv []string) error {
 	}
 
 	// Import image name starting with rc- (release-candidate) -- github action will update it if tests are successful.
-	command = exec.Command("oci", "compute", "image", "import", "from-object", "--bucket-name", args.bucketName, "--compartment-id", args.compartmentId, "--namespace", args.namespace, "--operating-system", "rc-" + imageName, "--display-name", "rc-" + imageName, "--name", objectName, "--operating-system-version", *selectedRelease.TagName, "--launch-mode", "PARAVIRTUALIZED")
+	command = exec.Command("oci", "compute", "image", "import", "from-object", "--bucket-name", args.bucketName, "--compartment-id", args.compartmentId, "--namespace", args.namespace, "--operating-system", "rc-"+imageName, "--display-name", "rc-"+imageName, "--name", objectName, "--operating-system-version", *selectedRelease.TagName, "--launch-mode", "PARAVIRTUALIZED")
 	output, err := command.Output()
 	if err != nil {
 		log.Fatal("failed to run OCI command: ", err)
@@ -250,10 +250,15 @@ func run(cmd *cobra.Command, argv []string) error {
 		time.Sleep(60 * time.Second)
 	}
 
+	ociConfigFile := os.Getenv("OCI_CONFIG_FILE")
+	if ociConfigFile == "" {
+		ociConfigFile = os.Getenv("HOME") + "/.oci/config"
+	}
+
 	// Need to update arm64 image capabilities
 	if args.arch == "arm64" {
 		// Add VM.Standard.A1.Flex compatibility
-		command = exec.Command("oci", "raw-request", "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/VM.Standard.A1.Flex", "--request-body", "{\"ocpuConstraints\":{\"min\":\"1\",\"max\":\"80\"},\"memoryConstraints\":{\"minInGBs\":\"1\",\"maxInGBs\":\"512\"},\"imageId\":\""+imageID+"\",\"shape\":\"VM.Standard.A1.Flex\"}")
+		command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/VM.Standard.A1.Flex", "--request-body", "{\"ocpuConstraints\":{\"min\":\"1\",\"max\":\"80\"},\"memoryConstraints\":{\"minInGBs\":\"1\",\"maxInGBs\":\"512\"},\"imageId\":\""+imageID+"\",\"shape\":\"VM.Standard.A1.Flex\"}")
 		output, err = command.CombinedOutput()
 		if err != nil {
 			log.Print(command.String())
@@ -294,7 +299,7 @@ func run(cmd *cobra.Command, argv []string) error {
 		}
 
 		for _, machine := range removeList {
-			command = exec.Command("oci", "raw-request", "--http-method", "DELETE", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"imageId\":\""+imageID+"\"}")
+			command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "DELETE", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"imageId\":\""+imageID+"\"}")
 			output, err := command.CombinedOutput()
 			if err != nil {
 				log.Print(command.String())
@@ -310,7 +315,7 @@ func run(cmd *cobra.Command, argv []string) error {
 		// Update image capabilities
 		// I'm so sorry, the capability-update.json is embedded to the command here, I tried all sort of things before this. To make a change, you can run:
 		// cat capability-update.json | jq -c | jq -R '@json' | sed 's|\\\\\\|\\|g'
-		command = exec.Command("oci", "raw-request", "--http-method", "POST", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/computeImageCapabilitySchemas", "--request-body", "{\"schemaData\":{\"Compute.Firmware\":{\"values\":[\"BIOS\",\"UEFI_64\"],\"defaultValue\":\"UEFI_64\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.LaunchMode\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.AMD_SecureEncryptedVirtualization\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Compute.SecureBoot\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Network.AttachmentType\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Network.IPv6Only\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.BootVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.LocalDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.RemoteDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.ConsistentVolumeNaming\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.Iscsi.MultipathDeviceSupported\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.EncryptionInTransit\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.AttachmentVersion\":{\"values\":[\"1\",\"2\"],\"defaultValue\":\"2\",\"source\":\"IMAGE\",\"descriptorType\":\"enuminteger\"}},\"imageId\":\""+imageID+"\",\"compartmentId\":\""+args.compartmentId+"\",\"computeGlobalImageCapabilitySchemaVersionName\":\"a3c588d1-282b-4937-9928-2570b5133968\"}")
+		command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "POST", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/computeImageCapabilitySchemas", "--request-body", "{\"schemaData\":{\"Compute.Firmware\":{\"values\":[\"BIOS\",\"UEFI_64\"],\"defaultValue\":\"UEFI_64\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.LaunchMode\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.AMD_SecureEncryptedVirtualization\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Compute.SecureBoot\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Network.AttachmentType\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Network.IPv6Only\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.BootVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.LocalDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.RemoteDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.ConsistentVolumeNaming\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.Iscsi.MultipathDeviceSupported\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.EncryptionInTransit\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.AttachmentVersion\":{\"values\":[\"1\",\"2\"],\"defaultValue\":\"2\",\"source\":\"IMAGE\",\"descriptorType\":\"enuminteger\"}},\"imageId\":\""+imageID+"\",\"compartmentId\":\""+args.compartmentId+"\",\"computeGlobalImageCapabilitySchemaVersionName\":\"a3c588d1-282b-4937-9928-2570b5133968\"}")
 		output, err = command.CombinedOutput()
 		if err != nil {
 			log.Print(command.String())
@@ -327,7 +332,7 @@ func run(cmd *cobra.Command, argv []string) error {
 			"VM.GPU.A10.2",
 		}
 		for _, machine := range addList {
-			command = exec.Command("oci", "raw-request", "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"imageId\":\""+imageID+"\",\"shape\":\""+machine+"\"}")
+			command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"imageId\":\""+imageID+"\",\"shape\":\""+machine+"\"}")
 			output, err = command.CombinedOutput()
 			if err != nil {
 				log.Print(command.String())
