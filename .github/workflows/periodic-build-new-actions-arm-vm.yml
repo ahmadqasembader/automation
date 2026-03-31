@@ -308,6 +308,7 @@ jobs:
       - name: Enable VM.Standard.A1.Flex in Ashburn and update image capabilities
         run: |
           set -euo pipefail
+          IMAGE_TAG=$(cat image_tag)
           export OCI_CONFIG_FILE="${{ github.workspace }}/.oci/config"
           export OCI_KEY_FILE="${{ github.workspace }}/.oci/oci_api_key.pem"
           mkdir -p ${{ github.workspace }}/.oci
@@ -325,7 +326,6 @@ jobs:
 
           chmod 600 ${OCI_CONFIG_FILE}
           chmod 600 ${OCI_KEY_FILE}
-          export OCI_CONFIG_FILE=${OCI_CONFIG_FILE}
 
           oci raw-request --http-method PUT \
             --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/images/${IMAGE_ID}/shapes/VM.Standard.A1.Flex \

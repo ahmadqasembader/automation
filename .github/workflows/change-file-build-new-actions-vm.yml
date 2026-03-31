@@ -94,7 +94,6 @@ jobs:
           chmod 600 ${OCI_KEY_FILE}
 
           export PATH=$PATH:$HOME/bin && \
-          export OCI_CONFIG_FILE=${OCI_CONFIG_FILE} && \
           export PACKER_PLUGIN_PATH=/home/ubuntu/.config/packer/plugins && \
           cd ci/gha-runner-vm && \
           PACKER_LOG=1 go run main.go \
@@ -331,7 +330,6 @@ jobs:
 
           chmod 600 ${OCI_CONFIG_FILE}
           chmod 600 ${OCI_KEY_FILE}
-          export OCI_CONFIG_FILE=${OCI_CONFIG_FILE}
 
           oci raw-request --http-method PUT \
             --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/images/${IMAGE_ID}/shapes/VM.GPU.A10.1 \
