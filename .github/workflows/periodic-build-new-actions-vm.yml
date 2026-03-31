@@ -91,9 +91,9 @@ jobs:
         id: build_image
         run: |
           set -euo pipefail
-          export OCI_CONFIG_FILE="/home/ubuntu/.oci/config"
-          export OCI_KEY_FILE="/home/ubuntu/.oci/oci_api_key.pem"
-          mkdir /home/ubuntu/.oci
+          export OCI_CONFIG_FILE="${{ github.workspace }}/.oci/config"
+          export OCI_KEY_FILE="${{ github.workspace }}/.oci/oci_api_key.pem"
+          mkdir ${{ github.workspace }}/.oci
 
           cat > ${OCI_CONFIG_FILE} << EOF
           [DEFAULT]
@@ -110,6 +110,7 @@ jobs:
           chmod 600 ${OCI_KEY_FILE}
 
           export PATH="$PATH:$HOME/.local/bin" && \
+          export OCI_CONFIG_FILE=${OCI_CONFIG_FILE} && \
           export PACKER_PLUGIN_PATH=/home/ubuntu/.config/packer/plugins && \
           cd ci/gha-runner-vm && \
           PACKER_LOG=1 GITHUB_PERIODIC=true go run main.go \
@@ -331,6 +332,26 @@ jobs:
 
       - name: Enable A10 shapes on Ashburn
         run: |
+          set -euo pipefail
+          export OCI_CONFIG_FILE="${{ github.workspace }}/.oci/config"
+          export OCI_KEY_FILE="${{ github.workspace }}/.oci/oci_api_key.pem"
+          mkdir -p ${{ github.workspace }}/.oci
+
+          cat > ${OCI_CONFIG_FILE} << EOF
+          [DEFAULT]
+          user=${{ secrets.OCI_CLI_USER }}
+          fingerprint=${{ secrets.OCI_CLI_FINGERPRINT }}
+          tenancy=${{ secrets.OCI_CLI_TENANCY }}
+          region=${{ secrets.OCI_CLI_REGION }}
+          key_file=${OCI_KEY_FILE}
+          EOF
+
+          echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
+
+          chmod 600 ${OCI_CONFIG_FILE}
+          chmod 600 ${OCI_KEY_FILE}
+          export OCI_CONFIG_FILE=${OCI_CONFIG_FILE}
+
           oci raw-request --http-method PUT \
             --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/images/${IMAGE_ID}/shapes/VM.GPU.A10.1 \
             --request-body "{\"imageId\":\"${IMAGE_ID}\",\"shape\":\"VM.GPU.A10.1\"}"
