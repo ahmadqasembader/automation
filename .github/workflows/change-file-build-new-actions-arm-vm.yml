@@ -308,6 +308,7 @@ jobs:
           region=${{ secrets.OCI_CLI_REGION }}
           key_file=${OCI_KEY_FILE}
           EOF
+          sed -i 's/^[[:space:]]*//' ${OCI_CONFIG_FILE}
 
           echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
 
@@ -315,9 +316,11 @@ jobs:
           chmod 600 ${OCI_KEY_FILE}
 
           oci raw-request --http-method PUT \
+            --config-file ${OCI_CONFIG_FILE} \
             --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/images/${IMAGE_ID}/shapes/VM.Standard.A1.Flex \
             --request-body "{\"imageId\":\"${IMAGE_ID}\",\"shape\":\"VM.Standard.A1.Flex\"}"
 
           oci raw-request --http-method POST \
+            --config-file ${OCI_CONFIG_FILE} \
             --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/computeImageCapabilitySchemas \
             --request-body "{\"schemaData\":{\"Compute.Firmware\":{\"values\":[\"BIOS\",\"UEFI_64\"],\"defaultValue\":\"UEFI_64\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.LaunchMode\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.AMD_SecureEncryptedVirtualization\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Compute.SecureBoot\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Network.AttachmentType\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Network.IPv6Only\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.BootVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.LocalDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.RemoteDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.ConsistentVolumeNaming\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.Iscsi.MultipathDeviceSupported\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.EncryptionInTransit\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.AttachmentVersion\":{\"values\":[\"1\",\"2\"],\"defaultValue\":\"2\",\"source\":\"IMAGE\",\"descriptorType\":\"enuminteger\"}},\"imageId\":\"${IMAGE_ID}\",\"compartmentId\":\"${COMPARTMENT_ID}\",\"computeGlobalImageCapabilitySchemaVersionName\":\"34dd2cea-aff2-4f45-b8f6-1cb5290bfab2\"}"

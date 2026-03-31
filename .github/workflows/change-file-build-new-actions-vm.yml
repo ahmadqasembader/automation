@@ -87,6 +87,7 @@ jobs:
           region=${{ secrets.OCI_CLI_REGION }}
           key_file=${OCI_KEY_FILE}
           EOF
+          sed -i 's/^[[:space:]]*//' ${OCI_CONFIG_FILE}
 
           echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
 
@@ -326,6 +327,7 @@ jobs:
           region=${{ secrets.OCI_CLI_REGION }}
           key_file=${OCI_KEY_FILE}
           EOF
+          sed -i 's/^[[:space:]]*//' ${OCI_CONFIG_FILE}
 
           echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
 
@@ -333,8 +335,10 @@ jobs:
           chmod 600 ${OCI_KEY_FILE}
 
           oci raw-request --http-method PUT \
+            --config-file ${OCI_CONFIG_FILE} \
             --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/images/${IMAGE_ID}/shapes/VM.GPU.A10.1 \
             --request-body "{\"imageId\":\"${IMAGE_ID}\",\"shape\":\"VM.GPU.A10.1\"}"
           oci raw-request --http-method PUT \
+            --config-file ${OCI_CONFIG_FILE} \
             --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/images/${IMAGE_ID}/shapes/VM.GPU.A10.2 \
             --request-body "{\"imageId\":\"${IMAGE_ID}\",\"shape\":\"VM.GPU.A10.2\"}"
