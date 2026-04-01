@@ -92,7 +92,7 @@ jobs:
         run: |
           set -euo pipefail
           export OCI_CONFIG_FILE="${{ github.workspace }}/.oci/config"
-          export OCI_KEY_FILE="${{ github.workspace }}/.oci/oci_api_key.pem"
+          export OCI_CLI_KEY_FILE="${{ github.workspace }}/.oci/oci_api_key.pem"
           mkdir ${{ github.workspace }}/.oci
 
           cat > ${OCI_CONFIG_FILE} << EOF
@@ -101,14 +101,13 @@ jobs:
           fingerprint=${{ secrets.OCI_CLI_FINGERPRINT }}
           tenancy=${{ secrets.OCI_CLI_TENANCY }}
           region=${{ secrets.OCI_CLI_REGION }}
-          key_file=${OCI_KEY_FILE}
+          key_file=${OCI_CLI_KEY_FILE}
           EOF
-          sed -i 's/^[[:space:]]*//' ${OCI_CONFIG_FILE}
 
-          echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
+          echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_CLI_KEY_FILE}
 
           chmod 600 ${OCI_CONFIG_FILE}
-          chmod 600 ${OCI_KEY_FILE}
+          chmod 600 ${OCI_CLI_KEY_FILE}
 
           export PATH="$PATH:$HOME/.local/bin" && \
           export PACKER_PLUGIN_PATH=/home/ubuntu/.config/packer/plugins && \
@@ -335,7 +334,7 @@ jobs:
         run: |
           set -euo pipefail
           export OCI_CONFIG_FILE="${{ github.workspace }}/.oci/config"
-          export OCI_KEY_FILE="${{ github.workspace }}/.oci/oci_api_key.pem"
+          export OCI_CLI_KEY_FILE="${{ github.workspace }}/.oci/oci_api_key.pem"
           mkdir -p ${{ github.workspace }}/.oci
 
           cat > ${OCI_CONFIG_FILE} << EOF
@@ -344,14 +343,13 @@ jobs:
           fingerprint=${{ secrets.OCI_CLI_FINGERPRINT }}
           tenancy=${{ secrets.OCI_CLI_TENANCY }}
           region=${{ secrets.OCI_CLI_REGION }}
-          key_file=${OCI_KEY_FILE}
+          key_file=${OCI_CLI_KEY_FILE}
           EOF
-          sed -i 's/^[[:space:]]*//' ${OCI_CONFIG_FILE}
 
-          echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_KEY_FILE}
+          echo "${{ secrets.OCI_CLI_KEY_CONTENT }}" > ${OCI_CLI_KEY_FILE}
 
           chmod 600 ${OCI_CONFIG_FILE}
-          chmod 600 ${OCI_KEY_FILE}
+          chmod 600 ${OCI_CLI_KEY_FILE}
 
           oci raw-request --http-method PUT \
             --config-file ${OCI_CONFIG_FILE} \
