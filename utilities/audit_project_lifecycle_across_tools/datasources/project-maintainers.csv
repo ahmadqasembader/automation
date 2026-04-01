@@ -699,13 +699,8 @@ Incubating,Cloud Custodian,Kapil Thangavelu,Stacklet,kapilt,https://github.com/c
 ,,Andy Luong,Microsoft,aluong,
 ,,Kiril Logachev,Stacklet,logachev,
 ,,Jorge Castro,Stacklet,castrojo,
-Sandbox,Dex,Joel Speed ,Red Hat,JoelSpeed,https://github.com/dexidp/dex/blob/master/MAINTAINERS
-,,Mark Sagi-Kazar,Banzai Cloud,sagikazarmark,
-,,Nandor Kracser,Banzai Cloud,bonifaido,
-,,Maksim Nabokikh,Palark,nabokihms,
-,,Rithu John,Lyft,rithujohn191,
-,,Stephan Renatus ,Chef,srenatus,
-,,Stephen Augustus ,VMware,justaugustus,
+Sandbox,Dex,Márk Sági-Kazár,,sagikazarmark,https://github.com/dexidp/dex/blob/master/MAINTAINERS.md
+,,Maksim Nabokikh,Palark GmbH,nabokihms,
 Incubating,LitmusChaos,Amit Kumar Das,Harness,amityt,https://github.com/litmuschaos/litmus/blob/master/MAINTAINERS.md
 ,,Arkojyoti Mukherjee,Harness,arkajyotiMukherjee,
 ,,Chandan Kumar,ZopsMart,chandankumar4,
@@ -1193,15 +1188,22 @@ Sandbox,MetalLB,Federico Paolinelli,Red Hat,fedepaol,https://github.com/metallb/
 Sandbox,Inclavare Containers,Jia Zhang,Alibaba,jiazhang0,https://github.com/alibaba/inclavare-containers/blob/master/MAINTAINERS.md
 ,,Liang Yang,Intel,YangLiang3,
 Incubating,Karmada,Kevin Wang,Huawei,kevin-wangzefeng,https://github.com/karmada-io/karmada/blob/master/MAINTAINERS.md
+,,Ding Wenjiang,ByteDance,warjiang,
 ,,Hanbo Li,ByteDance,mrlihanbo,
 ,,Hongcai Ren,Huawei,RainbowMango,
+,,Joe Nathan Abellard,Bloomberg,jabellard,
 ,,Junhua He,CECloud,whitewindmills,
 ,,Lei Xue,Moore Threads,carmark,
+,,Michas Szacillo,Bloomberg,mszacillo,
+,,Qiangqiang Chang,Hello Group,CharlesQQ,
 ,,Shiyi Xie,Huawei,GitHubxsy,
+,,Wei-Cheng Lai,Bloomberg,seanlaii,
 ,,Xiao Zhang,DaoCloud,wawa0210,
 ,,Yifan Shen,ICBC,zoroyouxi,
 ,,Yiheng Ci,Tiger Brokers,lfbear,
 ,,Zhen Chang,Huawei,XiShanYongYe-Chang,
+,,Zhuang Zhang,Huawei,zhzhuang-zju,
+,,Zongqing Li,Trip.com,zach593,
 Sandbox,Open Cluster Management,Qiu Jian,Red Hat,qiujian16,https://github.com/open-cluster-management-io/community/blob/main/MAINTAINERS.md
 ,,Joshua Packer,Red Hat,jnpacker,
 ,,David Eads,Red Hat,deads2k,
@@ -1840,7 +1842,7 @@ Sandbox,bpfman,Dave Tucker,Red Hat,dave-tucker,https://github.com/bpfman/bpfman/
 ,,Billy McFall,Red Hat,Billy99,
 Sandbox,OSCAL-COMPASS,Anca Sailer,IBM,ancatri,https://github.com/oscal-compass/community/blob/main/MAINTAINERS.md
 ,,Lou DeGenaro,IBM,degenaro,
-,,Manjiree Gadgil,IBM,mrgadgil,
+,,Chris Butler,Red Hat,butler54,
 ,,Yuji Watanabe,IBM,yuji-watanabe-jp,
 ,,Vikas Agarwal,IBM,vikas-agarwal76,
 Sandbox,LoxiLB,Trekkie,NetLOX,TrekkieCoder,https://github.com/loxilb-io/loxilb/blob/main/MAINTAINERS.md
