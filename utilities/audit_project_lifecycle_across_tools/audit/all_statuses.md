@@ -4,12 +4,13 @@
 
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|---|---|---|---|---|
-| Agones | sandbox | - | sandbox | - | sandbox | - | - | - |
+| Agones | sandbox | sandbox | sandbox | - | sandbox | - | - | - |
 | CoHDI | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 60 |
 | composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 74 |
 | Copa | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 77 |
 | KAI Scheduler | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
 | kube-vip | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 73 |
+| OpenEverest | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
 | Oxia | sandbox | sandbox | sandbox | sandbox | sandbox | - | Healthy | 70 |
 | Service Mesh Performance | sandbox | archived | - | - | - | archived | Healthy | 67 |
 | TrestleGRC | sandbox | sandbox | - | - | sandbox | - | Healthy | 76 |
@@ -34,8 +35,7 @@
 | kube-bind | forming | - | - | - | - | - | - | - |
 | KubeElasti | forming | sandbox | sandbox | sandbox | sandbox | - | - | - |
 | llm-d | forming | - | - | - | - | - | Excellent | 84 |
-| NMstate | forming | - | sandbox | sandbox | sandbox | - | Healthy | 76 |
-| OpenEverest | forming | sandbox | sandbox | sandbox | sandbox | - | - | - |
+| NMstate | forming | sandbox | sandbox | sandbox | sandbox | - | Healthy | 76 |
 | OptiFlow (AI‑OrchestrateX) | forming | - | - | - | - | - | - | - |
 | Schema Driven Configuration | forming | - | - | - | - | - | - | - |
 | SecureBuild | forming | - | - | - | - | - | - | - |
@@ -155,7 +155,7 @@
 | Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|---|---|---|---|---|
 | Aeraki Mesh | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 62 |
-| Agones | sandbox | - | sandbox | - | sandbox | - | - | - |
+| Agones | sandbox | sandbox | sandbox | - | sandbox | - | - | - |
 | Akri | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
 | Antrea | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
 | Armada | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
@@ -252,6 +252,7 @@
 | Open Policy Registry (OPCR) | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Stable | 54 |
 | OpenChoreo | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
 | OpenEBS | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+| OpenEverest | sandbox | sandbox | sandbox | sandbox | sandbox | - | - | - |
 | OpenFunction | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 60 |
 | openGemini | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
 | OpenGitOps | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox | Stable | 56 |
@@ -325,8 +326,7 @@
 | kube-bind | forming | - | - | - | - | - | - | - |
 | KubeElasti | forming | sandbox | sandbox | sandbox | sandbox | - | - | - |
 | llm-d | forming | - | - | - | - | - | Excellent | 84 |
-| NMstate | forming | - | sandbox | sandbox | sandbox | - | Healthy | 76 |
-| OpenEverest | forming | sandbox | sandbox | sandbox | sandbox | - | - | - |
+| NMstate | forming | sandbox | sandbox | sandbox | sandbox | - | Healthy | 76 |
 | OptiFlow (AI‑OrchestrateX) | forming | - | - | - | - | - | - | - |
 | Schema Driven Configuration | forming | - | - | - | - | - | - | - |
 | SecureBuild | forming | - | - | - | - | - | - | - |

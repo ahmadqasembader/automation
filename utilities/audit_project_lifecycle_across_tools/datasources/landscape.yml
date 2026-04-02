@@ -528,6 +528,17 @@ landscape:
             crunchbase: https://www.crunchbase.com/organization/mist-io
             joined: '2021-02-01'
           - item:
+            name: NMstate
+            description: >-
+              NMstate is a library with an accompanying command line tool that manages host networking settings in a declarative manner. When used in the Kubernetes environment it allows for declarative node network configuration through the Kubernetes API.
+            homepage_url: https://nmstate.io/
+            project: sandbox
+            repo_url: https://github.com/nmstate/nmstate
+            logo: cncf.svg
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            extra:
+              accepted: '2026-03-12'
+          - item:
             name: Omni
             description: >-
               Omni is a Kubernetes orchestrator for bare metal and edge environments. It manages full OS and Kubernetes lifecycles with Talos Linux and remote management with wireguard communication.
@@ -3859,6 +3870,17 @@ landscape:
       - subcategory:
         name: Scheduling & Orchestration
         items:
+          - item:
+            name: Agones
+            description: Agones is a library for hosting, running, and scaling dedicated game servers on Kubernetes.
+            homepage_url: https://agones.dev/site/
+            project: sandbox
+            repo_url: https://github.com/agones-dev/agones
+            logo: cncf.svg
+            twitter: https://twitter.com/agonesdev
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            extra:
+              accepted: '2025-12-21'
           - item:
             name: Amazon Elastic Container Service (ECS)
             description: >-
@@ -15389,12 +15411,6 @@ landscape:
             crunchbase: https://www.crunchbase.com/organization/infoblox
             joined: '2016-01-01'
           - item:
-            name: initializ™ (member)
-            homepage_url: https://www.initializ.io/
-            logo: initializ.svg
-            crunchbase: https://www.crunchbase.com/organization/initializ
-            joined: '2022-10-01'
-          - item:
             name: Innogrid (member)
             homepage_url: https://www.innogrid.com/
             logo: innogrid.svg
@@ -16089,12 +16105,6 @@ landscape:
             logo: palark.svg
             crunchbase: https://www.crunchbase.com/organization/palark
             joined: '2022-12-01'
-          - item:
-            name: Parseable (member)
-            homepage_url: https://www.parseable.com
-            logo: parseable.svg
-            crunchbase: https://www.crunchbase.com/organization/parseable
-            joined: '2025-04-01'
           - item:
             name: Pelotech (member)
             homepage_url: https://pelo.tech
