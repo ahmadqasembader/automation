@@ -349,6 +349,30 @@ def build_landscape_status_map(landscape_data: Dict[str, Any]) -> Dict[str, str]
     return name_to_status
 
 
+def build_landscape_slug_map(landscape_data: Dict[str, Any]) -> Dict[str, str]:
+    """
+    Map normalized lookup keys -> landscape extra.lfx_slug for each project.
+    """
+    name_to_slug: Dict[str, str] = {}
+    landscape_list: List[Any] = landscape_data.get("landscape") or []
+    for cat in landscape_list:
+        subcats = (cat.get("subcategories") or [])
+        for sub in subcats:
+            items = (sub.get("items") or [])
+            for item in items:
+                name = (item.get("name") or "").strip()
+                if not name:
+                    continue
+                extra = item.get("extra") or {}
+                lfx_slug = (extra.get("lfx_slug") or "").strip() if isinstance(extra, dict) else ""
+                if not lfx_slug:
+                    continue
+                for key in generate_aliases_from_landscape(name, extra):
+                    if key and key not in name_to_slug:
+                        name_to_slug[key] = lfx_slug
+    return name_to_slug
+
+
 def build_artwork_status_map(readme_text: str) -> Dict[str, str]:
     # Parse cncf/artwork README where projects are grouped under bullet headings.
     category_to_status = {
@@ -556,8 +580,8 @@ def _extract_github_path(url: str) -> str:
         return ""
 
 
-def collect_pcc_expected_statuses(pcc_data: Dict[str, Any]) -> List[Tuple[str, str]]:
-    pairs: List[Tuple[str, str]] = []
+def collect_pcc_expected_statuses(pcc_data: Dict[str, Any]) -> List[Tuple[str, str, str]]:
+    pairs: List[Tuple[str, str, str]] = []
     categories: Dict[str, List[Dict[str, Any]]] = pcc_data.get("categories") or {}
     for cat_name, items in categories.items():
         norm_status = normalize_status(cat_name)
@@ -566,7 +590,8 @@ def collect_pcc_expected_statuses(pcc_data: Dict[str, Any]) -> List[Tuple[str, s
         for item in items or []:
             name = item.get("name") or ""
             if name:
-                pairs.append((name, norm_status))
+                slug = (item.get("slug") or "").strip()
+                pairs.append((name, slug, norm_status))
     # Archived projects
     for item in pcc_data.get("archived_projects") or []:
         name = item.get("name") or ""
@@ -577,23 +602,27 @@ def collect_pcc_expected_statuses(pcc_data: Dict[str, Any]) -> List[Tuple[str, s
         if raw_status == "Formation - Disengaged":
             continue
         if raw_status == "Formation - Engaged":
-            pairs.append((name, "forming"))
+            slug = (item.get("slug") or "").strip()
+            pairs.append((name, slug, "forming"))
             continue
         if raw_status == "Prospect":
-            pairs.append((name, "prospect"))
+            slug = (item.get("slug") or "").strip()
+            pairs.append((name, slug, "prospect"))
             continue
-        pairs.append((name, "archived"))
+        slug = (item.get("slug") or "").strip()
+        pairs.append((name, slug, "archived"))
     # Forming projects
     for item in pcc_data.get("forming_projects") or []:
         name = item.get("name") or ""
         if not name:
             continue
-        pairs.append((name, "forming"))
+        slug = (item.get("slug") or "").strip()
+        pairs.append((name, slug, "forming"))
     return pairs
 
 
 def write_audit_markdown(
-    combined_rows: List[Tuple[str, str, str, str, str, str, str, str, str]],
+    combined_rows: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]],
 ) -> None:
     lines: List[str] = []
     lines.append(f"# CNCF Project Status Audit")
@@ -602,24 +631,24 @@ def write_audit_markdown(
         lines.append("_No mismatches found between PCC and external sources._")
     else:
         # Column headers hyperlinked to their respective sources for quick reference
-        lines.append("| Project | [PCC status](./pcc_projects.yaml) | [Landscape status](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor status](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers CSV status](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats status](https://devstats.cncf.io/) | [Artwork status](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |")
-        lines.append("|---|---|---|---|---|---|---|---|---|")
+        lines.append("| Project | [PCC Slug](./pcc_projects.yaml) | [PCC status](./pcc_projects.yaml) | [Landscape status](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor status](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers CSV status](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats status](https://devstats.cncf.io/) | [Artwork status](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |")
+        lines.append("|---|---|---|---|---|---|---|---|---|---|---|")
         # Sort by PCC status: graduated, incubating, sandbox, forming, archived, prospect; then by project name
         status_order = {"graduated": 0, "incubating": 1, "sandbox": 2, "forming": 3, "archived": 4, "prospect": 5}
-        def sort_key(row: Tuple[str, str, str, str, str, str, str, str, str]) -> Tuple[int, str]:
-            name, pcc_status, *_ = row
+        def sort_key(row: Tuple[str, str, str, str, str, str, str, str, str, str, str]) -> Tuple[int, str]:
+            name, _, pcc_status, *_ = row
             return (status_order.get(pcc_status, 99), name.lower())
         def fmt(v: str) -> str:
             return v if v else "-"
-        for name, pcc_status, landscape_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in sorted(combined_rows, key=sort_key):
-            lines.append(f"| {name} | {fmt(pcc_status)} | {fmt(landscape_status)} | {fmt(cm_status)} | {fmt(m_status)} | {fmt(d_status)} | {fmt(a_status)} | {fmt(lfx_tier)} | {fmt(lfx_score)} |")
+        for name, pcc_slug, pcc_status, landscape_status, landscape_slug, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in sorted(combined_rows, key=sort_key):
+            lines.append(f"| {name} | {fmt(pcc_slug)} | {fmt(pcc_status)} | {fmt(landscape_status)} | {fmt(landscape_slug)} | {fmt(cm_status)} | {fmt(m_status)} | {fmt(d_status)} | {fmt(a_status)} | {fmt(lfx_tier)} | {fmt(lfx_score)} |")
 
     with open(AUDIT_OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
 
 
 def write_full_status_markdown(
-    all_rows: List[Tuple[str, str, str, str, str, str, str, str, str]],
+    all_rows: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]],
 ) -> None:
     """
     Write a full report with anomalies first, then all projects grouped by PCC category
@@ -627,8 +656,8 @@ def write_full_status_markdown(
     """
     # Compute anomalies: include projects with ANY missing value ('-' after formatting) OR
     # any external source present and different from PCC
-    anomalies: List[Tuple[str, str, str, str, str, str, str, str, str]] = []
-    for name, pcc_status, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in all_rows:
+    anomalies: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]] = []
+    for name, pcc_slug, pcc_status, l_status, l_slug, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in all_rows:
         norm_pcc = normalize_status(pcc_status)
         missing_any = (l_status == "-") or (not cm_status) or (not m_status) or (not d_status) or (not a_status)
         differs_any = any([
@@ -639,9 +668,9 @@ def write_full_status_markdown(
             (a_status and normalize_status(a_status) != norm_pcc),
         ])
         if missing_any or differs_any:
-            anomalies.append((name, pcc_status, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
+            anomalies.append((name, pcc_slug, pcc_status, l_status, l_slug, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
 
-    def section(title: str, rows: List[Tuple[str, str, str, str, str, str, str, str, str]]) -> List[str]:
+    def section(title: str, rows: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]]) -> List[str]:
         out: List[str] = []
         out.append(f"## {title}")
         out.append("")
@@ -649,26 +678,26 @@ def write_full_status_markdown(
             out.append("_No entries._")
             out.append("")
             return out
-        out.append("| Project | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |")
-        out.append("|---|---|---|---|---|---|---|---|---|")
+        out.append("| Project | [PCC Slug](./pcc_projects.yaml) | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |")
+        out.append("|---|---|---|---|---|---|---|---|---|---|---|")
         def fmt(v: str) -> str:
             return v if v else "-"
-        for name, pcc_status, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in rows:
-            out.append(f"| {name} | {fmt(pcc_status)} | {fmt(l_status)} | {fmt(cm_status)} | {fmt(m_status)} | {fmt(d_status)} | {fmt(a_status)} | {fmt(lfx_tier)} | {fmt(lfx_score)} |")
+        for name, pcc_slug, pcc_status, l_status, l_slug, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in rows:
+            out.append(f"| {name} | {fmt(pcc_slug)} | {fmt(pcc_status)} | {fmt(l_status)} | {fmt(l_slug)} | {fmt(cm_status)} | {fmt(m_status)} | {fmt(d_status)} | {fmt(a_status)} | {fmt(lfx_tier)} | {fmt(lfx_score)} |")
         out.append("")
         return out
 
     # Sort helpers (match anomalies table order)
     status_order = {"graduated": 0, "incubating": 1, "sandbox": 2, "forming": 3, "archived": 4, "prospect": 5}
-    def status_then_name(row: Tuple[str, str, str, str, str, str, str, str, str]) -> Tuple[int, str]:
-        name, pcc_status, *_ = row
+    def status_then_name(row: Tuple[str, str, str, str, str, str, str, str, str, str, str]) -> Tuple[int, str]:
+        name, _, pcc_status, *_ = row
         return (status_order.get(normalize_status(pcc_status), 99), name.lower())
 
     # Sort anomalies by PCC status then name
     anomalies_sorted = sorted(anomalies, key=status_then_name)
 
     # Group all by PCC category (include forming, archived, and prospect too)
-    by_cat: Dict[str, List[Tuple[str, str, str, str, str, str, str, str, str]]] = {
+    by_cat: Dict[str, List[Tuple[str, str, str, str, str, str, str, str, str, str, str]]] = {
         "graduated": [],
         "incubating": [],
         "sandbox": [],
@@ -677,7 +706,7 @@ def write_full_status_markdown(
         "prospect": [],
     }
     for row in all_rows:
-        _, pcc_status, *_ = row
+        _, _, pcc_status, *_ = row
         cat = normalize_status(pcc_status)
         if cat in by_cat:
             by_cat[cat].append(row)
@@ -711,6 +740,7 @@ def main() -> None:
     devstats_html = download_devstats_html()
     artwork_readme = download_artwork_readme()
     landscape_map = build_landscape_status_map(landscape)
+    landscape_slug_map = build_landscape_slug_map(landscape)
     clomonitor_map = build_clomonitor_status_map(clomonitor)
     maintainers_map = build_foundation_status_map(maintainers_csv)
     devstats_map = build_devstats_status_map(devstats_html)
@@ -718,9 +748,9 @@ def main() -> None:
     lfx_map, _ = load_lfx_health_map()
     expected = collect_pcc_expected_statuses(pcc)
 
-    combined_rows: List[Tuple[str, str, str, str, str, str, str, str, str]] = []
-    all_rows: List[Tuple[str, str, str, str, str, str, str, str, str]] = []
-    for name, pcc_status in expected:
+    combined_rows: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]] = []
+    all_rows: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]] = []
+    for name, pcc_slug, pcc_status in expected:
         norm_pcc = normalize_status(pcc_status)
         # Build multiple query keys for Landscape lookup
         query_keys: List[str] = []
@@ -749,9 +779,14 @@ def main() -> None:
             if tok and tok not in query_keys:
                 query_keys.append(tok)
         l_status_raw = ""
+        l_slug_raw = ""
         for k in query_keys:
             if k in landscape_map:
                 l_status_raw = landscape_map[k]
+                break
+        for k in query_keys:
+            if k in landscape_slug_map:
+                l_slug_raw = landscape_slug_map[k]
                 break
         # Use the same robust key set for other sources
         cm_status_raw = ""
@@ -769,6 +804,7 @@ def main() -> None:
                 a_status_raw = artwork_map[k]
         # For Landscape, explicitly show '-' when missing to flag anomaly
         l_status = normalize_status(l_status_raw) if l_status_raw else "-"
+        l_slug = (l_slug_raw or "").strip()
         # For other sources, keep empty when missing
         cm_status = normalize_status(cm_status_raw) if cm_status_raw else ""
         m_status = normalize_status(m_status_raw) if m_status_raw else ""
@@ -786,7 +822,7 @@ def main() -> None:
         lfx_tier = (lfx_tier_raw or "").strip()
         lfx_score = (lfx_score_raw or "").strip()
 
-        all_rows.append((name, norm_pcc, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
+        all_rows.append((name, pcc_slug, norm_pcc, l_status, l_slug if l_slug else "-", cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
 
         # Anomaly criteria:
         # - Any missing value in any source (displayed as '-' later; Landscape missing is already '-')
@@ -799,7 +835,7 @@ def main() -> None:
         any_missing = (l_status == "-") or (not cm_status) or (not m_status) or (not d_status) or (not a_status)
 
         if any_missing or landscape_mismatch or clomonitor_mismatch or maintainers_mismatch or devstats_mismatch or artwork_mismatch:
-            combined_rows.append((name, norm_pcc, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
+            combined_rows.append((name, pcc_slug, norm_pcc, l_status, l_slug if l_slug else "-", cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
 
     write_audit_markdown(combined_rows)
     write_full_status_markdown(all_rows)
