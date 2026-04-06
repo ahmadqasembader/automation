@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os
 import sys
-from html import escape
 from typing import Dict, Any, List, Tuple
 
 import csv
@@ -29,6 +28,7 @@ REPO_ROOT = os.getcwd()
 PCC_YAML_PATH = os.path.join(REPO_ROOT, "datasources", "pcc_projects.yaml")
 AUDIT_OUTPUT_PATH = os.path.join(REPO_ROOT, "audit", "status_audit.md")
 ALL_AUDIT_OUTPUT_PATH = os.path.join(REPO_ROOT, "audit", "all_statuses.md")
+PROJECT_HEALTH_OUTPUT_PATH = os.path.join(REPO_ROOT, "audit", "project_health.md")
 DATASOURCES_DIR = os.path.join(REPO_ROOT, "datasources")
 LANDSCAPE_SRC_PATH = os.path.join(DATASOURCES_DIR, "landscape.yml")
 CLOMONITOR_SRC_PATH = os.path.join(DATASOURCES_DIR, "clomonitor.yaml")
@@ -44,52 +44,14 @@ LFX_HEALTH_REL = "../datasources/lfx_insights_health.yaml"
 PCC_DATASOURCE_REL = "./pcc_projects.yaml"
 
 
-def _th_link(label: str, href: str) -> str:
-    return f'<a href="{escape(href, quote=True)}">{escape(label)}</a>'
-
-
-def _th_link_br(line1: str, line2: str, href: str) -> str:
-    inner = f"{escape(line1)}<br>{escape(line2)}"
-    return f'<a href="{escape(href, quote=True)}">{inner}</a>'
-
-
-def _th_plain(label: str) -> str:
-    return escape(label)
-
-
-def _th_plain_br(line1: str, line2: str) -> str:
-    return f"{escape(line1)}<br>{escape(line2)}"
-
-
-def render_wide_audit_table_html(header_cells: List[str], body_rows: List[List[str]]) -> str:
-    """
-    Emit an HTML table inside a horizontal scroll wrapper so wide audits stay usable
-    in GitHub / browser viewers without relying on raw markdown table layout.
-    """
+def render_markdown_table(headers: List[str], rows: List[List[str]]) -> List[str]:
     lines: List[str] = []
-    # GitHub's markdown sanitizer strips inline `style` on divs; local viewers often keep it.
-    lines.append('<div style="overflow-x: auto;">')
-    lines.append("")
-    lines.append(
-        '<table style="width: max-content; max-width: 100%; border-collapse: collapse;">'
-    )
-    lines.append("<thead>")
-    lines.append("<tr>")
-    for h in header_cells:
-        lines.append(f"<th>{h}</th>")
-    lines.append("</tr>")
-    lines.append("</thead>")
-    lines.append("<tbody>")
-    for row in body_rows:
-        lines.append("<tr>")
-        for cell in row:
-            lines.append(f"<td>{escape(str(cell))}</td>")
-        lines.append("</tr>")
-    lines.append("</tbody>")
-    lines.append("</table>")
-    lines.append("")
-    lines.append("</div>")
-    return "\n".join(lines)
+    lines.append("| " + " | ".join(headers) + " |")
+    lines.append("|" + "|".join(["---"] * len(headers)) + "|")
+    for row in rows:
+        cells = [str(c if c else "-") for c in row]
+        lines.append("| " + " | ".join(cells) + " |")
+    return lines
 
 
 def ensure_dirs() -> None:
@@ -685,11 +647,6 @@ def write_audit_markdown(
     if not combined_rows:
         lines.append("_No mismatches found between PCC and external sources._")
     else:
-        lines.append(
-            "_Wide tables use compact two-line column titles to save horizontal space. "
-            "A scroll wrapper is included for viewers that support it; on github.com inline CSS is often stripped, so use a wide window or your editor Markdown preview if the table still overflows._"
-        )
-        lines.append("")
         # Sort by PCC status: graduated, incubating, sandbox, forming, archived, prospect; then by project name
         status_order = {"graduated": 0, "incubating": 1, "sandbox": 2, "forming": 3, "archived": 4, "prospect": 5}
         def sort_key(row: Tuple[str, str, str, str, str, str, str, str, str, str, str]) -> Tuple[int, str]:
@@ -697,22 +654,10 @@ def write_audit_markdown(
             return (status_order.get(pcc_status, 99), name.lower())
         def fmt(v: str) -> str:
             return v if v else "-"
-        header_cells = [
-            _th_plain("Project"),
-            _th_link_br("PCC", "slug", PCC_DATASOURCE_REL),
-            _th_link_br("Landscape", "slug", LANDSCAPE_YML_URL),
-            _th_link_br("PCC", "status", PCC_DATASOURCE_REL),
-            _th_link_br("Landscape", "status", LANDSCAPE_YML_URL),
-            _th_link_br("CLO", "Monitor", CLOMONITOR_YAML_URL),
-            _th_link_br("Maint.", "CSV", MAINTAINERS_CSV_URL),
-            _th_link("DevStats", DEVSTATS_URL),
-            _th_link("Artwork", ARTWORK_README_URL),
-            _th_link_br("Insights", "health", LFX_HEALTH_REL),
-            _th_link_br("Health", "score", LFX_HEALTH_REL),
-        ]
-        body_rows: List[List[str]] = []
+
+        core_rows: List[List[str]] = []
         for name, pcc_slug, landscape_slug, pcc_status, landscape_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in sorted(combined_rows, key=sort_key):
-            body_rows.append([
+            core_rows.append([
                 name,
                 fmt(pcc_slug),
                 fmt(landscape_slug),
@@ -722,10 +667,21 @@ def write_audit_markdown(
                 fmt(m_status),
                 fmt(d_status),
                 fmt(a_status),
-                fmt(lfx_tier),
-                fmt(lfx_score),
             ])
-        lines.append(render_wide_audit_table_html(header_cells, body_rows))
+        lines.extend(render_markdown_table(
+            [
+                "Project",
+                f"[PCC Slug]({PCC_DATASOURCE_REL})",
+                f"[Landscape Slug]({LANDSCAPE_YML_URL})",
+                f"[PCC Status]({PCC_DATASOURCE_REL})",
+                f"[Landscape Status]({LANDSCAPE_YML_URL})",
+                f"[CLOMonitor]({CLOMONITOR_YAML_URL})",
+                f"[Maintainers]({MAINTAINERS_CSV_URL})",
+                f"[DevStats]({DEVSTATS_URL})",
+                f"[Artwork]({ARTWORK_README_URL})",
+            ],
+            core_rows,
+        ))
 
     with open(AUDIT_OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
@@ -764,22 +720,9 @@ def write_full_status_markdown(
             return out
         def fmt(v: str) -> str:
             return v if v else "-"
-        header_cells = [
-            _th_plain("Project"),
-            _th_link_br("PCC", "slug", PCC_DATASOURCE_REL),
-            _th_link_br("Landscape", "slug", LANDSCAPE_YML_URL),
-            _th_link("PCC", PCC_DATASOURCE_REL),
-            _th_link("Landscape", LANDSCAPE_YML_URL),
-            _th_link_br("CLO", "Monitor", CLOMONITOR_YAML_URL),
-            _th_link("Maintainers", MAINTAINERS_CSV_URL),
-            _th_link("DevStats", DEVSTATS_URL),
-            _th_link("Artwork", ARTWORK_README_URL),
-            _th_link_br("Insights", "health", LFX_HEALTH_REL),
-            _th_link_br("Health", "score", LFX_HEALTH_REL),
-        ]
-        body_rows: List[List[str]] = []
+        core_rows: List[List[str]] = []
         for name, pcc_slug, landscape_slug, pcc_status, landscape_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in rows:
-            body_rows.append([
+            core_rows.append([
                 name,
                 fmt(pcc_slug),
                 fmt(landscape_slug),
@@ -789,10 +732,21 @@ def write_full_status_markdown(
                 fmt(m_status),
                 fmt(d_status),
                 fmt(a_status),
-                fmt(lfx_tier),
-                fmt(lfx_score),
             ])
-        out.append(render_wide_audit_table_html(header_cells, body_rows))
+        out.extend(render_markdown_table(
+            [
+                "Project",
+                f"[PCC Slug]({PCC_DATASOURCE_REL})",
+                f"[Landscape Slug]({LANDSCAPE_YML_URL})",
+                f"[PCC]({PCC_DATASOURCE_REL})",
+                f"[Landscape]({LANDSCAPE_YML_URL})",
+                f"[CLOMonitor]({CLOMONITOR_YAML_URL})",
+                f"[Maintainers]({MAINTAINERS_CSV_URL})",
+                f"[DevStats]({DEVSTATS_URL})",
+                f"[Artwork]({ARTWORK_README_URL})",
+            ],
+            core_rows,
+        ))
         out.append("")
         return out
 
@@ -827,11 +781,6 @@ def write_full_status_markdown(
     lines: List[str] = []
     lines.append("# CNCF Project Statuses")
     lines.append("")
-    lines.append(
-        "_Wide tables use compact two-line column titles to save horizontal space. "
-        "A scroll wrapper is included for viewers that support it; on github.com inline CSS is often stripped, so use a wide window or your editor Markdown preview if the table still overflows._"
-    )
-    lines.append("")
     lines.extend(section("Anomalies", anomalies_sorted))
     # Sections in the requested sort order
     lines.extend(section("Graduated", by_cat["graduated"]))
@@ -842,6 +791,42 @@ def write_full_status_markdown(
     lines.extend(section("Prospect", by_cat["prospect"]))
 
     with open(ALL_AUDIT_OUTPUT_PATH, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+
+def write_project_health_markdown(
+    all_rows: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]],
+) -> None:
+    lines: List[str] = []
+    lines.append("# CNCF Project Health")
+    lines.append("")
+
+    status_order = {"graduated": 0, "incubating": 1, "sandbox": 2, "forming": 3, "archived": 4, "prospect": 5}
+    sorted_rows = sorted(all_rows, key=lambda r: (status_order.get(normalize_status(r[3]), 99), r[0].lower()))
+
+    def fmt(v: str) -> str:
+        return v if v else "-"
+
+    body_rows: List[List[str]] = []
+    for name, _pcc_slug, _landscape_slug, pcc_status, _l_status, _cm_status, _m_status, _d_status, _a_status, lfx_tier, lfx_score in sorted_rows:
+        body_rows.append([
+            name,
+            fmt(pcc_status),
+            fmt(lfx_tier),
+            fmt(lfx_score),
+        ])
+
+    lines.extend(render_markdown_table(
+        [
+            "Project",
+            f"[PCC Status]({PCC_DATASOURCE_REL})",
+            f"[Insights Health]({LFX_HEALTH_REL})",
+            f"[Health Score]({LFX_HEALTH_REL})",
+        ],
+        body_rows,
+    ))
+
+    with open(PROJECT_HEALTH_OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
 
 
@@ -954,6 +939,7 @@ def main() -> None:
 
     write_audit_markdown(combined_rows)
     write_full_status_markdown(all_rows)
+    write_project_health_markdown(all_rows)
     print(f"Wrote audit with {len(combined_rows)} mismatches to {AUDIT_OUTPUT_PATH}")
 
 
