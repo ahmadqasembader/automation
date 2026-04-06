@@ -1,5 +1,18 @@
 # CNCF Project Health
 
+## Anomalies
+
+| Project | [PCC Status](./pcc_projects.yaml) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
+|---|---|---|---|
+| Agones | sandbox | - | - |
+| KAI Scheduler | sandbox | - | - |
+| OpenEverest | sandbox | - | - |
+| Operator Framework | incubating | Critical | - |
+| SPIRE | graduated | Critical | - |
+| Velero | sandbox | - | - |
+
+## Graduated
+
 | Project | [PCC Status](./pcc_projects.yaml) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|
 | Argo | graduated | Excellent | 83 |
@@ -37,6 +50,11 @@
 | The Update Framework (TUF) | graduated | Healthy | 78 |
 | TiKV | graduated | Excellent | 82 |
 | Vitess | graduated | Excellent | 80 |
+
+## Incubating
+
+| Project | [PCC Status](./pcc_projects.yaml) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
+|---|---|---|---|
 | Artifact Hub | incubating | Healthy | 71 |
 | Backstage | incubating | Excellent | 82 |
 | Buildpacks | incubating | Excellent | 82 |
@@ -73,6 +91,11 @@
 | Thanos | incubating | Excellent | 84 |
 | Volcano | incubating | Excellent | 86 |
 | wasmCloud | incubating | Healthy | 76 |
+
+## Sandbox
+
+| Project | [PCC Status](./pcc_projects.yaml) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
+|---|---|---|---|
 | Aeraki Mesh | sandbox | Healthy | 64 |
 | Agones | sandbox | - | - |
 | Akri | sandbox | Healthy | 73 |
@@ -220,6 +243,11 @@
 | xRegistry | sandbox | Healthy | 59 |
 | Youki | sandbox | Healthy | 77 |
 | zot | sandbox | Healthy | 78 |
+
+## Forming
+
+| Project | [PCC Status](./pcc_projects.yaml) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
+|---|---|---|---|
 | <QHTTPX> | forming | - | - |
 | AIBrix | forming | - | - |
 | Apicurio Registry | forming | - | - |
@@ -248,6 +276,11 @@
 | Sermant | forming | Healthy | 73 |
 | ServiceRadar | forming | - | - |
 | Terrascan | forming | - | - |
+
+## Archived
+
+| Project | [PCC Status](./pcc_projects.yaml) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
+|---|---|---|---|
 | Brigade | archived | Archived | - |
 | CNI-Genie | archived | Archived | - |
 | Curiefense | archived | Archived | - |
@@ -273,3 +306,8 @@
 | SuperEdge | archived | Archived | - |
 | Teller | archived | Archived | - |
 | Xline | archived | Archived | - |
+
+## Prospect
+
+_No entries._
+
