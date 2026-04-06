@@ -32,8 +32,20 @@ spec:
           service:
             type: LoadBalancer
             loadBalancerIP: "64.181.244.33"
+          extraVolumes:
+            - name: combined-client-ca
+              secret:
+                secretName: kcp-front-proxy-combined-client-ca
+          extraVolumeMounts:
+            - name: combined-client-ca
+              mountPath: /etc/kcp-front-proxy/combined-client-ca
           additionalPathMappings:
             - path: /services/organization/
+              backend: https://kdp-virtual-workspaces:6444
+              backend_server_ca: /etc/kcp/tls/ca/tls.crt
+              proxy_client_cert: /etc/kcp-front-proxy/requestheader-client/tls.crt
+              proxy_client_key: /etc/kcp-front-proxy/requestheader-client/tls.key
+            - path: /services/project/
               backend: https://kdp-virtual-workspaces:6444
               backend_server_ca: /etc/kcp/tls/ca/tls.crt
               proxy_client_cert: /etc/kcp-front-proxy/requestheader-client/tls.crt
@@ -46,6 +58,9 @@ spec:
           extraFlags:
             - '--cors-allowed-origins=localhost,services.cncf.io$'
             - '--authentication-drop-groups=system:kcp:logical-cluster-admin'
+            - '--feature-gates=EnableDeprecatedAPIExportVirtualWorkspacesUrls=true'
+            - '--shard-virtual-workspace-url=https://api.services.cncf.io'
+            - '--client-ca-file=/etc/kcp-front-proxy/combined-client-ca/tls.crt'
         # OIDC-specific configuration which is applied to both kcp and kcp-front-proxy
         oidc:
           enabled: true
