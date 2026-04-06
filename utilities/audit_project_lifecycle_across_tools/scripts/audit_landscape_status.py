@@ -808,30 +808,60 @@ def write_project_health_markdown(
     lines.append("# CNCF Project Health")
     lines.append("")
 
-    status_order = {"graduated": 0, "incubating": 1, "sandbox": 2, "forming": 3, "archived": 4, "prospect": 5}
-    sorted_rows = sorted(all_rows, key=lambda r: (status_order.get(normalize_status(r[3]), 99), r[0].lower()))
-
     def fmt(v: str) -> str:
         return v if v else "-"
 
-    body_rows: List[List[str]] = []
-    for name, _pcc_slug, _landscape_slug, pcc_status, _l_status, _cm_status, _m_status, _d_status, _a_status, lfx_tier, lfx_score in sorted_rows:
-        body_rows.append([
-            name,
-            fmt(pcc_status),
-            fmt(lfx_tier),
-            fmt(lfx_score),
-        ])
+    def to_health_row(row: Tuple[str, str, str, str, str, str, str, str, str, str, str]) -> List[str]:
+        name, _pcc_slug, _landscape_slug, pcc_status, _l_status, _cm_status, _m_status, _d_status, _a_status, lfx_tier, lfx_score = row
+        return [name, fmt(pcc_status), fmt(lfx_tier), fmt(lfx_score)]
 
-    lines.extend(render_markdown_table(
-        [
-            "Project",
-            f"[PCC Status]({PCC_DATASOURCE_REL})",
-            f"[Insights Health]({LFX_HEALTH_REL})",
-            f"[Health Score]({LFX_HEALTH_REL})",
-        ],
-        body_rows,
-    ))
+    def section(title: str, rows: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]]) -> List[str]:
+        out: List[str] = []
+        out.append(f"## {title}")
+        out.append("")
+        if not rows:
+            out.append("_No entries._")
+            out.append("")
+            return out
+        sorted_rows = sorted(rows, key=lambda r: r[0].lower())
+        out.extend(render_markdown_table(
+            [
+                "Project",
+                f"[PCC Status]({PCC_DATASOURCE_REL})",
+                f"[Insights Health]({LFX_HEALTH_REL})",
+                f"[Health Score]({LFX_HEALTH_REL})",
+            ],
+            [to_health_row(r) for r in sorted_rows],
+        ))
+        out.append("")
+        return out
+
+    by_cat: Dict[str, List[Tuple[str, str, str, str, str, str, str, str, str, str, str]]] = {
+        "graduated": [],
+        "incubating": [],
+        "sandbox": [],
+        "forming": [],
+        "archived": [],
+        "prospect": [],
+    }
+    anomalies: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]] = []
+    anomaly_statuses = {"graduated", "incubating", "sandbox"}
+
+    for row in all_rows:
+        pcc_status = normalize_status(row[3])
+        if pcc_status in by_cat:
+            by_cat[pcc_status].append(row)
+        health_score = (row[10] or "").strip()
+        if pcc_status in anomaly_statuses and not health_score:
+            anomalies.append(row)
+
+    lines.extend(section("Anomalies", anomalies))
+    lines.extend(section("Graduated", by_cat["graduated"]))
+    lines.extend(section("Incubating", by_cat["incubating"]))
+    lines.extend(section("Sandbox", by_cat["sandbox"]))
+    lines.extend(section("Forming", by_cat["forming"]))
+    lines.extend(section("Archived", by_cat["archived"]))
+    lines.extend(section("Prospect", by_cat["prospect"]))
 
     with open(PROJECT_HEALTH_OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
