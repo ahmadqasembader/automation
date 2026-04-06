@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+from html import escape
 from typing import Dict, Any, List, Tuple
 
 import csv
@@ -35,6 +36,60 @@ MAINTAINERS_SRC_PATH = os.path.join(DATASOURCES_DIR, "project-maintainers.csv")
 DEVSTATS_SRC_PATH = os.path.join(DATASOURCES_DIR, "devstats.html")
 ARTWORK_SRC_PATH = os.path.join(DATASOURCES_DIR, "artwork.md")
 LFX_HEALTH_SRC_PATH = os.path.join(DATASOURCES_DIR, "lfx_insights_health.yaml")
+
+LANDSCAPE_YML_URL = "https://github.com/cncf/landscape/blob/master/landscape.yml"
+CLOMONITOR_YAML_URL = "https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml"
+MAINTAINERS_CSV_URL = "https://github.com/cncf/foundation/blob/main/project-maintainers.csv"
+LFX_HEALTH_REL = "../datasources/lfx_insights_health.yaml"
+PCC_DATASOURCE_REL = "./pcc_projects.yaml"
+
+
+def _th_link(label: str, href: str) -> str:
+    return f'<a href="{escape(href, quote=True)}">{escape(label)}</a>'
+
+
+def _th_link_br(line1: str, line2: str, href: str) -> str:
+    inner = f"{escape(line1)}<br>{escape(line2)}"
+    return f'<a href="{escape(href, quote=True)}">{inner}</a>'
+
+
+def _th_plain(label: str) -> str:
+    return escape(label)
+
+
+def _th_plain_br(line1: str, line2: str) -> str:
+    return f"{escape(line1)}<br>{escape(line2)}"
+
+
+def render_wide_audit_table_html(header_cells: List[str], body_rows: List[List[str]]) -> str:
+    """
+    Emit an HTML table inside a horizontal scroll wrapper so wide audits stay usable
+    in GitHub / browser viewers without relying on raw markdown table layout.
+    """
+    lines: List[str] = []
+    # GitHub's markdown sanitizer strips inline `style` on divs; local viewers often keep it.
+    lines.append('<div style="overflow-x: auto;">')
+    lines.append("")
+    lines.append(
+        '<table style="width: max-content; max-width: 100%; border-collapse: collapse;">'
+    )
+    lines.append("<thead>")
+    lines.append("<tr>")
+    for h in header_cells:
+        lines.append(f"<th>{h}</th>")
+    lines.append("</tr>")
+    lines.append("</thead>")
+    lines.append("<tbody>")
+    for row in body_rows:
+        lines.append("<tr>")
+        for cell in row:
+            lines.append(f"<td>{escape(str(cell))}</td>")
+        lines.append("</tr>")
+    lines.append("</tbody>")
+    lines.append("</table>")
+    lines.append("")
+    lines.append("</div>")
+    return "\n".join(lines)
 
 
 def ensure_dirs() -> None:
@@ -630,18 +685,47 @@ def write_audit_markdown(
     if not combined_rows:
         lines.append("_No mismatches found between PCC and external sources._")
     else:
-        # Column headers hyperlinked to their respective sources for quick reference
-        lines.append("| Project | [PCC Slug](./pcc_projects.yaml) | [PCC status](./pcc_projects.yaml) | [Landscape status](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor status](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers CSV status](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats status](https://devstats.cncf.io/) | [Artwork status](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |")
-        lines.append("|---|---|---|---|---|---|---|---|---|---|---|")
+        lines.append(
+            "_Wide tables use compact two-line column titles to save horizontal space. "
+            "A scroll wrapper is included for viewers that support it; on github.com inline CSS is often stripped, so use a wide window or your editor Markdown preview if the table still overflows._"
+        )
+        lines.append("")
         # Sort by PCC status: graduated, incubating, sandbox, forming, archived, prospect; then by project name
         status_order = {"graduated": 0, "incubating": 1, "sandbox": 2, "forming": 3, "archived": 4, "prospect": 5}
         def sort_key(row: Tuple[str, str, str, str, str, str, str, str, str, str, str]) -> Tuple[int, str]:
-            name, _, pcc_status, *_ = row
+            name, _, _, pcc_status, *_ = row
             return (status_order.get(pcc_status, 99), name.lower())
         def fmt(v: str) -> str:
             return v if v else "-"
-        for name, pcc_slug, pcc_status, landscape_status, landscape_slug, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in sorted(combined_rows, key=sort_key):
-            lines.append(f"| {name} | {fmt(pcc_slug)} | {fmt(pcc_status)} | {fmt(landscape_status)} | {fmt(landscape_slug)} | {fmt(cm_status)} | {fmt(m_status)} | {fmt(d_status)} | {fmt(a_status)} | {fmt(lfx_tier)} | {fmt(lfx_score)} |")
+        header_cells = [
+            _th_plain("Project"),
+            _th_link_br("PCC", "slug", PCC_DATASOURCE_REL),
+            _th_link_br("Landscape", "slug", LANDSCAPE_YML_URL),
+            _th_link_br("PCC", "status", PCC_DATASOURCE_REL),
+            _th_link_br("Landscape", "status", LANDSCAPE_YML_URL),
+            _th_link_br("CLO", "Monitor", CLOMONITOR_YAML_URL),
+            _th_link_br("Maint.", "CSV", MAINTAINERS_CSV_URL),
+            _th_link("DevStats", DEVSTATS_URL),
+            _th_link("Artwork", ARTWORK_README_URL),
+            _th_link_br("Insights", "health", LFX_HEALTH_REL),
+            _th_link_br("Health", "score", LFX_HEALTH_REL),
+        ]
+        body_rows: List[List[str]] = []
+        for name, pcc_slug, landscape_slug, pcc_status, landscape_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in sorted(combined_rows, key=sort_key):
+            body_rows.append([
+                name,
+                fmt(pcc_slug),
+                fmt(landscape_slug),
+                fmt(pcc_status),
+                fmt(landscape_status),
+                fmt(cm_status),
+                fmt(m_status),
+                fmt(d_status),
+                fmt(a_status),
+                fmt(lfx_tier),
+                fmt(lfx_score),
+            ])
+        lines.append(render_wide_audit_table_html(header_cells, body_rows))
 
     with open(AUDIT_OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
@@ -657,7 +741,7 @@ def write_full_status_markdown(
     # Compute anomalies: include projects with ANY missing value ('-' after formatting) OR
     # any external source present and different from PCC
     anomalies: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]] = []
-    for name, pcc_slug, pcc_status, l_status, l_slug, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in all_rows:
+    for name, pcc_slug, l_slug, pcc_status, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in all_rows:
         norm_pcc = normalize_status(pcc_status)
         missing_any = (l_status == "-") or (not cm_status) or (not m_status) or (not d_status) or (not a_status)
         differs_any = any([
@@ -668,7 +752,7 @@ def write_full_status_markdown(
             (a_status and normalize_status(a_status) != norm_pcc),
         ])
         if missing_any or differs_any:
-            anomalies.append((name, pcc_slug, pcc_status, l_status, l_slug, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
+            anomalies.append((name, pcc_slug, l_slug, pcc_status, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
 
     def section(title: str, rows: List[Tuple[str, str, str, str, str, str, str, str, str, str, str]]) -> List[str]:
         out: List[str] = []
@@ -678,19 +762,44 @@ def write_full_status_markdown(
             out.append("_No entries._")
             out.append("")
             return out
-        out.append("| Project | [PCC Slug](./pcc_projects.yaml) | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |")
-        out.append("|---|---|---|---|---|---|---|---|---|---|---|")
         def fmt(v: str) -> str:
             return v if v else "-"
-        for name, pcc_slug, pcc_status, l_status, l_slug, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in rows:
-            out.append(f"| {name} | {fmt(pcc_slug)} | {fmt(pcc_status)} | {fmt(l_status)} | {fmt(l_slug)} | {fmt(cm_status)} | {fmt(m_status)} | {fmt(d_status)} | {fmt(a_status)} | {fmt(lfx_tier)} | {fmt(lfx_score)} |")
+        header_cells = [
+            _th_plain("Project"),
+            _th_link_br("PCC", "slug", PCC_DATASOURCE_REL),
+            _th_link_br("Landscape", "slug", LANDSCAPE_YML_URL),
+            _th_link("PCC", PCC_DATASOURCE_REL),
+            _th_link("Landscape", LANDSCAPE_YML_URL),
+            _th_link_br("CLO", "Monitor", CLOMONITOR_YAML_URL),
+            _th_link("Maintainers", MAINTAINERS_CSV_URL),
+            _th_link("DevStats", DEVSTATS_URL),
+            _th_link("Artwork", ARTWORK_README_URL),
+            _th_link_br("Insights", "health", LFX_HEALTH_REL),
+            _th_link_br("Health", "score", LFX_HEALTH_REL),
+        ]
+        body_rows: List[List[str]] = []
+        for name, pcc_slug, landscape_slug, pcc_status, landscape_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score in rows:
+            body_rows.append([
+                name,
+                fmt(pcc_slug),
+                fmt(landscape_slug),
+                fmt(pcc_status),
+                fmt(landscape_status),
+                fmt(cm_status),
+                fmt(m_status),
+                fmt(d_status),
+                fmt(a_status),
+                fmt(lfx_tier),
+                fmt(lfx_score),
+            ])
+        out.append(render_wide_audit_table_html(header_cells, body_rows))
         out.append("")
         return out
 
     # Sort helpers (match anomalies table order)
     status_order = {"graduated": 0, "incubating": 1, "sandbox": 2, "forming": 3, "archived": 4, "prospect": 5}
     def status_then_name(row: Tuple[str, str, str, str, str, str, str, str, str, str, str]) -> Tuple[int, str]:
-        name, _, pcc_status, *_ = row
+        name, _, _, pcc_status, *_ = row
         return (status_order.get(normalize_status(pcc_status), 99), name.lower())
 
     # Sort anomalies by PCC status then name
@@ -706,7 +815,7 @@ def write_full_status_markdown(
         "prospect": [],
     }
     for row in all_rows:
-        _, _, pcc_status, *_ = row
+        _, _, _, pcc_status, *_ = row
         cat = normalize_status(pcc_status)
         if cat in by_cat:
             by_cat[cat].append(row)
@@ -717,6 +826,11 @@ def write_full_status_markdown(
 
     lines: List[str] = []
     lines.append("# CNCF Project Statuses")
+    lines.append("")
+    lines.append(
+        "_Wide tables use compact two-line column titles to save horizontal space. "
+        "A scroll wrapper is included for viewers that support it; on github.com inline CSS is often stripped, so use a wide window or your editor Markdown preview if the table still overflows._"
+    )
     lines.append("")
     lines.extend(section("Anomalies", anomalies_sorted))
     # Sections in the requested sort order
@@ -822,7 +936,8 @@ def main() -> None:
         lfx_tier = (lfx_tier_raw or "").strip()
         lfx_score = (lfx_score_raw or "").strip()
 
-        all_rows.append((name, pcc_slug, norm_pcc, l_status, l_slug if l_slug else "-", cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
+        slug_disp = l_slug if l_slug else "-"
+        all_rows.append((name, pcc_slug, slug_disp, norm_pcc, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
 
         # Anomaly criteria:
         # - Any missing value in any source (displayed as '-' later; Landscape missing is already '-')
@@ -835,7 +950,7 @@ def main() -> None:
         any_missing = (l_status == "-") or (not cm_status) or (not m_status) or (not d_status) or (not a_status)
 
         if any_missing or landscape_mismatch or clomonitor_mismatch or maintainers_mismatch or devstats_mismatch or artwork_mismatch:
-            combined_rows.append((name, pcc_slug, norm_pcc, l_status, l_slug if l_slug else "-", cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
+            combined_rows.append((name, pcc_slug, slug_disp, norm_pcc, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
 
     write_audit_markdown(combined_rows)
     write_full_status_markdown(all_rows)
