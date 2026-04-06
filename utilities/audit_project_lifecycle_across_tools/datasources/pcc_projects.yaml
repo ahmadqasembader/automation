@@ -1010,7 +1010,7 @@ categories:
     slug: openchoreo
     category: Sandbox
     status: Active
-    project_logo: null
+    project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/openchoreo/openchoreo-logo.svg?v=1775157130793
     repository_url: https://github.com/openchoreo
   - name: OpenEBS
     slug: openebs
