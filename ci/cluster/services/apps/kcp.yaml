@@ -25,6 +25,8 @@ spec:
           volumeSize: 1Gi
           extraFlags:
             - '--enable-leader-election'
+            - '--feature-gates=EnableDeprecatedAPIExportVirtualWorkspacesUrls=true'
+            - '--shard-virtual-workspace-url=https://api.services.cncf.io'
         kcpFrontProxy:
           replicas: 2
           certificate:
@@ -58,8 +60,6 @@ spec:
           extraFlags:
             - '--cors-allowed-origins=localhost,services.cncf.io$'
             - '--authentication-drop-groups=system:kcp:logical-cluster-admin'
-            - '--feature-gates=EnableDeprecatedAPIExportVirtualWorkspacesUrls=true'
-            - '--shard-virtual-workspace-url=https://api.services.cncf.io'
             - '--client-ca-file=/etc/kcp-front-proxy/combined-client-ca/tls.crt'
         # OIDC-specific configuration which is applied to both kcp and kcp-front-proxy
         oidc:
