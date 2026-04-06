@@ -342,6 +342,13 @@ def normalize_status(value: str) -> str:
     return v
 
 
+def normalize_slug(value: str) -> str:
+    """
+    Normalize slugs for equality checks across sources.
+    """
+    return (value or "").strip().lower()
+
+
 def build_landscape_status_map(landscape_data: Dict[str, Any]) -> Dict[str, str]:
     name_to_status: Dict[str, str] = {}
     landscape_list: List[Any] = landscape_data.get("landscape") or []
@@ -928,13 +935,17 @@ def main() -> None:
         # - Any missing value in any source (displayed as '-' later; Landscape missing is already '-')
         # - OR any source present and different from PCC
         landscape_mismatch = (l_status == "-") or (l_status != norm_pcc)
+        landscape_slug_missing = (slug_disp == "-")
+        pcc_slug_norm = normalize_slug(pcc_slug)
+        landscape_slug_norm = normalize_slug(slug_disp)
+        landscape_slug_mismatch = bool(pcc_slug_norm) and bool(landscape_slug_norm) and (pcc_slug_norm != landscape_slug_norm)
         clomonitor_mismatch = bool(cm_status) and (cm_status != norm_pcc)
         maintainers_mismatch = bool(m_status) and (m_status != norm_pcc)
         devstats_mismatch = bool(d_status) and (d_status != norm_pcc)
         artwork_mismatch = bool(a_status) and (a_status != norm_pcc)
         any_missing = (l_status == "-") or (not cm_status) or (not m_status) or (not d_status) or (not a_status)
 
-        if any_missing or landscape_mismatch or clomonitor_mismatch or maintainers_mismatch or devstats_mismatch or artwork_mismatch:
+        if any_missing or landscape_mismatch or landscape_slug_missing or landscape_slug_mismatch or clomonitor_mismatch or maintainers_mismatch or devstats_mismatch or artwork_mismatch:
             combined_rows.append((name, pcc_slug, slug_disp, norm_pcc, l_status, cm_status, m_status, d_status, a_status, lfx_tier, lfx_score))
 
     write_audit_markdown(combined_rows)

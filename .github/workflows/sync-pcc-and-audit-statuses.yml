@@ -78,6 +78,7 @@ jobs:
             - **PCC projects** (`pcc_projects.yaml`): Source of truth from LFX PCC API
             - **Status audit** (`audit/status_audit.md`): Anomalies and mismatches across sources
             - **Full status report** (`audit/all_statuses.md`): Complete project status comparison
+            - **Project health report** (`audit/project_health.md`): Project health tier and score
             - **Data source snapshots** (`datasources/**`): Reproducible snapshots of external sources
 
             Sources audited:
@@ -93,5 +94,6 @@ jobs:
             utilities/audit_project_lifecycle_across_tools/datasources/pcc_projects.yaml
             utilities/audit_project_lifecycle_across_tools/audit/status_audit.md
             utilities/audit_project_lifecycle_across_tools/audit/all_statuses.md
+            utilities/audit_project_lifecycle_across_tools/audit/project_health.md
             utilities/audit_project_lifecycle_across_tools/datasources/**
 
