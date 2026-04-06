@@ -1,369 +1,4517 @@
 # CNCF Project Statuses
 
+_Wide tables use compact two-line column titles to save horizontal space. A scroll wrapper is included for viewers that support it; on github.com inline CSS is often stripped, so use a wide window or your editor Markdown preview if the table still overflows._
+
 ## Anomalies
 
-| Project | [PCC Slug](./pcc_projects.yaml) | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Agones | agones | sandbox | sandbox | - | sandbox | - | sandbox | - | - | - |
-| CoHDI | cohdi | sandbox | sandbox | cohdi | sandbox | sandbox | sandbox | - | Healthy | 62 |
-| composefs | composefs | sandbox | sandbox | composefs | sandbox | sandbox | sandbox | - | Healthy | 73 |
-| Copa | copacetic | sandbox | sandbox | copacetic | sandbox | sandbox | sandbox | - | Healthy | 78 |
-| KAI Scheduler | kai-scheduler | sandbox | sandbox | - | sandbox | sandbox | sandbox | - | - | - |
-| kube-vip | kube-vip | sandbox | sandbox | kube-vip | sandbox | sandbox | sandbox | - | Healthy | 73 |
-| OpenEverest | openeverest | sandbox | sandbox | openeverest | sandbox | sandbox | sandbox | - | - | - |
-| Oxia | oxia | sandbox | sandbox | oxia | sandbox | sandbox | sandbox | - | Healthy | 72 |
-| Service Mesh Performance | service-mesh-performance | sandbox | archived | service-mesh-performance | - | - | - | archived | Healthy | 65 |
-| TrestleGRC | trestlegrc | sandbox | sandbox | trestlegrc | - | - | sandbox | - | Healthy | 78 |
-| Velero | velero | sandbox | - | - | sandbox | - | sandbox | - | - | - |
-| <QHTTPX> | - | forming | - | - | - | - | - | - | - | - |
-| AIBrix | - | forming | - | - | - | - | - | - | - | - |
-| Apicurio Registry | - | forming | - | - | - | - | - | - | - | - |
-| BLAFS | - | forming | - | - | - | - | - | - | - | - |
-| Cedar | - | forming | sandbox | cedar | - | sandbox | - | - | - | - |
-| CNCF Standards & Specifications | - | forming | - | - | - | - | - | - | - | - |
-| CNCF Toolbox | - | forming | - | - | - | - | - | - | - | - |
-| Conveyor CI | - | forming | - | - | - | - | - | - | - | - |
-| Cruise | - | forming | - | - | - | - | - | - | Healthy | 61 |
-| CubeCOS | - | forming | - | - | - | - | - | - | - | - |
-| Curvine | - | forming | - | - | - | - | - | - | - | - |
-| DevOps AI Toolkit | - | forming | - | - | - | - | - | - | - | - |
-| Dexfile | - | forming | - | - | - | - | - | - | - | - |
-| Gthulhu | - | forming | - | - | - | - | - | - | Healthy | 68 |
-| Higress | - | forming | sandbox | - | - | - | - | - | - | - |
-| Kmesh | - | forming | sandbox | kmesh | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
-| ksctl | - | forming | - | - | - | - | - | - | - | - |
-| kube-bind | - | forming | - | - | - | - | - | - | - | - |
-| KubeElasti | - | forming | sandbox | kubeelasti | sandbox | sandbox | sandbox | - | - | - |
-| llm-d | - | forming | - | - | - | - | - | - | Excellent | 84 |
-| NMstate | - | forming | sandbox | - | sandbox | sandbox | sandbox | - | Healthy | 77 |
-| OptiFlow (AI‑OrchestrateX) | - | forming | - | - | - | - | - | - | - | - |
-| Schema Driven Configuration | - | forming | - | - | - | - | - | - | - | - |
-| SecureBuild | - | forming | - | - | - | - | - | - | - | - |
-| SemaMesh | - | forming | - | - | - | - | - | - | - | - |
-| Sermant | - | forming | sandbox | sermant | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
-| ServiceRadar | - | forming | - | - | - | - | - | - | - | - |
-| Terrascan | - | forming | - | - | - | - | - | - | - | - |
-| Brigade | - | archived | archived | brigade | - | - | - | archived | Archived | - |
-| CNI-Genie | - | archived | archived | cni-genie | - | - | - | - | Archived | - |
-| Curiefense | - | archived | archived | curiefense | - | - | - | archived | Archived | - |
-| Curve | - | archived | archived | curve | - | - | - | archived | Archived | - |
-| Devstream | - | archived | archived | devstream | - | - | - | archived | Archived | - |
-| FabEdge | - | archived | archived | fabedge | - | - | - | archived | Archived | - |
-| Fonio | - | archived | archived | ingraind | - | - | - | archived | - | - |
-| Keptn | - | archived | archived | keptn | - | - | - | archived | Archived | - |
-| Krator | - | archived | archived | krator | - | - | - | archived | Archived | - |
-| Krustlet | - | archived | archived | krustlet | - | - | - | archived | Archived | - |
-| KubeDL | - | archived | archived | kubedl | - | - | - | archived | Archived | - |
-| Merbridge | - | archived | archived | merbridge | - | - | - | archived | Archived | - |
-| Nocalhost | - | archived | archived | nocalhost | - | - | - | archived | Archived | - |
-| Open Service Mesh | - | archived | archived | OSM | - | - | - | archived | - | - |
-| OpenELB | - | archived | archived | openelb | - | - | - | archived | Archived | - |
-| OpenMetrics | - | archived | archived | openmetrics | - | - | - | archived | Archived | - |
-| OpenTracing | - | archived | archived | opentracing | - | - | - | archived | Archived | - |
-| Pravega | - | archived | archived | pravega | - | - | - | archived | Archived | - |
-| RKT | - | archived | archived | rkt | - | - | - | archived | Archived | - |
-| sealer | - | archived | archived | sealer | - | - | - | archived | Archived | - |
-| Service Mesh Interface | - | archived | archived | smi | - | - | - | archived | - | - |
-| skooner | - | archived | archived | k8dash | - | - | - | archived | - | - |
-| SuperEdge | - | archived | archived | superedge | - | - | - | archived | Archived | - |
-| Teller | - | archived | archived | teller | - | - | - | archived | Archived | - |
-| Xline | - | archived | archived | xline | - | - | - | archived | Archived | - |
+<div style="overflow-x: auto;">
+
+<table style="width: max-content; max-width: 100%; border-collapse: collapse;">
+<thead>
+<tr>
+<th>Project</th>
+<th><a href="./pcc_projects.yaml">PCC<br>slug</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape<br>slug</a></th>
+<th><a href="./pcc_projects.yaml">PCC</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape</a></th>
+<th><a href="https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml">CLO<br>Monitor</a></th>
+<th><a href="https://github.com/cncf/foundation/blob/main/project-maintainers.csv">Maintainers</a></th>
+<th><a href="https://devstats.cncf.io/">DevStats</a></th>
+<th><a href="https://raw.githubusercontent.com/cncf/artwork/main/README.md">Artwork</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Insights<br>health</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Health<br>score</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agones</td>
+<td>agones</td>
+<td>-</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>CoHDI</td>
+<td>cohdi</td>
+<td>cohdi</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>62</td>
+</tr>
+<tr>
+<td>composefs</td>
+<td>composefs</td>
+<td>composefs</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>Copa</td>
+<td>copacetic</td>
+<td>copacetic</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>KAI Scheduler</td>
+<td>kai-scheduler</td>
+<td>-</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>kube-vip</td>
+<td>kube-vip</td>
+<td>kube-vip</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>OpenEverest</td>
+<td>openeverest</td>
+<td>openeverest</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Oxia</td>
+<td>oxia</td>
+<td>oxia</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>72</td>
+</tr>
+<tr>
+<td>Service Mesh Performance</td>
+<td>service-mesh-performance</td>
+<td>service-mesh-performance</td>
+<td>sandbox</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Healthy</td>
+<td>65</td>
+</tr>
+<tr>
+<td>TrestleGRC</td>
+<td>trestlegrc</td>
+<td>trestlegrc</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Velero</td>
+<td>velero</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>&lt;QHTTPX&gt;</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>AIBrix</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Apicurio Registry</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>BLAFS</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Cedar</td>
+<td>-</td>
+<td>cedar</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>CNCF Standards &amp; Specifications</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>CNCF Toolbox</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Conveyor CI</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Cruise</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>Healthy</td>
+<td>61</td>
+</tr>
+<tr>
+<td>CubeCOS</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Curvine</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>DevOps AI Toolkit</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Dexfile</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Gthulhu</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>Healthy</td>
+<td>68</td>
+</tr>
+<tr>
+<td>Higress</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Kmesh</td>
+<td>-</td>
+<td>kmesh</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>ksctl</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>kube-bind</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>KubeElasti</td>
+<td>-</td>
+<td>kubeelasti</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>llm-d</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>NMstate</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>OptiFlow (AI‑OrchestrateX)</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Schema Driven Configuration</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SecureBuild</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SemaMesh</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Sermant</td>
+<td>-</td>
+<td>sermant</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>ServiceRadar</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Terrascan</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Brigade</td>
+<td>-</td>
+<td>brigade</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>CNI-Genie</td>
+<td>-</td>
+<td>cni-genie</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Curiefense</td>
+<td>-</td>
+<td>curiefense</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Curve</td>
+<td>-</td>
+<td>curve</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Devstream</td>
+<td>-</td>
+<td>devstream</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>FabEdge</td>
+<td>-</td>
+<td>fabedge</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Fonio</td>
+<td>-</td>
+<td>ingraind</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Keptn</td>
+<td>-</td>
+<td>keptn</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Krator</td>
+<td>-</td>
+<td>krator</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Krustlet</td>
+<td>-</td>
+<td>krustlet</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>KubeDL</td>
+<td>-</td>
+<td>kubedl</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Merbridge</td>
+<td>-</td>
+<td>merbridge</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Nocalhost</td>
+<td>-</td>
+<td>nocalhost</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Open Service Mesh</td>
+<td>-</td>
+<td>OSM</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>OpenELB</td>
+<td>-</td>
+<td>openelb</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>OpenMetrics</td>
+<td>-</td>
+<td>openmetrics</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>OpenTracing</td>
+<td>-</td>
+<td>opentracing</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pravega</td>
+<td>-</td>
+<td>pravega</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>RKT</td>
+<td>-</td>
+<td>rkt</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>sealer</td>
+<td>-</td>
+<td>sealer</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Service Mesh Interface</td>
+<td>-</td>
+<td>smi</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>skooner</td>
+<td>-</td>
+<td>k8dash</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SuperEdge</td>
+<td>-</td>
+<td>superedge</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Teller</td>
+<td>-</td>
+<td>teller</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Xline</td>
+<td>-</td>
+<td>xline</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 ## Graduated
 
-| Project | [PCC Slug](./pcc_projects.yaml) | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Argo | argo | graduated | graduated | argo | graduated | graduated | graduated | graduated | Excellent | 83 |
-| cert-manager | cert-manager | graduated | graduated | cert-manager | graduated | graduated | graduated | graduated | Excellent | 82 |
-| Cilium | cilium | graduated | graduated | cilium | graduated | graduated | graduated | graduated | Excellent | 82 |
-| CloudEvents | cloudevents | graduated | graduated | cloudevents | graduated | graduated | graduated | graduated | Excellent | 86 |
-| Containerd | containerd | graduated | graduated | containerd | graduated | graduated | graduated | graduated | Excellent | 87 |
-| CoreDNS | coredns | graduated | graduated | coredns | graduated | graduated | graduated | graduated | Healthy | 78 |
-| CRI-O | cri-o | graduated | graduated | cri-o | graduated | graduated | graduated | graduated | Healthy | 79 |
-| Crossplane | crossplane | graduated | graduated | crossplane | graduated | graduated | graduated | graduated | Excellent | 86 |
-| CubeFS | chubaofs | graduated | graduated | chubaofs | graduated | graduated | graduated | graduated | Healthy | 76 |
-| Dapr | dapr | graduated | graduated | dapr | graduated | graduated | graduated | graduated | Excellent | 82 |
-| Dragonfly | d7y | graduated | graduated | d7y | graduated | graduated | graduated | graduated | Excellent | 80 |
-| Envoy | envoy | graduated | graduated | envoy | graduated | graduated | graduated | graduated | Excellent | 86 |
-| Etcd | etcd | graduated | graduated | etcd | graduated | graduated | graduated | graduated | Excellent | 83 |
-| Falco | falco | graduated | graduated | falco | graduated | graduated | graduated | graduated | Excellent | 83 |
-| Fluentd | fluentd | graduated | graduated | fluentd | graduated | graduated | graduated | graduated | Excellent | 84 |
-| Flux | fluxcd | graduated | graduated | fluxcd | graduated | graduated | graduated | graduated | Excellent | 82 |
-| Harbor | harbor | graduated | graduated | harbor | graduated | graduated | graduated | graduated | Excellent | 84 |
-| Helm | helm | graduated | graduated | helm | graduated | graduated | graduated | graduated | Excellent | 84 |
-| in-toto | intoto | graduated | graduated | intoto | graduated | graduated | graduated | graduated | Healthy | 72 |
-| Istio | istio | graduated | graduated | istio | graduated | graduated | graduated | graduated | Excellent | 85 |
-| Jaeger | jaeger | graduated | graduated | jaeger | graduated | graduated | graduated | graduated | Healthy | 78 |
-| KEDA | KEDA | graduated | graduated | KEDA | graduated | graduated | graduated | graduated | Excellent | 85 |
-| Knative | knative | graduated | graduated | knative | graduated | graduated | graduated | graduated | Excellent | 85 |
-| KubeEdge | kubeedge | graduated | graduated | kubeedge | graduated | graduated | graduated | graduated | Excellent | 80 |
-| Kubernetes | k8s | graduated | graduated | k8s | graduated | graduated | graduated | graduated | Excellent | 88 |
-| Kyverno | kyverno | graduated | graduated | kyverno | graduated | graduated | graduated | graduated | Excellent | 80 |
-| Linkerd | linkerd | graduated | graduated | linkerd | graduated | graduated | graduated | graduated | Excellent | 80 |
-| Open Policy Agent | openpolicyagent | graduated | graduated | openpolicyagent | graduated | graduated | graduated | graduated | Excellent | 81 |
-| Prometheus | prometheus | graduated | graduated | prometheus_del | graduated | graduated | graduated | graduated | Excellent | 86 |
-| Rook | rook | graduated | graduated | rook | graduated | graduated | graduated | graduated | Excellent | 85 |
-| SPIFFE | spiffe | graduated | graduated | spiffe | graduated | graduated | graduated | graduated | Excellent | 80 |
-| SPIRE | spire | graduated | graduated | spire | graduated | graduated | graduated | graduated | Critical | - |
-| The Update Framework (TUF) | tuf | graduated | graduated | tuf | graduated | graduated | graduated | graduated | Healthy | 78 |
-| TiKV | tikv | graduated | graduated | tikv | graduated | graduated | graduated | graduated | Excellent | 82 |
-| Vitess | vitess | graduated | graduated | vitess | graduated | graduated | graduated | graduated | Excellent | 80 |
+<div style="overflow-x: auto;">
+
+<table style="width: max-content; max-width: 100%; border-collapse: collapse;">
+<thead>
+<tr>
+<th>Project</th>
+<th><a href="./pcc_projects.yaml">PCC<br>slug</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape<br>slug</a></th>
+<th><a href="./pcc_projects.yaml">PCC</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape</a></th>
+<th><a href="https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml">CLO<br>Monitor</a></th>
+<th><a href="https://github.com/cncf/foundation/blob/main/project-maintainers.csv">Maintainers</a></th>
+<th><a href="https://devstats.cncf.io/">DevStats</a></th>
+<th><a href="https://raw.githubusercontent.com/cncf/artwork/main/README.md">Artwork</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Insights<br>health</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Health<br>score</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Argo</td>
+<td>argo</td>
+<td>argo</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>83</td>
+</tr>
+<tr>
+<td>cert-manager</td>
+<td>cert-manager</td>
+<td>cert-manager</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>Cilium</td>
+<td>cilium</td>
+<td>cilium</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>CloudEvents</td>
+<td>cloudevents</td>
+<td>cloudevents</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>86</td>
+</tr>
+<tr>
+<td>Containerd</td>
+<td>containerd</td>
+<td>containerd</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>87</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>coredns</td>
+<td>coredns</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>CRI-O</td>
+<td>cri-o</td>
+<td>cri-o</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Healthy</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Crossplane</td>
+<td>crossplane</td>
+<td>crossplane</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>86</td>
+</tr>
+<tr>
+<td>CubeFS</td>
+<td>chubaofs</td>
+<td>chubaofs</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Dapr</td>
+<td>dapr</td>
+<td>dapr</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>Dragonfly</td>
+<td>d7y</td>
+<td>d7y</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Envoy</td>
+<td>envoy</td>
+<td>envoy</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>86</td>
+</tr>
+<tr>
+<td>Etcd</td>
+<td>etcd</td>
+<td>etcd</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>83</td>
+</tr>
+<tr>
+<td>Falco</td>
+<td>falco</td>
+<td>falco</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>83</td>
+</tr>
+<tr>
+<td>Fluentd</td>
+<td>fluentd</td>
+<td>fluentd</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>Flux</td>
+<td>fluxcd</td>
+<td>fluxcd</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>Harbor</td>
+<td>harbor</td>
+<td>harbor</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>Helm</td>
+<td>helm</td>
+<td>helm</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>in-toto</td>
+<td>intoto</td>
+<td>intoto</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Healthy</td>
+<td>72</td>
+</tr>
+<tr>
+<td>Istio</td>
+<td>istio</td>
+<td>istio</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>85</td>
+</tr>
+<tr>
+<td>Jaeger</td>
+<td>jaeger</td>
+<td>jaeger</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>KEDA</td>
+<td>KEDA</td>
+<td>KEDA</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>85</td>
+</tr>
+<tr>
+<td>Knative</td>
+<td>knative</td>
+<td>knative</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>85</td>
+</tr>
+<tr>
+<td>KubeEdge</td>
+<td>kubeedge</td>
+<td>kubeedge</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>k8s</td>
+<td>k8s</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>88</td>
+</tr>
+<tr>
+<td>Kyverno</td>
+<td>kyverno</td>
+<td>kyverno</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Linkerd</td>
+<td>linkerd</td>
+<td>linkerd</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Open Policy Agent</td>
+<td>openpolicyagent</td>
+<td>openpolicyagent</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>Prometheus</td>
+<td>prometheus</td>
+<td>prometheus_del</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>86</td>
+</tr>
+<tr>
+<td>Rook</td>
+<td>rook</td>
+<td>rook</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>85</td>
+</tr>
+<tr>
+<td>SPIFFE</td>
+<td>spiffe</td>
+<td>spiffe</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>SPIRE</td>
+<td>spire</td>
+<td>spire</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Critical</td>
+<td>-</td>
+</tr>
+<tr>
+<td>The Update Framework (TUF)</td>
+<td>tuf</td>
+<td>tuf</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>TiKV</td>
+<td>tikv</td>
+<td>tikv</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>Vitess</td>
+<td>vitess</td>
+<td>vitess</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>graduated</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 ## Incubating
 
-| Project | [PCC Slug](./pcc_projects.yaml) | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Artifact Hub | artifact-hub | incubating | incubating | artifact-hub | incubating | incubating | incubating | incubating | Healthy | 71 |
-| Backstage | backstage | incubating | incubating | backstage | incubating | incubating | incubating | incubating | Excellent | 82 |
-| Buildpacks | buildpacks | incubating | incubating | buildpacks | incubating | incubating | incubating | incubating | Excellent | 82 |
-| Chaos Mesh | ChaosMesh | incubating | incubating | ChaosMesh | incubating | incubating | incubating | incubating | Healthy | 74 |
-| Cloud Custodian | c7n | incubating | incubating | c7n | incubating | incubating | incubating | incubating | Healthy | 73 |
-| CNI | cni | incubating | incubating | cni | incubating | incubating | incubating | incubating | Excellent | 80 |
-| Contour | contour | incubating | incubating | contour | incubating | incubating | incubating | incubating | Healthy | 78 |
-| Cortex | cortex | incubating | incubating | cortex | incubating | incubating | incubating | incubating | Excellent | 80 |
-| emissary-ingress | emissary | incubating | incubating | emissary | incubating | incubating | incubating | incubating | Healthy | 74 |
-| Flatcar | flatcar | incubating | incubating | flatcar | incubating | incubating | incubating | incubating | Excellent | 80 |
-| Fluid Project | fluid | incubating | incubating | - | incubating | incubating | incubating | incubating | Healthy | 78 |
-| gRPC | grpc | incubating | incubating | grpc | incubating | incubating | incubating | incubating | Excellent | 83 |
-| karmada | karmada | incubating | incubating | karmada | incubating | incubating | incubating | incubating | Healthy | 78 |
-| Keycloak | keycloak | incubating | incubating | keycloak | incubating | incubating | incubating | incubating | Excellent | 86 |
-| Kserve | kserve | incubating | incubating | kserve | incubating | incubating | incubating | incubating | Excellent | 81 |
-| Kubeflow | kubeflow | incubating | incubating | kubeflow | incubating | incubating | incubating | incubating | Excellent | 86 |
-| Kubescape | kubescape | incubating | incubating | kubescape | incubating | incubating | incubating | incubating | Healthy | 76 |
-| KubeVela | kubevela | incubating | incubating | kubevela | incubating | incubating | incubating | incubating | Excellent | 81 |
-| KubeVirt | kubevirt | incubating | incubating | kubevirt | incubating | incubating | incubating | incubating | Excellent | 87 |
-| Lima | lima | incubating | incubating | lima | incubating | incubating | incubating | incubating | Excellent | 81 |
-| LitmusChaos | litmuschaos | incubating | incubating | litmuschaos | incubating | incubating | incubating | incubating | Healthy | 76 |
-| Longhorn | longhorn | incubating | incubating | longhorn | incubating | incubating | incubating | incubating | Healthy | 75 |
-| metal3-io | metal3 | incubating | incubating | metal3 | incubating | incubating | incubating | incubating | Excellent | 82 |
-| NATS | nats | incubating | incubating | nats | incubating | incubating | incubating | incubating | Excellent | 82 |
-| Notary | notary | incubating | incubating | - | incubating | incubating | incubating | incubating | Excellent | 82 |
-| OpenCost | opencost | incubating | incubating | opencost | incubating | incubating | incubating | incubating | Excellent | 80 |
-| OpenFeature | openfeature | incubating | incubating | openfeature | incubating | incubating | incubating | incubating | Excellent | 81 |
-| OpenFGA | openfga | incubating | incubating | openfga | incubating | incubating | incubating | incubating | Excellent | 85 |
-| OpenKruise | openkruise | incubating | incubating | openkruise | incubating | incubating | incubating | incubating | Excellent | 81 |
-| OpenTelemetry | opentelemetry | incubating | incubating | opentelemetry | incubating | incubating | incubating | incubating | Excellent | 89 |
-| OpenYurt | openyurt | incubating | incubating | openyurt | incubating | incubating | incubating | incubating | Excellent | 80 |
-| Operator Framework | operator-sdk | incubating | incubating | operator-sdk | incubating | incubating | incubating | incubating | Critical | - |
-| Strimzi | strimzi | incubating | incubating | strimzi | incubating | incubating | incubating | incubating | Excellent | 86 |
-| Thanos | thanos | incubating | incubating | thanos | incubating | incubating | incubating | incubating | Excellent | 84 |
-| Volcano | Volcano | incubating | incubating | Volcano | incubating | incubating | incubating | incubating | Excellent | 86 |
-| wasmCloud | wasmcloud | incubating | incubating | wasmcloud | incubating | incubating | incubating | incubating | Healthy | 76 |
+<div style="overflow-x: auto;">
+
+<table style="width: max-content; max-width: 100%; border-collapse: collapse;">
+<thead>
+<tr>
+<th>Project</th>
+<th><a href="./pcc_projects.yaml">PCC<br>slug</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape<br>slug</a></th>
+<th><a href="./pcc_projects.yaml">PCC</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape</a></th>
+<th><a href="https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml">CLO<br>Monitor</a></th>
+<th><a href="https://github.com/cncf/foundation/blob/main/project-maintainers.csv">Maintainers</a></th>
+<th><a href="https://devstats.cncf.io/">DevStats</a></th>
+<th><a href="https://raw.githubusercontent.com/cncf/artwork/main/README.md">Artwork</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Insights<br>health</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Health<br>score</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Artifact Hub</td>
+<td>artifact-hub</td>
+<td>artifact-hub</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>71</td>
+</tr>
+<tr>
+<td>Backstage</td>
+<td>backstage</td>
+<td>backstage</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>Buildpacks</td>
+<td>buildpacks</td>
+<td>buildpacks</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>Chaos Mesh</td>
+<td>ChaosMesh</td>
+<td>ChaosMesh</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>Cloud Custodian</td>
+<td>c7n</td>
+<td>c7n</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>CNI</td>
+<td>cni</td>
+<td>cni</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Contour</td>
+<td>contour</td>
+<td>contour</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Cortex</td>
+<td>cortex</td>
+<td>cortex</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>emissary-ingress</td>
+<td>emissary</td>
+<td>emissary</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>Flatcar</td>
+<td>flatcar</td>
+<td>flatcar</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Fluid Project</td>
+<td>fluid</td>
+<td>-</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>gRPC</td>
+<td>grpc</td>
+<td>grpc</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>83</td>
+</tr>
+<tr>
+<td>karmada</td>
+<td>karmada</td>
+<td>karmada</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Keycloak</td>
+<td>keycloak</td>
+<td>keycloak</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>86</td>
+</tr>
+<tr>
+<td>Kserve</td>
+<td>kserve</td>
+<td>kserve</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>Kubeflow</td>
+<td>kubeflow</td>
+<td>kubeflow</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>86</td>
+</tr>
+<tr>
+<td>Kubescape</td>
+<td>kubescape</td>
+<td>kubescape</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>KubeVela</td>
+<td>kubevela</td>
+<td>kubevela</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>KubeVirt</td>
+<td>kubevirt</td>
+<td>kubevirt</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>87</td>
+</tr>
+<tr>
+<td>Lima</td>
+<td>lima</td>
+<td>lima</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>LitmusChaos</td>
+<td>litmuschaos</td>
+<td>litmuschaos</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Longhorn</td>
+<td>longhorn</td>
+<td>longhorn</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>75</td>
+</tr>
+<tr>
+<td>metal3-io</td>
+<td>metal3</td>
+<td>metal3</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>NATS</td>
+<td>nats</td>
+<td>nats</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>Notary</td>
+<td>notary</td>
+<td>-</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>OpenCost</td>
+<td>opencost</td>
+<td>opencost</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>OpenFeature</td>
+<td>openfeature</td>
+<td>openfeature</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>OpenFGA</td>
+<td>openfga</td>
+<td>openfga</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>85</td>
+</tr>
+<tr>
+<td>OpenKruise</td>
+<td>openkruise</td>
+<td>openkruise</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>OpenTelemetry</td>
+<td>opentelemetry</td>
+<td>opentelemetry</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>89</td>
+</tr>
+<tr>
+<td>OpenYurt</td>
+<td>openyurt</td>
+<td>openyurt</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Operator Framework</td>
+<td>operator-sdk</td>
+<td>operator-sdk</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Critical</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Strimzi</td>
+<td>strimzi</td>
+<td>strimzi</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>86</td>
+</tr>
+<tr>
+<td>Thanos</td>
+<td>thanos</td>
+<td>thanos</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>Volcano</td>
+<td>Volcano</td>
+<td>Volcano</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Excellent</td>
+<td>86</td>
+</tr>
+<tr>
+<td>wasmCloud</td>
+<td>wasmcloud</td>
+<td>wasmcloud</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>incubating</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 ## Sandbox
 
-| Project | [PCC Slug](./pcc_projects.yaml) | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Aeraki Mesh | aerakimesh | sandbox | sandbox | aerakimesh | sandbox | sandbox | sandbox | sandbox | Healthy | 64 |
-| Agones | agones | sandbox | sandbox | - | sandbox | - | sandbox | - | - | - |
-| Akri | akri | sandbox | sandbox | akri | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
-| Antrea | antrea | sandbox | sandbox | antrea | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
-| Armada | armada | sandbox | sandbox | armada | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
-| Athenz | athenz | sandbox | sandbox | athenz | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
-| Atlantis | atlantis | sandbox | sandbox | atlantis | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
-| Bank-Vaults | bank-vaults | sandbox | sandbox | bank-vaults | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| BFE | BFE | sandbox | sandbox | BFE | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| bootc | bootc | sandbox | sandbox | bootc | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
-| bpfman | bpfman | sandbox | sandbox | bpfman | sandbox | sandbox | sandbox | sandbox | Healthy | 71 |
-| Cadence | cadence | sandbox | sandbox | cadence | sandbox | sandbox | sandbox | sandbox | Excellent | 87 |
-| Capsule | capsule | sandbox | sandbox | capsule | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
-| Carina | carina | sandbox | sandbox | carina | sandbox | sandbox | sandbox | sandbox | Stable | 50 |
-| Cartography | cartography | sandbox | sandbox | cartography | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| Carvel | carvel | sandbox | sandbox | carvel | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
-| cdk8s | cdk8s | sandbox | sandbox | cdk8s | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
-| ChaosBlade | chaosblade | sandbox | sandbox | chaosblade | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| CloudNativePG | cloudnativepg | sandbox | sandbox | cloudnativepg | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
-| Clusternet | clusternet | sandbox | sandbox | clusternet | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
-| Clusterpedia | clusterpedia | sandbox | sandbox | clusterpedia | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
-| CoHDI | cohdi | sandbox | sandbox | cohdi | sandbox | sandbox | sandbox | - | Healthy | 62 |
-| composefs | composefs | sandbox | sandbox | composefs | sandbox | sandbox | sandbox | - | Healthy | 73 |
-| Confidential Containers | confcont | sandbox | sandbox | confcont | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
-| Connect RPC | connect | sandbox | sandbox | connect | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
-| container2wasm | container2wasm | sandbox | sandbox | container2wasm | sandbox | sandbox | sandbox | sandbox | Healthy | 70 |
-| ContainerSSH | containerssh | sandbox | sandbox | containerssh | sandbox | sandbox | sandbox | sandbox | Healthy | 70 |
-| Copa | copacetic | sandbox | sandbox | copacetic | sandbox | sandbox | sandbox | - | Healthy | 78 |
-| Cozystack | cozystack | sandbox | sandbox | cozystack | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| Dalec | dalec | sandbox | sandbox | dalec | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
-| Devfile | devfile | sandbox | sandbox | devfile | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
-| DevSpace | devspace | sandbox | sandbox | devspace | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| Dex | dex | sandbox | sandbox | dex | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| Distribution | cncf-distribution | sandbox | sandbox | cncf-distribution | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| Drasi | drasi | sandbox | sandbox | drasi | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
-| easegress | easegress | sandbox | sandbox | easegress | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
-| Eraser | eraser | sandbox | sandbox | eraser | sandbox | sandbox | sandbox | sandbox | Stable | 55 |
-| External Secrets Operator | externalsecretsoperator | sandbox | sandbox | externalsecretsoperator | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
-| HAMi | hami | sandbox | sandbox | hami | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
-| Headlamp | headlamp | sandbox | sandbox | headlamp | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
-| Hexa | hexa | sandbox | sandbox | hexa | sandbox | sandbox | sandbox | sandbox | Stable | 49 |
-| HolmesGPT | holmesgpt | sandbox | sandbox | holmesgpt | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| HwameiStor | hwameistor | sandbox | sandbox | hwameistor | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| Hyperlight | hyperlight | sandbox | sandbox | hyperlight | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| Inclavare Containers | inclavarecontainers | sandbox | sandbox | inclavarecontainers | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
-| Inspektor Gadget | inspektorgadget | sandbox | sandbox | inspektorgadget | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| interLink | interlink | sandbox | sandbox | interlink | sandbox | sandbox | sandbox | sandbox | Stable | 56 |
-| k0s | k0s | sandbox | sandbox | k0s | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| k3s | k3s | sandbox | sandbox | k3s | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| k8gb | k8gb | sandbox | sandbox | k8gb | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| K8sGPT | k8sgpt | sandbox | sandbox | k8sgpt | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| K8up | k8up | sandbox | sandbox | k8up | sandbox | sandbox | sandbox | sandbox | Healthy | 63 |
-| kagent | kagent | sandbox | sandbox | kagent | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| KAI Scheduler | kai-scheduler | sandbox | sandbox | - | sandbox | sandbox | sandbox | - | - | - |
-| Kairos | kairos | sandbox | sandbox | kairos | sandbox | sandbox | sandbox | sandbox | Healthy | 79 |
-| Kanister | kanister | sandbox | sandbox | kanister | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
-| KCL | kcl | sandbox | sandbox | kcl | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
-| kcp | kcp | sandbox | sandbox | kcp | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
-| Kepler | kepler | sandbox | sandbox | kepler | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| Keylime | keylime | sandbox | sandbox | keylime | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| kgateway | kgateway | sandbox | sandbox | kgateway | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
-| KitOps | kitops | sandbox | sandbox | kitops | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| ko | ko | sandbox | sandbox | ko | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| Konveyor | konveyor | sandbox | sandbox | konveyor | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| Koordinator | koordinator | sandbox | sandbox | koordinator | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| kpt | kpt | sandbox | sandbox | kpt | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| krkn | krkn | sandbox | sandbox | krkn | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| Kuadrant | kuadrant | sandbox | sandbox | kuadrant | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
-| Kuasar | kuasar | sandbox | sandbox | kuasar | sandbox | sandbox | sandbox | sandbox | Healthy | 60 |
-| kube-burner | kube-burner | sandbox | sandbox | kube-burner | sandbox | sandbox | sandbox | sandbox | Healthy | 71 |
-| Kube-OVN | kube-ovn | sandbox | sandbox | kube-ovn | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
-| kube-rs | kube-rs | sandbox | sandbox | kube-rs | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
-| kube-vip | kube-vip | sandbox | sandbox | kube-vip | sandbox | sandbox | sandbox | - | Healthy | 73 |
-| Kubean | kubean | sandbox | sandbox | kubean | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
-| KubeArmor | kubearmor | sandbox | sandbox | kubearmor | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
-| Kubeclipper | kubeclipper | sandbox | sandbox | kubeclipper | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
-| KubeFleet | kubefleet | sandbox | sandbox | kubefleet | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
-| Kuberhealthy | kuberhealthy | sandbox | sandbox | kuberhealthy | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
-| Kubernetes AI Toolchain Operator (KAITO) | kaito | sandbox | sandbox | kaito | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| KubeSlice | kubeslice | sandbox | sandbox | kubeslice | sandbox | sandbox | sandbox | sandbox | Healthy | 67 |
-| KubeStellar | kubestellar | sandbox | sandbox | kubestellar | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
-| kubewarden | kubewarden | sandbox | sandbox | kubewarden | sandbox | sandbox | sandbox | sandbox | Excellent | 83 |
-| KUDO | kudo | sandbox | sandbox | kudo | sandbox | sandbox | sandbox | sandbox | Healthy | 70 |
-| Kuma | kuma | sandbox | sandbox | kuma | sandbox | sandbox | sandbox | sandbox | Excellent | 84 |
-| Kured | kured | sandbox | sandbox | kured | sandbox | sandbox | sandbox | sandbox | Healthy | 70 |
-| KusionStack | kusionstack | sandbox | sandbox | kusionstack | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
-| Logging Operator | logging-operator | sandbox | sandbox | logging-operator | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| LoxiLB | loxilb | sandbox | sandbox | loxilb | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
-| Meshery | meshery | sandbox | sandbox | meshery | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
-| MetalLB | metallb | sandbox | sandbox | metallb | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
-| Microcks | microcks | sandbox | sandbox | microcks | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
-| ModelPack | modelpack | sandbox | sandbox | modelpack | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
-| Network Service Mesh | nsm | sandbox | sandbox | nsm | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| OAuth2 Proxy | oauth2-proxy | sandbox | sandbox | oauth2-proxy | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| Open Cluster Management | openclustermanagement | sandbox | sandbox | openclustermanagement | sandbox | sandbox | sandbox | sandbox | Excellent | 86 |
-| Open Policy Registry (OPCR) | opcr | sandbox | sandbox | opcr | sandbox | sandbox | sandbox | sandbox | Stable | 55 |
-| OpenChoreo | openchoreo | sandbox | sandbox | openchoreo | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
-| OpenEBS | openebs | sandbox | sandbox | openebs | sandbox | sandbox | sandbox | sandbox | Healthy | 79 |
-| OpenEverest | openeverest | sandbox | sandbox | openeverest | sandbox | sandbox | sandbox | - | - | - |
-| OpenFunction | openfunction | sandbox | sandbox | openfunction | sandbox | sandbox | sandbox | sandbox | Healthy | 60 |
-| openGemini | opengemini | sandbox | sandbox | opengemini | sandbox | sandbox | sandbox | sandbox | Healthy | 64 |
-| OpenGitOps | gitops-wg | sandbox | sandbox | gitops-wg | sandbox | sandbox | sandbox | sandbox | Stable | 58 |
-| OpenTofu | opentf | sandbox | sandbox | opentf | sandbox | sandbox | sandbox | sandbox | Excellent | 83 |
-| ORAS (OCI Registry as Storage) | oras | sandbox | sandbox | oras | sandbox | sandbox | sandbox | sandbox | Excellent | 82 |
-| OVN-Kubernetes | ovn-kubernetes | sandbox | sandbox | ovn-kubernetes | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
-| Oxia | oxia | sandbox | sandbox | oxia | sandbox | sandbox | sandbox | - | Healthy | 72 |
-| Paralus | paralus | sandbox | sandbox | paralus | sandbox | sandbox | sandbox | sandbox | Healthy | 68 |
-| PARSEC | parsec | sandbox | sandbox | parsec | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| Perses | perses | sandbox | sandbox | perses | sandbox | sandbox | sandbox | sandbox | Excellent | 85 |
-| PipeCD | pipecd | sandbox | sandbox | pipecd | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
-| Piraeus-Datastore | piraeus-datastore | sandbox | sandbox | piraeus-datastore | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
-| Pixie | pixie | sandbox | sandbox | pixie | sandbox | sandbox | sandbox | sandbox | Healthy | 75 |
-| Podman Container Tools | podman-container-tools | sandbox | sandbox | podman-container-tools | sandbox | sandbox | sandbox | sandbox | Excellent | 83 |
-| Podman Desktop | podman-desktop | sandbox | sandbox | podman-desktop | sandbox | sandbox | sandbox | sandbox | Excellent | 83 |
-| Porter | porter | sandbox | sandbox | porter | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
-| Radius | radius | sandbox | sandbox | radius | sandbox | sandbox | sandbox | sandbox | Excellent | 81 |
-| Ratify | ratify | sandbox | sandbox | ratify | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
-| Runme Notebooks | runme-notebooks | sandbox | sandbox | runme-notebooks | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
-| SchemaHero | schemahero | sandbox | sandbox | schemahero | sandbox | sandbox | sandbox | sandbox | Healthy | 67 |
-| Score | score | sandbox | sandbox | score | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| Serverless Devs | serverlessdevs | sandbox | sandbox | serverlessdevs | sandbox | sandbox | sandbox | sandbox | Healthy | 79 |
-| Serverless Workflow Specification | serverlessworkflow | sandbox | sandbox | serverlessworkflow | sandbox | sandbox | sandbox | sandbox | Excellent | 83 |
-| Service Mesh Performance | service-mesh-performance | sandbox | archived | service-mesh-performance | - | - | - | archived | Healthy | 65 |
-| Shipwright | shipwright | sandbox | sandbox | shipwright | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| SlimFaaS | slimfaas | sandbox | sandbox | slimfaas | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
-| SlimToolkit | slimtoolkit | sandbox | sandbox | slimtoolkit | sandbox | sandbox | sandbox | sandbox | Healthy | 65 |
-| SOPS | sops | sandbox | sandbox | sops | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| Spiderpool | spiderpool | sandbox | sandbox | spiderpool | sandbox | sandbox | sandbox | sandbox | Healthy | 72 |
-| Spin | spin | sandbox | sandbox | spin | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
-| stacker | stacker | sandbox | sandbox | stacker | sandbox | sandbox | sandbox | sandbox | Healthy | 67 |
-| Submariner | submariner | sandbox | sandbox | submariner | sandbox | sandbox | sandbox | sandbox | Healthy | 79 |
-| Telepresence | telepresence | sandbox | sandbox | telepresence | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
-| Tinkerbell | tinkerbell | sandbox | sandbox | tinkerbell | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| Tokenetes | tratteria | sandbox | sandbox | tratteria | sandbox | sandbox | sandbox | sandbox | Stable | 50 |
-| Tremor | tremor | sandbox | sandbox | tremor | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
-| TrestleGRC | trestlegrc | sandbox | sandbox | trestlegrc | - | - | sandbox | - | Healthy | 78 |
-| Trickster | trickster | sandbox | sandbox | trickster | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
-| urunc | urunc | sandbox | sandbox | urunc | sandbox | sandbox | sandbox | sandbox | Healthy | 69 |
-| Velero | velero | sandbox | - | - | sandbox | - | sandbox | - | - | - |
-| Vineyard | vineyard | sandbox | sandbox | vineyard | sandbox | sandbox | sandbox | sandbox | Healthy | 66 |
-| Virtual Kubelet | virtualkubelet | sandbox | sandbox | virtualkubelet | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| VS Code Kubernetes Tools | vscodekubernetestools | sandbox | sandbox | vscodekubernetestools | sandbox | sandbox | sandbox | sandbox | Healthy | 76 |
-| WasmEdge Runtime | wasmedge-runtime | sandbox | sandbox | wasmedge-runtime | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| werf | werf | sandbox | sandbox | werf | sandbox | sandbox | sandbox | sandbox | Healthy | 74 |
-| xRegistry | xregistry | sandbox | sandbox | xregistry | sandbox | sandbox | sandbox | sandbox | Healthy | 59 |
-| Youki | youki | sandbox | sandbox | - | sandbox | sandbox | sandbox | sandbox | Healthy | 77 |
-| zot | zot | sandbox | sandbox | zot | sandbox | sandbox | sandbox | sandbox | Healthy | 78 |
+<div style="overflow-x: auto;">
+
+<table style="width: max-content; max-width: 100%; border-collapse: collapse;">
+<thead>
+<tr>
+<th>Project</th>
+<th><a href="./pcc_projects.yaml">PCC<br>slug</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape<br>slug</a></th>
+<th><a href="./pcc_projects.yaml">PCC</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape</a></th>
+<th><a href="https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml">CLO<br>Monitor</a></th>
+<th><a href="https://github.com/cncf/foundation/blob/main/project-maintainers.csv">Maintainers</a></th>
+<th><a href="https://devstats.cncf.io/">DevStats</a></th>
+<th><a href="https://raw.githubusercontent.com/cncf/artwork/main/README.md">Artwork</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Insights<br>health</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Health<br>score</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aeraki Mesh</td>
+<td>aerakimesh</td>
+<td>aerakimesh</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>64</td>
+</tr>
+<tr>
+<td>Agones</td>
+<td>agones</td>
+<td>-</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Akri</td>
+<td>akri</td>
+<td>akri</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>Antrea</td>
+<td>antrea</td>
+<td>antrea</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>75</td>
+</tr>
+<tr>
+<td>Armada</td>
+<td>armada</td>
+<td>armada</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>Athenz</td>
+<td>athenz</td>
+<td>athenz</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Atlantis</td>
+<td>atlantis</td>
+<td>atlantis</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>Bank-Vaults</td>
+<td>bank-vaults</td>
+<td>bank-vaults</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>BFE</td>
+<td>BFE</td>
+<td>BFE</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>bootc</td>
+<td>bootc</td>
+<td>bootc</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>bpfman</td>
+<td>bpfman</td>
+<td>bpfman</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>71</td>
+</tr>
+<tr>
+<td>Cadence</td>
+<td>cadence</td>
+<td>cadence</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>87</td>
+</tr>
+<tr>
+<td>Capsule</td>
+<td>capsule</td>
+<td>capsule</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>Carina</td>
+<td>carina</td>
+<td>carina</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Stable</td>
+<td>50</td>
+</tr>
+<tr>
+<td>Cartography</td>
+<td>cartography</td>
+<td>cartography</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>Carvel</td>
+<td>carvel</td>
+<td>carvel</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>cdk8s</td>
+<td>cdk8s</td>
+<td>cdk8s</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>72</td>
+</tr>
+<tr>
+<td>ChaosBlade</td>
+<td>chaosblade</td>
+<td>chaosblade</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>CloudNativePG</td>
+<td>cloudnativepg</td>
+<td>cloudnativepg</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>Clusternet</td>
+<td>clusternet</td>
+<td>clusternet</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>68</td>
+</tr>
+<tr>
+<td>Clusterpedia</td>
+<td>clusterpedia</td>
+<td>clusterpedia</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>68</td>
+</tr>
+<tr>
+<td>CoHDI</td>
+<td>cohdi</td>
+<td>cohdi</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>62</td>
+</tr>
+<tr>
+<td>composefs</td>
+<td>composefs</td>
+<td>composefs</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>Confidential Containers</td>
+<td>confcont</td>
+<td>confcont</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>Connect RPC</td>
+<td>connect</td>
+<td>connect</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>container2wasm</td>
+<td>container2wasm</td>
+<td>container2wasm</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>70</td>
+</tr>
+<tr>
+<td>ContainerSSH</td>
+<td>containerssh</td>
+<td>containerssh</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Copa</td>
+<td>copacetic</td>
+<td>copacetic</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Cozystack</td>
+<td>cozystack</td>
+<td>cozystack</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Dalec</td>
+<td>dalec</td>
+<td>dalec</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>Devfile</td>
+<td>devfile</td>
+<td>devfile</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>DevSpace</td>
+<td>devspace</td>
+<td>devspace</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>Dex</td>
+<td>dex</td>
+<td>dex</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Distribution</td>
+<td>cncf-distribution</td>
+<td>cncf-distribution</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>Drasi</td>
+<td>drasi</td>
+<td>drasi</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>easegress</td>
+<td>easegress</td>
+<td>easegress</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>66</td>
+</tr>
+<tr>
+<td>Eraser</td>
+<td>eraser</td>
+<td>eraser</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Stable</td>
+<td>55</td>
+</tr>
+<tr>
+<td>External Secrets Operator</td>
+<td>externalsecretsoperator</td>
+<td>externalsecretsoperator</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>HAMi</td>
+<td>hami</td>
+<td>hami</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>Headlamp</td>
+<td>headlamp</td>
+<td>headlamp</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Hexa</td>
+<td>hexa</td>
+<td>hexa</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Stable</td>
+<td>49</td>
+</tr>
+<tr>
+<td>HolmesGPT</td>
+<td>holmesgpt</td>
+<td>holmesgpt</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>HwameiStor</td>
+<td>hwameistor</td>
+<td>hwameistor</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Hyperlight</td>
+<td>hyperlight</td>
+<td>hyperlight</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Inclavare Containers</td>
+<td>inclavarecontainers</td>
+<td>inclavarecontainers</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>72</td>
+</tr>
+<tr>
+<td>Inspektor Gadget</td>
+<td>inspektorgadget</td>
+<td>inspektorgadget</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>interLink</td>
+<td>interlink</td>
+<td>interlink</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Stable</td>
+<td>56</td>
+</tr>
+<tr>
+<td>k0s</td>
+<td>k0s</td>
+<td>k0s</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>k3s</td>
+<td>k3s</td>
+<td>k3s</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>k8gb</td>
+<td>k8gb</td>
+<td>k8gb</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>K8sGPT</td>
+<td>k8sgpt</td>
+<td>k8sgpt</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>K8up</td>
+<td>k8up</td>
+<td>k8up</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>63</td>
+</tr>
+<tr>
+<td>kagent</td>
+<td>kagent</td>
+<td>kagent</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>KAI Scheduler</td>
+<td>kai-scheduler</td>
+<td>-</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Kairos</td>
+<td>kairos</td>
+<td>kairos</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Kanister</td>
+<td>kanister</td>
+<td>kanister</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>75</td>
+</tr>
+<tr>
+<td>KCL</td>
+<td>kcl</td>
+<td>kcl</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>75</td>
+</tr>
+<tr>
+<td>kcp</td>
+<td>kcp</td>
+<td>kcp</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Kepler</td>
+<td>kepler</td>
+<td>kepler</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Keylime</td>
+<td>keylime</td>
+<td>keylime</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>kgateway</td>
+<td>kgateway</td>
+<td>kgateway</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>KitOps</td>
+<td>kitops</td>
+<td>kitops</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>ko</td>
+<td>ko</td>
+<td>ko</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>Konveyor</td>
+<td>konveyor</td>
+<td>konveyor</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Koordinator</td>
+<td>koordinator</td>
+<td>koordinator</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>kpt</td>
+<td>kpt</td>
+<td>kpt</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>krkn</td>
+<td>krkn</td>
+<td>krkn</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>Kuadrant</td>
+<td>kuadrant</td>
+<td>kuadrant</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>75</td>
+</tr>
+<tr>
+<td>Kuasar</td>
+<td>kuasar</td>
+<td>kuasar</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>60</td>
+</tr>
+<tr>
+<td>kube-burner</td>
+<td>kube-burner</td>
+<td>kube-burner</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>71</td>
+</tr>
+<tr>
+<td>Kube-OVN</td>
+<td>kube-ovn</td>
+<td>kube-ovn</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>kube-rs</td>
+<td>kube-rs</td>
+<td>kube-rs</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>kube-vip</td>
+<td>kube-vip</td>
+<td>kube-vip</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>Kubean</td>
+<td>kubean</td>
+<td>kubean</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>72</td>
+</tr>
+<tr>
+<td>KubeArmor</td>
+<td>kubearmor</td>
+<td>kubearmor</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Kubeclipper</td>
+<td>kubeclipper</td>
+<td>kubeclipper</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>75</td>
+</tr>
+<tr>
+<td>KubeFleet</td>
+<td>kubefleet</td>
+<td>kubefleet</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>66</td>
+</tr>
+<tr>
+<td>Kuberhealthy</td>
+<td>kuberhealthy</td>
+<td>kuberhealthy</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>68</td>
+</tr>
+<tr>
+<td>Kubernetes AI Toolchain Operator (KAITO)</td>
+<td>kaito</td>
+<td>kaito</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>KubeSlice</td>
+<td>kubeslice</td>
+<td>kubeslice</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>67</td>
+</tr>
+<tr>
+<td>KubeStellar</td>
+<td>kubestellar</td>
+<td>kubestellar</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>kubewarden</td>
+<td>kubewarden</td>
+<td>kubewarden</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>83</td>
+</tr>
+<tr>
+<td>KUDO</td>
+<td>kudo</td>
+<td>kudo</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Kuma</td>
+<td>kuma</td>
+<td>kuma</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>Kured</td>
+<td>kured</td>
+<td>kured</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>70</td>
+</tr>
+<tr>
+<td>KusionStack</td>
+<td>kusionstack</td>
+<td>kusionstack</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>Logging Operator</td>
+<td>logging-operator</td>
+<td>logging-operator</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>LoxiLB</td>
+<td>loxilb</td>
+<td>loxilb</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>68</td>
+</tr>
+<tr>
+<td>Meshery</td>
+<td>meshery</td>
+<td>meshery</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>MetalLB</td>
+<td>metallb</td>
+<td>metallb</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Microcks</td>
+<td>microcks</td>
+<td>microcks</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>ModelPack</td>
+<td>modelpack</td>
+<td>modelpack</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>Network Service Mesh</td>
+<td>nsm</td>
+<td>nsm</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>OAuth2 Proxy</td>
+<td>oauth2-proxy</td>
+<td>oauth2-proxy</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>Open Cluster Management</td>
+<td>openclustermanagement</td>
+<td>openclustermanagement</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>86</td>
+</tr>
+<tr>
+<td>Open Policy Registry (OPCR)</td>
+<td>opcr</td>
+<td>opcr</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Stable</td>
+<td>55</td>
+</tr>
+<tr>
+<td>OpenChoreo</td>
+<td>openchoreo</td>
+<td>openchoreo</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>OpenEBS</td>
+<td>openebs</td>
+<td>openebs</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>79</td>
+</tr>
+<tr>
+<td>OpenEverest</td>
+<td>openeverest</td>
+<td>openeverest</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>OpenFunction</td>
+<td>openfunction</td>
+<td>openfunction</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>60</td>
+</tr>
+<tr>
+<td>openGemini</td>
+<td>opengemini</td>
+<td>opengemini</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>64</td>
+</tr>
+<tr>
+<td>OpenGitOps</td>
+<td>gitops-wg</td>
+<td>gitops-wg</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Stable</td>
+<td>58</td>
+</tr>
+<tr>
+<td>OpenTofu</td>
+<td>opentf</td>
+<td>opentf</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>83</td>
+</tr>
+<tr>
+<td>ORAS (OCI Registry as Storage)</td>
+<td>oras</td>
+<td>oras</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>82</td>
+</tr>
+<tr>
+<td>OVN-Kubernetes</td>
+<td>ovn-kubernetes</td>
+<td>ovn-kubernetes</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>Oxia</td>
+<td>oxia</td>
+<td>oxia</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>72</td>
+</tr>
+<tr>
+<td>Paralus</td>
+<td>paralus</td>
+<td>paralus</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>68</td>
+</tr>
+<tr>
+<td>PARSEC</td>
+<td>parsec</td>
+<td>parsec</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>Perses</td>
+<td>perses</td>
+<td>perses</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>85</td>
+</tr>
+<tr>
+<td>PipeCD</td>
+<td>pipecd</td>
+<td>pipecd</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Piraeus-Datastore</td>
+<td>piraeus-datastore</td>
+<td>piraeus-datastore</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>Pixie</td>
+<td>pixie</td>
+<td>pixie</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>75</td>
+</tr>
+<tr>
+<td>Podman Container Tools</td>
+<td>podman-container-tools</td>
+<td>podman-container-tools</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>83</td>
+</tr>
+<tr>
+<td>Podman Desktop</td>
+<td>podman-desktop</td>
+<td>podman-desktop</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>83</td>
+</tr>
+<tr>
+<td>Porter</td>
+<td>porter</td>
+<td>porter</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Radius</td>
+<td>radius</td>
+<td>radius</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>81</td>
+</tr>
+<tr>
+<td>Ratify</td>
+<td>ratify</td>
+<td>ratify</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>66</td>
+</tr>
+<tr>
+<td>Runme Notebooks</td>
+<td>runme-notebooks</td>
+<td>runme-notebooks</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>SchemaHero</td>
+<td>schemahero</td>
+<td>schemahero</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>67</td>
+</tr>
+<tr>
+<td>Score</td>
+<td>score</td>
+<td>score</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>Serverless Devs</td>
+<td>serverlessdevs</td>
+<td>serverlessdevs</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Serverless Workflow Specification</td>
+<td>serverlessworkflow</td>
+<td>serverlessworkflow</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>83</td>
+</tr>
+<tr>
+<td>Service Mesh Performance</td>
+<td>service-mesh-performance</td>
+<td>service-mesh-performance</td>
+<td>sandbox</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Healthy</td>
+<td>65</td>
+</tr>
+<tr>
+<td>Shipwright</td>
+<td>shipwright</td>
+<td>shipwright</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>SlimFaaS</td>
+<td>slimfaas</td>
+<td>slimfaas</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>66</td>
+</tr>
+<tr>
+<td>SlimToolkit</td>
+<td>slimtoolkit</td>
+<td>slimtoolkit</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>65</td>
+</tr>
+<tr>
+<td>SOPS</td>
+<td>sops</td>
+<td>sops</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>Spiderpool</td>
+<td>spiderpool</td>
+<td>spiderpool</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>72</td>
+</tr>
+<tr>
+<td>Spin</td>
+<td>spin</td>
+<td>spin</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>stacker</td>
+<td>stacker</td>
+<td>stacker</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>67</td>
+</tr>
+<tr>
+<td>Submariner</td>
+<td>submariner</td>
+<td>submariner</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Telepresence</td>
+<td>telepresence</td>
+<td>telepresence</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Tinkerbell</td>
+<td>tinkerbell</td>
+<td>tinkerbell</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Tokenetes</td>
+<td>tratteria</td>
+<td>tratteria</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Stable</td>
+<td>50</td>
+</tr>
+<tr>
+<td>Tremor</td>
+<td>tremor</td>
+<td>tremor</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>66</td>
+</tr>
+<tr>
+<td>TrestleGRC</td>
+<td>trestlegrc</td>
+<td>trestlegrc</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>Trickster</td>
+<td>trickster</td>
+<td>trickster</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+<tr>
+<td>urunc</td>
+<td>urunc</td>
+<td>urunc</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>69</td>
+</tr>
+<tr>
+<td>Velero</td>
+<td>velero</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Vineyard</td>
+<td>vineyard</td>
+<td>vineyard</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>66</td>
+</tr>
+<tr>
+<td>Virtual Kubelet</td>
+<td>virtualkubelet</td>
+<td>virtualkubelet</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>VS Code Kubernetes Tools</td>
+<td>vscodekubernetestools</td>
+<td>vscodekubernetestools</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>76</td>
+</tr>
+<tr>
+<td>WasmEdge Runtime</td>
+<td>wasmedge-runtime</td>
+<td>wasmedge-runtime</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>werf</td>
+<td>werf</td>
+<td>werf</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>74</td>
+</tr>
+<tr>
+<td>xRegistry</td>
+<td>xregistry</td>
+<td>xregistry</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>59</td>
+</tr>
+<tr>
+<td>Youki</td>
+<td>youki</td>
+<td>-</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>zot</td>
+<td>zot</td>
+<td>zot</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>78</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 ## Forming
 
-| Project | [PCC Slug](./pcc_projects.yaml) | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| <QHTTPX> | - | forming | - | - | - | - | - | - | - | - |
-| AIBrix | - | forming | - | - | - | - | - | - | - | - |
-| Apicurio Registry | - | forming | - | - | - | - | - | - | - | - |
-| BLAFS | - | forming | - | - | - | - | - | - | - | - |
-| Cedar | - | forming | sandbox | cedar | - | sandbox | - | - | - | - |
-| CNCF Standards & Specifications | - | forming | - | - | - | - | - | - | - | - |
-| CNCF Toolbox | - | forming | - | - | - | - | - | - | - | - |
-| Conveyor CI | - | forming | - | - | - | - | - | - | - | - |
-| Cruise | - | forming | - | - | - | - | - | - | Healthy | 61 |
-| CubeCOS | - | forming | - | - | - | - | - | - | - | - |
-| Curvine | - | forming | - | - | - | - | - | - | - | - |
-| DevOps AI Toolkit | - | forming | - | - | - | - | - | - | - | - |
-| Dexfile | - | forming | - | - | - | - | - | - | - | - |
-| Gthulhu | - | forming | - | - | - | - | - | - | Healthy | 68 |
-| Higress | - | forming | sandbox | - | - | - | - | - | - | - |
-| Kmesh | - | forming | sandbox | kmesh | sandbox | sandbox | sandbox | sandbox | Excellent | 80 |
-| ksctl | - | forming | - | - | - | - | - | - | - | - |
-| kube-bind | - | forming | - | - | - | - | - | - | - | - |
-| KubeElasti | - | forming | sandbox | kubeelasti | sandbox | sandbox | sandbox | - | - | - |
-| llm-d | - | forming | - | - | - | - | - | - | Excellent | 84 |
-| NMstate | - | forming | sandbox | - | sandbox | sandbox | sandbox | - | Healthy | 77 |
-| OptiFlow (AI‑OrchestrateX) | - | forming | - | - | - | - | - | - | - | - |
-| Schema Driven Configuration | - | forming | - | - | - | - | - | - | - | - |
-| SecureBuild | - | forming | - | - | - | - | - | - | - | - |
-| SemaMesh | - | forming | - | - | - | - | - | - | - | - |
-| Sermant | - | forming | sandbox | sermant | sandbox | sandbox | sandbox | sandbox | Healthy | 73 |
-| ServiceRadar | - | forming | - | - | - | - | - | - | - | - |
-| Terrascan | - | forming | - | - | - | - | - | - | - | - |
+<div style="overflow-x: auto;">
+
+<table style="width: max-content; max-width: 100%; border-collapse: collapse;">
+<thead>
+<tr>
+<th>Project</th>
+<th><a href="./pcc_projects.yaml">PCC<br>slug</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape<br>slug</a></th>
+<th><a href="./pcc_projects.yaml">PCC</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape</a></th>
+<th><a href="https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml">CLO<br>Monitor</a></th>
+<th><a href="https://github.com/cncf/foundation/blob/main/project-maintainers.csv">Maintainers</a></th>
+<th><a href="https://devstats.cncf.io/">DevStats</a></th>
+<th><a href="https://raw.githubusercontent.com/cncf/artwork/main/README.md">Artwork</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Insights<br>health</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Health<br>score</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;QHTTPX&gt;</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>AIBrix</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Apicurio Registry</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>BLAFS</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Cedar</td>
+<td>-</td>
+<td>cedar</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>-</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>CNCF Standards &amp; Specifications</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>CNCF Toolbox</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Conveyor CI</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Cruise</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>Healthy</td>
+<td>61</td>
+</tr>
+<tr>
+<td>CubeCOS</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Curvine</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>DevOps AI Toolkit</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Dexfile</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Gthulhu</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>Healthy</td>
+<td>68</td>
+</tr>
+<tr>
+<td>Higress</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Kmesh</td>
+<td>-</td>
+<td>kmesh</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Excellent</td>
+<td>80</td>
+</tr>
+<tr>
+<td>ksctl</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>kube-bind</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>KubeElasti</td>
+<td>-</td>
+<td>kubeelasti</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>llm-d</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>Excellent</td>
+<td>84</td>
+</tr>
+<tr>
+<td>NMstate</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>-</td>
+<td>Healthy</td>
+<td>77</td>
+</tr>
+<tr>
+<td>OptiFlow (AI‑OrchestrateX)</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Schema Driven Configuration</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SecureBuild</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SemaMesh</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Sermant</td>
+<td>-</td>
+<td>sermant</td>
+<td>forming</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>sandbox</td>
+<td>Healthy</td>
+<td>73</td>
+</tr>
+<tr>
+<td>ServiceRadar</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Terrascan</td>
+<td>-</td>
+<td>-</td>
+<td>forming</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 ## Archived
 
-| Project | [PCC Slug](./pcc_projects.yaml) | PCC | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [Landscape slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://github.com/cncf/artwork/blob/main/README.md) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Brigade | - | archived | archived | brigade | - | - | - | archived | Archived | - |
-| CNI-Genie | - | archived | archived | cni-genie | - | - | - | - | Archived | - |
-| Curiefense | - | archived | archived | curiefense | - | - | - | archived | Archived | - |
-| Curve | - | archived | archived | curve | - | - | - | archived | Archived | - |
-| Devstream | - | archived | archived | devstream | - | - | - | archived | Archived | - |
-| FabEdge | - | archived | archived | fabedge | - | - | - | archived | Archived | - |
-| Fonio | - | archived | archived | ingraind | - | - | - | archived | - | - |
-| Keptn | - | archived | archived | keptn | - | - | - | archived | Archived | - |
-| Krator | - | archived | archived | krator | - | - | - | archived | Archived | - |
-| Krustlet | - | archived | archived | krustlet | - | - | - | archived | Archived | - |
-| KubeDL | - | archived | archived | kubedl | - | - | - | archived | Archived | - |
-| Merbridge | - | archived | archived | merbridge | - | - | - | archived | Archived | - |
-| Nocalhost | - | archived | archived | nocalhost | - | - | - | archived | Archived | - |
-| Open Service Mesh | - | archived | archived | OSM | - | - | - | archived | - | - |
-| OpenELB | - | archived | archived | openelb | - | - | - | archived | Archived | - |
-| OpenMetrics | - | archived | archived | openmetrics | - | - | - | archived | Archived | - |
-| OpenTracing | - | archived | archived | opentracing | - | - | - | archived | Archived | - |
-| Pravega | - | archived | archived | pravega | - | - | - | archived | Archived | - |
-| RKT | - | archived | archived | rkt | - | - | - | archived | Archived | - |
-| sealer | - | archived | archived | sealer | - | - | - | archived | Archived | - |
-| Service Mesh Interface | - | archived | archived | smi | - | - | - | archived | - | - |
-| skooner | - | archived | archived | k8dash | - | - | - | archived | - | - |
-| SuperEdge | - | archived | archived | superedge | - | - | - | archived | Archived | - |
-| Teller | - | archived | archived | teller | - | - | - | archived | Archived | - |
-| Xline | - | archived | archived | xline | - | - | - | archived | Archived | - |
+<div style="overflow-x: auto;">
+
+<table style="width: max-content; max-width: 100%; border-collapse: collapse;">
+<thead>
+<tr>
+<th>Project</th>
+<th><a href="./pcc_projects.yaml">PCC<br>slug</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape<br>slug</a></th>
+<th><a href="./pcc_projects.yaml">PCC</a></th>
+<th><a href="https://github.com/cncf/landscape/blob/master/landscape.yml">Landscape</a></th>
+<th><a href="https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml">CLO<br>Monitor</a></th>
+<th><a href="https://github.com/cncf/foundation/blob/main/project-maintainers.csv">Maintainers</a></th>
+<th><a href="https://devstats.cncf.io/">DevStats</a></th>
+<th><a href="https://raw.githubusercontent.com/cncf/artwork/main/README.md">Artwork</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Insights<br>health</a></th>
+<th><a href="../datasources/lfx_insights_health.yaml">Health<br>score</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Brigade</td>
+<td>-</td>
+<td>brigade</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>CNI-Genie</td>
+<td>-</td>
+<td>cni-genie</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Curiefense</td>
+<td>-</td>
+<td>curiefense</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Curve</td>
+<td>-</td>
+<td>curve</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Devstream</td>
+<td>-</td>
+<td>devstream</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>FabEdge</td>
+<td>-</td>
+<td>fabedge</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Fonio</td>
+<td>-</td>
+<td>ingraind</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Keptn</td>
+<td>-</td>
+<td>keptn</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Krator</td>
+<td>-</td>
+<td>krator</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Krustlet</td>
+<td>-</td>
+<td>krustlet</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>KubeDL</td>
+<td>-</td>
+<td>kubedl</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Merbridge</td>
+<td>-</td>
+<td>merbridge</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Nocalhost</td>
+<td>-</td>
+<td>nocalhost</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Open Service Mesh</td>
+<td>-</td>
+<td>OSM</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>OpenELB</td>
+<td>-</td>
+<td>openelb</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>OpenMetrics</td>
+<td>-</td>
+<td>openmetrics</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>OpenTracing</td>
+<td>-</td>
+<td>opentracing</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pravega</td>
+<td>-</td>
+<td>pravega</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>RKT</td>
+<td>-</td>
+<td>rkt</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>sealer</td>
+<td>-</td>
+<td>sealer</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Service Mesh Interface</td>
+<td>-</td>
+<td>smi</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>skooner</td>
+<td>-</td>
+<td>k8dash</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SuperEdge</td>
+<td>-</td>
+<td>superedge</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Teller</td>
+<td>-</td>
+<td>teller</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Xline</td>
+<td>-</td>
+<td>xline</td>
+<td>archived</td>
+<td>archived</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>archived</td>
+<td>Archived</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 ## Prospect
 
