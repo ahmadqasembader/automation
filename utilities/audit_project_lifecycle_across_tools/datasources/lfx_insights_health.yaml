@@ -1,12 +1,12 @@
 source: LFX Insights (project page SSR + badge; archived status from page)
 pcc_source_file: datasources/pcc_projects.yaml
-generated_at: '2026-04-05T07:33:57+00:00'
+generated_at: '2026-04-06T18:34:10+00:00'
 projects:
 - name: Argo
   pcc_slug: argo
   insights_slug_used: argo
   health_tier: Excellent
-  overall_score: 83
+  overall_score: 84
   error: null
 - name: cert-manager
   pcc_slug: cert-manager
@@ -264,7 +264,7 @@ projects:
   pcc_slug: emissary
   insights_slug_used: emissary
   health_tier: Healthy
-  overall_score: 74
+  overall_score: 72
   error: null
 - name: Flatcar
   pcc_slug: flatcar
@@ -565,7 +565,7 @@ projects:
   pcc_slug: composefs
   insights_slug_used: composefs
   health_tier: Healthy
-  overall_score: 73
+  overall_score: 74
   error: null
 - name: Confidential Containers
   pcc_slug: confcont
@@ -890,7 +890,7 @@ projects:
   pcc_slug: kubefleet
   insights_slug_used: kubefleet
   health_tier: Healthy
-  overall_score: 66
+  overall_score: 70
   error: null
 - name: Kuberhealthy
   pcc_slug: kuberhealthy
@@ -902,7 +902,7 @@ projects:
   pcc_slug: kaito
   insights_slug_used: kaito
   health_tier: Healthy
-  overall_score: 77
+  overall_score: 76
   error: null
 - name: KubeSlice
   pcc_slug: kubeslice
@@ -1149,7 +1149,7 @@ projects:
   pcc_slug: score
   insights_slug_used: score
   health_tier: Healthy
-  overall_score: 74
+  overall_score: 75
   error: null
 - name: Serverless Devs
   pcc_slug: serverlessdevs
@@ -1300,7 +1300,7 @@ projects:
   pcc_slug: xregistry
   insights_slug_used: xregistry
   health_tier: Healthy
-  overall_score: 59
+  overall_score: 60
   error: null
 - name: Youki
   pcc_slug: youki
