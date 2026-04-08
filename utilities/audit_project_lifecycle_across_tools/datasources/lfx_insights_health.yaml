@@ -1,6 +1,6 @@
 source: LFX Insights (project page SSR + badge; archived status from page)
 pcc_source_file: datasources/pcc_projects.yaml
-generated_at: '2026-04-06T18:34:10+00:00'
+generated_at: '2026-04-08T20:29:19+00:00'
 projects:
 - name: Argo
   pcc_slug: argo
@@ -24,7 +24,7 @@ projects:
   pcc_slug: cloudevents
   insights_slug_used: cloudevents
   health_tier: Excellent
-  overall_score: 86
+  overall_score: 84
   error: null
 - name: Containerd
   pcc_slug: containerd
@@ -41,8 +41,8 @@ projects:
 - name: CRI-O
   pcc_slug: cri-o
   insights_slug_used: cri-o
-  health_tier: Healthy
-  overall_score: 79
+  health_tier: Excellent
+  overall_score: 80
   error: null
 - name: Crossplane
   pcc_slug: crossplane
@@ -84,7 +84,7 @@ projects:
   pcc_slug: falco
   insights_slug_used: falco
   health_tier: Excellent
-  overall_score: 83
+  overall_score: 82
   error: null
 - name: Fluentd
   pcc_slug: fluentd
@@ -150,7 +150,7 @@ projects:
   pcc_slug: k8s
   insights_slug_used: k8s
   health_tier: Excellent
-  overall_score: 88
+  overall_score: null
   error: null
 - name: Kyverno
   pcc_slug: kyverno
@@ -198,7 +198,7 @@ projects:
   pcc_slug: tuf
   insights_slug_used: tuf
   health_tier: Healthy
-  overall_score: 78
+  overall_score: 79
   error: null
 - name: TiKV
   pcc_slug: tikv
@@ -282,7 +282,7 @@ projects:
   pcc_slug: grpc
   insights_slug_used: grpc
   health_tier: Excellent
-  overall_score: 83
+  overall_score: 84
   error: null
 - name: karmada
   pcc_slug: karmada
@@ -378,7 +378,7 @@ projects:
   pcc_slug: openfga
   insights_slug_used: openfga
   health_tier: Excellent
-  overall_score: 85
+  overall_score: 84
   error: null
 - name: OpenKruise
   pcc_slug: openkruise
@@ -414,13 +414,13 @@ projects:
   pcc_slug: thanos
   insights_slug_used: thanos
   health_tier: Excellent
-  overall_score: 84
+  overall_score: 82
   error: null
 - name: Volcano
   pcc_slug: Volcano
   insights_slug_used: Volcano
   health_tier: Excellent
-  overall_score: 86
+  overall_score: 85
   error: null
 - name: wasmCloud
   pcc_slug: wasmcloud
@@ -522,8 +522,8 @@ projects:
 - name: Carvel
   pcc_slug: carvel
   insights_slug_used: carvel
-  health_tier: Excellent
-  overall_score: 81
+  health_tier: Healthy
+  overall_score: 79
   error: null
 - name: cdk8s
   pcc_slug: cdk8s
@@ -565,7 +565,7 @@ projects:
   pcc_slug: composefs
   insights_slug_used: composefs
   health_tier: Healthy
-  overall_score: 74
+  overall_score: 73
   error: null
 - name: Confidential Containers
   pcc_slug: confcont
@@ -619,7 +619,7 @@ projects:
   pcc_slug: devspace
   insights_slug_used: devspace
   health_tier: Healthy
-  overall_score: 77
+  overall_score: 76
   error: null
 - name: Dex
   pcc_slug: dex
@@ -637,7 +637,7 @@ projects:
   pcc_slug: drasi
   insights_slug_used: drasi
   health_tier: Healthy
-  overall_score: 73
+  overall_score: 74
   error: null
 - name: easegress
   pcc_slug: easegress
@@ -739,7 +739,7 @@ projects:
   pcc_slug: k8up
   insights_slug_used: k8up
   health_tier: Healthy
-  overall_score: 63
+  overall_score: 64
   error: null
 - name: kagent
   pcc_slug: kagent
@@ -764,13 +764,13 @@ projects:
   pcc_slug: kanister
   insights_slug_used: kanister
   health_tier: Healthy
-  overall_score: 75
+  overall_score: 74
   error: null
 - name: KCL
   pcc_slug: kcl
   insights_slug_used: kcl
   health_tier: Healthy
-  overall_score: 75
+  overall_score: 76
   error: null
 - name: kcp
   pcc_slug: kcp
@@ -908,7 +908,7 @@ projects:
   pcc_slug: kubeslice
   insights_slug_used: kubeslice
   health_tier: Healthy
-  overall_score: 67
+  overall_score: 69
   error: null
 - name: KubeStellar
   pcc_slug: kubestellar
@@ -932,7 +932,7 @@ projects:
   pcc_slug: kuma
   insights_slug_used: kuma
   health_tier: Excellent
-  overall_score: 84
+  overall_score: 82
   error: null
 - name: Kured
   pcc_slug: kured
@@ -1004,7 +1004,7 @@ projects:
   pcc_slug: opcr
   insights_slug_used: opcr
   health_tier: Stable
-  overall_score: 55
+  overall_score: 56
   error: null
 - name: OpenChoreo
   pcc_slug: openchoreo
@@ -1125,7 +1125,7 @@ projects:
   pcc_slug: radius
   insights_slug_used: radius
   health_tier: Excellent
-  overall_score: 81
+  overall_score: 82
   error: null
 - name: Ratify
   pcc_slug: ratify
@@ -1149,7 +1149,7 @@ projects:
   pcc_slug: score
   insights_slug_used: score
   health_tier: Healthy
-  overall_score: 75
+  overall_score: 74
   error: null
 - name: Serverless Devs
   pcc_slug: serverlessdevs
@@ -1233,7 +1233,7 @@ projects:
   pcc_slug: tratteria
   insights_slug_used: tratteria
   health_tier: Stable
-  overall_score: 50
+  overall_score: 51
   error: null
 - name: Tremor
   pcc_slug: tremor
@@ -1294,19 +1294,19 @@ projects:
   pcc_slug: werf
   insights_slug_used: werf
   health_tier: Healthy
-  overall_score: 74
+  overall_score: 75
   error: null
 - name: xRegistry
   pcc_slug: xregistry
   insights_slug_used: xregistry
-  health_tier: Healthy
-  overall_score: 60
+  health_tier: Stable
+  overall_score: 59
   error: null
 - name: Youki
   pcc_slug: youki
   insights_slug_used: youki
   health_tier: Healthy
-  overall_score: 77
+  overall_score: 76
   error: null
 - name: zot
   pcc_slug: zot
@@ -1481,7 +1481,7 @@ projects:
   pcc_slug: null
   insights_slug_used: sermant
   health_tier: Healthy
-  overall_score: 73
+  overall_score: 71
   error: null
 - name: ServiceRadar
   pcc_slug: null
