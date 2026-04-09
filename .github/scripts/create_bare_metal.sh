@@ -57,6 +57,7 @@ if [ -z "$INSTANCE_OCID" ]; then
     --query "data.id" --raw-output)
 fi
 
+echo "REGION=$REGION" > .env
 echo "INSTANCE_OCID=$INSTANCE_OCID" >> .env
 
 echo "Fetching public IP..."

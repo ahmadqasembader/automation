@@ -97,7 +97,8 @@ jobs:
         run: |
           set -euo pipefail
           if [ -n "${INSTANCE_OCID:-}" ]; then
-            oci compute instance terminate --instance-id "$INSTANCE_OCID" --force
+            # REGION and INSTANCE_OCID are set in .env by create_bare_metal.sh
+            oci compute instance terminate --instance-id "$INSTANCE_OCID" --force --region $REGION
           else
             echo "No INSTANCE_OCID set, skipping termination"
           fi
