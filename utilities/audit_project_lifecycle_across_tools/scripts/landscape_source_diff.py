@@ -447,7 +447,7 @@ def render_markdown(data: Dict[str, Any]) -> str:
             agree_s = "—" if agree is None else ("Yes" if agree else "**No**")
             lines.append(
                 f"| {f['field']} | {fmt_val(f.get('landscape'))} | {fmt_val(f.get('pcc'))} | "
-                f"{fmt_val(f.get('clomonitor'))} | {agree_s} | {f.get('message', '')} |"
+                f"{fmt_val(f.get('clomonitor'))} | {agree_s} | {fmt_val(f.get('message', ''))} |"
             )
         lines.append("")
 
