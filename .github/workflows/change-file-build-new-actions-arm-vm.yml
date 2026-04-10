@@ -320,6 +320,16 @@ jobs:
             --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/images/${IMAGE_ID}/shapes/VM.Standard.A1.Flex \
             --request-body "{\"imageId\":\"${IMAGE_ID}\",\"shape\":\"VM.Standard.A1.Flex\"}"
 
+          oci raw-request --http-method PUT \
+            --config-file ${OCI_CONFIG_FILE} \
+            --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/images/${IMAGE_ID}/shapes/VM.Standard.A2.Flex \
+            --request-body "{\"imageId\":\"${IMAGE_ID}\",\"shape\":\"VM.Standard.A2.Flex\"}"
+
+          oci raw-request --http-method PUT \
+            --config-file ${OCI_CONFIG_FILE} \
+            --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/images/${IMAGE_ID}/shapes/VM.Standard.A4.Flex \
+            --request-body "{\"imageId\":\"${IMAGE_ID}\",\"shape\":\"VM.Standard.A4.Flex\"}"
+
           oci raw-request --http-method POST \
             --config-file ${OCI_CONFIG_FILE} \
             --target-uri https://iaas.us-ashburn-1.oraclecloud.com/20160918/computeImageCapabilitySchemas \

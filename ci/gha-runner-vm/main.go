@@ -257,17 +257,24 @@ func run(cmd *cobra.Command, argv []string) error {
 
 	// Need to update arm64 image capabilities
 	if args.arch == "arm64" {
-		// Add VM.Standard.A1.Flex compatibility
-		command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/VM.Standard.A1.Flex", "--request-body", "{\"ocpuConstraints\":{\"min\":\"1\",\"max\":\"80\"},\"memoryConstraints\":{\"minInGBs\":\"1\",\"maxInGBs\":\"512\"},\"imageId\":\""+imageID+"\",\"shape\":\"VM.Standard.A1.Flex\"}")
-		output, err = command.CombinedOutput()
-		if err != nil {
-			log.Print(command.String())
-			log.Printf("OCI command failed. Output:\n%s", string(output))
-			log.Fatal("could not run command: ", err)
-			exec.Command("oci", "compute", "image", "delete", "--force", "--image-id", imageID)
-			return nil
+		// Add VM.Standard.A1.Flex, VM.Standard.A2.Flex, VM.Standard.A4.Flex
+		addListArm := []string{
+			"VM.Standard.A1.Flex",
+			"VM.Standard.A2.Flex",
+			"VM.Standard.A4.Flex",
 		}
-		log.Println("VM.Standard.A1.Flex compatibility added")
+		for _, machine := range addListArm {
+			command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"ocpuConstraints\":{\"min\":\"1\",\"max\":\"80\"},\"memoryConstraints\":{\"minInGBs\":\"1\",\"maxInGBs\":\"512\"},\"imageId\":\""+imageID+"\",\"shape\":\""+machine+"\"}")
+			output, err = command.CombinedOutput()
+			if err != nil {
+				log.Print(command.String())
+				log.Printf("OCI command failed. Output:\n%s", string(output))
+				log.Fatal("could not run command: ", err)
+				exec.Command("oci", "compute", "image", "delete", "--force", "--image-id", imageID)
+				return nil
+			}
+			log.Printf("%s compatibility added", machine)
+		}
 
 		// Remove other amd64/x86 compatibility
 		removeList := []string{
