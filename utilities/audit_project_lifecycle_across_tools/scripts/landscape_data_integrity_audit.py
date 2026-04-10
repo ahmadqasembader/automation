@@ -157,8 +157,8 @@ def _normalize_item_dict(it_wrap: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     return None
 
 
-def iter_landscape_items(doc: Dict[str, Any]) -> List[Tuple[str, str, Dict[str, Any]]]:
-    """Yield (category_name, subcategory_name, item_dict)."""
+def list_landscape_items(doc: Dict[str, Any]) -> List[Tuple[str, str, Dict[str, Any]]]:
+    """Return a list of (category_name, subcategory_name, item_dict) tuples."""
     out: List[Tuple[str, str, Dict[str, Any]]] = []
     root = doc.get("landscape")
     if root is None:
@@ -208,7 +208,7 @@ def yn(p: bool) -> str:
 
 def build_rows(doc: Dict[str, Any]) -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
-    for cat_name, sub_name, item in iter_landscape_items(doc):
+    for cat_name, sub_name, item in list_landscape_items(doc):
         name = str(item.get("name") or "").strip()
         if not name:
             continue

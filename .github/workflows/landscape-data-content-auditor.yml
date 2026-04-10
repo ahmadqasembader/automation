@@ -17,7 +17,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
 
@@ -54,7 +54,7 @@ jobs:
           git remote set-url origin https://github.com/${{ github.repository }}.git
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           signoff: true
