@@ -83,7 +83,7 @@ jobs:
         with:
           context: ./ci/cloudrunners/
           platforms: linux/amd64
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           labels: ${{ steps.meta.outputs.labels }}
           file: ./ci/cloudrunners/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
