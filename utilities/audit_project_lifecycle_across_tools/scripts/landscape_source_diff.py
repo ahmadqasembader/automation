@@ -29,8 +29,13 @@ OUTPUT_DIR = os.path.join(AUDIT_ROOT, "audit", "landscape_data_integrity_audit")
 
 _ldi_path = os.path.join(SCRIPT_DIR, "landscape_data_integrity_audit.py")
 _spec = importlib.util.spec_from_file_location("_ldi", _ldi_path)
+if _spec is None or _spec.loader is None:
+    print(
+        f"Failed to load helper module from: {_ldi_path}",
+        file=sys.stderr,
+    )
+    sys.exit(2)
 _ldi = importlib.util.module_from_spec(_spec)
-assert _spec.loader is not None
 _spec.loader.exec_module(_ldi)
 
 iter_landscape_items = _ldi.iter_landscape_items
