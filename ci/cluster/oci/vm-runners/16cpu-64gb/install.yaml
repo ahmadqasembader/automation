@@ -296,15 +296,19 @@ spec:
     spec:
       containers:
       - name: runner
-        image: ghcr.io/cncf/gha-cloudrunner:20655761335
+        image: ghcr.io/cncf/gha-cloudrunner@sha256:02d5e0beb0511b03683ae63a8c7af31f5e1fb1ca8cbbfc90c22d1c2351ea5b39
         args:
         - --arch=amd64
-        - --shape=VM.Standard.E6.Flex
+        - --shape=VM.Standard.E6.Flex,VM.Standard.E5.Flex,VM.Standard.E4.Flex
         - --shape-ocpus=16.0
         - --shape-memory-in-gbs=64.0
-        - --availability-domain=bzBe:US-SANJOSE-1-AD-1
         - --compartment-id=ocid1.compartment.oc1..aaaaaaaa22icap66vxktktubjlhf6oxvfhev6n7udgje2chahyrtq65ga63a
+        - --region=us-sanjose-1
+        - --availability-domain=bzBe:US-SANJOSE-1-AD-1
         - --subnet-id=ocid1.subnet.oc1.us-sanjose-1.aaaaaaaahgdslvujnywu3hvhqbvgz23souseseozvypng7ehnxgcotislubq
+        - --fallback-region=us-ashburn-1
+        - --fallback-availability-domain=Uocm:US-ASHBURN-AD-1
+        - --fallback-subnet-id=ocid1.subnet.oc1.iad.aaaaaaaagygdzd4xgbz4xhqhvnbxnoemhjd5ick7vodx4ghk4kg6a6c4xh5q
         env:
         - name: OCI_CONFIG_FILE
           value: /etc/oci/config
