@@ -57,7 +57,6 @@ jobs:
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
         with:
           registry: ${{ env.REGISTRY }}
@@ -75,7 +74,7 @@ jobs:
             type=sha
             type=ref,event=branch
 
-      # Build and push Docker image with Buildx (don't push on PR)
+      # Build and push Docker image with Buildx
       # https://github.com/docker/build-push-action
       - name: Build and push Cloudrunner Docker image
         id: build-and-push
@@ -83,7 +82,7 @@ jobs:
         with:
           context: ./ci/cloudrunners/
           platforms: linux/amd64
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           labels: ${{ steps.meta.outputs.labels }}
           file: ./ci/cloudrunners/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
@@ -146,10 +145,16 @@ jobs:
 
   # Test the published image by running it and see if the VM is created.
   test-image:
-    if: ${{ github.event_name != 'pull_request' }}
     needs: build-cloudrunner-images
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      REGION: us-sanjose-1
+      AVAILABILITY_DOMAIN: bzBe:US-SANJOSE-1-AD-1
+      SUBNET_ID: ocid1.subnet.oc1.us-sanjose-1.aaaaaaaahgdslvujnywu3hvhqbvgz23souseseozvypng7ehnxgcotislubq
+      FALLBACK_REGION: us-ashburn-1
+      FALLBACK_AVAILABILITY_DOMAIN: bzBe:US-ASHBURN-AD-1
+      FALLBACK_SUBNET_ID: ocid1.subnet.oc1.iad.aaaaaaaagygdzd4xgbz4xhqhvnbxnoemhjd5ick7vodx4ghk4kg6a6c4xh5q
     strategy:
       fail-fast: false
       matrix:
@@ -157,28 +162,24 @@ jobs:
         include:
           - runner: "amd64"
             arch: "amd64"
-            shape: "VM.Standard.E6.Flex"
+            shape: "VM.Standard.E6.Flex,VM.Standard.E5.Flex,VM.Standard.E4.Flex"
             ocpus: 2
             memory: 8.0
-            region: "us-sanjose-1"
-            availability-domain: bzBe:US-SANJOSE-1-AD-1
-            subnet-id: ocid1.subnet.oc1.us-sanjose-1.aaaaaaaahgdslvujnywu3hvhqbvgz23souseseozvypng7ehnxgcotislubq
           - runner: "arm64"
             arch: "arm64"
             shape: "VM.Standard.A1.Flex"
             ocpus: 2
             memory: 8.0
-            region: "us-sanjose-1"
-            availability-domain: bzBe:US-SANJOSE-1-AD-1
-            subnet-id: ocid1.subnet.oc1.us-sanjose-1.aaaaaaaahgdslvujnywu3hvhqbvgz23souseseozvypng7ehnxgcotislubq
           - runner: "gpu-a10-1"
             arch: "amd64"
             shape: "VM.GPU.A10.1"
             ocpus: 0   # Not a flex type, so ocpus and memory are determined by the shape
-            memory: 0  # Not a flex type, so ocpus and memory are determined by the shape
-            region: "us-ashburn-1"
-            availability-domain: bzBe:US-ASHBURN-AD-2
-            subnet-id: ocid1.subnet.oc1.iad.aaaaaaaagygdzd4xgbz4xhqhvnbxnoemhjd5ick7vodx4ghk4kg6a6c4xh5q
+            memory: 0
+          - runner: "gpu-a10-2"
+            arch: "amd64"
+            shape: "VM.GPU.A10.2"
+            ocpus: 0   # Not a flex type, so ocpus and memory are determined by the shape
+            memory: 0
     steps:
       - name: Test the published Cloudrunner Docker image
         run: |
@@ -205,6 +206,9 @@ jobs:
             --shape=${{ matrix.shape }} \
             --shape-ocpus=${{ matrix.ocpus }} \
             --shape-memory-in-gbs=${{ matrix.memory }} \
-            --region=${{ matrix.region}} \
-            --availability-domain=${{ matrix.availability-domain }} \
-            --subnet-id=${{ matrix.subnet-id }}
+            --region=${{ env.REGION }} \
+            --availability-domain=${{ env.AVAILABILITY_DOMAIN }} \
+            --subnet-id=${{ env.SUBNET_ID }} \
+            --fallback-region=${{ env.FALLBACK_REGION }} \
+            --fallback-availability-domain=${{ env.FALLBACK_AVAILABILITY_DOMAIN }} \
+            --fallback-subnet-id=${{ env.FALLBACK_SUBNET_ID }}
