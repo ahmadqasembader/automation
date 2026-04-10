@@ -1,0 +1,4291 @@
+{
+  "source": "datasources/landscape.yml",
+  "scope_maturities": [
+    "archived",
+    "graduated",
+    "incubating",
+    "sandbox"
+  ],
+  "fixable_field_keys": [
+    "extra.lfx_slug",
+    "repo_url",
+    "logo",
+    "extra.dev_stats_url",
+    "extra.clomonitor_name",
+    "extra.accepted",
+    "extra.artwork_url"
+  ],
+  "project_count": 251,
+  "lifecycle_date_failures": 1,
+  "projects": [
+    {
+      "name": "Brigade",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "CNI-Genie",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Curiefense",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": false,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Curve",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "DevStream",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "FabEdge",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Fonio",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Keptn",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Krator",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Krustlet",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "KubeDL",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Merbridge",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Nocalhost",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Open Service Mesh",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenELB",
+      "path": "Orchestration & Management / Service Proxy",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "OpenMetrics",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenTracing",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Pravega",
+      "path": "App Definition and Development / Streaming & Messaging",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "rkt",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "sealer",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Service Mesh Interface (SMI)",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Service Mesh Performance",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Skooner",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "SuperEdge",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Teller",
+      "path": "Provisioning / Key Management",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Xline",
+      "path": "Orchestration & Management / Coordination & Service Discovery",
+      "effective_project": "archived",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Argo",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "cert-manager",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Cilium",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "CloudEvents",
+      "path": "App Definition and Development / Streaming & Messaging",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "containerd",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "CoreDNS",
+      "path": "Orchestration & Management / Coordination & Service Discovery",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "CRI-O",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Crossplane",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "CubeFS",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Dapr",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Dragonfly",
+      "path": "Provisioning / Container Registry",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Envoy",
+      "path": "Orchestration & Management / Service Proxy",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "etcd",
+      "path": "Orchestration & Management / Coordination & Service Discovery",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Falco",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Fluentd",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Flux",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Harbor",
+      "path": "Provisioning / Container Registry",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Helm",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "in-toto",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Istio",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Jaeger",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KEDA",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Knative",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KubeEdge",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kubernetes",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kyverno",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Linkerd",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Open Policy Agent (OPA)",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Prometheus",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Rook",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "SPIFFE",
+      "path": "Provisioning / Key Management",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "SPIRE",
+      "path": "Provisioning / Key Management",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "The Update Framework (TUF)",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "TiKV",
+      "path": "App Definition and Development / Database",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Vitess",
+      "path": "App Definition and Development / Database",
+      "effective_project": "graduated",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Artifact Hub",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Backstage",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Buildpacks",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Chaos Mesh",
+      "path": "Observability and Analysis / Chaos Engineering",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Cloud Custodian",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Container Network Interface (CNI)",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Contour",
+      "path": "Orchestration & Management / Service Proxy",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Cortex",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Emissary-Ingress",
+      "path": "Orchestration & Management / API Gateway",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Flatcar Container Linux",
+      "path": "Platform / Certified Kubernetes - Distribution",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Fluid",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "gRPC",
+      "path": "Orchestration & Management / Remote Procedure Call",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Karmada",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Keycloak",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KServe",
+      "path": "CNAI / ML Serving",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kubeflow",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kubescape",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KubeVela",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KubeVirt",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Lima",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Litmus",
+      "path": "Observability and Analysis / Chaos Engineering",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Longhorn",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "metal3-io",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "NATS",
+      "path": "App Definition and Development / Streaming & Messaging",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Notary Project",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenCost",
+      "path": "Observability and Analysis / Continuous Optimization",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenFeature",
+      "path": "Observability and Analysis / Feature Flagging",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenFGA",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenKruise",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenTelemetry",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenYurt",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Operator Framework",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Strimzi",
+      "path": "App Definition and Development / Streaming & Messaging",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Thanos",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Volcano",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "wasmCloud",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "incubating",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Aeraki Mesh",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Agones",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "cncf logo",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Akri",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Antrea",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Armada",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Athenz",
+      "path": "Provisioning / Key Management",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Atlantis",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Bank-Vaults",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "BFE",
+      "path": "Orchestration & Management / Service Proxy",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "bootc",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "bpfman",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Cadence Workflow",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Capsule",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Carina",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Cartography",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Carvel",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "CDK for Kubernetes (CDK8s)",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Cedar",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Chaosblade",
+      "path": "Observability and Analysis / Chaos Engineering",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "CloudNativePG",
+      "path": "App Definition and Development / Database",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Clusternet",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Clusterpedia",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "CoHDI",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "cncf logo",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "composefs",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "cncf logo",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Confidential Containers",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Connect RPC",
+      "path": "Orchestration & Management / Remote Procedure Call",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "container2wasm",
+      "path": "Wasm / Orchestration & Management",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "ContainerSSH",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Copa",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Cozystack",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Cozystack",
+      "path": "Platform / PaaS/Container Service",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Dalec",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Devfile",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "DevSpace",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Dex",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Distribution",
+      "path": "Provisioning / Container Registry",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Drasi",
+      "path": "App Definition and Development / Streaming & Messaging",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Easegress",
+      "path": "Orchestration & Management / API Gateway",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Eraser",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "external-secrets",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "hami",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Headlamp",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Hexa",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Higress",
+      "path": "Orchestration & Management / API Gateway",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": false,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "HolmesGPT",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "HwameiStor",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Hyperlight",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Inclavare Containers",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Inspektor Gadget",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Interlink",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "k0s",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "k3s",
+      "path": "Platform / Certified Kubernetes - Distribution",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "k8gb",
+      "path": "Orchestration & Management / Coordination & Service Discovery",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "K8sGPT",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "K8up",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "kagent",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KAI Scheduler",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "cncf logo",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Kairos",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KAITO",
+      "path": "CNAI / ML Serving",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kanister",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KCL",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "kcp",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kepler",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Keylime",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kgateway",
+      "path": "Orchestration & Management / API Gateway",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KitOps",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kmesh",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "ko",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Konveyor",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Koordinator",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "kpt",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Krkn",
+      "path": "Observability and Analysis / Chaos Engineering",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kuadrant",
+      "path": "Orchestration & Management / API Gateway",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kuasar",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kube-burner",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kube-OVN",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "kube-rs",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "kube-vip",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Kubean",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KubeArmor",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KubeClipper",
+      "path": "Platform / Certified Kubernetes - Installer",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KubeElasti",
+      "path": "Serverless / Framework",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "cncf logo",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "KubeFleet",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kuberhealthy",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KubeSlice",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KubeStellar",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kubewarden",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KUDO",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kuma",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Kured",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "KusionStack",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Logging Operator (Kube Logging)",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "LoxiLB",
+      "path": "Orchestration & Management / Service Proxy",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Meshery",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "MetalLB",
+      "path": "Orchestration & Management / Service Proxy",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Microcks",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "ModelPack",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Monocle",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "fail",
+      "dates_detail": "missing:accepted",
+      "missing_required_dates": [
+        "accepted"
+      ],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": false,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
+        "extra.accepted": false,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Network Service Mesh",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "NMstate",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OAuth2 Proxy",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Open Cluster Management",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Open Policy Containers",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenChoreo",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenEBS",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenEverest",
+      "path": "App Definition and Development / Database",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "OpenFunction",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "openGemini",
+      "path": "App Definition and Development / Database",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenGitOps",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OpenTofu",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "ORAS",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OSCAL-COMPASS",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "OVN-Kubernetes",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Oxia",
+      "path": "Orchestration & Management / Coordination & Service Discovery",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": false
+      }
+    },
+    {
+      "name": "Paralus",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Parsec",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Perses",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "PipeCD",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Piraeus Datastore",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Pixie",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Podman Container Tools",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Podman Desktop",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Porter",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Radius",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Ratify",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Runme Notebooks",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "SchemaHero",
+      "path": "App Definition and Development / Database",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Score",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Sermant",
+      "path": "Orchestration & Management / Service Mesh",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Serverless Devs",
+      "path": "Orchestration & Management / Scheduling & Orchestration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Serverless Workflow",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Shipwright",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "SlimFaaS",
+      "path": "Serverless / Installable Platform",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "SlimToolkit",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "SOPS",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Spiderpool",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Spin",
+      "path": "Wasm / Application Frameworks",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "SpinKube",
+      "path": "Wasm / Orchestration & Management",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": false,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Stacker",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Submariner",
+      "path": "Runtime / Cloud Native Network",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Telepresence",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Tinkerbell",
+      "path": "Provisioning / Automation & Configuration",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Tokenetes",
+      "path": "Provisioning / Security & Compliance",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Tremor",
+      "path": "App Definition and Development / Streaming & Messaging",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Trickster",
+      "path": "Observability and Analysis / Observability",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "urunc",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Vineyard",
+      "path": "Runtime / Cloud Native Storage",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Virtual Kubelet",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "Visual Studio Code Kubernetes Tools",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "WasmEdge Runtime",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "werf",
+      "path": "App Definition and Development / Continuous Integration & Delivery",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "xRegistry",
+      "path": "App Definition and Development / Application Definition & Image Build",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "youki",
+      "path": "Runtime / Container Runtime",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    },
+    {
+      "name": "zot",
+      "path": "Provisioning / Container Registry",
+      "effective_project": "sandbox",
+      "dates_ok": "pass",
+      "dates_detail": "ok",
+      "missing_required_dates": [],
+      "fields": {
+        "repo_url": true,
+        "logo": "Yes",
+        "extra.lfx_slug": true,
+        "extra.dev_stats_url": true,
+        "extra.clomonitor_name": true,
+        "extra.accepted": true,
+        "extra.artwork_url": true
+      }
+    }
+  ]
+}

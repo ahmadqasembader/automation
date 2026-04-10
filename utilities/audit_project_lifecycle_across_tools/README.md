@@ -25,6 +25,8 @@ This utility generates a canonical list of CNCF project statuses from the LFX PC
 | `scripts/fetch_pcc_projects.py` | Calls LFX PCC API; writes `pcc_projects.yaml` (requires `LFX_TOKEN`) |
 | `scripts/fetch_lfx_insights_health.py` | Builds `lfx_insights_health.yaml` from Insights project pages + badge (no token; archived status from page) |
 | `scripts/audit_landscape_status.py` | Compares sources and writes `audit/*.md` |
+| `scripts/landscape_data_integrity_audit.py` | Field presence + lifecycle date rules on vendored `datasources/landscape.yml` → `audit/landscape_data_integrity_audit/` |
+| `scripts/landscape_source_diff.py` | Compare `landscape.yml` to `pcc_projects.yaml` + `clomonitor.yaml`; flags landscape drift and PCC↔CLOMonitor disagreements → `audit/landscape_data_integrity_audit/landscape_source_diff.{md,json}` |
 | `.github/workflows/sync-pcc-and-audit-statuses.yml` | Manual workflow: PCC + snapshots + audit → PR |
 | `.github/workflows/sync-lfx-insights-health.yml` | Weekly (Sunday UTC) + manual: refresh `lfx_insights_health.yaml` → PR |
 | `datasources/pcc_projects.yaml` | Generated PCC data |
@@ -76,6 +78,20 @@ python scripts/fetch_pcc_projects.py
 cd utilities/audit_project_lifecycle_across_tools
 python scripts/fetch_lfx_insights_health.py
 # Optional: python scripts/fetch_lfx_insights_health.py --max-projects 10
+```
+
+**Landscape data integrity** (reads `datasources/landscape.yml` only; requires PyYAML):
+
+```bash
+cd utilities/audit_project_lifecycle_across_tools
+python scripts/landscape_data_integrity_audit.py
+```
+
+**Landscape vs PCC / CLOMonitor diff** (requires `landscape.yml`, `pcc_projects.yaml`, `clomonitor.yaml` under `datasources/`):
+
+```bash
+cd utilities/audit_project_lifecycle_across_tools
+python scripts/landscape_source_diff.py
 ```
 
 **Audit reports:**
