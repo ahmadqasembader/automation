@@ -4,10 +4,6 @@
 
 | Project | [PCC Status](./pcc_projects.yaml) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|
-| Agones | sandbox | - | - |
-| KAI Scheduler | sandbox | - | - |
-| Kubernetes | graduated | Excellent | - |
-| OpenEverest | sandbox | - | - |
 | Operator Framework | incubating | Critical | - |
 | SPIRE | graduated | Critical | - |
 | Velero | sandbox | - | - |
@@ -40,7 +36,7 @@
 | KEDA | graduated | Excellent | 85 |
 | Knative | graduated | Excellent | 85 |
 | KubeEdge | graduated | Excellent | 80 |
-| Kubernetes | graduated | Excellent | - |
+| Kubernetes | graduated | Excellent | 88 |
 | Kyverno | graduated | Excellent | 80 |
 | Linkerd | graduated | Excellent | 80 |
 | Open Policy Agent | graduated | Excellent | 81 |
@@ -83,25 +79,25 @@
 | Notary | incubating | Excellent | 82 |
 | OpenCost | incubating | Excellent | 80 |
 | OpenFeature | incubating | Excellent | 81 |
-| OpenFGA | incubating | Excellent | 84 |
+| OpenFGA | incubating | Excellent | 85 |
 | OpenKruise | incubating | Excellent | 81 |
 | OpenTelemetry | incubating | Excellent | 89 |
 | OpenYurt | incubating | Excellent | 80 |
 | Operator Framework | incubating | Critical | - |
 | Strimzi | incubating | Excellent | 86 |
-| Thanos | incubating | Excellent | 82 |
+| Thanos | incubating | Excellent | 84 |
 | Volcano | incubating | Excellent | 85 |
-| wasmCloud | incubating | Healthy | 76 |
+| wasmCloud | incubating | Healthy | 73 |
 
 ## Sandbox
 
 | Project | [PCC Status](./pcc_projects.yaml) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|
 | Aeraki Mesh | sandbox | Healthy | 64 |
-| Agones | sandbox | - | - |
+| Agones | sandbox | Healthy | 79 |
 | Akri | sandbox | Healthy | 73 |
 | Antrea | sandbox | Healthy | 75 |
-| Armada | sandbox | Excellent | 82 |
+| Armada | sandbox | Excellent | 84 |
 | Athenz | sandbox | Healthy | 76 |
 | Atlantis | sandbox | Excellent | 81 |
 | Bank-Vaults | sandbox | Healthy | 77 |
@@ -112,7 +108,7 @@
 | Capsule | sandbox | Excellent | 81 |
 | Carina | sandbox | Stable | 50 |
 | Cartography | sandbox | Healthy | 74 |
-| Carvel | sandbox | Healthy | 79 |
+| Carvel | sandbox | Healthy | 78 |
 | cdk8s | sandbox | Healthy | 72 |
 | ChaosBlade | sandbox | Healthy | 77 |
 | CloudNativePG | sandbox | Excellent | 84 |
@@ -126,9 +122,9 @@
 | ContainerSSH | sandbox | Healthy | 70 |
 | Copa | sandbox | Healthy | 78 |
 | Cozystack | sandbox | Healthy | 78 |
-| Dalec | sandbox | Healthy | 73 |
+| Dalec | sandbox | Healthy | 74 |
 | Devfile | sandbox | Healthy | 76 |
-| DevSpace | sandbox | Healthy | 76 |
+| DevSpace | sandbox | Healthy | 77 |
 | Dex | sandbox | Healthy | 78 |
 | Distribution | sandbox | Healthy | 77 |
 | Drasi | sandbox | Healthy | 74 |
@@ -143,14 +139,14 @@
 | Hyperlight | sandbox | Healthy | 78 |
 | Inclavare Containers | sandbox | Healthy | 72 |
 | Inspektor Gadget | sandbox | Healthy | 78 |
-| interLink | sandbox | Stable | 56 |
+| interLink | sandbox | Stable | 55 |
 | k0s | sandbox | Healthy | 77 |
 | k3s | sandbox | Healthy | 78 |
 | k8gb | sandbox | Healthy | 74 |
 | K8sGPT | sandbox | Healthy | 74 |
 | K8up | sandbox | Healthy | 64 |
 | kagent | sandbox | Healthy | 77 |
-| KAI Scheduler | sandbox | - | - |
+| KAI Scheduler | sandbox | Excellent | 80 |
 | Kairos | sandbox | Healthy | 79 |
 | Kanister | sandbox | Healthy | 74 |
 | KCL | sandbox | Healthy | 76 |
@@ -168,13 +164,13 @@
 | Kuasar | sandbox | Healthy | 60 |
 | kube-burner | sandbox | Healthy | 71 |
 | Kube-OVN | sandbox | Excellent | 82 |
-| kube-rs | sandbox | Excellent | 80 |
-| kube-vip | sandbox | Healthy | 73 |
+| kube-rs | sandbox | Healthy | 80 |
+| kube-vip | sandbox | Healthy | 74 |
 | Kubean | sandbox | Healthy | 72 |
 | KubeArmor | sandbox | Healthy | 76 |
 | Kubeclipper | sandbox | Healthy | 75 |
 | KubeFleet | sandbox | Healthy | 70 |
-| Kuberhealthy | sandbox | Healthy | 68 |
+| Kuberhealthy | sandbox | Healthy | 69 |
 | Kubernetes AI Toolchain Operator (KAITO) | sandbox | Healthy | 76 |
 | KubeSlice | sandbox | Healthy | 69 |
 | KubeStellar | sandbox | Excellent | 81 |
@@ -195,7 +191,7 @@
 | Open Policy Registry (OPCR) | sandbox | Stable | 56 |
 | OpenChoreo | sandbox | Excellent | 82 |
 | OpenEBS | sandbox | Healthy | 79 |
-| OpenEverest | sandbox | - | - |
+| OpenEverest | sandbox | Healthy | 78 |
 | OpenFunction | sandbox | Healthy | 60 |
 | openGemini | sandbox | Healthy | 64 |
 | OpenGitOps | sandbox | Stable | 58 |
@@ -216,8 +212,8 @@
 | Ratify | sandbox | Healthy | 66 |
 | Runme Notebooks | sandbox | Healthy | 76 |
 | SchemaHero | sandbox | Healthy | 67 |
-| Score | sandbox | Healthy | 74 |
-| Serverless Devs | sandbox | Healthy | 79 |
+| Score | sandbox | Healthy | 75 |
+| Serverless Devs | sandbox | Healthy | 78 |
 | Serverless Workflow Specification | sandbox | Excellent | 83 |
 | Service Mesh Performance | sandbox | Healthy | 65 |
 | Shipwright | sandbox | Healthy | 78 |
@@ -227,22 +223,22 @@
 | Spiderpool | sandbox | Healthy | 72 |
 | Spin | sandbox | Excellent | 80 |
 | stacker | sandbox | Healthy | 67 |
-| Submariner | sandbox | Healthy | 79 |
+| Submariner | sandbox | Excellent | 80 |
 | Telepresence | sandbox | Healthy | 76 |
 | Tinkerbell | sandbox | Healthy | 78 |
-| Tokenetes | sandbox | Stable | 51 |
+| Tokenetes | sandbox | Stable | 50 |
 | Tremor | sandbox | Healthy | 66 |
-| TrestleGRC | sandbox | Healthy | 78 |
+| TrestleGRC | sandbox | Healthy | 76 |
 | Trickster | sandbox | Healthy | 78 |
 | urunc | sandbox | Healthy | 69 |
 | Velero | sandbox | - | - |
 | Vineyard | sandbox | Healthy | 66 |
 | Virtual Kubelet | sandbox | Healthy | 74 |
-| VS Code Kubernetes Tools | sandbox | Healthy | 76 |
+| VS Code Kubernetes Tools | sandbox | Healthy | 77 |
 | WasmEdge Runtime | sandbox | Healthy | 77 |
 | werf | sandbox | Healthy | 75 |
 | xRegistry | sandbox | Stable | 59 |
-| Youki | sandbox | Healthy | 76 |
+| Youki | sandbox | Healthy | 78 |
 | zot | sandbox | Healthy | 78 |
 
 ## Forming
@@ -266,9 +262,9 @@
 | Higress | forming | - | - |
 | Kmesh | forming | Excellent | 80 |
 | ksctl | forming | - | - |
-| kube-bind | forming | - | - |
-| KubeElasti | forming | - | - |
-| llm-d | forming | Excellent | 84 |
+| kube-bind | forming | Healthy | 70 |
+| KubeElasti | forming | Healthy | 64 |
+| llm-d | forming | Excellent | 85 |
 | NMstate | forming | Healthy | 77 |
 | OptiFlow (AI‑OrchestrateX) | forming | - | - |
 | Schema Driven Configuration | forming | - | - |
