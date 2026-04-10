@@ -183,12 +183,6 @@ def resolve_pcc_clo(
             pcc = pcc_by_slug[nk]
             notes.append("pcc_via_clo_name")
 
-    if pcc and not clo:
-        nk = normalize_slug(pcc.get("slug"))
-        if nk in clo_by_name:
-            clo = clo_by_name[nk]
-            notes.append("clo_via_pcc_slug")
-
     if not pcc and not clo:
         nk = normalize_key(name)
         if nk in pcc_by_name:
