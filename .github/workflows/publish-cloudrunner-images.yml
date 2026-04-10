@@ -146,7 +146,6 @@ jobs:
 
   # Test the published image by running it and see if the VM is created.
   test-image:
-    if: ${{ github.event_name != 'pull_request' }}
     needs: build-cloudrunner-images
     runs-on: ubuntu-latest
     timeout-minutes: 15
