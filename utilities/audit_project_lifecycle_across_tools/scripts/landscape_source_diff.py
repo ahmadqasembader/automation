@@ -12,6 +12,8 @@ import importlib.util
 import json
 import os
 import sys
+import datetime
+import re
 from typing import Any, Dict, List, Optional, Tuple
 
 try:
@@ -38,7 +40,9 @@ if _spec is None or _spec.loader is None:
 _ldi = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_ldi)
 
-iter_landscape_items = _ldi.iter_landscape_items
+list_landscape_items = getattr(_ldi, "list_landscape_items", None) or getattr(
+    _ldi, "iter_landscape_items"
+)
 get_extra = _ldi.get_extra
 effective_project = _ldi.effective_project
 present = _ldi.present
@@ -63,6 +67,23 @@ def normalize_url(u: str) -> str:
     return u.lower().rstrip("/")
 
 
+def normalize_repo_identity(u: str) -> str:
+    """
+    Normalize repository identity for diffing.
+
+    For GitHub URLs, treat all repos under the same org/owner as equivalent to
+    reduce noise (e.g. org root URL vs specific repo URL).
+    """
+    n = normalize_url(u)
+    gh_prefix = "https://github.com/"
+    if n.startswith(gh_prefix):
+        tail = n[len(gh_prefix) :]
+        owner = tail.split("/", 1)[0].strip()
+        if owner:
+            return f"github-org:{owner}"
+    return n
+
+
 def normalize_date(s: Any) -> str:
     if s is None:
         return ""
@@ -70,6 +91,87 @@ def normalize_date(s: Any) -> str:
     if "T" in t:
         t = t.split("T", 1)[0]
     return t[:10] if len(t) >= 10 else t
+
+
+def parse_iso_date(s: Any) -> Optional[datetime.date]:
+    v = normalize_date(s)
+    if not v:
+        return None
+    try:
+        return datetime.date.fromisoformat(v)
+    except Exception:
+        return None
+
+
+def dates_within_tolerance(a: Any, b: Any, tolerance_days: int) -> bool:
+    da = parse_iso_date(a)
+    db = parse_iso_date(b)
+    if da is None or db is None:
+        return False
+    return abs((da - db).days) <= tolerance_days
+
+
+def is_github_url(u: Any) -> bool:
+    return normalize_url(str(u or "")).startswith("https://github.com/")
+
+
+def canonical_token(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", str(s or "").lower())
+
+
+def slug_aliases(s: Any) -> List[str]:
+    v = str(s or "").strip().lower()
+    if not v:
+        return []
+    out = {v}
+    out.add(v.replace("_", "-"))
+    out.add(v.replace("-", " "))
+    out.add(v.replace("_", " "))
+    out.add(v.replace(" ", "-"))
+    out.add(v.replace(" ", ""))
+    out.add(canonical_token(v))
+    return [x for x in out if x]
+
+
+def slug_equivalent(a: Any, b: Any) -> bool:
+    aa = set(slug_aliases(a))
+    bb = set(slug_aliases(b))
+    if not aa or not bb:
+        return False
+    return bool(aa.intersection(bb))
+
+
+def devstats_project_token(u: Any) -> str:
+    n = normalize_url(str(u or ""))
+    if not n:
+        return ""
+    m = re.match(r"^https?://([^./]+)\.(?:devstats|teststats)\.cncf\.io", n)
+    return canonical_token(m.group(1)) if m else ""
+
+
+def suppress_repo_mismatch_for_non_github_pcc(
+    pcc_repo: str,
+    clo_name: str,
+    land_devstats: str,
+    clo_devstats: str,
+) -> bool:
+    """
+    Suppress repo_url anomaly when PCC provides a website (non-GitHub) and
+    CLOMonitor identity aligns with DevStats identity.
+    """
+    if not pcc_repo or is_github_url(pcc_repo):
+        return False
+    ctoken = canonical_token(clo_name)
+    if not ctoken:
+        return False
+
+    lt = devstats_project_token(land_devstats)
+    ct = devstats_project_token(clo_devstats)
+    if not lt and not ct:
+        return False
+
+    # Require CLOMonitor name to align with at least one DevStats project token.
+    return (lt and lt == ctoken) or (ct and ct == ctoken)
 
 
 def pcc_maturity_from_row(tier: str, row: Dict[str, Any]) -> str:
@@ -258,14 +360,55 @@ def compare_field(
     }
 
 
-def slug_identity_conflict(pcc: Optional[Dict[str, Any]], clo: Optional[Dict[str, Any]]) -> Optional[str]:
-    if not pcc or not clo:
+def compare_slug_field(
+    field_label: str,
+    land_raw: Any,
+    pcc_raw: Any,
+    clo_raw: Any,
+) -> Optional[Dict[str, Any]]:
+    """
+    Compare slug-like identifiers with alias-equivalent matching to reduce noise.
+    """
+    has_l = present(land_raw)
+    has_p = present(pcc_raw)
+    has_c = present(clo_raw)
+    if not has_p and not has_c:
         return None
-    ps = normalize_slug(pcc.get("slug"))
-    cn = normalize_slug(clo.get("name"))
-    if ps and cn and ps != cn:
-        return f"PCC slug {pcc.get('slug')!r} vs CLOMonitor name {clo.get('name')!r} (normalized identifiers differ)."
-    return None
+
+    pcc_clo_agree = True
+    if has_p and has_c:
+        pcc_clo_agree = slug_equivalent(pcc_raw, clo_raw)
+
+    land_ok_p = (not has_p) or (has_l and slug_equivalent(land_raw, pcc_raw))
+    land_ok_c = (not has_c) or (has_l and slug_equivalent(land_raw, clo_raw))
+
+    if pcc_clo_agree and land_ok_p and land_ok_c:
+        return None
+
+    msgs: List[str] = []
+    if has_p and has_c and not pcc_clo_agree:
+        msgs.append(f"PCC ({pcc_raw!r}) and CLOMonitor ({clo_raw!r}) disagree.")
+    if has_p and not land_ok_p:
+        msgs.append(
+            f"Landscape ({land_raw!r}) ≠ PCC ({pcc_raw!r})."
+            if has_l
+            else f"Landscape missing; PCC has {pcc_raw!r}."
+        )
+    if has_c and not land_ok_c:
+        msgs.append(
+            f"Landscape ({land_raw!r}) ≠ CLOMonitor ({clo_raw!r})."
+            if has_l
+            else f"Landscape missing; CLOMonitor has {clo_raw!r}."
+        )
+
+    return {
+        "field": field_label,
+        "landscape": land_raw if has_l else None,
+        "pcc": pcc_raw if has_p else None,
+        "clomonitor": clo_raw if has_c else None,
+        "pcc_clomonitor_agree": pcc_clo_agree if (has_p and has_c) else None,
+        "message": " ".join(msgs),
+    }
 
 
 def build_report() -> Dict[str, Any]:
@@ -277,7 +420,7 @@ def build_report() -> Dict[str, Any]:
 
     projects_out: List[Dict[str, Any]] = []
 
-    for cat_name, sub_name, item in iter_landscape_items(land_doc):
+    for cat_name, sub_name, item in list_landscape_items(land_doc):
         name = str(item.get("name") or "").strip()
         if not name:
             continue
@@ -309,29 +452,22 @@ def build_report() -> Dict[str, Any]:
 
         findings: List[Dict[str, Any]] = []
 
-        idc = slug_identity_conflict(pcc, clo)
-        if idc:
-            findings.append(
-                {
-                    "field": "identifiers",
-                    "landscape": None,
-                    "pcc": pcc_slug,
-                    "clomonitor": clo_name,
-                    "pcc_clomonitor_agree": False,
-                    "message": idc,
-                }
-            )
+        suppress_repo = suppress_repo_mismatch_for_non_github_pcc(
+            pcc_repo=pcc_repo,
+            clo_name=clo_name,
+            land_devstats=land_dev,
+            clo_devstats=clo_dev,
+        )
+        if not suppress_repo:
+            f1 = compare_field("repo_url", land_repo, pcc_repo, clo_repo, normalize_repo_identity)
+            if f1:
+                findings.append(f1)
 
-        f1 = compare_field("repo_url", land_repo, pcc_repo, clo_repo, normalize_url)
-        if f1:
-            findings.append(f1)
-
-        f2 = compare_field(
+        f2 = compare_slug_field(
             "extra.lfx_slug",
             land_slug,
             pcc_slug,
             clo_name,
-            normalize_slug,
         )
         if f2:
             findings.append(f2)
@@ -350,15 +486,17 @@ def build_report() -> Dict[str, Any]:
         if f4:
             findings.append(f4)
 
-        f5 = compare_field(
-            "extra.accepted",
-            land_acc,
-            None,
-            clo_acc,
-            lambda x: normalize_date(x),
-        )
-        if f5:
-            findings.append(f5)
+        # Accepted date can legitimately differ by publication lag; ignore <= 30 days.
+        if not dates_within_tolerance(land_acc, clo_acc, tolerance_days=30):
+            f5 = compare_field(
+                "extra.accepted",
+                land_acc,
+                None,
+                clo_acc,
+                lambda x: normalize_date(x),
+            )
+            if f5:
+                findings.append(f5)
 
         if pcc_mat or clo_mat:
             f6 = compare_field(
@@ -424,28 +562,51 @@ def render_markdown(data: Dict[str, Any]) -> str:
     lines.append(f"- **No PCC and no CLOMonitor match:** {len(unmatched)}")
     lines.append("")
 
-    lines.append("## Per-project: landscape vs sources")
+    lines.append("## Differences (sorted by field)")
     lines.append("")
-    for p in sorted(with_findings, key=lambda x: (x["maturity"], x["name"].lower())):
-        lines.append(f"### {p['name']} ({p['maturity']})")
-        lines.append("")
-        lines.append(f"- **Path:** {p['path']}")
-        lines.append(
-            f"- **Matched:** PCC={p['matched_pcc']}, CLOMonitor={p['matched_clomonitor']} ({p['match_note']})"
-        )
-        lines.append("")
-        lines.append("| Field | Landscape | PCC | CLOMonitor | PCC≈CLO? | Note |")
-        lines.append("|-------|-----------|-----|------------|---------|------|")
+    lines.append(
+        "Each row is one detected mismatch. Sorted by `Field`, then `Project`."
+    )
+    lines.append("")
+    lines.append(
+        "| Field | Project | Maturity | Landscape | PCC | CLOMonitor | PCC≈CLO? | Note |"
+    )
+    lines.append(
+        "|---|---|---|---|---|---|---|---|"
+    )
+
+    flat_rows: List[Tuple[str, str, str, Any, Any, Any, Any, str]] = []
+    for p in with_findings:
         for f in p["findings"]:
             agree = f.get("pcc_clomonitor_agree")
             agree_s = "—" if agree is None else ("Yes" if agree else "**No**")
-            lines.append(
-                f"| {f['field']} | {fmt_val(f.get('landscape'))} | {fmt_val(f.get('pcc'))} | "
-                f"{fmt_val(f.get('clomonitor'))} | {agree_s} | {fmt_val(f.get('message', ''))} |"
+            flat_rows.append(
+                (
+                    f.get("field", ""),
+                    p["name"],
+                    p["maturity"],
+                    f.get("landscape"),
+                    f.get("pcc"),
+                    f.get("clomonitor"),
+                    agree_s,
+                    f.get("message", ""),
+                )
             )
-        lines.append("")
+
+    flat_rows.sort(key=lambda r: (str(r[0]).lower(), str(r[1]).lower()))
+    for fld, name, mat, lv, pv, cv, agree_s, msg in flat_rows:
+        lines.append(
+            f"| {fmt_val(fld)} | {fmt_val(name)} | {fmt_val(mat)} | "
+            f"{fmt_val(lv)} | {fmt_val(pv)} | {fmt_val(cv)} | {agree_s} | {fmt_val(msg)} |"
+        )
+    lines.append("")
 
     lines.append("## No datasource match")
+    lines.append("")
+    lines.append(
+        "These are in-scope landscape projects that could not be matched to PCC or CLOMonitor; "
+        "they are usually candidates for upstream/source alignment PRs."
+    )
     lines.append("")
     if not unmatched:
         lines.append("_All in-scope items resolved to at least PCC or CLOMonitor._")

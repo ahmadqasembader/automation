@@ -28,12 +28,15 @@ This utility generates a canonical list of CNCF project statuses from the LFX PC
 | `scripts/landscape_data_integrity_audit.py` | Field presence + lifecycle date rules on vendored `datasources/landscape.yml` → `audit/landscape_data_integrity_audit/` |
 | `scripts/landscape_source_diff.py` | Compare `landscape.yml` to `pcc_projects.yaml` + `clomonitor.yaml`; flags landscape drift and PCC↔CLOMonitor disagreements → `audit/landscape_data_integrity_audit/landscape_source_diff.{md,json}` |
 | `.github/workflows/sync-pcc-and-audit-statuses.yml` | Manual workflow: PCC + snapshots + audit → PR |
+| `.github/workflows/landscape-data-content-auditor.yml` | Manual workflow: runs both landscape audit scripts; opens a PR only if `audit/landscape_data_integrity_audit/*.{md,json}` change (no `LFX_TOKEN`) |
 | `.github/workflows/sync-lfx-insights-health.yml` | Weekly (Sunday UTC) + manual: refresh `lfx_insights_health.yaml` → PR |
 | `datasources/pcc_projects.yaml` | Generated PCC data |
 | `datasources/lfx_insights_health.yaml` | Generated **Insights Health** tier and **Health Score** (optional until first weekly run merges) |
 | `datasources/` | Other source snapshots |
 | `audit/status_audit.md` | Generated anomalies table |
 | `audit/all_statuses.md` | Generated full table |
+| `audit/landscape_data_integrity_audit/landscape_data_integrity.{md,json}` | Generated field + lifecycle rules on vendored landscape |
+| `audit/landscape_data_integrity_audit/landscape_source_diff.{md,json}` | Generated landscape vs PCC / CLOMonitor diff |
 
 ## Data sources
 
@@ -59,6 +62,12 @@ This utility generates a canonical list of CNCF project statuses from the LFX PC
 1. **Actions → “Sync LFX Insights health scores” → Run workflow** (or wait for the weekly Sunday schedule).
 2. Merge the PR that updates `datasources/lfx_insights_health.yaml`.
 3. Run the PCC audit workflow again (or merge a branch that already includes the health file) so the **Insights Health** and **Health Score** columns populate.
+
+### Landscape data content auditor (no `LFX_TOKEN`)
+
+1. Ensure `datasources/landscape.yml`, `datasources/pcc_projects.yaml`, and `datasources/clomonitor.yaml` are present on the default branch (typically refreshed by the PCC sync workflow).
+2. **Actions → “Landscape Data Content Auditor” → Run workflow**
+3. If the four outputs under `audit/landscape_data_integrity_audit/` change, the workflow opens or updates a PR with only those files.
 
 ## Run locally
 
