@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -59,13 +60,14 @@ func main() {
 
 // isOutOfCapacityError returns true when the OCI error indicates the host capacity in the target region/AD has been exhausted.
 func isOutOfCapacityError(err error) bool {
-	if svcErr, ok := common.IsServiceError(err); ok {
+	var svcErr common.ServiceError
+	if errors.As(err, &svcErr) {
 		code := svcErr.GetCode()
 		msg := strings.ToLower(svcErr.GetMessage())
 		if strings.Contains(msg, "out of host capacity") ||
 			strings.Contains(msg, "out of capacity") ||
 			code == "LimitExceeded" ||
-			(svcErr.GetHTTPStatusCode() == 500 && strings.Contains(msg, "capacity")) {
+			code == "InternalError" && strings.Contains(msg, "capacity") {
 			return true
 		}
 	}
