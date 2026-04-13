@@ -6,7 +6,7 @@ When those two disagree, that is called out. **`landscape.yml` should be updated
 ## Summary
 
 - **CNCF landscape items in scope:** 251
-- **With at least one drift / conflict row:** 79
+- **With at least one drift / conflict row:** 76
 - **Findings where PCC and CLOMonitor disagree:** 56
 - **No PCC and no CLOMonitor match:** 4
 
@@ -26,14 +26,6 @@ Each row is one detected mismatch. Sorted by `Field`, then `Project`.
 | extra.accepted | ORAS | sandbox | 2021-07-13 | — | 2021-06-02 | — | Landscape ('2021-07-13') ≠ CLOMonitor ('2021-06-02'). |
 | extra.clomonitor_name | Podman Container Tools | sandbox | podman | — | podman-container-tools | — | Landscape ('podman') ≠ CLOMonitor ('podman-container-tool… |
 | extra.clomonitor_name | Runme Notebooks | sandbox | runme | — | runme-notebooks | — | Landscape ('runme') ≠ CLOMonitor ('runme-notebooks'). |
-| extra.dev_stats_url | external-secrets | sandbox | https://externalsecretsoperator.devstats.cncf.io/ | — | https://external-secrets.devstats.cncf.io/ | — | Landscape ('https://externalsecretsoperator.devstats.cncf… |
-| extra.dev_stats_url | Kubewarden | sandbox | https://kubewarden.devstats.cncf.io/ | — | https://kubewarden.teststats.cncf.io/ | — | Landscape ('https://kubewarden.devstats.cncf.io/') ≠ CLOM… |
-| extra.dev_stats_url | OpenCost | incubating | https://opencost.devstats.cncf.io/ | — | https://opencost.teststats.cncf.io/ | — | Landscape ('https://opencost.devstats.cncf.io/') ≠ CLOMon… |
-| extra.dev_stats_url | OpenFeature | incubating | https://openfeature.devstats.cncf.io/ | — | https://openfeature.teststats.cncf.io/ | — | Landscape ('https://openfeature.devstats.cncf.io/') ≠ CLO… |
-| extra.dev_stats_url | OVN-Kubernetes | sandbox | https://ovnkubernetes.devstats.cncf.io/ | — | https://ovn-kubernetes.devstats.cncf.io | — | Landscape ('https://ovnkubernetes.devstats.cncf.io/') ≠ C… |
-| extra.dev_stats_url | Piraeus Datastore | sandbox | — | — | https://piraeus.devstats.cncf.io/ | — | Landscape missing; CLOMonitor has 'https://piraeus.devsta… |
-| extra.dev_stats_url | Runme Notebooks | sandbox | https://runmenotebooks.devstats.cncf.io/ | — | https://runme-notebooks.devstats.cncf.io | — | Landscape ('https://runmenotebooks.devstats.cncf.io/') ≠ … |
-| extra.dev_stats_url | Shipwright | sandbox | https://shipwrightcncf.devstats.cncf.io/ | — | https://shipwright.devstats.cncf.io/ | — | Landscape ('https://shipwrightcncf.devstats.cncf.io/') ≠ … |
 | extra.lfx_slug | Cloud Custodian | incubating | c7n | c7n | cloud-custodian | **No** | PCC ('c7n') and CLOMonitor ('cloud-custodian') disagree. … |
 | extra.lfx_slug | Confidential Containers | sandbox | confcont | confcont | confidential-containers | **No** | PCC ('confcont') and CLOMonitor ('confidential-containers… |
 | extra.lfx_slug | Connect RPC | sandbox | connect | connect | connect-rpc | **No** | PCC ('connect') and CLOMonitor ('connect-rpc') disagree. … |
