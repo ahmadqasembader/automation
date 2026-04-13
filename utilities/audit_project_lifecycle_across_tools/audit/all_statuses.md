@@ -33,7 +33,7 @@
 | Kmesh | - | kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
 | ksctl | - | - | forming | - | - | - | - | - |
 | kube-bind | - | - | forming | - | - | - | - | - |
-| KubeElasti | - | kubeelasti | forming | sandbox | sandbox | sandbox | sandbox | - |
+| KubeElasti | - | kubeelasti | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
 | llm-d | - | - | forming | - | - | - | - | - |
 | NMstate | - | nmstate | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
 | OptiFlow (AI‑OrchestrateX) | - | - | forming | - | - | - | - | - |
@@ -324,7 +324,7 @@
 | Kmesh | - | kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
 | ksctl | - | - | forming | - | - | - | - | - |
 | kube-bind | - | - | forming | - | - | - | - | - |
-| KubeElasti | - | kubeelasti | forming | sandbox | sandbox | sandbox | sandbox | - |
+| KubeElasti | - | kubeelasti | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
 | llm-d | - | - | forming | - | - | - | - | - |
 | NMstate | - | nmstate | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
 | OptiFlow (AI‑OrchestrateX) | - | - | forming | - | - | - | - | - |
