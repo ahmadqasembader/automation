@@ -276,14 +276,6 @@
           "clomonitor": "runme-notebooks",
           "pcc_clomonitor_agree": null,
           "message": "Landscape ('runme') ≠ CLOMonitor ('runme-notebooks')."
-        },
-        {
-          "field": "extra.dev_stats_url",
-          "landscape": "https://runmenotebooks.devstats.cncf.io/",
-          "pcc": null,
-          "clomonitor": "https://runme-notebooks.devstats.cncf.io",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('https://runmenotebooks.devstats.cncf.io/') ≠ CLOMonitor ('https://runme-notebooks.devstats.cncf.io')."
         }
       ]
     },
@@ -500,14 +492,6 @@
           "clomonitor": "external-secrets",
           "pcc_clomonitor_agree": false,
           "message": "PCC ('externalsecretsoperator') and CLOMonitor ('external-secrets') disagree. Landscape ('externalsecretsoperator') ≠ CLOMonitor ('external-secrets')."
-        },
-        {
-          "field": "extra.dev_stats_url",
-          "landscape": "https://externalsecretsoperator.devstats.cncf.io/",
-          "pcc": null,
-          "clomonitor": "https://external-secrets.devstats.cncf.io/",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('https://externalsecretsoperator.devstats.cncf.io/') ≠ CLOMonitor ('https://external-secrets.devstats.cncf.io/')."
         }
       ]
     },
@@ -590,16 +574,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.dev_stats_url",
-          "landscape": "https://kubewarden.devstats.cncf.io/",
-          "pcc": null,
-          "clomonitor": "https://kubewarden.teststats.cncf.io/",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('https://kubewarden.devstats.cncf.io/') ≠ CLOMonitor ('https://kubewarden.teststats.cncf.io/')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Kyverno",
@@ -940,14 +915,6 @@
           "clomonitor": "piraeus",
           "pcc_clomonitor_agree": false,
           "message": "PCC ('piraeus-datastore') and CLOMonitor ('piraeus') disagree. Landscape ('piraeus-datastore') ≠ CLOMonitor ('piraeus')."
-        },
-        {
-          "field": "extra.dev_stats_url",
-          "landscape": null,
-          "pcc": null,
-          "clomonitor": "https://piraeus.devstats.cncf.io/",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape missing; CLOMonitor has 'https://piraeus.devstats.cncf.io/'."
         }
       ]
     },
@@ -1280,14 +1247,6 @@
           "clomonitor": "https://github.com/ovn-kubernetes/ovn-kubernetes",
           "pcc_clomonitor_agree": false,
           "message": "PCC ('https://github.com/ovn-org/ovn-kubernetes') and CLOMonitor ('https://github.com/ovn-kubernetes/ovn-kubernetes') disagree. Landscape ('https://github.com/ovn-kubernetes/ovn-kubernetes') ≠ PCC ('https://github.com/ovn-org/ovn-kubernetes')."
-        },
-        {
-          "field": "extra.dev_stats_url",
-          "landscape": "https://ovnkubernetes.devstats.cncf.io/",
-          "pcc": null,
-          "clomonitor": "https://ovn-kubernetes.devstats.cncf.io",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('https://ovnkubernetes.devstats.cncf.io/') ≠ CLOMonitor ('https://ovn-kubernetes.devstats.cncf.io')."
         }
       ]
     },
@@ -2403,16 +2362,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.dev_stats_url",
-          "landscape": "https://shipwrightcncf.devstats.cncf.io/",
-          "pcc": null,
-          "clomonitor": "https://shipwright.devstats.cncf.io/",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('https://shipwrightcncf.devstats.cncf.io/') ≠ CLOMonitor ('https://shipwright.devstats.cncf.io/')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Stacker",
@@ -2646,16 +2596,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.dev_stats_url",
-          "landscape": "https://openfeature.devstats.cncf.io/",
-          "pcc": null,
-          "clomonitor": "https://openfeature.teststats.cncf.io/",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('https://openfeature.devstats.cncf.io/') ≠ CLOMonitor ('https://openfeature.teststats.cncf.io/')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Chaos Mesh",
@@ -2708,14 +2649,6 @@
           "clomonitor": "https://github.com/opencost/opencost",
           "pcc_clomonitor_agree": false,
           "message": "PCC ('https://github.com/kubecost/cost-model') and CLOMonitor ('https://github.com/opencost/opencost') disagree. Landscape ('https://github.com/opencost/opencost') ≠ PCC ('https://github.com/kubecost/cost-model')."
-        },
-        {
-          "field": "extra.dev_stats_url",
-          "landscape": "https://opencost.devstats.cncf.io/",
-          "pcc": null,
-          "clomonitor": "https://opencost.teststats.cncf.io/",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('https://opencost.devstats.cncf.io/') ≠ CLOMonitor ('https://opencost.teststats.cncf.io/')."
         }
       ]
     },

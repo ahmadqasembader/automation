@@ -244,7 +244,7 @@ CNCF items with `project` (or `extra.project`) in: archived, graduated, incubati
 | Parsec | Provisioning / Security & Compliance | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
 | Perses | Observability and Analysis / Observability | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
 | PipeCD | App Definition and Development / Continuous Integration & Delivery | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| Piraeus Datastore | Runtime / Cloud Native Storage | pass | ok | Yes | Yes | Yes | No | Yes | Yes | Yes |
+| Piraeus Datastore | Runtime / Cloud Native Storage | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
 | Pixie | Observability and Analysis / Observability | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
 | Podman Container Tools | Runtime / Container Runtime | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
 | Podman Desktop | App Definition and Development / Application Definition & Image Build | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
@@ -288,31 +288,31 @@ CNCF items with `project` (or `extra.project`) in: archived, graduated, incubati
 | Project | Path | dates_ok | dates_detail | slug | repo | logo | devstats | clomon | accepted | artwork |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Brigade | App Definition and Development / Continuous Integration & Delivery | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
-| CNI-Genie | Runtime / Cloud Native Network | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | No |
-| Curiefense | Provisioning / Security & Compliance | pass | ok | Yes | No | Yes | Yes | No | Yes | Yes |
-| Curve | Runtime / Cloud Native Storage | pass | ok | Yes | Yes | Yes | No | Yes | Yes | No |
-| DevStream | Provisioning / Automation & Configuration | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | No |
-| FabEdge | Runtime / Cloud Native Network | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| CNI-Genie | Runtime / Cloud Native Network | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
+| Curiefense | Provisioning / Security & Compliance | pass | ok | Yes | No | Yes | No | No | Yes | Yes |
+| Curve | Runtime / Cloud Native Storage | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
+| DevStream | Provisioning / Automation & Configuration | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
+| FabEdge | Runtime / Cloud Native Network | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
 | Fonio | Observability and Analysis / Observability | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
-| Keptn | App Definition and Development / Continuous Integration & Delivery | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| Krator | App Definition and Development / Application Definition & Image Build | pass | ok | Yes | Yes | Yes | Yes | No | Yes | No |
+| Keptn | App Definition and Development / Continuous Integration & Delivery | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
+| Krator | App Definition and Development / Application Definition & Image Build | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
 | Krustlet | Runtime / Container Runtime | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
-| KubeDL | Provisioning / Automation & Configuration | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| Merbridge | Orchestration & Management / Service Mesh | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| Nocalhost | App Definition and Development / Application Definition & Image Build | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| KubeDL | Provisioning / Automation & Configuration | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
+| Merbridge | Orchestration & Management / Service Mesh | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
+| Nocalhost | App Definition and Development / Application Definition & Image Build | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
 | Open Service Mesh | Orchestration & Management / Service Mesh | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
-| OpenELB | Orchestration & Management / Service Proxy | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | No |
-| OpenMetrics | Observability and Analysis / Observability | pass | ok | Yes | Yes | Yes | Yes | No | Yes | Yes |
+| OpenELB | Orchestration & Management / Service Proxy | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
+| OpenMetrics | Observability and Analysis / Observability | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
 | OpenTracing | Observability and Analysis / Observability | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
-| Pravega | App Definition and Development / Streaming & Messaging | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| Pravega | App Definition and Development / Streaming & Messaging | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
 | rkt | Runtime / Container Runtime | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
-| sealer | App Definition and Development / Application Definition & Image Build | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | No |
+| sealer | App Definition and Development / Application Definition & Image Build | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
 | Service Mesh Interface (SMI) | Orchestration & Management / Service Mesh | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
-| Service Mesh Performance | Orchestration & Management / Service Mesh | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| Skooner | Observability and Analysis / Observability | pass | ok | Yes | Yes | Yes | No | Yes | Yes | No |
-| SuperEdge | Provisioning / Automation & Configuration | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| Teller | Provisioning / Key Management | pass | ok | Yes | Yes | Yes | No | Yes | Yes | No |
-| Xline | Orchestration & Management / Coordination & Service Discovery | pass | ok | Yes | Yes | Yes | Yes | Yes | Yes | No |
+| Service Mesh Performance | Orchestration & Management / Service Mesh | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
+| Skooner | Observability and Analysis / Observability | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
+| SuperEdge | Provisioning / Automation & Configuration | pass | ok | Yes | Yes | Yes | No | No | Yes | Yes |
+| Teller | Provisioning / Key Management | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
+| Xline | Orchestration & Management / Coordination & Service Discovery | pass | ok | Yes | Yes | Yes | No | No | Yes | No |
 
 
 ## Lifecycle date failures (detail)

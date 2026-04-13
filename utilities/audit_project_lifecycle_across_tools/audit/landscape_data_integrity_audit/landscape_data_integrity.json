@@ -46,8 +46,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": false
       }
@@ -63,7 +63,7 @@
         "repo_url": false,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
+        "extra.dev_stats_url": false,
         "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
@@ -81,7 +81,7 @@
         "logo": "Yes",
         "extra.lfx_slug": true,
         "extra.dev_stats_url": false,
-        "extra.clomonitor_name": true,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": false
       }
@@ -97,8 +97,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": false
       }
@@ -114,8 +114,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
       }
@@ -148,8 +148,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
       }
@@ -165,7 +165,7 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
+        "extra.dev_stats_url": false,
         "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": false
@@ -199,8 +199,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
       }
@@ -216,8 +216,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
       }
@@ -233,8 +233,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
       }
@@ -267,8 +267,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": false
       }
@@ -284,7 +284,7 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
+        "extra.dev_stats_url": false,
         "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
@@ -318,8 +318,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
       }
@@ -352,8 +352,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": false
       }
@@ -386,8 +386,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
       }
@@ -404,7 +404,7 @@
         "logo": "Yes",
         "extra.lfx_slug": true,
         "extra.dev_stats_url": false,
-        "extra.clomonitor_name": true,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": false
       }
@@ -420,8 +420,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": true
       }
@@ -438,7 +438,7 @@
         "logo": "Yes",
         "extra.lfx_slug": true,
         "extra.dev_stats_url": false,
-        "extra.clomonitor_name": true,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": false
       }
@@ -454,8 +454,8 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": true,
-        "extra.clomonitor_name": true,
+        "extra.dev_stats_url": false,
+        "extra.clomonitor_name": false,
         "extra.accepted": true,
         "extra.artwork_url": false
       }
@@ -3686,7 +3686,7 @@
         "repo_url": true,
         "logo": "Yes",
         "extra.lfx_slug": true,
-        "extra.dev_stats_url": false,
+        "extra.dev_stats_url": true,
         "extra.clomonitor_name": true,
         "extra.accepted": true,
         "extra.artwork_url": true
