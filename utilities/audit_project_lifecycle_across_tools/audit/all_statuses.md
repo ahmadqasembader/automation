@@ -4,7 +4,7 @@
 
 | Project | [PCC Slug](./pcc_projects.yaml) | [Landscape Slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [PCC](./pcc_projects.yaml) | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://raw.githubusercontent.com/cncf/artwork/main/README.md) |
 |---|---|---|---|---|---|---|---|---|
-| Agones | agones | agones | sandbox | sandbox | sandbox | - | sandbox | - |
+| Agones | agones | agones | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | CoHDI | cohdi | cohdi | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | composefs | composefs | composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | Copa | copacetic | copacetic | sandbox | sandbox | sandbox | sandbox | sandbox | - |
@@ -155,7 +155,7 @@
 | Project | [PCC Slug](./pcc_projects.yaml) | [Landscape Slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [PCC](./pcc_projects.yaml) | [Landscape](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://raw.githubusercontent.com/cncf/artwork/main/README.md) |
 |---|---|---|---|---|---|---|---|---|
 | Aeraki Mesh | aerakimesh | aerakimesh | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox |
-| Agones | agones | agones | sandbox | sandbox | sandbox | - | sandbox | - |
+| Agones | agones | agones | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | Akri | akri | akri | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox |
 | Antrea | antrea | antrea | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox |
 | Armada | armada | armada | sandbox | sandbox | sandbox | sandbox | sandbox | sandbox |
