@@ -15,6 +15,7 @@
           "pcc": "https://github.com/deislabs/akri",
           "clomonitor": "https://github.com/project-akri/akri",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/deislabs/akri') and CLOMonitor ('https://github.com/project-akri/akri') disagree. Landscape ('https://github.com/project-akri/akri') ≠ PCC ('https://github.com/deislabs/akri')."
         }
       ]
@@ -60,6 +61,7 @@
           "pcc": "c7n",
           "clomonitor": "cloud-custodian",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('c7n') and CLOMonitor ('cloud-custodian') disagree. Landscape ('c7n') ≠ CLOMonitor ('cloud-custodian')."
         }
       ]
@@ -114,6 +116,7 @@
           "pcc": "https://github.com/jozu-ai/kitops",
           "clomonitor": "https://github.com/jozu-ai/kitops",
           "pcc_clomonitor_agree": true,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('https://github.com/kitops-ml/kitops') ≠ PCC ('https://github.com/jozu-ai/kitops'). Landscape ('https://github.com/kitops-ml/kitops') ≠ CLOMonitor ('https://github.com/jozu-ai/kitops')."
         }
       ]
@@ -132,6 +135,7 @@
           "pcc": "https://github.com/kptdev",
           "clomonitor": "https://github.com/GoogleContainerTools/kpt",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/kptdev') and CLOMonitor ('https://github.com/GoogleContainerTools/kpt') disagree. Landscape ('https://github.com/kptdev/kpt') ≠ CLOMonitor ('https://github.com/GoogleContainerTools/kpt')."
         }
       ]
@@ -195,6 +199,7 @@
           "pcc": "metal3",
           "clomonitor": "metal3-io",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('metal3') and CLOMonitor ('metal3-io') disagree. Landscape ('metal3') ≠ CLOMonitor ('metal3-io')."
         }
       ]
@@ -222,6 +227,7 @@
           "pcc": "opentf",
           "clomonitor": "opentofu",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('opentf') and CLOMonitor ('opentofu') disagree. Landscape ('opentf') ≠ CLOMonitor ('opentofu')."
         }
       ]
@@ -240,6 +246,7 @@
           "pcc": "https://github.com/OpenYurt",
           "clomonitor": "https://github.com/openyurtio/openyurt",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/OpenYurt') and CLOMonitor ('https://github.com/openyurtio/openyurt') disagree. Landscape ('https://github.com/openyurtio/openyurt') ≠ PCC ('https://github.com/OpenYurt')."
         }
       ]
@@ -258,6 +265,7 @@
           "pcc": "https://github.com/stateful/runme",
           "clomonitor": "https://github.com/runmedev/runme",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/stateful/runme') and CLOMonitor ('https://github.com/runmedev/runme') disagree. Landscape ('https://github.com/runmedev/runme') ≠ PCC ('https://github.com/stateful/runme')."
         },
         {
@@ -266,6 +274,7 @@
           "pcc": null,
           "clomonitor": "runme-notebooks",
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('runme') ≠ CLOMonitor ('runme-notebooks')."
         }
       ]
@@ -302,6 +311,7 @@
           "pcc": "cncf-distribution",
           "clomonitor": "distribution",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('cncf-distribution') and CLOMonitor ('distribution') disagree. Landscape ('cncf-distribution') ≠ CLOMonitor ('distribution')."
         }
       ]
@@ -320,6 +330,7 @@
           "pcc": "d7y",
           "clomonitor": "dragonfly",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('d7y') and CLOMonitor ('dragonfly') disagree. Landscape ('d7y') ≠ CLOMonitor ('dragonfly')."
         }
       ]
@@ -374,6 +385,7 @@
           "pcc": "https://github.com/cartography-cncf/cartography",
           "clomonitor": "https://github.com/lyft/cartography",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/cartography-cncf/cartography') and CLOMonitor ('https://github.com/lyft/cartography') disagree. Landscape ('https://github.com/cartography-cncf/cartography') ≠ CLOMonitor ('https://github.com/lyft/cartography')."
         }
       ]
@@ -401,6 +413,7 @@
           "pcc": "https://github.com/jetstack/cert-manager",
           "clomonitor": "https://github.com/cert-manager/community",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/jetstack/cert-manager') and CLOMonitor ('https://github.com/cert-manager/community') disagree. Landscape ('https://github.com/cert-manager/cert-manager') ≠ PCC ('https://github.com/jetstack/cert-manager')."
         }
       ]
@@ -419,6 +432,7 @@
           "pcc": "confcont",
           "clomonitor": "confidential-containers",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('confcont') and CLOMonitor ('confidential-containers') disagree. Landscape ('confcont') ≠ CLOMonitor ('confidential-containers')."
         }
       ]
@@ -446,6 +460,7 @@
           "pcc": null,
           "clomonitor": "2023-12-19",
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('2023-09-19') ≠ CLOMonitor ('2023-12-19')."
         }
       ]
@@ -482,6 +497,7 @@
           "pcc": "externalsecretsoperator",
           "clomonitor": "external-secrets",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('externalsecretsoperator') and CLOMonitor ('external-secrets') disagree. Landscape ('externalsecretsoperator') ≠ CLOMonitor ('external-secrets')."
         }
       ]
@@ -509,6 +525,7 @@
           "pcc": "hexa",
           "clomonitor": "hexapolicyorchestrator",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('hexa') and CLOMonitor ('hexapolicyorchestrator') disagree. Landscape ('hexa') ≠ CLOMonitor ('hexapolicyorchestrator')."
         }
       ]
@@ -590,6 +607,7 @@
           "pcc": "https://github.com/theupdateframework/notary",
           "clomonitor": "https://github.com/notaryproject/notation",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/theupdateframework/notary') and CLOMonitor ('https://github.com/notaryproject/notation') disagree. Landscape ('https://github.com/notaryproject/notation') ≠ PCC ('https://github.com/theupdateframework/notary')."
         }
       ]
@@ -617,6 +635,7 @@
           "pcc": "openpolicyagent",
           "clomonitor": "opa",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('openpolicyagent') and CLOMonitor ('opa') disagree. Landscape ('openpolicyagent') ≠ CLOMonitor ('opa')."
         }
       ]
@@ -653,6 +672,7 @@
           "pcc": "trestlegrc",
           "clomonitor": "oscal-compass",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('trestlegrc') and CLOMonitor ('oscal-compass') disagree. Landscape ('trestlegrc') ≠ CLOMonitor ('oscal-compass')."
         }
       ]
@@ -689,6 +709,7 @@
           "pcc": "https://github.com/deislabs/ratify",
           "clomonitor": "https://github.com/ratify-project/ratify",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/deislabs/ratify') and CLOMonitor ('https://github.com/ratify-project/ratify') disagree. Landscape ('https://github.com/ratify-project/ratify') ≠ PCC ('https://github.com/deislabs/ratify')."
         }
       ]
@@ -716,6 +737,7 @@
           "pcc": "https://github.com/mozilla/sops",
           "clomonitor": "https://github.com/mozilla/sops",
           "pcc_clomonitor_agree": true,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('https://github.com/getsops/sops') ≠ PCC ('https://github.com/mozilla/sops'). Landscape ('https://github.com/getsops/sops') ≠ CLOMonitor ('https://github.com/mozilla/sops')."
         }
       ]
@@ -743,6 +765,7 @@
           "pcc": "tratteria",
           "clomonitor": "tokenetes",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('tratteria') and CLOMonitor ('tokenetes') disagree. Landscape ('tratteria') ≠ CLOMonitor ('tokenetes')."
         }
       ]
@@ -788,6 +811,7 @@
           "pcc": "https://github.com/SpectralOps/teller",
           "clomonitor": null,
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": null,
           "message": "Landscape ('https://github.com/tellerops/teller') ≠ PCC ('https://github.com/SpectralOps/teller')."
         }
       ]
@@ -815,6 +839,7 @@
           "pcc": "https://github.com/cubefs/cubefs",
           "clomonitor": "https://github.com/chubaofs/chubaofs",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/cubefs/cubefs') and CLOMonitor ('https://github.com/chubaofs/chubaofs') disagree. Landscape ('https://github.com/cubeFS/cubefs') ≠ CLOMonitor ('https://github.com/chubaofs/chubaofs')."
         }
       ]
@@ -896,6 +921,7 @@
           "pcc": "piraeus-datastore",
           "clomonitor": "piraeus",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('piraeus-datastore') and CLOMonitor ('piraeus') disagree. Landscape ('piraeus-datastore') ≠ CLOMonitor ('piraeus')."
         }
       ]
@@ -941,6 +967,7 @@
           "pcc": "https://github.com/containers/composefs",
           "clomonitor": "https://github.com/composefs/composefs",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/containers/composefs') and CLOMonitor ('https://github.com/composefs/composefs') disagree. Landscape ('https://github.com/containers/composefs') ≠ CLOMonitor ('https://github.com/composefs/composefs')."
         }
       ]
@@ -959,6 +986,7 @@
           "pcc": "https://github.com/containers/bootc",
           "clomonitor": "https://github.com/bootc-dev/bootc",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/containers/bootc') and CLOMonitor ('https://github.com/bootc-dev/bootc') disagree. Landscape ('https://github.com/bootc-dev/bootc') ≠ PCC ('https://github.com/containers/bootc')."
         }
       ]
@@ -995,6 +1023,7 @@
           "pcc": "https://github.com/inclavare-containers/inclavare-containers",
           "clomonitor": "https://github.com/alibaba/inclavare-containers",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/inclavare-containers/inclavare-containers') and CLOMonitor ('https://github.com/alibaba/inclavare-containers') disagree. Landscape ('https://github.com/inclavare-containers/inclavare-containers') ≠ CLOMonitor ('https://github.com/alibaba/inclavare-containers')."
         },
         {
@@ -1003,6 +1032,7 @@
           "pcc": "inclavarecontainers",
           "clomonitor": "inclavare",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('inclavarecontainers') and CLOMonitor ('inclavare') disagree. Landscape ('inclavarecontainers') ≠ CLOMonitor ('inclavare')."
         }
       ]
@@ -1048,6 +1078,7 @@
           "pcc": null,
           "clomonitor": "podman-container-tools",
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('podman') ≠ CLOMonitor ('podman-container-tools')."
         }
       ]
@@ -1102,6 +1133,7 @@
           "pcc": "wasmedge-runtime",
           "clomonitor": "wasm-edge",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('wasmedge-runtime') and CLOMonitor ('wasm-edge') disagree. Landscape ('wasmedge-runtime') ≠ CLOMonitor ('wasm-edge')."
         }
       ]
@@ -1120,6 +1152,7 @@
           "pcc": "https://github.com/containers/youki",
           "clomonitor": "https://github.com/containers/youki",
           "pcc_clomonitor_agree": true,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('https://github.com/youki-dev/youki') ≠ PCC ('https://github.com/containers/youki'). Landscape ('https://github.com/youki-dev/youki') ≠ CLOMonitor ('https://github.com/containers/youki')."
         }
       ]
@@ -1183,6 +1216,7 @@
           "pcc": "https://github.com/alauda/kube-ovn",
           "clomonitor": "https://github.com/kubeovn/kube-ovn",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/alauda/kube-ovn') and CLOMonitor ('https://github.com/kubeovn/kube-ovn') disagree. Landscape ('https://github.com/kubeovn/kube-ovn') ≠ PCC ('https://github.com/alauda/kube-ovn')."
         }
       ]
@@ -1210,6 +1244,7 @@
           "pcc": "nsm",
           "clomonitor": "network-service-mesh",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('nsm') and CLOMonitor ('network-service-mesh') disagree. Landscape ('nsm') ≠ CLOMonitor ('network-service-mesh')."
         }
       ]
@@ -1228,6 +1263,7 @@
           "pcc": "https://github.com/ovn-org/ovn-kubernetes",
           "clomonitor": "https://github.com/ovn-kubernetes/ovn-kubernetes",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/ovn-org/ovn-kubernetes') and CLOMonitor ('https://github.com/ovn-kubernetes/ovn-kubernetes') disagree. Landscape ('https://github.com/ovn-kubernetes/ovn-kubernetes') ≠ PCC ('https://github.com/ovn-org/ovn-kubernetes')."
         }
       ]
@@ -1318,6 +1354,7 @@
           "pcc": "https://github.com/aenix-io/cozystack/",
           "clomonitor": "https://github.com/cozystack/cozystack",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/aenix-io/cozystack/') and CLOMonitor ('https://github.com/cozystack/cozystack') disagree. Landscape ('https://github.com/cozystack/cozystack') ≠ PCC ('https://github.com/aenix-io/cozystack/')."
         }
       ]
@@ -1345,6 +1382,7 @@
           "pcc": "https://github.com/eraser-dev/eraser",
           "clomonitor": "https://github.com/Azure/eraser",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/eraser-dev/eraser') and CLOMonitor ('https://github.com/Azure/eraser') disagree. Landscape ('https://github.com/eraser-dev/eraser') ≠ CLOMonitor ('https://github.com/Azure/eraser')."
         }
       ]
@@ -1363,6 +1401,7 @@
           "pcc": "https://github.com/Project-Fluid",
           "clomonitor": "https://github.com/fluid-cloudnative/fluid",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/Project-Fluid') and CLOMonitor ('https://github.com/fluid-cloudnative/fluid') disagree. Landscape ('https://github.com/fluid-cloudnative/fluid') ≠ PCC ('https://github.com/Project-Fluid')."
         }
       ]
@@ -1426,6 +1465,7 @@
           "pcc": "https://github.com/kai-scheduler/",
           "clomonitor": "https://github.com/NVIDIA/KAI-Scheduler",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/kai-scheduler/') and CLOMonitor ('https://github.com/NVIDIA/KAI-Scheduler') disagree. Landscape ('https://github.com/kai-scheduler/KAI-Scheduler') ≠ CLOMonitor ('https://github.com/NVIDIA/KAI-Scheduler')."
         }
       ]
@@ -1480,6 +1520,7 @@
           "pcc": "https://github.com/kubefleet-dev/",
           "clomonitor": "https://github.com/Azure/fleet",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/kubefleet-dev/') and CLOMonitor ('https://github.com/Azure/fleet') disagree. Landscape ('https://github.com/kubefleet-dev/kubefleet') ≠ CLOMonitor ('https://github.com/Azure/fleet')."
         }
       ]
@@ -1498,6 +1539,7 @@
           "pcc": "k8s",
           "clomonitor": "kubernetes",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('k8s') and CLOMonitor ('kubernetes') disagree. Landscape ('k8s') ≠ CLOMonitor ('kubernetes')."
         }
       ]
@@ -1525,6 +1567,7 @@
           "pcc": null,
           "clomonitor": "2023-09-19",
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('2023-12-19') ≠ CLOMonitor ('2023-09-19')."
         }
       ]
@@ -1543,6 +1586,7 @@
           "pcc": "https://github.com/weaveworks/kured",
           "clomonitor": "https://github.com/kubereboot/kured",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/weaveworks/kured') and CLOMonitor ('https://github.com/kubereboot/kured') disagree. Landscape ('https://github.com/kubereboot/kured') ≠ PCC ('https://github.com/weaveworks/kured')."
         }
       ]
@@ -1561,6 +1605,7 @@
           "pcc": "openclustermanagement",
           "clomonitor": "ocm",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('openclustermanagement') and CLOMonitor ('ocm') disagree. Landscape ('openclustermanagement') ≠ CLOMonitor ('ocm')."
         }
       ]
@@ -1669,6 +1714,7 @@
           "pcc": "connect",
           "clomonitor": "connect-rpc",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('connect') and CLOMonitor ('connect-rpc') disagree. Landscape ('connect') ≠ CLOMonitor ('connect-rpc')."
         }
       ]
@@ -1732,6 +1778,7 @@
           "pcc": "https://github.com/kubesphere/openelb",
           "clomonitor": null,
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": null,
           "message": "Landscape ('https://github.com/openelb/openelb') ≠ PCC ('https://github.com/kubesphere/openelb')."
         }
       ]
@@ -1750,6 +1797,7 @@
           "pcc": "https://github.com/megaease/easegress",
           "clomonitor": "https://github.com/megaease/easegress",
           "pcc_clomonitor_agree": true,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('https://github.com/easegress-io/easegress') ≠ PCC ('https://github.com/megaease/easegress'). Landscape ('https://github.com/easegress-io/easegress') ≠ CLOMonitor ('https://github.com/megaease/easegress')."
         }
       ]
@@ -1768,6 +1816,7 @@
           "pcc": "emissary",
           "clomonitor": "emissary-ingress",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('emissary') and CLOMonitor ('emissary-ingress') disagree. Landscape ('emissary') ≠ CLOMonitor ('emissary-ingress')."
         }
       ]
@@ -1894,6 +1943,7 @@
           "pcc": "sandbox",
           "clomonitor": null,
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": null,
           "message": "Landscape ('archived') ≠ PCC ('sandbox')."
         }
       ]
@@ -1921,6 +1971,7 @@
           "pcc": null,
           "clomonitor": "https://openeverest.devstats.cncf.io/",
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape missing; CLOMonitor has 'https://openeverest.devstats.cncf.io/'."
         }
       ]
@@ -1984,6 +2035,7 @@
           "pcc": "https://github.com/drasi-project",
           "clomonitor": "https://github.com/drasi-project/drasi-platform",
           "pcc_clomonitor_agree": true,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('http://github.com/drasi-project/drasi-platform') ≠ PCC ('https://github.com/drasi-project'). Landscape ('http://github.com/drasi-project/drasi-platform') ≠ CLOMonitor ('https://github.com/drasi-project/drasi-platform')."
         }
       ]
@@ -2101,6 +2153,7 @@
           "pcc": "https://github.com/loft-sh/devspace",
           "clomonitor": "https://github.com/loft-sh/devspace",
           "pcc_clomonitor_agree": true,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('https://github.com/devspace-sh/devspace') ≠ PCC ('https://github.com/loft-sh/devspace'). Landscape ('https://github.com/devspace-sh/devspace') ≠ CLOMonitor ('https://github.com/loft-sh/devspace')."
         }
       ]
@@ -2155,6 +2208,7 @@
           "pcc": "https://github.com/kubevela",
           "clomonitor": "https://github.com/oam-dev/kubevela",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/kubevela') and CLOMonitor ('https://github.com/oam-dev/kubevela') disagree. Landscape ('https://github.com/kubevela/kubevela') ≠ CLOMonitor ('https://github.com/oam-dev/kubevela')."
         }
       ]
@@ -2191,6 +2245,7 @@
           "pcc": "https://github.com/meshery/meshery",
           "clomonitor": "https://github.com/microcks/microcks",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/meshery/meshery') and CLOMonitor ('https://github.com/microcks/microcks') disagree. Landscape ('https://github.com/microcks/microcks') ≠ PCC ('https://github.com/meshery/meshery')."
         }
       ]
@@ -2209,6 +2264,7 @@
           "pcc": "https://github.com/CloudNativeAI/model-spec",
           "clomonitor": "https://github.com/modelpack/model-spec",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/CloudNativeAI/model-spec') and CLOMonitor ('https://github.com/modelpack/model-spec') disagree. Landscape ('https://github.com/modelpack/model-spec') ≠ PCC ('https://github.com/CloudNativeAI/model-spec')."
         }
       ]
@@ -2236,6 +2292,7 @@
           "pcc": "operator-sdk",
           "clomonitor": "operator-framework",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('operator-sdk') and CLOMonitor ('operator-framework') disagree. Landscape ('operator-sdk') ≠ CLOMonitor ('operator-framework')."
         }
       ]
@@ -2263,6 +2320,7 @@
           "pcc": "https://github.com/Porter",
           "clomonitor": "https://github.com/getporter/porter",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/Porter') and CLOMonitor ('https://github.com/getporter/porter') disagree. Landscape ('https://github.com/getporter/porter') ≠ PCC ('https://github.com/Porter')."
         }
       ]
@@ -2299,6 +2357,7 @@
           "pcc": "https://github.com/alibaba/sealer",
           "clomonitor": null,
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": null,
           "message": "Landscape ('https://github.com/sealerio/sealer') ≠ PCC ('https://github.com/alibaba/sealer')."
         }
       ]
@@ -2353,6 +2412,7 @@
           "pcc": "https://github.com/Azure/vscode-kubernetes-tools",
           "clomonitor": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/Azure/vscode-kubernetes-tools') and CLOMonitor ('https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools') disagree. Landscape ('https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools') ≠ PCC ('https://github.com/Azure/vscode-kubernetes-tools')."
         }
       ]
@@ -2398,6 +2458,7 @@
           "pcc": "fluxcd",
           "clomonitor": "flux-project",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('fluxcd') and CLOMonitor ('flux-project') disagree. Landscape ('fluxcd') ≠ CLOMonitor ('flux-project')."
         }
       ]
@@ -2425,6 +2486,7 @@
           "pcc": "gitops-wg",
           "clomonitor": "open-gitops",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('gitops-wg') and CLOMonitor ('open-gitops') disagree. Landscape ('gitops-wg') ≠ CLOMonitor ('open-gitops')."
         }
       ]
@@ -2515,6 +2577,7 @@
           "pcc": "https://github.com/aenix-io/cozystack/",
           "clomonitor": "https://github.com/cozystack/cozystack",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/aenix-io/cozystack/') and CLOMonitor ('https://github.com/cozystack/cozystack') disagree. Landscape ('https://github.com/cozystack/cozystack') ≠ PCC ('https://github.com/aenix-io/cozystack/')."
         }
       ]
@@ -2542,6 +2605,7 @@
           "pcc": "https://github.com/AxaFrance/SlimFaas",
           "clomonitor": "https://github.com/AxaFrance/SlimFaas",
           "pcc_clomonitor_agree": true,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('https://github.com/SlimPlanet/SlimFaas') ≠ PCC ('https://github.com/AxaFrance/SlimFaas'). Landscape ('https://github.com/SlimPlanet/SlimFaas') ≠ CLOMonitor ('https://github.com/AxaFrance/SlimFaas')."
         }
       ]
@@ -2605,6 +2669,7 @@
           "pcc": "https://github.com/kubecost/cost-model",
           "clomonitor": "https://github.com/opencost/opencost",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/kubecost/cost-model') and CLOMonitor ('https://github.com/opencost/opencost') disagree. Landscape ('https://github.com/opencost/opencost') ≠ PCC ('https://github.com/kubecost/cost-model')."
         }
       ]
@@ -2650,6 +2715,7 @@
           "pcc": "https://github.com/kubernetes-sigs/headlamp",
           "clomonitor": "https://github.com/headlamp-k8s/headlamp",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/kubernetes-sigs/headlamp') and CLOMonitor ('https://github.com/headlamp-k8s/headlamp') disagree. Landscape ('https://github.com/kubernetes-sigs/headlamp') ≠ CLOMonitor ('https://github.com/headlamp-k8s/headlamp')."
         }
       ]
@@ -2668,6 +2734,7 @@
           "pcc": "https://github.com/holmesgpt/",
           "clomonitor": "https://github.com/robusta-dev/holmesgpt",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('https://github.com/holmesgpt/') and CLOMonitor ('https://github.com/robusta-dev/holmesgpt') disagree. Landscape ('https://github.com/HolmesGPT/holmesgpt') ≠ CLOMonitor ('https://github.com/robusta-dev/holmesgpt')."
         }
       ]
@@ -2731,6 +2798,7 @@
           "pcc": "logging-operator",
           "clomonitor": "kube-logging",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": false,
           "message": "PCC ('logging-operator') and CLOMonitor ('kube-logging') disagree. Landscape ('logging-operator') ≠ CLOMonitor ('kube-logging')."
         }
       ]
@@ -2794,6 +2862,7 @@
           "pcc": "https://github.com/pixie-labs/pixie",
           "clomonitor": "https://github.com/pixie-io/pixie",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/pixie-labs/pixie') and CLOMonitor ('https://github.com/pixie-io/pixie') disagree. Landscape ('https://github.com/pixie-io/pixie') ≠ PCC ('https://github.com/pixie-labs/pixie')."
         }
       ]
@@ -2812,6 +2881,7 @@
           "pcc": "prometheus",
           "clomonitor": "prometheus",
           "pcc_clomonitor_agree": true,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('prometheus_del') ≠ PCC ('prometheus'). Landscape ('prometheus_del') ≠ CLOMonitor ('prometheus')."
         }
       ]
@@ -2848,6 +2918,7 @@
           "pcc": "https://github.com/tricksterproxy/trickster",
           "clomonitor": "https://github.com/trickstercache/trickster",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/tricksterproxy/trickster') and CLOMonitor ('https://github.com/trickstercache/trickster') disagree. Landscape ('https://github.com/trickstercache/trickster') ≠ PCC ('https://github.com/tricksterproxy/trickster')."
         }
       ]
@@ -2866,6 +2937,7 @@
           "pcc": "https://github.com/fermyon/spin",
           "clomonitor": "https://github.com/spinframework/spin",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/fermyon/spin') and CLOMonitor ('https://github.com/spinframework/spin') disagree. Landscape ('https://github.com/spinframework/spin') ≠ PCC ('https://github.com/fermyon/spin')."
         }
       ]
@@ -2884,6 +2956,7 @@
           "pcc": null,
           "clomonitor": "https://github.com/spinkube/documentation",
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('https://github.com/spinframework/spin-operator') ≠ CLOMonitor ('https://github.com/spinkube/documentation')."
         },
         {
@@ -2892,6 +2965,7 @@
           "pcc": null,
           "clomonitor": "spinkube",
           "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape missing; CLOMonitor has 'spinkube'."
         }
       ]
@@ -2910,6 +2984,7 @@
           "pcc": "https://github.com/ktock/container2wasm",
           "clomonitor": "https://github.com/container2wasm/container2wasm",
           "pcc_clomonitor_agree": false,
+          "landscape_clomonitor_agree": true,
           "message": "PCC ('https://github.com/ktock/container2wasm') and CLOMonitor ('https://github.com/container2wasm/container2wasm') disagree. Landscape ('https://github.com/container2wasm/container2wasm') ≠ PCC ('https://github.com/ktock/container2wasm')."
         }
       ]
@@ -2928,6 +3003,7 @@
           "pcc": "https://github.com/Azure/kaito",
           "clomonitor": "https://github.com/Azure/kaito",
           "pcc_clomonitor_agree": true,
+          "landscape_clomonitor_agree": false,
           "message": "Landscape ('https://github.com/kaito-project/kaito') ≠ PCC ('https://github.com/Azure/kaito'). Landscape ('https://github.com/kaito-project/kaito') ≠ CLOMonitor ('https://github.com/Azure/kaito')."
         }
       ]
