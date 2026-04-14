@@ -170,16 +170,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.accepted",
-          "landscape": "2024-09-12",
-          "pcc": null,
-          "clomonitor": "2024-10-17",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('2024-09-12') ≠ CLOMonitor ('2024-10-17')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Meshery",
@@ -889,16 +880,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.accepted",
-          "landscape": "2021-07-13",
-          "pcc": null,
-          "clomonitor": "2021-06-02",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('2021-07-13') ≠ CLOMonitor ('2021-06-02')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Piraeus Datastore",
@@ -1275,16 +1257,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.accepted",
-          "landscape": "2025-12-21",
-          "pcc": null,
-          "clomonitor": "2026-03-12",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('2025-12-21') ≠ CLOMonitor ('2026-03-12')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Armada",
@@ -1454,14 +1427,6 @@
           "clomonitor": "https://github.com/NVIDIA/KAI-Scheduler",
           "pcc_clomonitor_agree": false,
           "message": "PCC ('https://github.com/kai-scheduler/') and CLOMonitor ('https://github.com/NVIDIA/KAI-Scheduler') disagree. Landscape ('https://github.com/kai-scheduler/KAI-Scheduler') ≠ CLOMonitor ('https://github.com/NVIDIA/KAI-Scheduler')."
-        },
-        {
-          "field": "extra.accepted",
-          "landscape": "2025-12-21",
-          "pcc": null,
-          "clomonitor": "2026-02-08",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('2025-12-21') ≠ CLOMonitor ('2026-02-08')."
         }
       ]
     },
@@ -1553,7 +1518,16 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": []
+      "findings": [
+        {
+          "field": "extra.accepted",
+          "landscape": "2023-12-19",
+          "pcc": null,
+          "clomonitor": "2023-09-19",
+          "pcc_clomonitor_agree": null,
+          "message": "Landscape ('2023-12-19') ≠ CLOMonitor ('2023-09-19')."
+        }
+      ]
     },
     {
       "name": "Kured",
@@ -1598,16 +1572,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.accepted",
-          "landscape": "2022-04-26",
-          "pcc": null,
-          "clomonitor": "2021-11-09",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('2022-04-26') ≠ CLOMonitor ('2021-11-09')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Serverless Devs",
@@ -1949,7 +1914,16 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": []
+      "findings": [
+        {
+          "field": "extra.dev_stats_url",
+          "landscape": null,
+          "pcc": null,
+          "clomonitor": "https://openeverest.devstats.cncf.io/",
+          "pcc_clomonitor_agree": null,
+          "message": "Landscape missing; CLOMonitor has 'https://openeverest.devstats.cncf.io/'."
+        }
+      ]
     },
     {
       "name": "openGemini",
@@ -2111,16 +2085,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.accepted",
-          "landscape": "2022-01-11",
-          "pcc": null,
-          "clomonitor": "2021-01-11",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('2022-01-11') ≠ CLOMonitor ('2021-01-11')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "DevSpace",
@@ -2191,14 +2156,6 @@
           "clomonitor": "https://github.com/oam-dev/kubevela",
           "pcc_clomonitor_agree": false,
           "message": "PCC ('https://github.com/kubevela') and CLOMonitor ('https://github.com/oam-dev/kubevela') disagree. Landscape ('https://github.com/kubevela/kubevela') ≠ CLOMonitor ('https://github.com/oam-dev/kubevela')."
-        },
-        {
-          "field": "extra.accepted",
-          "landscape": "2021-06-22",
-          "pcc": null,
-          "clomonitor": "2021-04-05",
-          "pcc_clomonitor_agree": null,
-          "message": "Landscape ('2021-06-22') ≠ CLOMonitor ('2021-04-05')."
         }
       ]
     },
