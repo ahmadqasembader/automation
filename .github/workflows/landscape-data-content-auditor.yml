@@ -68,7 +68,7 @@ jobs:
             This PR updates:
             - `audit/landscape_data_integrity_audit/landscape_source_diff.md`
             - `audit/landscape_data_integrity_audit/landscape_source_diff.json`
-            - `audit/landscape_data_integrity_audit/repo_url_landscape.md`
+            - `audit/landscape_data_integrity_audit/repo_url_pcc_landscape_anomalies.md`
 
             Data sources used:
             - `datasources/landscape.yml`
@@ -78,4 +78,4 @@ jobs:
           add-paths: |
             utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/landscape_source_diff.md
             utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/landscape_source_diff.json
-            utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/repo_url_landscape.md
+            utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/repo_url_pcc_landscape_anomalies.md

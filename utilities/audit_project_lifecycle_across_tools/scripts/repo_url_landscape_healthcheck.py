@@ -24,7 +24,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 AUDIT_ROOT = os.path.dirname(SCRIPT_DIR)
 OUTPUT_DIR = os.path.join(AUDIT_ROOT, "audit", "landscape_data_integrity_audit")
 DEFAULT_SOURCE_JSON = os.path.join(OUTPUT_DIR, "landscape_source_diff.json")
-DEFAULT_OUTPUT_MD = os.path.join(OUTPUT_DIR, "repo_url_landscape.md")
+DEFAULT_OUTPUT_MD = os.path.join(OUTPUT_DIR, "repo_url_pcc_landscape_anomalies.md")
 
 
 @dataclass(frozen=True)
@@ -102,6 +102,8 @@ def _normalize_url(url: str) -> str:
     path = (parsed.path or "").rstrip("/")
     if path.endswith(".git"):
         path = path[:-4]
+    if host in {"github.com", "www.github.com"}:
+        path = path.lower()
     return f"{scheme}://{host}{path}"
 
 
@@ -161,13 +163,14 @@ def check_url(url: str, timeout_seconds: int = 20) -> UrlCheck:
 
 def render_markdown(rows: Iterable[RepoRow]) -> str:
     lines = [
-        "# Repo URL health check (Landscape vs PCC)",
+        "# Repo URL anomalies for PCC (Landscape vs PCC)",
         "",
         "Generated from `landscape_source_diff.json` (`field = repo_url`) with `curl` URL checks.",
         "",
         "Rule: when both URLs are GitHub and org/owner matches, repo path differences are treated as aligned.",
+        "This report includes only non-aligned (anomalous) PCC vs Landscape rows.",
         "",
-        "| Project | Maturity | PCC URL | PCC | Landscape URL | Landscape | Org match | Same final URL | Result | Note |",
+        "| Project | Maturity | PCC URL | PCC | Landscape URL | Landscape | Org match | Same final destination | Result | Note |",
         "|---|---|---|---|---|---|---|---|---|---|",
     ]
     rendered_rows: List[Dict[str, str]] = []
@@ -180,13 +183,11 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
 
         pcc_final_norm = _normalize_url(pcc.final_url)
         land_final_norm = _normalize_url(land.final_url)
-        same_final = (
-            pcc.ok
-            and land.ok
-            and pcc_final_norm != "—"
-            and land_final_norm != "—"
-            and pcc_final_norm == land_final_norm
-        )
+        same_final_value = "N/A"
+        same_final_bool = False
+        if pcc.ok and land.ok and pcc_final_norm != "—" and land_final_norm != "—":
+            same_final_bool = pcc_final_norm == land_final_norm
+            same_final_value = "Yes" if same_final_bool else "No"
 
         if row.pcc_url == "—" or row.landscape_url == "—":
             result = "Missing URL"
@@ -194,10 +195,10 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
         elif org_match:
             result = "Aligned (org match)"
             note = f"GitHub owner `{pcc_owner}` matches; repo path ignored."
-        elif same_final:
+        elif same_final_bool:
             result = "Aligned (same final URL)"
             note = "URLs converge to same effective destination."
-        elif pcc.ok and land.ok:
+        elif same_final_value == "No":
             result = "Mismatch"
             note = (
                 "Different final destinations: "
@@ -210,23 +211,26 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
                 f"PCC `{pcc.status_text}`, Landscape `{land.status_text}`."
             )
 
-        rendered_rows.append(
-            {
-                "project": row.project,
-                "maturity": row.maturity,
-                "pcc_url": row.pcc_url,
-                "pcc_status": pcc.status_text,
-                "landscape_url": row.landscape_url,
-                "landscape_status": land.status_text,
-                "org_match": "Yes" if org_match else "No",
-                "same_final": "Yes" if same_final else "No",
-                "result": result,
-                "note": note,
-            }
-        )
+        aligned_by_policy = org_match or same_final_bool
+        if not aligned_by_policy:
+            rendered_rows.append(
+                {
+                    "project": row.project,
+                    "maturity": row.maturity,
+                    "pcc_url": row.pcc_url,
+                    "pcc_status": pcc.status_text,
+                    "landscape_url": row.landscape_url,
+                    "landscape_status": land.status_text,
+                    "org_match": "Yes" if org_match else "No",
+                    "same_final": same_final_value,
+                    "result": result,
+                    "note": note,
+                }
+            )
 
-    # Keep "Same final URL = No" rows at the top.
-    rendered_rows.sort(key=lambda r: (0 if r["same_final"] == "No" else 1, r["project"].lower()))
+    # Keep "Same final destination = No" rows at the top, then N/A, then Yes.
+    sort_rank = {"No": 0, "N/A": 1, "Yes": 2}
+    rendered_rows.sort(key=lambda r: (sort_rank.get(r["same_final"], 3), r["project"].lower()))
     for r in rendered_rows:
         lines.append(
             f"| {r['project']} | {r['maturity']} | {r['pcc_url']} | {r['pcc_status']} | "
@@ -239,7 +243,7 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Generate repo_url_landscape.md from "
+            "Generate repo_url_pcc_landscape_anomalies.md from "
             "audit/landscape_data_integrity_audit/landscape_source_diff.json"
         )
     )
