@@ -24,7 +24,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 AUDIT_ROOT = os.path.dirname(SCRIPT_DIR)
 OUTPUT_DIR = os.path.join(AUDIT_ROOT, "audit", "landscape_data_integrity_audit")
 DEFAULT_SOURCE_JSON = os.path.join(OUTPUT_DIR, "landscape_source_diff.json")
-DEFAULT_OUTPUT_MD = os.path.join(OUTPUT_DIR, "repo_url_landscape.md")
+DEFAULT_OUTPUT_MD = os.path.join(OUTPUT_DIR, "repo_url_pcc_landscape_anomalies.md")
 
 
 @dataclass(frozen=True)
@@ -163,11 +163,12 @@ def check_url(url: str, timeout_seconds: int = 20) -> UrlCheck:
 
 def render_markdown(rows: Iterable[RepoRow]) -> str:
     lines = [
-        "# Repo URL health check (Landscape vs PCC)",
+        "# Repo URL anomalies for PCC (Landscape vs PCC)",
         "",
         "Generated from `landscape_source_diff.json` (`field = repo_url`) with `curl` URL checks.",
         "",
         "Rule: when both URLs are GitHub and org/owner matches, repo path differences are treated as aligned.",
+        "This report includes only non-aligned (anomalous) PCC vs Landscape rows.",
         "",
         "| Project | Maturity | PCC URL | PCC | Landscape URL | Landscape | Org match | Same final destination | Result | Note |",
         "|---|---|---|---|---|---|---|---|---|---|",
@@ -210,20 +211,22 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
                 f"PCC `{pcc.status_text}`, Landscape `{land.status_text}`."
             )
 
-        rendered_rows.append(
-            {
-                "project": row.project,
-                "maturity": row.maturity,
-                "pcc_url": row.pcc_url,
-                "pcc_status": pcc.status_text,
-                "landscape_url": row.landscape_url,
-                "landscape_status": land.status_text,
-                "org_match": "Yes" if org_match else "No",
-                "same_final": same_final_value,
-                "result": result,
-                "note": note,
-            }
-        )
+        aligned_by_policy = org_match or same_final_bool
+        if not aligned_by_policy:
+            rendered_rows.append(
+                {
+                    "project": row.project,
+                    "maturity": row.maturity,
+                    "pcc_url": row.pcc_url,
+                    "pcc_status": pcc.status_text,
+                    "landscape_url": row.landscape_url,
+                    "landscape_status": land.status_text,
+                    "org_match": "Yes" if org_match else "No",
+                    "same_final": same_final_value,
+                    "result": result,
+                    "note": note,
+                }
+            )
 
     # Keep "Same final destination = No" rows at the top, then N/A, then Yes.
     sort_rank = {"No": 0, "N/A": 1, "Yes": 2}
@@ -240,7 +243,7 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Generate repo_url_landscape.md from "
+            "Generate repo_url_pcc_landscape_anomalies.md from "
             "audit/landscape_data_integrity_audit/landscape_source_diff.json"
         )
     )

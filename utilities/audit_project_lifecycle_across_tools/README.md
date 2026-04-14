@@ -26,7 +26,7 @@ This utility generates a canonical list of CNCF project statuses from the LFX PC
 | `scripts/fetch_lfx_insights_health.py` | Builds `lfx_insights_health.yaml` from Insights project pages + badge (no token; archived status from page) |
 | `scripts/audit_landscape_status.py` | Compares sources and writes `audit/*.md` |
 | `scripts/landscape_source_diff.py` | Compare `landscape.yml` to `pcc_projects.yaml` + `clomonitor.yaml`; flags landscape drift and PCC↔CLOMonitor disagreements → `audit/landscape_data_integrity_audit/landscape_source_diff.{md,json}` |
-| `scripts/repo_url_landscape_healthcheck.py` | Build repo URL healthcheck from `landscape_source_diff.json` (`repo_url` findings) using `curl` checks, GitHub org-match alignment, and final URL comparison → `audit/landscape_data_integrity_audit/repo_url_landscape.md` |
+| `scripts/repo_url_landscape_healthcheck.py` | Build PCC-focused repo URL anomalies from `landscape_source_diff.json` (`repo_url` findings) using `curl` checks, GitHub org-match alignment, and final destination comparison → `audit/landscape_data_integrity_audit/repo_url_pcc_landscape_anomalies.md` |
 | `.github/workflows/sync-pcc-and-audit-statuses.yml` | Manual workflow: PCC + snapshots + audit → PR |
 | `.github/workflows/landscape-data-content-auditor.yml` | Manual workflow: runs both landscape audit scripts; opens a PR only if `audit/landscape_data_integrity_audit/*.{md,json}` change (no `LFX_TOKEN`) |
 | `.github/workflows/sync-lfx-insights-health.yml` | Weekly (Sunday UTC) + manual: refresh `lfx_insights_health.yaml` → PR |
@@ -36,7 +36,7 @@ This utility generates a canonical list of CNCF project statuses from the LFX PC
 | `audit/status_audit.md` | Generated anomalies table |
 | `audit/all_statuses.md` | Generated full table |
 | `audit/landscape_data_integrity_audit/landscape_source_diff.{md,json}` | Generated landscape vs PCC / CLOMonitor diff |
-| `audit/landscape_data_integrity_audit/repo_url_landscape.md` | Generated repo URL healthcheck from `landscape_source_diff.json` |
+| `audit/landscape_data_integrity_audit/repo_url_pcc_landscape_anomalies.md` | Generated PCC-focused repo URL anomalies from `landscape_source_diff.json` |
 
 ## Data sources
 
@@ -67,7 +67,7 @@ This utility generates a canonical list of CNCF project statuses from the LFX PC
 
 1. Ensure `datasources/landscape.yml`, `datasources/pcc_projects.yaml`, and `datasources/clomonitor.yaml` are present on the default branch (typically refreshed by the PCC sync workflow).
 2. **Actions → “Landscape Data Content Auditor” → Run workflow**
-3. If outputs under `audit/landscape_data_integrity_audit/` change, the workflow opens or updates a PR with only those files (`landscape_source_diff.{md,json}`, `repo_url_landscape.md`).
+3. If outputs under `audit/landscape_data_integrity_audit/` change, the workflow opens or updates a PR with only those files (`landscape_source_diff.{md,json}`, `repo_url_pcc_landscape_anomalies.md`).
 
 ## Run locally
 
