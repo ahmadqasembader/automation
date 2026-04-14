@@ -3,7 +3,7 @@
 | Project | [PCC Slug](./pcc_projects.yaml) | [Landscape Slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [PCC Status](./pcc_projects.yaml) | [Landscape Status](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://raw.githubusercontent.com/cncf/artwork/main/README.md) |
 |---|---|---|---|---|---|---|---|---|
 | Prometheus | prometheus | prometheus_del | graduated | graduated | graduated | graduated | graduated | graduated |
-| Agones | agones | agones | sandbox | sandbox | sandbox | - | sandbox | - |
+| Agones | agones | agones | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | CoHDI | cohdi | cohdi | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | composefs | composefs | composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - |
 | Copa | copacetic | copacetic | sandbox | sandbox | sandbox | sandbox | sandbox | - |
