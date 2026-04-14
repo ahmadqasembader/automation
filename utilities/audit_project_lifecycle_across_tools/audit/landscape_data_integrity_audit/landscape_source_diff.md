@@ -6,7 +6,7 @@ When those two disagree, that is called out. **`landscape.yml` should be updated
 ## Summary
 
 - **CNCF landscape items in scope:** 251
-- **With at least one drift / conflict row:** 76
+- **With at least one drift / conflict row:** 73
 - **Findings where PCC and CLOMonitor disagree:** 56
 - **No PCC and no CLOMonitor match:** 4
 
@@ -16,16 +16,11 @@ Each row is one detected mismatch. Sorted by `Field`, then `Project`.
 
 | Field | Project | Maturity | Landscape | PCC | CLOMonitor | PCC≈CLO? | Note |
 |---|---|---|---|---|---|---|---|
-| extra.accepted | Agones | sandbox | 2025-12-21 | — | 2026-03-12 | — | Landscape ('2025-12-21') ≠ CLOMonitor ('2026-03-12'). |
 | extra.accepted | Copa | sandbox | 2023-09-19 | — | 2023-12-19 | — | Landscape ('2023-09-19') ≠ CLOMonitor ('2023-12-19'). |
-| extra.accepted | Devfile | sandbox | 2022-01-11 | — | 2021-01-11 | — | Landscape ('2022-01-11') ≠ CLOMonitor ('2021-01-11'). |
-| extra.accepted | KAI Scheduler | sandbox | 2025-12-21 | — | 2026-02-08 | — | Landscape ('2025-12-21') ≠ CLOMonitor ('2026-02-08'). |
-| extra.accepted | KubeVela | incubating | 2021-06-22 | — | 2021-04-05 | — | Landscape ('2021-06-22') ≠ CLOMonitor ('2021-04-05'). |
-| extra.accepted | KusionStack | sandbox | 2024-09-12 | — | 2024-10-17 | — | Landscape ('2024-09-12') ≠ CLOMonitor ('2024-10-17'). |
-| extra.accepted | OpenFunction | sandbox | 2022-04-26 | — | 2021-11-09 | — | Landscape ('2022-04-26') ≠ CLOMonitor ('2021-11-09'). |
-| extra.accepted | ORAS | sandbox | 2021-07-13 | — | 2021-06-02 | — | Landscape ('2021-07-13') ≠ CLOMonitor ('2021-06-02'). |
+| extra.accepted | KubeStellar | sandbox | 2023-12-19 | — | 2023-09-19 | — | Landscape ('2023-12-19') ≠ CLOMonitor ('2023-09-19'). |
 | extra.clomonitor_name | Podman Container Tools | sandbox | podman | — | podman-container-tools | — | Landscape ('podman') ≠ CLOMonitor ('podman-container-tool… |
 | extra.clomonitor_name | Runme Notebooks | sandbox | runme | — | runme-notebooks | — | Landscape ('runme') ≠ CLOMonitor ('runme-notebooks'). |
+| extra.dev_stats_url | OpenEverest | sandbox | — | — | https://openeverest.devstats.cncf.io/ | — | Landscape missing; CLOMonitor has 'https://openeverest.de… |
 | extra.lfx_slug | Cloud Custodian | incubating | c7n | c7n | cloud-custodian | **No** | PCC ('c7n') and CLOMonitor ('cloud-custodian') disagree. … |
 | extra.lfx_slug | Confidential Containers | sandbox | confcont | confcont | confidential-containers | **No** | PCC ('confcont') and CLOMonitor ('confidential-containers… |
 | extra.lfx_slug | Connect RPC | sandbox | connect | connect | connect-rpc | **No** | PCC ('connect') and CLOMonitor ('connect-rpc') disagree. … |
