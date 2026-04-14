@@ -4,10 +4,8 @@ Generated from `landscape_source_diff.json` (`field = repo_url`) with `curl` URL
 
 Rule: when both URLs are GitHub and org/owner matches, repo path differences are treated as aligned.
 
-| Project | Maturity | PCC URL | PCC | Landscape URL | Landscape | Org match | Same final URL | Result | Note |
+| Project | Maturity | PCC URL | PCC | Landscape URL | Landscape | Org match | Same final destination | Result | Note |
 |---|---|---|---|---|---|---|---|---|---|
-| CubeFS | graduated | https://github.com/cubefs/cubefs | ✅ 200 | https://github.com/cubeFS/cubefs | ✅ 200 | Yes | No | Aligned (org match) | GitHub owner `cubefs` matches; repo path ignored. |
-| Drasi | sandbox | https://github.com/drasi-project | ✅ 200 | http://github.com/drasi-project/drasi-platform | ✅ 200 | Yes | No | Aligned (org match) | GitHub owner `drasi-project` matches; repo path ignored. |
 | Fluid | incubating | https://github.com/Project-Fluid | ✅ 200 | https://github.com/fluid-cloudnative/fluid | ✅ 200 | No | No | Mismatch | Different final destinations: PCC `https://github.com/Project-Fluid` vs Landscape `https://github.com/fluid-cloudnative/fluid`. |
 | HolmesGPT | sandbox | https://github.com/holmesgpt/ | ✅ 200 | https://github.com/HolmesGPT/holmesgpt | ✅ 200 | Yes | No | Aligned (org match) | GitHub owner `holmesgpt` matches; repo path ignored. |
 | KAI Scheduler | sandbox | https://github.com/kai-scheduler/ | ✅ 200 | https://github.com/kai-scheduler/KAI-Scheduler | ✅ 200 | Yes | No | Aligned (org match) | GitHub owner `kai-scheduler` matches; repo path ignored. |
@@ -18,7 +16,8 @@ Rule: when both URLs are GitHub and org/owner matches, repo path differences are
 | Notary Project | incubating | https://github.com/theupdateframework/notary | ✅ 200 | https://github.com/notaryproject/notation | ✅ 200 | No | No | Mismatch | Different final destinations: PCC `https://github.com/notaryproject/notary` vs Landscape `https://github.com/notaryproject/notation`. |
 | OpenYurt | incubating | https://github.com/OpenYurt | ✅ 200 | https://github.com/openyurtio/openyurt | ✅ 200 | No | No | Mismatch | Different final destinations: PCC `https://github.com/OpenYurt` vs Landscape `https://github.com/openyurtio/openyurt`. |
 | Porter | sandbox | https://github.com/Porter | ✅ 200 | https://github.com/getporter/porter | ✅ 200 | No | No | Mismatch | Different final destinations: PCC `https://github.com/Porter` vs Landscape `https://github.com/getporter/porter`. |
-| SpinKube | sandbox | — | ❌ missing | https://github.com/spinframework/spin-operator | ✅ 200 | No | No | Missing URL | One side is missing. |
+| Drasi | sandbox | https://github.com/drasi-project | ✅ 200 | http://github.com/drasi-project/drasi-platform | ❌ URLError | Yes | N/A | Aligned (org match) | GitHub owner `drasi-project` matches; repo path ignored. |
+| SpinKube | sandbox | — | ❌ missing | https://github.com/spinframework/spin-operator | ✅ 200 | No | N/A | Missing URL | One side is missing. |
 | Akri | sandbox | https://github.com/deislabs/akri | ✅ 200 | https://github.com/project-akri/akri | ✅ 200 | No | Yes | Aligned (same final URL) | URLs converge to same effective destination. |
 | bootc | sandbox | https://github.com/containers/bootc | ✅ 200 | https://github.com/bootc-dev/bootc | ✅ 200 | No | Yes | Aligned (same final URL) | URLs converge to same effective destination. |
 | Cartography | sandbox | https://github.com/cartography-cncf/cartography | ✅ 200 | https://github.com/cartography-cncf/cartography | ✅ 200 | Yes | Yes | Aligned (org match) | GitHub owner `cartography-cncf` matches; repo path ignored. |
@@ -26,6 +25,7 @@ Rule: when both URLs are GitHub and org/owner matches, repo path differences are
 | composefs | sandbox | https://github.com/containers/composefs | ✅ 200 | https://github.com/containers/composefs | ✅ 200 | Yes | Yes | Aligned (org match) | GitHub owner `containers` matches; repo path ignored. |
 | container2wasm | sandbox | https://github.com/ktock/container2wasm | ✅ 200 | https://github.com/container2wasm/container2wasm | ✅ 200 | No | Yes | Aligned (same final URL) | URLs converge to same effective destination. |
 | Cozystack | sandbox | https://github.com/aenix-io/cozystack/ | ✅ 200 | https://github.com/cozystack/cozystack | ✅ 200 | No | Yes | Aligned (same final URL) | URLs converge to same effective destination. |
+| CubeFS | graduated | https://github.com/cubefs/cubefs | ✅ 200 | https://github.com/cubeFS/cubefs | ✅ 200 | Yes | Yes | Aligned (org match) | GitHub owner `cubefs` matches; repo path ignored. |
 | DevSpace | sandbox | https://github.com/loft-sh/devspace | ✅ 200 | https://github.com/devspace-sh/devspace | ✅ 200 | No | Yes | Aligned (same final URL) | URLs converge to same effective destination. |
 | Easegress | sandbox | https://github.com/megaease/easegress | ✅ 200 | https://github.com/easegress-io/easegress | ✅ 200 | No | Yes | Aligned (same final URL) | URLs converge to same effective destination. |
 | Eraser | sandbox | https://github.com/eraser-dev/eraser | ✅ 200 | https://github.com/eraser-dev/eraser | ✅ 200 | Yes | Yes | Aligned (org match) | GitHub owner `eraser-dev` matches; repo path ignored. |

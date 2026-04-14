@@ -102,6 +102,8 @@ def _normalize_url(url: str) -> str:
     path = (parsed.path or "").rstrip("/")
     if path.endswith(".git"):
         path = path[:-4]
+    if host in {"github.com", "www.github.com"}:
+        path = path.lower()
     return f"{scheme}://{host}{path}"
 
 
@@ -167,7 +169,7 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
         "",
         "Rule: when both URLs are GitHub and org/owner matches, repo path differences are treated as aligned.",
         "",
-        "| Project | Maturity | PCC URL | PCC | Landscape URL | Landscape | Org match | Same final URL | Result | Note |",
+        "| Project | Maturity | PCC URL | PCC | Landscape URL | Landscape | Org match | Same final destination | Result | Note |",
         "|---|---|---|---|---|---|---|---|---|---|",
     ]
     rendered_rows: List[Dict[str, str]] = []
@@ -180,13 +182,11 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
 
         pcc_final_norm = _normalize_url(pcc.final_url)
         land_final_norm = _normalize_url(land.final_url)
-        same_final = (
-            pcc.ok
-            and land.ok
-            and pcc_final_norm != "—"
-            and land_final_norm != "—"
-            and pcc_final_norm == land_final_norm
-        )
+        same_final_value = "N/A"
+        same_final_bool = False
+        if pcc.ok and land.ok and pcc_final_norm != "—" and land_final_norm != "—":
+            same_final_bool = pcc_final_norm == land_final_norm
+            same_final_value = "Yes" if same_final_bool else "No"
 
         if row.pcc_url == "—" or row.landscape_url == "—":
             result = "Missing URL"
@@ -194,10 +194,10 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
         elif org_match:
             result = "Aligned (org match)"
             note = f"GitHub owner `{pcc_owner}` matches; repo path ignored."
-        elif same_final:
+        elif same_final_bool:
             result = "Aligned (same final URL)"
             note = "URLs converge to same effective destination."
-        elif pcc.ok and land.ok:
+        elif same_final_value == "No":
             result = "Mismatch"
             note = (
                 "Different final destinations: "
@@ -219,14 +219,15 @@ def render_markdown(rows: Iterable[RepoRow]) -> str:
                 "landscape_url": row.landscape_url,
                 "landscape_status": land.status_text,
                 "org_match": "Yes" if org_match else "No",
-                "same_final": "Yes" if same_final else "No",
+                "same_final": same_final_value,
                 "result": result,
                 "note": note,
             }
         )
 
-    # Keep "Same final URL = No" rows at the top.
-    rendered_rows.sort(key=lambda r: (0 if r["same_final"] == "No" else 1, r["project"].lower()))
+    # Keep "Same final destination = No" rows at the top, then N/A, then Yes.
+    sort_rank = {"No": 0, "N/A": 1, "Yes": 2}
+    rendered_rows.sort(key=lambda r: (sort_rank.get(r["same_final"], 3), r["project"].lower()))
     for r in rendered_rows:
         lines.append(
             f"| {r['project']} | {r['maturity']} | {r['pcc_url']} | {r['pcc_status']} | "
