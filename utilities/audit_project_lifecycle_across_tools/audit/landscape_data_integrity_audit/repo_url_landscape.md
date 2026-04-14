@@ -7,7 +7,7 @@ Rule: when both URLs are GitHub and org/owner matches, repo path differences are
 | Project | Maturity | PCC URL | PCC | Landscape URL | Landscape | Org match | Same final URL | Result | Note |
 |---|---|---|---|---|---|---|---|---|---|
 | CubeFS | graduated | https://github.com/cubefs/cubefs | ✅ 200 | https://github.com/cubeFS/cubefs | ✅ 200 | Yes | No | Aligned (org match) | GitHub owner `cubefs` matches; repo path ignored. |
-| Drasi | sandbox | https://github.com/drasi-project | ✅ 200 | http://github.com/drasi-project/drasi-platform | ❌ URLError | Yes | No | Aligned (org match) | GitHub owner `drasi-project` matches; repo path ignored. |
+| Drasi | sandbox | https://github.com/drasi-project | ✅ 200 | http://github.com/drasi-project/drasi-platform | ✅ 200 | Yes | No | Aligned (org match) | GitHub owner `drasi-project` matches; repo path ignored. |
 | Fluid | incubating | https://github.com/Project-Fluid | ✅ 200 | https://github.com/fluid-cloudnative/fluid | ✅ 200 | No | No | Mismatch | Different final destinations: PCC `https://github.com/Project-Fluid` vs Landscape `https://github.com/fluid-cloudnative/fluid`. |
 | HolmesGPT | sandbox | https://github.com/holmesgpt/ | ✅ 200 | https://github.com/HolmesGPT/holmesgpt | ✅ 200 | Yes | No | Aligned (org match) | GitHub owner `holmesgpt` matches; repo path ignored. |
 | KAI Scheduler | sandbox | https://github.com/kai-scheduler/ | ✅ 200 | https://github.com/kai-scheduler/KAI-Scheduler | ✅ 200 | Yes | No | Aligned (org match) | GitHub owner `kai-scheduler` matches; repo path ignored. |
