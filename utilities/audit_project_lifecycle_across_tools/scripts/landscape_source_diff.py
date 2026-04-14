@@ -350,12 +350,17 @@ def compare_field(
         else:
             msgs.append(f"Landscape missing; CLOMonitor has {clo_raw!r}.")
 
+    landscape_clomonitor_agree: Optional[bool] = None
+    if has_c:
+        landscape_clomonitor_agree = bool(has_l and lv == cv)
+
     return {
         "field": field_label,
         "landscape": land_raw if present(land_raw) else None,
         "pcc": pcc_raw if present(pcc_raw) else None,
         "clomonitor": clo_raw if present(clo_raw) else None,
         "pcc_clomonitor_agree": sources_agree if (has_p and has_c) else None,
+        "landscape_clomonitor_agree": landscape_clomonitor_agree,
         "message": " ".join(msgs),
     }
 
@@ -401,12 +406,17 @@ def compare_slug_field(
             else f"Landscape missing; CLOMonitor has {clo_raw!r}."
         )
 
+    landscape_clomonitor_agree: Optional[bool] = None
+    if has_c:
+        landscape_clomonitor_agree = bool(has_l and slug_equivalent(land_raw, clo_raw))
+
     return {
         "field": field_label,
         "landscape": land_raw if has_l else None,
         "pcc": pcc_raw if has_p else None,
         "clomonitor": clo_raw if has_c else None,
         "pcc_clomonitor_agree": pcc_clo_agree if (has_p and has_c) else None,
+        "landscape_clomonitor_agree": landscape_clomonitor_agree,
         "message": " ".join(msgs),
     }
 
@@ -547,18 +557,20 @@ def render_markdown(data: Dict[str, Any]) -> str:
     projects = data["projects"]
     with_findings = [p for p in projects if p["findings"]]
     unmatched = [p for p in projects if not p["matched_pcc"] and not p["matched_clomonitor"]]
-    pcc_clo_only = [
+    landscape_clo_mismatch = [
         f
         for p in projects
         for f in p["findings"]
-        if f.get("pcc_clomonitor_agree") is False
+        if f.get("landscape_clomonitor_agree") is False
     ]
 
     lines.append("## Summary")
     lines.append("")
     lines.append(f"- **CNCF landscape items in scope:** {len(projects)}")
     lines.append(f"- **With at least one drift / conflict row:** {len(with_findings)}")
-    lines.append(f"- **Findings where PCC and CLOMonitor disagree:** {len(pcc_clo_only)}")
+    lines.append(
+        f"- **Findings where Landscape and CLOMonitor disagree:** {len(landscape_clo_mismatch)}"
+    )
     lines.append(f"- **No PCC and no CLOMonitor match:** {len(unmatched)}")
     lines.append("")
 
@@ -569,7 +581,7 @@ def render_markdown(data: Dict[str, Any]) -> str:
     )
     lines.append("")
     lines.append(
-        "| Field | Project | Maturity | Landscape | PCC | CLOMonitor | PCC≈CLO? | Note |"
+        "| Field | Project | Maturity | Landscape | PCC | CLOMonitor | Landscape≈CLO? | Note |"
     )
     lines.append(
         "|---|---|---|---|---|---|---|---|"
@@ -578,7 +590,7 @@ def render_markdown(data: Dict[str, Any]) -> str:
     flat_rows: List[Tuple[str, str, str, Any, Any, Any, Any, str]] = []
     for p in with_findings:
         for f in p["findings"]:
-            agree = f.get("pcc_clomonitor_agree")
+            agree = f.get("landscape_clomonitor_agree")
             agree_s = "—" if agree is None else ("Yes" if agree else "**No**")
             flat_rows.append(
                 (
@@ -594,10 +606,10 @@ def render_markdown(data: Dict[str, Any]) -> str:
             )
 
     flat_rows.sort(key=lambda r: (str(r[0]).lower(), str(r[1]).lower()))
-    for fld, name, mat, lv, pv, cv, agree_s, msg in flat_rows:
+    for fld, name, mat, lv, pv, cv, land_clo_s, msg in flat_rows:
         lines.append(
             f"| {fmt_val(fld)} | {fmt_val(name)} | {fmt_val(mat)} | "
-            f"{fmt_val(lv)} | {fmt_val(pv)} | {fmt_val(cv)} | {agree_s} | {fmt_val(msg)} |"
+            f"{fmt_val(lv)} | {fmt_val(pv)} | {fmt_val(cv)} | {land_clo_s} | {fmt_val(msg)} |"
         )
     lines.append("")
 
