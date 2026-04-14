@@ -33,15 +33,15 @@ jobs:
           test -f datasources/pcc_projects.yaml || (echo "Missing datasources/pcc_projects.yaml" >&2; exit 1)
           test -f datasources/clomonitor.yaml || (echo "Missing datasources/clomonitor.yaml" >&2; exit 1)
 
-      - name: Run landscape data integrity audit
-        working-directory: ./utilities/audit_project_lifecycle_across_tools
-        run: |
-          python scripts/landscape_data_integrity_audit.py
-
       - name: Run landscape source diff audit
         working-directory: ./utilities/audit_project_lifecycle_across_tools
         run: |
           python scripts/landscape_source_diff.py
+
+      - name: Run repo URL landscape healthcheck
+        working-directory: ./utilities/audit_project_lifecycle_across_tools
+        run: |
+          python scripts/repo_url_landscape_healthcheck.py
 
       - name: Clean up git credentials
         run: |
@@ -66,10 +66,9 @@ jobs:
             Automated refresh of landscape content auditing outputs.
 
             This PR updates:
-            - `audit/landscape_data_integrity_audit/landscape_data_integrity.md`
-            - `audit/landscape_data_integrity_audit/landscape_data_integrity.json`
             - `audit/landscape_data_integrity_audit/landscape_source_diff.md`
             - `audit/landscape_data_integrity_audit/landscape_source_diff.json`
+            - `audit/landscape_data_integrity_audit/repo_url_landscape.md`
 
             Data sources used:
             - `datasources/landscape.yml`
@@ -77,7 +76,6 @@ jobs:
             - `datasources/clomonitor.yaml`
           branch: automation/landscape-data-content-auditor
           add-paths: |
-            utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/landscape_data_integrity.md
-            utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/landscape_data_integrity.json
             utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/landscape_source_diff.md
             utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/landscape_source_diff.json
+            utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/repo_url_landscape.md
