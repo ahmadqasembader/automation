@@ -239,17 +239,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/openyurtio/openyurt",
-          "pcc": "https://github.com/OpenYurt",
-          "clomonitor": "https://github.com/openyurtio/openyurt",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/OpenYurt') and CLOMonitor ('https://github.com/openyurtio/openyurt') disagree. Landscape ('https://github.com/openyurtio/openyurt') ≠ PCC ('https://github.com/OpenYurt')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Runme Notebooks",
@@ -600,17 +590,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/notaryproject/notation",
-          "pcc": "https://github.com/theupdateframework/notary",
-          "clomonitor": "https://github.com/notaryproject/notation",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/theupdateframework/notary') and CLOMonitor ('https://github.com/notaryproject/notation') disagree. Landscape ('https://github.com/notaryproject/notation') ≠ PCC ('https://github.com/theupdateframework/notary')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "OAuth2 Proxy",
@@ -1394,17 +1374,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/fluid-cloudnative/fluid",
-          "pcc": "https://github.com/Project-Fluid",
-          "clomonitor": "https://github.com/fluid-cloudnative/fluid",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/Project-Fluid') and CLOMonitor ('https://github.com/fluid-cloudnative/fluid') disagree. Landscape ('https://github.com/fluid-cloudnative/fluid') ≠ PCC ('https://github.com/Project-Fluid')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "hami",
@@ -1513,17 +1483,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/kubefleet-dev/kubefleet",
-          "pcc": "https://github.com/kubefleet-dev/",
-          "clomonitor": "https://github.com/Azure/fleet",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('https://github.com/kubefleet-dev/') and CLOMonitor ('https://github.com/Azure/fleet') disagree. Landscape ('https://github.com/kubefleet-dev/kubefleet') ≠ CLOMonitor ('https://github.com/Azure/fleet')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Kubernetes",
@@ -2238,17 +2198,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/microcks/microcks",
-          "pcc": "https://github.com/meshery/meshery",
-          "clomonitor": "https://github.com/microcks/microcks",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/meshery/meshery') and CLOMonitor ('https://github.com/microcks/microcks') disagree. Landscape ('https://github.com/microcks/microcks') ≠ PCC ('https://github.com/meshery/meshery')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "ModelPack",
@@ -2313,17 +2263,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/getporter/porter",
-          "pcc": "https://github.com/Porter",
-          "clomonitor": "https://github.com/getporter/porter",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/Porter') and CLOMonitor ('https://github.com/getporter/porter') disagree. Landscape ('https://github.com/getporter/porter') ≠ PCC ('https://github.com/Porter')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Radius",
@@ -2562,25 +2502,6 @@
       "matched_pcc": true,
       "matched_clomonitor": true,
       "findings": []
-    },
-    {
-      "name": "Cozystack",
-      "path": "Platform / PaaS/Container Service",
-      "maturity": "sandbox",
-      "match_note": "clomonitor_name+lfx_slug",
-      "matched_pcc": true,
-      "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/cozystack/cozystack",
-          "pcc": "https://github.com/aenix-io/cozystack/",
-          "clomonitor": "https://github.com/cozystack/cozystack",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/aenix-io/cozystack/') and CLOMonitor ('https://github.com/cozystack/cozystack') disagree. Landscape ('https://github.com/cozystack/cozystack') ≠ PCC ('https://github.com/aenix-io/cozystack/')."
-        }
-      ]
     },
     {
       "name": "KubeElasti",
