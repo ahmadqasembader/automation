@@ -278,7 +278,7 @@ categories:
     category: Incubating
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/fluid.svg
-    repository_url: https://github.com/Project-Fluid
+    repository_url: https://github.com/fluid-cloudnative/fluid
   - name: gRPC
     slug: grpc
     category: Incubating
@@ -362,7 +362,7 @@ categories:
     category: Incubating
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/notary.svg
-    repository_url: https://github.com/theupdateframework/notary
+    repository_url: https://github.com/notaryproject/notation
   - name: OpenCost
     slug: opencost
     category: Incubating
@@ -398,7 +398,7 @@ categories:
     category: Incubating
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/openyurt.svg
-    repository_url: https://github.com/OpenYurt
+    repository_url: https://github.com/openyurtio/openyurt
   - name: Operator Framework
     slug: operator-sdk
     category: Incubating
@@ -975,7 +975,7 @@ categories:
     category: Sandbox
     status: Active
     project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/microcks/microcks-logo.svg?v=1722530900928
-    repository_url: https://github.com/meshery/meshery
+    repository_url: https://github.com/microcks/microcks
   - name: ModelPack
     slug: modelpack
     category: Sandbox
@@ -1119,7 +1119,7 @@ categories:
     category: Sandbox
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/porter.svg
-    repository_url: https://github.com/Porter
+    repository_url: https://github.com/getporter/porter
   - name: Radius
     slug: radius
     category: Sandbox

@@ -6,7 +6,6 @@
 |---|---|---|---|
 | Operator Framework | incubating | Critical | - |
 | SPIRE | graduated | Critical | - |
-| Velero | sandbox | - | - |
 
 ## Graduated
 
@@ -27,17 +26,17 @@
 | Etcd | graduated | Excellent | 83 |
 | Falco | graduated | Excellent | 82 |
 | Fluentd | graduated | Excellent | 84 |
-| Flux | graduated | Excellent | 83 |
+| Flux | graduated | Excellent | 82 |
 | Harbor | graduated | Excellent | 84 |
 | Helm | graduated | Excellent | 84 |
 | in-toto | graduated | Healthy | 72 |
 | Istio | graduated | Excellent | 85 |
 | Jaeger | graduated | Healthy | 78 |
 | KEDA | graduated | Excellent | 85 |
-| Knative | graduated | Excellent | 86 |
+| Knative | graduated | Excellent | 85 |
 | KubeEdge | graduated | Excellent | 80 |
 | Kubernetes | graduated | Excellent | 88 |
-| Kyverno | graduated | Excellent | 80 |
+| Kyverno | graduated | Healthy | 78 |
 | Linkerd | graduated | Excellent | 80 |
 | Open Policy Agent | graduated | Excellent | 81 |
 | Prometheus | graduated | Excellent | 86 |
@@ -52,7 +51,7 @@
 
 | Project | [PCC Status](./pcc_projects.yaml) | [Insights Health](../datasources/lfx_insights_health.yaml) | [Health Score](../datasources/lfx_insights_health.yaml) |
 |---|---|---|---|
-| Artifact Hub | incubating | Healthy | 71 |
+| Artifact Hub | incubating | Healthy | 72 |
 | Backstage | incubating | Excellent | 82 |
 | Buildpacks | incubating | Excellent | 82 |
 | Chaos Mesh | incubating | Healthy | 74 |
@@ -60,7 +59,7 @@
 | CNI | incubating | Excellent | 80 |
 | Contour | incubating | Healthy | 78 |
 | Cortex | incubating | Excellent | 80 |
-| emissary-ingress | incubating | Healthy | 71 |
+| emissary-ingress | incubating | Healthy | 68 |
 | Flatcar | incubating | Excellent | 80 |
 | Fluid Project | incubating | Healthy | 77 |
 | gRPC | incubating | Excellent | 84 |
@@ -74,7 +73,7 @@
 | Lima | incubating | Excellent | 81 |
 | LitmusChaos | incubating | Healthy | 76 |
 | Longhorn | incubating | Healthy | 75 |
-| metal3-io | incubating | Excellent | 82 |
+| metal3-io | incubating | Excellent | 80 |
 | NATS | incubating | Excellent | 82 |
 | Notary | incubating | Excellent | 82 |
 | OpenCost | incubating | Excellent | 80 |
@@ -87,7 +86,7 @@
 | Strimzi | incubating | Excellent | 86 |
 | Thanos | incubating | Excellent | 84 |
 | Volcano | incubating | Excellent | 85 |
-| wasmCloud | incubating | Healthy | 74 |
+| wasmCloud | incubating | Healthy | 73 |
 
 ## Sandbox
 
@@ -114,7 +113,7 @@
 | CloudNativePG | sandbox | Excellent | 84 |
 | Clusternet | sandbox | Healthy | 68 |
 | Clusterpedia | sandbox | Healthy | 72 |
-| CoHDI | sandbox | Healthy | 62 |
+| CoHDI | sandbox | Healthy | 63 |
 | composefs | sandbox | Healthy | 72 |
 | Confidential Containers | sandbox | Excellent | 84 |
 | Connect RPC | sandbox | Excellent | 84 |
@@ -131,7 +130,7 @@
 | easegress | sandbox | Healthy | 66 |
 | Eraser | sandbox | Stable | 55 |
 | External Secrets Operator | sandbox | Excellent | 81 |
-| HAMi | sandbox | Excellent | 83 |
+| HAMi | sandbox | Excellent | 81 |
 | Headlamp | sandbox | Excellent | 80 |
 | Hexa | sandbox | Stable | 49 |
 | HolmesGPT | sandbox | Healthy | 72 |
@@ -139,7 +138,7 @@
 | Hyperlight | sandbox | Healthy | 78 |
 | Inclavare Containers | sandbox | Healthy | 72 |
 | Inspektor Gadget | sandbox | Healthy | 78 |
-| interLink | sandbox | Stable | 55 |
+| interLink | sandbox | Stable | 56 |
 | k0s | sandbox | Healthy | 77 |
 | k3s | sandbox | Healthy | 78 |
 | k8gb | sandbox | Healthy | 74 |
@@ -200,7 +199,7 @@
 | OVN-Kubernetes | sandbox | Healthy | 73 |
 | Oxia | sandbox | Healthy | 72 |
 | Paralus | sandbox | Healthy | 68 |
-| PARSEC | sandbox | Healthy | 77 |
+| PARSEC | sandbox | Healthy | 78 |
 | Perses | sandbox | Excellent | 85 |
 | PipeCD | sandbox | Excellent | 80 |
 | Piraeus-Datastore | sandbox | Healthy | 74 |
@@ -219,19 +218,19 @@
 | Shipwright | sandbox | Healthy | 78 |
 | SlimFaaS | sandbox | Healthy | 66 |
 | SlimToolkit | sandbox | Healthy | 65 |
-| SOPS | sandbox | Healthy | 74 |
+| SOPS | sandbox | Healthy | 73 |
 | Spiderpool | sandbox | Healthy | 72 |
 | Spin | sandbox | Excellent | 80 |
 | stacker | sandbox | Healthy | 67 |
 | Submariner | sandbox | Excellent | 81 |
 | Telepresence | sandbox | Healthy | 76 |
-| Tinkerbell | sandbox | Healthy | 78 |
-| Tokenetes | sandbox | Stable | 51 |
+| Tinkerbell | sandbox | Healthy | 76 |
+| Tokenetes | sandbox | Stable | 48 |
 | Tremor | sandbox | Healthy | 66 |
-| TrestleGRC | sandbox | Healthy | 76 |
+| TrestleGRC | sandbox | Healthy | 78 |
 | Trickster | sandbox | Healthy | 78 |
 | urunc | sandbox | Healthy | 69 |
-| Velero | sandbox | - | - |
+| Velero | sandbox | Excellent | 88 |
 | Vineyard | sandbox | Healthy | 66 |
 | Virtual Kubelet | sandbox | Healthy | 74 |
 | VS Code Kubernetes Tools | sandbox | Healthy | 77 |
@@ -247,27 +246,27 @@
 |---|---|---|---|
 | <QHTTPX> | forming | - | - |
 | AIBrix | forming | - | - |
-| Apicurio Registry | forming | - | - |
+| Apicurio Registry | forming | Excellent | 83 |
 | BLAFS | forming | - | - |
-| Cedar | forming | - | - |
+| Cedar | forming | Excellent | 85 |
 | CNCF Standards & Specifications | forming | - | - |
 | CNCF Toolbox | forming | - | - |
 | Conveyor CI | forming | - | - |
 | Cruise | forming | Healthy | 61 |
 | CubeCOS | forming | - | - |
-| Curvine | forming | - | - |
+| Curvine | forming | Healthy | 78 |
 | DevOps AI Toolkit | forming | - | - |
 | Dexfile | forming | - | - |
 | Gthulhu | forming | Healthy | 68 |
 | Higress | forming | - | - |
 | Kmesh | forming | Excellent | 80 |
-| ksctl | forming | - | - |
+| ksctl | forming | Excellent | 87 |
 | kube-bind | forming | Healthy | 70 |
 | KubeElasti | forming | Healthy | 64 |
 | llm-d | forming | Excellent | 85 |
 | NMstate | forming | Healthy | 78 |
 | OptiFlow (AI‑OrchestrateX) | forming | - | - |
-| Schema Driven Configuration | forming | - | - |
+| Schema Driven Configuration | forming | Healthy | 66 |
 | SecureBuild | forming | - | - |
 | SemaMesh | forming | - | - |
 | Sermant | forming | Healthy | 72 |
@@ -284,22 +283,22 @@
 | Curve | archived | Archived | - |
 | Devstream | archived | Archived | - |
 | FabEdge | archived | Archived | - |
-| Fonio | archived | - | - |
+| Fonio | archived | Archived | - |
 | Keptn | archived | Archived | - |
 | Krator | archived | Archived | - |
 | Krustlet | archived | Archived | - |
 | KubeDL | archived | Archived | - |
 | Merbridge | archived | Archived | - |
 | Nocalhost | archived | Archived | - |
-| Open Service Mesh | archived | - | - |
+| Open Service Mesh | archived | Archived | - |
 | OpenELB | archived | Archived | - |
 | OpenMetrics | archived | Archived | - |
 | OpenTracing | archived | Archived | - |
 | Pravega | archived | Archived | - |
 | RKT | archived | Archived | - |
 | sealer | archived | Archived | - |
-| Service Mesh Interface | archived | - | - |
-| skooner | archived | - | - |
+| Service Mesh Interface | archived | Archived | - |
+| skooner | archived | Archived | - |
 | SuperEdge | archived | Archived | - |
 | Teller | archived | Archived | - |
 | Xline | archived | Archived | - |
