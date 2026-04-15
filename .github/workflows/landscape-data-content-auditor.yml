@@ -69,6 +69,7 @@ jobs:
             - `audit/landscape_data_integrity_audit/landscape_source_diff.md`
             - `audit/landscape_data_integrity_audit/landscape_source_diff.json`
             - `audit/landscape_data_integrity_audit/repo_url_pcc_landscape_anomalies.md`
+            - `audit/landscape_data_integrity_audit/repo_url_landscape_clomonitor_anomalies.md`
 
             Data sources used:
             - `datasources/landscape.yml`
@@ -79,3 +80,4 @@ jobs:
             utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/landscape_source_diff.md
             utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/landscape_source_diff.json
             utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/repo_url_pcc_landscape_anomalies.md
+            utilities/audit_project_lifecycle_across_tools/audit/landscape_data_integrity_audit/repo_url_landscape_clomonitor_anomalies.md
