@@ -37,6 +37,7 @@ PCC_PATH = os.path.join(DATASOURCES_DIR, "pcc_projects.yaml")
 OUTPUT_PATH = os.path.join(DATASOURCES_DIR, "lfx_insights_health.yaml")
 
 BADGE_URL = "https://insights.linuxfoundation.org/api/badge/health-score"
+SEARCH_URL = "https://insights.linuxfoundation.org/api/search"
 PROJECT_PAGE_URL = "https://insights.linuxfoundation.org/project/{slug}"
 
 SESSION = requests.Session()
@@ -62,15 +63,16 @@ def is_archived_insights_page(html: str) -> bool:
     return False
 
 
-def fetch_project_page_html(slug: str) -> Optional[str]:
+def fetch_project_page_html_with_status(slug: str) -> Tuple[Optional[str], Optional[int]]:
+    """Return (html, http_status) for an Insights project page lookup."""
     url = PROJECT_PAGE_URL.format(slug=requests.utils.quote(slug, safe=""))
     try:
         r = SESSION.get(url, timeout=45)
     except requests.RequestException:
-        return None
+        return None, None
     if r.status_code != 200:
-        return None
-    return r.text
+        return None, r.status_code
+    return r.text, r.status_code
 
 
 def overall_score_from_page_html(html: str) -> Optional[int]:
@@ -90,6 +92,60 @@ def slugify_from_name(name: str) -> str:
     s = re.sub(r"[^a-z0-9]+", "-", s)
     s = re.sub(r"-+", "-", s).strip("-")
     return s
+
+
+def normalize_name_for_match(value: str) -> str:
+    s = (value or "").lower().strip()
+    s = re.sub(r"\([^)]*\)", "", s)
+    s = re.sub(r"[^a-z0-9]+", " ", s).strip()
+    return s
+
+
+def search_insights_slug_by_name(name: str) -> Optional[str]:
+    """
+    Resolve a project slug using the same public search endpoint the Insights UI uses.
+    Prefer exact normalized-name matches to avoid accidental cross-project matches.
+    """
+    query = (name or "").strip()
+    if not query:
+        return None
+    try:
+        r = SESSION.get(SEARCH_URL, params={"query": query}, timeout=45)
+    except requests.RequestException:
+        return None
+    if r.status_code != 200:
+        return None
+    try:
+        payload = r.json()
+    except ValueError:
+        return None
+
+    projects = payload.get("projects")
+    if not isinstance(projects, list) or not projects:
+        return None
+
+    query_norm = normalize_name_for_match(query)
+    exact: List[str] = []
+    for item in projects:
+        if not isinstance(item, dict):
+            continue
+        slug = item.get("slug")
+        project_name = item.get("name")
+        if not isinstance(slug, str) or not slug.strip():
+            continue
+        if isinstance(project_name, str) and normalize_name_for_match(project_name) == query_norm:
+            exact.append(slug.strip())
+
+    if exact:
+        # Deterministic pick if there are multiple exact-normalized names.
+        return sorted(set(exact), key=str.lower)[0]
+
+    # Conservative fallback: single search hit from UI endpoint.
+    if len(projects) == 1 and isinstance(projects[0], dict):
+        slug = projects[0].get("slug")
+        if isinstance(slug, str) and slug.strip():
+            return slug.strip()
+    return None
 
 
 def iter_pcc_projects(
@@ -186,11 +242,14 @@ def fetch_one(name: str, pcc_slug: Optional[str]) -> Dict[str, Any]:
         "error": None,
     }
     last_badge_status: Optional[int] = None
+    saw_only_404_project_pages = True
 
     # 1) Prefer project page: authoritative for "Archived" and numeric score.
     for slug in slugs:
         time.sleep(SLEEP_SECONDS)
-        html = fetch_project_page_html(slug)
+        html, page_status = fetch_project_page_html_with_status(slug)
+        if page_status != 404:
+            saw_only_404_project_pages = False
         if not html:
             continue
         if is_archived_insights_page(html):
@@ -216,6 +275,34 @@ def fetch_one(name: str, pcc_slug: Optional[str]) -> Dict[str, Any]:
             row["health_tier"] = tier
             row["overall_score"] = None
             return row
+
+    # 3) UI-like fallback: if name-based slug attempts all landed on 404, resolve via Insights search.
+    if saw_only_404_project_pages:
+        search_slug = search_insights_slug_by_name(name)
+        if search_slug and search_slug not in slugs:
+            time.sleep(SLEEP_SECONDS)
+            html, _status = fetch_project_page_html_with_status(search_slug)
+            if html:
+                if is_archived_insights_page(html):
+                    row["insights_slug_used"] = search_slug
+                    row["health_tier"] = "Archived"
+                    row["overall_score"] = None
+                    return row
+                score = overall_score_from_page_html(html)
+                time.sleep(SLEEP_SECONDS)
+                tier, last_badge_status = tier_from_badge_head(search_slug)
+                if tier:
+                    row["insights_slug_used"] = search_slug
+                    row["health_tier"] = tier
+                    row["overall_score"] = score
+                    return row
+            tier, last_badge_status = tier_from_badge_head(search_slug)
+            time.sleep(SLEEP_SECONDS)
+            if tier:
+                row["insights_slug_used"] = search_slug
+                row["health_tier"] = tier
+                row["overall_score"] = None
+                return row
 
     row["error"] = "not_found"
     if last_badge_status is not None:
