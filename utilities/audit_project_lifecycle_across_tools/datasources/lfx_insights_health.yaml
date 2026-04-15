@@ -1,6 +1,6 @@
 source: LFX Insights (project page SSR + badge; archived status from page)
 pcc_source_file: datasources/pcc_projects.yaml
-generated_at: '2026-04-13T08:31:46+00:00'
+generated_at: '2026-04-15T15:14:45+00:00'
 projects:
 - name: Argo
   pcc_slug: argo
@@ -96,7 +96,7 @@ projects:
   pcc_slug: fluxcd
   insights_slug_used: fluxcd
   health_tier: Excellent
-  overall_score: 83
+  overall_score: 82
   error: null
 - name: Harbor
   pcc_slug: harbor
@@ -138,7 +138,7 @@ projects:
   pcc_slug: knative
   insights_slug_used: knative
   health_tier: Excellent
-  overall_score: 86
+  overall_score: 85
   error: null
 - name: KubeEdge
   pcc_slug: kubeedge
@@ -155,8 +155,8 @@ projects:
 - name: Kyverno
   pcc_slug: kyverno
   insights_slug_used: kyverno
-  health_tier: Excellent
-  overall_score: 80
+  health_tier: Healthy
+  overall_score: 78
   error: null
 - name: Linkerd
   pcc_slug: linkerd
@@ -216,7 +216,7 @@ projects:
   pcc_slug: artifact-hub
   insights_slug_used: artifact-hub
   health_tier: Healthy
-  overall_score: 71
+  overall_score: 72
   error: null
 - name: Backstage
   pcc_slug: backstage
@@ -264,7 +264,7 @@ projects:
   pcc_slug: emissary
   insights_slug_used: emissary
   health_tier: Healthy
-  overall_score: 71
+  overall_score: 68
   error: null
 - name: Flatcar
   pcc_slug: flatcar
@@ -348,7 +348,7 @@ projects:
   pcc_slug: metal3
   insights_slug_used: metal3
   health_tier: Excellent
-  overall_score: 82
+  overall_score: 80
   error: null
 - name: NATS
   pcc_slug: nats
@@ -426,7 +426,7 @@ projects:
   pcc_slug: wasmcloud
   insights_slug_used: wasmcloud
   health_tier: Healthy
-  overall_score: 74
+  overall_score: 73
   error: null
 - name: Aeraki Mesh
   pcc_slug: aerakimesh
@@ -558,7 +558,7 @@ projects:
   pcc_slug: cohdi
   insights_slug_used: cohdi
   health_tier: Healthy
-  overall_score: 62
+  overall_score: 63
   error: null
 - name: composefs
   pcc_slug: composefs
@@ -660,7 +660,7 @@ projects:
   pcc_slug: hami
   insights_slug_used: hami
   health_tier: Excellent
-  overall_score: 83
+  overall_score: 81
   error: null
 - name: Headlamp
   pcc_slug: headlamp
@@ -708,7 +708,7 @@ projects:
   pcc_slug: interlink
   insights_slug_used: interlink
   health_tier: Stable
-  overall_score: 55
+  overall_score: 56
   error: null
 - name: k0s
   pcc_slug: k0s
@@ -1074,7 +1074,7 @@ projects:
   pcc_slug: parsec
   insights_slug_used: parsec
   health_tier: Healthy
-  overall_score: 77
+  overall_score: 78
   error: null
 - name: Perses
   pcc_slug: perses
@@ -1188,7 +1188,7 @@ projects:
   pcc_slug: sops
   insights_slug_used: sops
   health_tier: Healthy
-  overall_score: 74
+  overall_score: 73
   error: null
 - name: Spiderpool
   pcc_slug: spiderpool
@@ -1224,13 +1224,13 @@ projects:
   pcc_slug: tinkerbell
   insights_slug_used: tinkerbell
   health_tier: Healthy
-  overall_score: 78
+  overall_score: 76
   error: null
 - name: Tokenetes
   pcc_slug: tratteria
   insights_slug_used: tratteria
   health_tier: Stable
-  overall_score: 51
+  overall_score: 48
   error: null
 - name: Tremor
   pcc_slug: tremor
@@ -1242,7 +1242,7 @@ projects:
   pcc_slug: trestlegrc
   insights_slug_used: trestlegrc
   health_tier: Healthy
-  overall_score: 76
+  overall_score: 78
   error: null
 - name: Trickster
   pcc_slug: trickster
@@ -1258,11 +1258,10 @@ projects:
   error: null
 - name: Velero
   pcc_slug: velero
-  insights_slug_used: null
-  health_tier: null
-  overall_score: null
-  error: not_found
-  http_status_last: 404
+  insights_slug_used: vmware-tanzu-velero
+  health_tier: Excellent
+  overall_score: 88
+  error: null
 - name: Vineyard
   pcc_slug: vineyard
   insights_slug_used: vineyard
@@ -1327,11 +1326,10 @@ projects:
   http_status_last: 404
 - name: Apicurio Registry
   pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
-  overall_score: null
-  error: not_found
-  http_status_last: 404
+  insights_slug_used: apicurio-apicurio-registry
+  health_tier: Excellent
+  overall_score: 83
+  error: null
 - name: BLAFS
   pcc_slug: null
   insights_slug_used: null
@@ -1341,11 +1339,10 @@ projects:
   http_status_last: 404
 - name: Cedar
   pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
-  overall_score: null
-  error: not_found
-  http_status_last: 404
+  insights_slug_used: cedar-policy
+  health_tier: Excellent
+  overall_score: 85
+  error: null
 - name: CNCF Toolbox
   pcc_slug: null
   insights_slug_used: null
@@ -1375,11 +1372,10 @@ projects:
   http_status_last: 404
 - name: Curvine
   pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
-  overall_score: null
-  error: not_found
-  http_status_last: 404
+  insights_slug_used: curvineio
+  health_tier: Healthy
+  overall_score: 78
+  error: null
 - name: DevOps AI Toolkit
   pcc_slug: null
   insights_slug_used: null
@@ -1415,11 +1411,10 @@ projects:
   error: null
 - name: ksctl
   pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
-  overall_score: null
-  error: not_found
-  http_status_last: 404
+  insights_slug_used: eksctl-io-eksctl
+  health_tier: Excellent
+  overall_score: 87
+  error: null
 - name: kube-bind
   pcc_slug: null
   insights_slug_used: kube-bind
@@ -1453,11 +1448,10 @@ projects:
   http_status_last: 404
 - name: Schema Driven Configuration
   pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
-  overall_score: null
-  error: not_found
-  http_status_last: 404
+  insights_slug_used: schema-driven-configuration-sdcio
+  health_tier: Healthy
+  overall_score: 66
+  error: null
 - name: SecureBuild
   pcc_slug: null
   insights_slug_used: null
@@ -1557,11 +1551,10 @@ projects:
   error: null
 - name: Fonio
   pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
+  insights_slug_used: ingraind
+  health_tier: Archived
   overall_score: null
-  error: not_found
-  http_status_last: 404
+  error: null
 - name: IO Flow
   pcc_slug: null
   insights_slug_used: null
@@ -1658,11 +1651,10 @@ projects:
   error: null
 - name: Open Service Mesh
   pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
+  insights_slug_used: OSM
+  health_tier: Archived
   overall_score: null
-  error: not_found
-  http_status_last: 404
+  error: null
 - name: OpenELB
   pcc_slug: null
   insights_slug_used: openelb
@@ -1714,11 +1706,10 @@ projects:
   error: null
 - name: Service Mesh Interface
   pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
+  insights_slug_used: smi
+  health_tier: Archived
   overall_score: null
-  error: not_found
-  http_status_last: 404
+  error: null
 - name: Silver Surfer
   pcc_slug: null
   insights_slug_used: null
@@ -1728,11 +1719,10 @@ projects:
   http_status_last: 404
 - name: skooner
   pcc_slug: null
-  insights_slug_used: null
-  health_tier: null
+  insights_slug_used: k8dash
+  health_tier: Archived
   overall_score: null
-  error: not_found
-  http_status_last: 404
+  error: null
 - name: SuperEdge
   pcc_slug: null
   insights_slug_used: superedge
