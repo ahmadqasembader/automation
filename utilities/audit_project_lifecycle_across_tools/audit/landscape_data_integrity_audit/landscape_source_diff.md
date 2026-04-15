@@ -5,9 +5,9 @@ When those two disagree, that is called out. **`landscape.yml` should be updated
 
 ## Summary
 
-- **CNCF landscape items in scope:** 251
-- **With at least one drift / conflict row:** 73
-- **Findings where Landscape and CLOMonitor disagree:** 50
+- **CNCF landscape items in scope:** 250
+- **With at least one drift / conflict row:** 66
+- **Findings where Landscape and CLOMonitor disagree:** 49
 - **No PCC and no CLOMonitor match:** 4
 
 ## Differences (sorted by field)
@@ -54,13 +54,11 @@ Each row is one detected mismatch. Sorted by `Field`, then `Project`.
 | repo_url | composefs | sandbox | https://github.com/containers/composefs | https://github.com/containers/composefs | https://github.com/composefs/composefs | **No** | PCC ('https://github.com/containers/composefs') and CLOMo… |
 | repo_url | container2wasm | sandbox | https://github.com/container2wasm/container2wasm | https://github.com/ktock/container2wasm | https://github.com/container2wasm/container2wasm | Yes | PCC ('https://github.com/ktock/container2wasm') and CLOMo… |
 | repo_url | Cozystack | sandbox | https://github.com/cozystack/cozystack | https://github.com/aenix-io/cozystack/ | https://github.com/cozystack/cozystack | Yes | PCC ('https://github.com/aenix-io/cozystack/') and CLOMon… |
-| repo_url | Cozystack | sandbox | https://github.com/cozystack/cozystack | https://github.com/aenix-io/cozystack/ | https://github.com/cozystack/cozystack | Yes | PCC ('https://github.com/aenix-io/cozystack/') and CLOMon… |
 | repo_url | CubeFS | graduated | https://github.com/cubeFS/cubefs | https://github.com/cubefs/cubefs | https://github.com/chubaofs/chubaofs | **No** | PCC ('https://github.com/cubefs/cubefs') and CLOMonitor (… |
 | repo_url | DevSpace | sandbox | https://github.com/devspace-sh/devspace | https://github.com/loft-sh/devspace | https://github.com/loft-sh/devspace | **No** | Landscape ('https://github.com/devspace-sh/devspace') ≠ P… |
 | repo_url | Drasi | sandbox | http://github.com/drasi-project/drasi-platform | https://github.com/drasi-project | https://github.com/drasi-project/drasi-platform | **No** | Landscape ('http://github.com/drasi-project/drasi-platfor… |
 | repo_url | Easegress | sandbox | https://github.com/easegress-io/easegress | https://github.com/megaease/easegress | https://github.com/megaease/easegress | **No** | Landscape ('https://github.com/easegress-io/easegress') ≠… |
 | repo_url | Eraser | sandbox | https://github.com/eraser-dev/eraser | https://github.com/eraser-dev/eraser | https://github.com/Azure/eraser | **No** | PCC ('https://github.com/eraser-dev/eraser') and CLOMonit… |
-| repo_url | Fluid | incubating | https://github.com/fluid-cloudnative/fluid | https://github.com/Project-Fluid | https://github.com/fluid-cloudnative/fluid | Yes | PCC ('https://github.com/Project-Fluid') and CLOMonitor (… |
 | repo_url | Headlamp | sandbox | https://github.com/kubernetes-sigs/headlamp | https://github.com/kubernetes-sigs/headlamp | https://github.com/headlamp-k8s/headlamp | **No** | PCC ('https://github.com/kubernetes-sigs/headlamp') and C… |
 | repo_url | HolmesGPT | sandbox | https://github.com/HolmesGPT/holmesgpt | https://github.com/holmesgpt/ | https://github.com/robusta-dev/holmesgpt | **No** | PCC ('https://github.com/holmesgpt/') and CLOMonitor ('ht… |
 | repo_url | Inclavare Containers | sandbox | https://github.com/inclavare-containers/inclavare-containers | https://github.com/inclavare-containers/inclavare-containers | https://github.com/alibaba/inclavare-containers | **No** | PCC ('https://github.com/inclavare-containers/inclavare-c… |
@@ -69,18 +67,13 @@ Each row is one detected mismatch. Sorted by `Field`, then `Project`.
 | repo_url | KitOps | sandbox | https://github.com/kitops-ml/kitops | https://github.com/jozu-ai/kitops | https://github.com/jozu-ai/kitops | **No** | Landscape ('https://github.com/kitops-ml/kitops') ≠ PCC (… |
 | repo_url | kpt | sandbox | https://github.com/kptdev/kpt | https://github.com/kptdev | https://github.com/GoogleContainerTools/kpt | **No** | PCC ('https://github.com/kptdev') and CLOMonitor ('https:… |
 | repo_url | Kube-OVN | sandbox | https://github.com/kubeovn/kube-ovn | https://github.com/alauda/kube-ovn | https://github.com/kubeovn/kube-ovn | Yes | PCC ('https://github.com/alauda/kube-ovn') and CLOMonitor… |
-| repo_url | KubeFleet | sandbox | https://github.com/kubefleet-dev/kubefleet | https://github.com/kubefleet-dev/ | https://github.com/Azure/fleet | **No** | PCC ('https://github.com/kubefleet-dev/') and CLOMonitor … |
 | repo_url | KubeVela | incubating | https://github.com/kubevela/kubevela | https://github.com/kubevela | https://github.com/oam-dev/kubevela | **No** | PCC ('https://github.com/kubevela') and CLOMonitor ('http… |
 | repo_url | Kured | sandbox | https://github.com/kubereboot/kured | https://github.com/weaveworks/kured | https://github.com/kubereboot/kured | Yes | PCC ('https://github.com/weaveworks/kured') and CLOMonito… |
-| repo_url | Microcks | sandbox | https://github.com/microcks/microcks | https://github.com/meshery/meshery | https://github.com/microcks/microcks | Yes | PCC ('https://github.com/meshery/meshery') and CLOMonitor… |
 | repo_url | ModelPack | sandbox | https://github.com/modelpack/model-spec | https://github.com/CloudNativeAI/model-spec | https://github.com/modelpack/model-spec | Yes | PCC ('https://github.com/CloudNativeAI/model-spec') and C… |
-| repo_url | Notary Project | incubating | https://github.com/notaryproject/notation | https://github.com/theupdateframework/notary | https://github.com/notaryproject/notation | Yes | PCC ('https://github.com/theupdateframework/notary') and … |
 | repo_url | OpenCost | incubating | https://github.com/opencost/opencost | https://github.com/kubecost/cost-model | https://github.com/opencost/opencost | Yes | PCC ('https://github.com/kubecost/cost-model') and CLOMon… |
 | repo_url | OpenELB | archived | https://github.com/openelb/openelb | https://github.com/kubesphere/openelb | — | — | Landscape ('https://github.com/openelb/openelb') ≠ PCC ('… |
-| repo_url | OpenYurt | incubating | https://github.com/openyurtio/openyurt | https://github.com/OpenYurt | https://github.com/openyurtio/openyurt | Yes | PCC ('https://github.com/OpenYurt') and CLOMonitor ('http… |
 | repo_url | OVN-Kubernetes | sandbox | https://github.com/ovn-kubernetes/ovn-kubernetes | https://github.com/ovn-org/ovn-kubernetes | https://github.com/ovn-kubernetes/ovn-kubernetes | Yes | PCC ('https://github.com/ovn-org/ovn-kubernetes') and CLO… |
 | repo_url | Pixie | sandbox | https://github.com/pixie-io/pixie | https://github.com/pixie-labs/pixie | https://github.com/pixie-io/pixie | Yes | PCC ('https://github.com/pixie-labs/pixie') and CLOMonito… |
-| repo_url | Porter | sandbox | https://github.com/getporter/porter | https://github.com/Porter | https://github.com/getporter/porter | Yes | PCC ('https://github.com/Porter') and CLOMonitor ('https:… |
 | repo_url | Ratify | sandbox | https://github.com/ratify-project/ratify | https://github.com/deislabs/ratify | https://github.com/ratify-project/ratify | Yes | PCC ('https://github.com/deislabs/ratify') and CLOMonitor… |
 | repo_url | Runme Notebooks | sandbox | https://github.com/runmedev/runme | https://github.com/stateful/runme | https://github.com/runmedev/runme | Yes | PCC ('https://github.com/stateful/runme') and CLOMonitor … |
 | repo_url | sealer | archived | https://github.com/sealerio/sealer | https://github.com/alibaba/sealer | — | — | Landscape ('https://github.com/sealerio/sealer') ≠ PCC ('… |
