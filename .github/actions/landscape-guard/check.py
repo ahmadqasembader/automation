@@ -159,6 +159,8 @@ def main():
 
     # For each changed item, check if a .project repo exists
     # Cache org lookups to avoid duplicate API calls
+    # ASSUME_DOT_PROJECT=true skips the API call (useful for testing)
+    assume_dot_project = os.environ.get("ASSUME_DOT_PROJECT", "false").lower() == "true"
     org_cache: dict[str, bool] = {}
     guarded_violations = []
 
@@ -167,7 +169,9 @@ def main():
         if not org:
             continue
 
-        if org not in org_cache:
+        if assume_dot_project:
+            org_cache[org] = True
+        elif org not in org_cache:
             org_cache[org] = has_dot_project_repo(org, token)
 
         if org_cache[org]:

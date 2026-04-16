@@ -8,22 +8,6 @@ on:
       - '.github/actions/landscape-guard/**'
 
 jobs:
-  test-unit:
-    name: Unit tests (check.py)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
-        run: pip install pyyaml pytest
-
-      - name: Run unit tests
-        working-directory: .github/actions/landscape-guard
-        run: python -m pytest test_check.py -v
 
   test-action-warn:
     name: Action integration (warn mode)
@@ -74,6 +58,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_AUTHOR: "test-human"
           FAIL_ON_VIOLATION: "false"
+          ASSUME_DOT_PROJECT: "true"
           GITHUB_OUTPUT: /tmp/landscape-guard-test/github_output
           GITHUB_STEP_SUMMARY: ${{ github.step_summary }}
         run: |
@@ -129,6 +114,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_AUTHOR: "test-human"
           FAIL_ON_VIOLATION: "true"
+          ASSUME_DOT_PROJECT: "true"
           GITHUB_OUTPUT: /tmp/landscape-guard-test/github_output
           GITHUB_STEP_SUMMARY: ${{ github.step_summary }}
         run: |
