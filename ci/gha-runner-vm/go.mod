@@ -1,6 +1,6 @@
 module github.com/cncf/automation/ci/gha-vm-runner/m
 
-go 1.24.2
+go 1.26.1
 
 require (
 	github.com/google/go-github/v71 v71.0.0
