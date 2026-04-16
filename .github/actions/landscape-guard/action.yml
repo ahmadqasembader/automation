@@ -1,0 +1,60 @@
+name: landscape-guard
+description: >
+  Checks landscape.yml PRs for direct modifications to fields managed by
+  dot-project (.project) repos. Posts a warning comment when a project that
+  has adopted .project is edited directly in the landscape.
+
+inputs:
+  github-token:
+    description: "GitHub token for API calls and PR comments"
+    required: true
+  landscape-file:
+    description: "Path to landscape.yml relative to repo root"
+    required: false
+    default: "landscape.yml"
+  fail-on-violation:
+    description: "Set to 'true' to fail the check instead of just warning"
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    # 1. Get the base branch version of landscape.yml
+    - name: Fetch base ref
+      shell: bash
+      env:
+        BASE_REF: ${{ github.base_ref }}
+        LANDSCAPE_FILE: ${{ inputs.landscape-file }}
+      run: |
+        git fetch origin "$BASE_REF" --depth=1
+        git show "origin/$BASE_REF:$LANDSCAPE_FILE" > /tmp/landscape-base.yml
+
+    # 2. Run the checker script
+    - name: Check for managed field changes
+      id: check
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        LANDSCAPE_BASE: /tmp/landscape-base.yml
+        LANDSCAPE_PR: ${{ inputs.landscape-file }}
+        PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        FAIL_ON_VIOLATION: ${{ inputs.fail-on-violation }}
+      run: python3 ${{ github.action_path }}/check.py
+
+    # 3. Post PR comment if violations found
+    - name: Comment on PR
+      if: steps.check.outputs.comment != ''
+      uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require('fs');
+          const comment = fs.readFileSync('/tmp/landscape-guard-comment.md', 'utf8');
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body: comment
+          });
+
