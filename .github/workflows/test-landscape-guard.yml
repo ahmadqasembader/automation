@@ -1,0 +1,235 @@
+# This workflow tests the landscape-guard composite action itself.
+# It runs on PRs that touch the action's code, using fixture data.
+name: Test landscape-guard action
+
+on:
+  pull_request:
+    paths:
+      - '.github/actions/landscape-guard/**'
+
+jobs:
+  test-unit:
+    name: Unit tests (check.py)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml pytest
+
+      - name: Run unit tests
+        working-directory: .github/actions/landscape-guard
+        run: python -m pytest test_check.py -v
+
+  test-action-warn:
+    name: Action integration (warn mode)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      # Create a fake base landscape.yml and a modified PR version
+      - name: Setup test fixtures
+        run: |
+          mkdir -p /tmp/landscape-guard-test
+
+          cat > /tmp/landscape-guard-test/base.yml << 'EOF'
+          landscape:
+            - name: CNCF Projects
+              subcategories:
+                - name: Orchestration
+                  items:
+                    - name: Kubernetes
+                      repo_url: https://github.com/kubernetes/kubernetes
+                      homepage_url: https://kubernetes.io
+                      description: Production-Grade Container Orchestration
+          EOF
+
+          cat > /tmp/landscape-guard-test/pr.yml << 'EOF'
+          landscape:
+            - name: CNCF Projects
+              subcategories:
+                - name: Orchestration
+                  items:
+                    - name: Kubernetes
+                      repo_url: https://github.com/kubernetes/kubernetes
+                      homepage_url: https://kubernetes-changed.io
+                      description: Production-Grade Container Orchestration
+          EOF
+
+      - name: Run checker (expect warning, exit 0)
+        env:
+          LANDSCAPE_BASE: /tmp/landscape-guard-test/base.yml
+          LANDSCAPE_PR: /tmp/landscape-guard-test/pr.yml
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_AUTHOR: "test-human"
+          FAIL_ON_VIOLATION: "false"
+          GITHUB_OUTPUT: /tmp/landscape-guard-test/github_output
+          GITHUB_STEP_SUMMARY: ${{ github.step_summary }}
+        run: |
+          touch /tmp/landscape-guard-test/github_output
+          python .github/actions/landscape-guard/check.py
+          echo "Check passed (warn mode) ✓"
+
+  test-action-block:
+    name: Action integration (block mode)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Setup test fixtures
+        run: |
+          mkdir -p /tmp/landscape-guard-test
+
+          cat > /tmp/landscape-guard-test/base.yml << 'EOF'
+          landscape:
+            - name: CNCF Projects
+              subcategories:
+                - name: Orchestration
+                  items:
+                    - name: Kubernetes
+                      repo_url: https://github.com/kubernetes/kubernetes
+                      homepage_url: https://kubernetes.io
+                      description: Production-Grade Container Orchestration
+          EOF
+
+          cat > /tmp/landscape-guard-test/pr.yml << 'EOF'
+          landscape:
+            - name: CNCF Projects
+              subcategories:
+                - name: Orchestration
+                  items:
+                    - name: Kubernetes
+                      repo_url: https://github.com/kubernetes/kubernetes
+                      homepage_url: https://kubernetes-changed.io
+                      description: Production-Grade Container Orchestration
+          EOF
+
+      - name: Run checker (expect exit 1 in block mode)
+        env:
+          LANDSCAPE_BASE: /tmp/landscape-guard-test/base.yml
+          LANDSCAPE_PR: /tmp/landscape-guard-test/pr.yml
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_AUTHOR: "test-human"
+          FAIL_ON_VIOLATION: "true"
+          GITHUB_OUTPUT: /tmp/landscape-guard-test/github_output
+          GITHUB_STEP_SUMMARY: ${{ github.step_summary }}
+        run: |
+          touch /tmp/landscape-guard-test/github_output
+          set +e
+          python .github/actions/landscape-guard/check.py
+          EXIT_CODE=$?
+          set -e
+          if [ "$EXIT_CODE" -eq 1 ]; then
+            echo "Check correctly failed in block mode ✓"
+          else
+            echo "ERROR: Expected exit code 1 but got $EXIT_CODE"
+            exit 1
+          fi
+
+  test-action-no-change:
+    name: Action integration (no changes)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Setup identical fixtures
+        run: |
+          mkdir -p /tmp/landscape-guard-test
+
+          cat > /tmp/landscape-guard-test/landscape.yml << 'EOF'
+          landscape:
+            - name: CNCF Projects
+              subcategories:
+                - name: Orchestration
+                  items:
+                    - name: Kubernetes
+                      repo_url: https://github.com/kubernetes/kubernetes
+                      homepage_url: https://kubernetes.io
+          EOF
+
+      - name: Run checker (expect clean pass)
+        env:
+          LANDSCAPE_BASE: /tmp/landscape-guard-test/landscape.yml
+          LANDSCAPE_PR: /tmp/landscape-guard-test/landscape.yml
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_AUTHOR: "test-human"
+          FAIL_ON_VIOLATION: "true"
+        run: |
+          python .github/actions/landscape-guard/check.py
+          echo "No changes detected ✓"
+
+  test-action-bot-bypass:
+    name: Action integration (bot bypass)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Setup test fixtures with changes
+        run: |
+          mkdir -p /tmp/landscape-guard-test
+
+          cat > /tmp/landscape-guard-test/base.yml << 'EOF'
+          landscape:
+            - name: CNCF Projects
+              subcategories:
+                - name: Orchestration
+                  items:
+                    - name: Kubernetes
+                      repo_url: https://github.com/kubernetes/kubernetes
+                      homepage_url: https://kubernetes.io
+          EOF
+
+          cat > /tmp/landscape-guard-test/pr.yml << 'EOF'
+          landscape:
+            - name: CNCF Projects
+              subcategories:
+                - name: Orchestration
+                  items:
+                    - name: Kubernetes
+                      repo_url: https://github.com/kubernetes/kubernetes
+                      homepage_url: https://kubernetes-changed.io
+          EOF
+
+      - name: Run checker as bot (expect bypass, exit 0)
+        env:
+          LANDSCAPE_BASE: /tmp/landscape-guard-test/base.yml
+          LANDSCAPE_PR: /tmp/landscape-guard-test/pr.yml
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_AUTHOR: "cncf-ci"
+          FAIL_ON_VIOLATION: "true"
+        run: |
+          python .github/actions/landscape-guard/check.py
+          echo "Bot bypass worked ✓"
+
