@@ -9,17 +9,12 @@ inputs:
     required: false
     default: 'text'
   go_version:
-    description: 'Go version to use'
+    description: 'DEPRECATED: no longer used. Version is read from utilities/dot-project/go.mod'
     required: false
-    default: '1.24'
+    default: ''
 runs:
   using: 'composite'
   steps:
-    - name: Set up Go
-      uses: actions/setup-go@v6
-      with:
-        go-version: ${{ inputs.go_version }}
-
     - name: Checkout automation tools
       uses: actions/checkout@v6
       with:
@@ -27,6 +22,11 @@ runs:
         repository: cncf/automation
         path: _cncf-automation
         sparse-checkout: utilities/dot-project
+
+    - name: Set up Go
+      uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6
+      with:
+        go-version-file: _cncf-automation/utilities/dot-project/go.mod
 
     - name: Build validator
       shell: bash
