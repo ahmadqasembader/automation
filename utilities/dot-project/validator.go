@@ -38,7 +38,7 @@ func NewProjectValidator(configPath string) (*ProjectValidator, error) {
 	return &ProjectValidator{
 		config: config,
 		cache:  cache,
-		client: &http.Client{Timeout: 30 * time.Second},
+		client: &http.Client{Timeout: DefaultHTTPTimeout},
 	}, nil
 }
 
@@ -649,7 +649,7 @@ func NewValidator(cacheDir string) *ProjectValidator {
 	return &ProjectValidator{
 		config: config,
 		cache:  cache,
-		client: &http.Client{Timeout: 30 * time.Second},
+		client: &http.Client{Timeout: DefaultHTTPTimeout},
 	}
 }
 

@@ -16,7 +16,7 @@ import (
 func main() {
 	var (
 		projectFile   = flag.String("project", "", "Path to project.yaml file (required)")
-		thresholdDays = flag.Int("threshold", 180, "Days before considering maintainers stale")
+		thresholdDays = flag.Int("threshold", projects.DefaultStalenessThresholdDays, "Days before considering maintainers stale")
 		lastUpdate    = flag.String("last-update", "", "Override last update date (YYYY-MM-DD format)")
 		outputFormat  = flag.String("output", "text", "Output format: text, json, yaml")
 	)

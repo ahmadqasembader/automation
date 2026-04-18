@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"time"
 
 	"projects"
 )
@@ -66,7 +65,7 @@ func main() {
 		token = os.Getenv("GITHUB_TOKEN")
 	}
 
-	client := &http.Client{Timeout: 30 * time.Second}
+	client := &http.Client{Timeout: projects.DefaultHTTPTimeout}
 
 	fmt.Fprintf(os.Stderr, "Bootstrapping project: %s (slug: %s)\n", projectName, slug)
 
