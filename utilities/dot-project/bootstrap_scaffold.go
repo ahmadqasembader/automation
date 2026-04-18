@@ -3,6 +3,7 @@ package projects
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -258,6 +259,27 @@ var templateFuncs = template.FuncMap{
 	},
 }
 
+// writeScaffoldConfig holds options for WriteScaffold.
+type writeScaffoldConfig struct {
+	force bool
+}
+
+// WriteScaffoldOption configures WriteScaffold behaviour.
+type WriteScaffoldOption func(*writeScaffoldConfig)
+
+// WithForce allows WriteScaffold to overwrite auxiliary files (README.md,
+// .gitignore, workflows, SECURITY.md, CODEOWNERS) but never the core
+// metadata files (project.yaml, maintainers.yaml).
+func WithForce() WriteScaffoldOption {
+	return func(c *writeScaffoldConfig) { c.force = true }
+}
+
+// protectedFiles are never overwritten, even with --force.
+var protectedFiles = map[string]bool{
+	"project.yaml":     true,
+	"maintainers.yaml": true,
+}
+
 // GenerateProjectYAML produces the project.yaml content from a BootstrapResult.
 func GenerateProjectYAML(result *BootstrapResult) ([]byte, error) {
 	tmpl, err := template.New("project").Funcs(templateFuncs).Parse(projectYAMLTemplate)
@@ -319,8 +341,13 @@ func GenerateMaintainersYAML(result *BootstrapResult) ([]byte, error) {
 
 // WriteScaffold writes the complete .project scaffold (8 files) to the
 // specified directory. It will not overwrite existing project.yaml or
-// maintainers.yaml files.
-func WriteScaffold(dir string, result *BootstrapResult) error {
+// maintainers.yaml files. Other files are skipped if they exist unless
+// force is true.
+func WriteScaffold(dir string, result *BootstrapResult, opts ...WriteScaffoldOption) error {
+	cfg := writeScaffoldConfig{}
+	for _, o := range opts {
+		o(&cfg)
+	}
 	// Helper: generate content from a Go template string
 	tmplGen := func(tmplName, tmplContent string) func() ([]byte, error) {
 		return func() ([]byte, error) {
@@ -373,15 +400,43 @@ func WriteScaffold(dir string, result *BootstrapResult) error {
 		files = append(files, scaffoldFile{"CODEOWNERS", tmplGen("codeowners", codeownersTemplate)})
 	}
 
-	// Protect against overwriting core metadata files
-	for _, f := range []string{"project.yaml", "maintainers.yaml"} {
+	// Check if any protected files exist
+	protectedExist := false
+	for f := range protectedFiles {
 		if _, err := os.Stat(filepath.Join(dir, f)); err == nil {
-			return fmt.Errorf("%s already exists in %s; refusing to overwrite", f, dir)
+			protectedExist = true
+			break
+		}
+	}
+
+	// If protected files exist and force is NOT set, error out
+	if protectedExist && !cfg.force {
+		for f := range protectedFiles {
+			if _, err := os.Stat(filepath.Join(dir, f)); err == nil {
+				return fmt.Errorf("%s already exists in %s; refusing to overwrite (use --force to regenerate auxiliary files)", f, dir)
+			}
 		}
 	}
 
 	for _, f := range files {
 		fullPath := filepath.Join(dir, f.path)
+
+		// Never overwrite protected files
+		if protectedFiles[f.path] {
+			if _, err := os.Stat(fullPath); err == nil {
+				log.Printf("Skipping %s: protected file already exists", f.path)
+				continue
+			}
+		}
+
+		// Skip existing auxiliary files unless force is set
+		if !cfg.force {
+			if _, err := os.Stat(fullPath); err == nil {
+				log.Printf("Skipping %s: file already exists (use --force to overwrite)", f.path)
+				continue
+			}
+		}
+
 		if err := os.MkdirAll(filepath.Dir(fullPath), 0755); err != nil {
 			return fmt.Errorf("creating directory for %s: %w", f.path, err)
 		}
