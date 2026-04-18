@@ -571,7 +571,7 @@ func loadCache(dir string) (*Cache, error) {
 
 	// Ensure cache directory exists
 	if err := os.MkdirAll(dir, 0755); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create cache directory %q: %w", dir, err)
 	}
 
 	cachePath := filepath.Join(dir, "cache.json")
@@ -581,11 +581,16 @@ func loadCache(dir string) (*Cache, error) {
 
 	data, err := os.ReadFile(cachePath)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to read cache file %q: %w", cachePath, err)
 	}
 
 	if err := json.Unmarshal(data, &cache.Entries); err != nil {
-		return nil, err
+		log.Printf("Warning: cache file %q is corrupted, removing and starting fresh: %v", cachePath, err)
+		if removeErr := os.Remove(cachePath); removeErr != nil {
+			log.Printf("Warning: failed to remove corrupted cache file %q: %v", cachePath, removeErr)
+		}
+		cache.Entries = make(map[string]CacheEntry)
+		return cache, nil
 	}
 
 	return cache, nil
@@ -644,7 +649,14 @@ func NewValidator(cacheDir string) *ProjectValidator {
 		OutputFormat:   "text",
 	}
 
-	cache, _ := loadCache(cacheDir)
+	cache, err := loadCache(cacheDir)
+	if err != nil {
+		log.Printf("Warning: failed to load cache from %s, starting with empty cache: %v", cacheDir, err)
+		cache = &Cache{
+			Entries: make(map[string]CacheEntry),
+			dir:     cacheDir,
+		}
+	}
 
 	return &ProjectValidator{
 		config: config,
