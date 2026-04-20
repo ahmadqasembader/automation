@@ -29,7 +29,7 @@
 | DevOps AI Toolkit | - | - | forming | - | - | - | - | - |
 | Dexfile | - | - | forming | - | - | - | - | - |
 | Gthulhu | - | - | forming | - | - | - | - | - |
-| Higress | - | - | forming | sandbox | - | - | - | - |
+| Higress | - | - | forming | sandbox | - | - | sandbox | - |
 | Kmesh | - | kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
 | ksctl | - | - | forming | - | - | - | - | - |
 | kube-bind | - | - | forming | - | - | - | - | - |
@@ -320,7 +320,7 @@
 | DevOps AI Toolkit | - | - | forming | - | - | - | - | - |
 | Dexfile | - | - | forming | - | - | - | - | - |
 | Gthulhu | - | - | forming | - | - | - | - | - |
-| Higress | - | - | forming | sandbox | - | - | - | - |
+| Higress | - | - | forming | sandbox | - | - | sandbox | - |
 | Kmesh | - | kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
 | ksctl | - | - | forming | - | - | - | - | - |
 | kube-bind | - | - | forming | - | - | - | - | - |

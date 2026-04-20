@@ -5998,6 +5998,13 @@ landscape:
             logo: edb.svg
             crunchbase: https://www.crunchbase.com/organization/enterprisedb
           - item:
+            name: Endee
+            description: High-performance open-source vector database for AI search, RAG, semantic search, and hybrid retrieval.
+            homepage_url: https://endee.io/
+            repo_url: https://github.com/endee-io/endee
+            logo: endee.svg
+            crunchbase: https://www.crunchbase.com/organization/endee
+          - item:
             name: Epsilla
             description: 10x faster vector database and one-stop RAGaaS platform for building LLM applications
             homepage_url: https://epsilla.com
@@ -8333,18 +8340,23 @@ landscape:
           - item:
             name: OpenChoreo
             description: >-
-              OpenChoreo is a developer platform for Kubernetes offering development and architecture abstractions, a Backstage-powered developer portal, application CI/CD, GitOps, and observability. It composes CNCF and complementary projects into a modular, extensible framework that provides both strong governance for platform engineers and simplified abstractions for developers.
+              A developer platform for Kubernetes that delivers higher-level abstractions with a Backstage-powered portal, CI/CD, GitOps, and built-in observability.
             homepage_url: https://openchoreo.dev
             project: sandbox
             repo_url: https://github.com/openchoreo/openchoreo
             project_org: https://github.com/openchoreo
+            url_for_bestpractices: https://www.bestpractices.dev/en/projects/11819
             logo: openchoreo.svg
+            twitter: https://x.com/openchoreo
             crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
             extra:
               lfx_slug: openchoreo
               accepted: '2026-01-06'
               dev_stats_url: https://openchoreo.devstats.cncf.io/
               artwork_url: https://github.com/cncf/artwork/tree/master/projects/openchoreo
+              linkedin_url: https://www.linkedin.com/company/openchoreo/
+              blog_url: https://openchoreo.dev/blog/
+              slack_url: https://cloud-native.slack.com/messages/openchoreo/
               clomonitor_name: openchoreo
           - item:
             name: OpenKruise
@@ -15770,12 +15782,6 @@ landscape:
             logo: kubedb.svg
             joined: '2024-12-01'
           - item:
-            name: Kubecost (member)
-            homepage_url: https://kubecost.com/
-            logo: kubecost.svg
-            crunchbase: https://www.crunchbase.com/organization/kubecost
-            joined: '2019-09-01'
-          - item:
             name: KubeOps (member)
             homepage_url: https://kubeops.net/en
             logo: kubeops.svg
@@ -16016,6 +16022,12 @@ landscape:
             logo: miraxia-edge-technology.svg
             crunchbase: https://www.crunchbase.com/organization/miraxia-edge-technology-corporation
             joined: '2022-04-01'
+          - item:
+            name: Mistral AI (member)
+            homepage_url: https://mistral.ai
+            logo: mistral-ai.svg
+            crunchbase: https://www.crunchbase.com/organization/mistral-ai
+            joined: '2026-04-01'            
           - item:
             name: mogenius (member)
             homepage_url: https://mogenius.com
