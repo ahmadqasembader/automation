@@ -352,10 +352,17 @@ func TestCache(t *testing.T) {
 		if err := os.MkdirAll(dir, 0755); err != nil {
 			t.Fatal(err)
 		}
-		writeFile(t, filepath.Join(dir, "cache.json"), `{not valid json}`)
-		_, err := loadCache(dir)
-		if err == nil {
-			t.Fatal("expected error for corrupted cache file")
+		cachePath := filepath.Join(dir, "cache.json")
+		writeFile(t, cachePath, `{not valid json}`)
+		cache, err := loadCache(dir)
+		if err != nil {
+			t.Fatalf("expected loadCache to recover from corrupted file, got error: %v", err)
+		}
+		if len(cache.Entries) != 0 {
+			t.Fatalf("expected empty cache after recovery, got %d entries", len(cache.Entries))
+		}
+		if _, statErr := os.Stat(cachePath); !os.IsNotExist(statErr) {
+			t.Fatal("expected corrupted cache file to be removed")
 		}
 	})
 }

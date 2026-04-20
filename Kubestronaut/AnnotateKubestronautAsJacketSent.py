@@ -1,37 +1,63 @@
-import os
 import argparse
+import os
+
 import pygsheets
 from dotenv import load_dotenv
 
-parser = argparse.ArgumentParser(description='Annotate the Kubestronaut sheet to reflect shipping associated to a Kubestronauts email')
+from AckKubestronautAndGKSwagShipped import (
+    FALLBACK_EMAIL_COLUMN,
+    FALLBACK_KUBESTRONAUT_SENT_COLUMN,
+    annotate_email,
+    resolve_infos_columns,
+)
 
-parser.add_argument('-a','--annotation', help='', required=True)
-parser.add_argument('-e','--email', help='', required=True)
-args = vars(parser.parse_args())
 
-annotation = args['annotation']
-email = args['email']
+parser = argparse.ArgumentParser(
+    description="Annotate the Kubestronaut sheet to reflect shipping associated to a Kubestronauts email"
+)
+parser.add_argument("-a", "--annotation", help="", required=True)
+parser.add_argument("-e", "--email", help="", required=True)
+parser.add_argument(
+    "--email-column",
+    default="",
+    help=f"Column containing emails in KUBESTRONAUTS_INFOS. Default: auto-detect, then {FALLBACK_EMAIL_COLUMN}.",
+)
+parser.add_argument(
+    "--kubestronaut-sent-column",
+    default="",
+    help=(
+        "Column to update for Kubestronaut jacket shipping. "
+        f"Default: auto-detect, then {FALLBACK_KUBESTRONAUT_SENT_COLUMN}."
+    ),
+)
+args = parser.parse_args()
 
 load_dotenv()
-# Store credentials
-KUBESTRONAUTS_INFOS = os.getenv('KUBESTRONAUTS_INFOS')
+kubestronauts_infos = os.getenv("KUBESTRONAUTS_INFOS")
+if not kubestronauts_infos:
+    raise ValueError("Missing KUBESTRONAUTS_INFOS in .env")
 
-# Let's open the GoogleSheet to write Kubestronaut info + coupons
-#authorization
-gc = pygsheets.authorize(service_file='kubestronauts-handling-service-file.json')
-#open the google spreadsheet
-sh = gc.open_by_key(KUBESTRONAUTS_INFOS)
-#select the first sheet
+gc = pygsheets.authorize(service_file="kubestronauts-handling-service-file.json")
+sh = gc.open_by_key(kubestronauts_infos)
 wks = sh[0]
 
-list_kubestronauts_cells=wks.find(pattern=email, cols=(13,13), matchEntireCell=True)
-number_matching_cells = len(list_kubestronauts_cells)
+email_column, kubestronaut_sent_column, _ = resolve_infos_columns(
+    wks,
+    email_column=args.email_column.strip().upper(),
+    kubestronaut_sent_column=args.kubestronaut_sent_column.strip().upper(),
+    golden_sent_columns=tuple(),
+)
+print(
+    "KUBESTRONAUTS_INFOS columns: "
+    f"email={email_column}, kubestronaut_shipped={kubestronaut_sent_column}"
+)
 
-if (number_matching_cells==1):
-        email_cell = list_kubestronauts_cells[0]
-        wks.update_value("T"+str(email_cell.row),annotation)
-        print(email+" : OK")
-elif (number_matching_cells==0):
-        print("Kubestronaut with email "+email+" not found !!")
-else:
-        print("Kubestronaut with email "+email+" found multiple times !!")
+_, message = annotate_email(
+    infos_worksheet=wks,
+    email=args.email,
+    annotation=args.annotation,
+    email_column=email_column,
+    target_columns=(kubestronaut_sent_column,),
+    dry_run=False,
+)
+print(message)

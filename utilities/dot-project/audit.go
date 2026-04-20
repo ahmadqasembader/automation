@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
-	"time"
 )
 
 // AuditResult represents the result of checking a project's governance/security references
@@ -28,7 +27,7 @@ type AuditCheck struct {
 // AuditProject checks that all referenced URLs in a project are accessible
 func AuditProject(project Project, client *http.Client) AuditResult {
 	if client == nil {
-		client = &http.Client{Timeout: 10 * time.Second}
+		client = &http.Client{Timeout: DefaultHTTPTimeout}
 	}
 
 	result := AuditResult{

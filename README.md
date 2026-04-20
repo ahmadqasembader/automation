@@ -14,7 +14,11 @@ Tools and scripts for managing self-hosted GitHub Actions runners on CNCF's infr
 
 For more information, see the [CI documentation](./ci/README.md).
 
-### [Additional Tools - Add other major tools here]
+### Project Status Audit
+
+Cross-checks CNCF project lifecycle data from **LFX PCC** against Landscape, CLOMonitor, maintainers CSV, DevStats, and Artwork, and optionally adds **[LFX Insights](https://insights.linuxfoundation.org/)** **Insights Health** (tier, including **Archived** when shown on Insights) and **Health Score** (number when applicable) when `lfx_insights_health.yaml` is present (informational only; not used for anomaly detection).
+
+See [utilities/audit_project_lifecycle_across_tools/README.md](./utilities/audit_project_lifecycle_across_tools/README.md) for workflows, local usage, and file layout.
 
 ## Contributing
 

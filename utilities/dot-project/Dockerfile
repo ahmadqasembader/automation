@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.26-alpine AS builder
+FROM golang:1.26.1-alpine AS builder
 
 RUN apk add --no-cache git
 
@@ -17,7 +17,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /bin/validator ./cmd/v
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /bin/landscape-updater ./cmd/landscape-updater
 
 # Runtime stage
-FROM alpine:3.20
+FROM alpine:3.23
 
 WORKDIR /app
 

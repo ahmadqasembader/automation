@@ -1,1 +1,20 @@
 Coupons-*
+
+# Local credentials / tokens
+gmail-token.json
+kubestronauts-handling-service-file.json
+**/kubestronauts-handling-service-file.json
+
+# Local exports containing personal data or external spreadsheet/workflow IDs
+Kubestronaut.json
+Kubestronaut_manual_matching.json
+KubestronautsSlackManager*.json
+shopify-variant-ids.json
+TOKEN
+*.csv
+*.tsv
+*_ToBe_*.txt
+*_To_Be_*.txt
+GoldenKubestronauts_ToBe_Annotated.txt
+
+Rendering

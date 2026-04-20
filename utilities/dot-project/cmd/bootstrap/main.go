@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"time"
 
 	"projects"
 )
@@ -66,7 +65,7 @@ func main() {
 		token = os.Getenv("GITHUB_TOKEN")
 	}
 
-	client := &http.Client{Timeout: 30 * time.Second}
+	client := &http.Client{Timeout: projects.DefaultHTTPTimeout}
 
 	fmt.Fprintf(os.Stderr, "Bootstrapping project: %s (slug: %s)\n", projectName, slug)
 
@@ -118,9 +117,46 @@ func main() {
 		}
 	}
 
+	// Phase 3.5: Search for TOC/sandbox onboarding issue (if no URL from landscape)
+	var tocURL string
+	if !*skipGH && token != "" && (landscapeData == nil || landscapeData.AnnualReviewURL == "") {
+		fmt.Fprintf(os.Stderr, "  Searching for TOC/sandbox onboarding issue...\n")
+		var err error
+		tocURL, err = projects.SearchTOCIssues(projectName, org, token, client, "")
+		if err != nil {
+			log.Printf("  Warning: TOC issue search failed: %v", err)
+		} else if tocURL != "" {
+			fmt.Fprintf(os.Stderr, "  Found TOC/onboarding issue: %s\n", tocURL)
+		} else {
+			fmt.Fprintf(os.Stderr, "  No TOC/onboarding issue found\n")
+		}
+	}
+
 	// Phase 4: Merge data
 	fmt.Fprintf(os.Stderr, "  Merging data sources...\n")
 	result := projects.MergeBootstrapData(slug, landscapeData, cloProject, ghData)
+
+	// Apply TOC issue URL from search if not already set by landscape
+	if result.TOCIssueURL == "" && tocURL != "" {
+		result.TOCIssueURL = tocURL
+		result.Sources["toc_issue_url"] = "github_search"
+		// Remove the TOC issue TODO since we found one
+		var filteredTODOs []string
+		for _, todo := range result.TODOs {
+			if todo != "Add maturity_log entry with TOC issue URL" {
+				filteredTODOs = append(filteredTODOs, todo)
+			}
+		}
+		result.TODOs = filteredTODOs
+	}
+
+	// Ensure org/repo are set even if GitHub fetch was skipped
+	if result.GitHubOrg == "" && org != "" {
+		result.GitHubOrg = org
+	}
+	if result.GitHubRepo == "" && repo != "" {
+		result.GitHubRepo = repo
+	}
 
 	// Phase 5: Generate output
 	if *dryRun {
@@ -148,7 +184,33 @@ func main() {
 		fmt.Fprintf(os.Stderr, "\nScaffold written to %s:\n", *outputDir)
 		fmt.Fprintf(os.Stderr, "  - project.yaml\n")
 		fmt.Fprintf(os.Stderr, "  - maintainers.yaml\n")
+		fmt.Fprintf(os.Stderr, "  - README.md\n")
+		if result.SecurityPolicyURL == "" {
+			fmt.Fprintf(os.Stderr, "  - SECURITY.md\n")
+		} else {
+			fmt.Fprintf(os.Stderr, "  - SECURITY.md (skipped: using %s)\n", result.SecurityPolicyURL)
+		}
+		fmt.Fprintf(os.Stderr, "  - CODEOWNERS\n")
+		fmt.Fprintf(os.Stderr, "  - .gitignore\n")
 		fmt.Fprintf(os.Stderr, "  - .github/workflows/validate.yaml\n")
+		fmt.Fprintf(os.Stderr, "  - .github/workflows/update-landscape.yml\n")
+
+		// Report discovered file URLs
+		if result.SecurityPolicyURL != "" || result.ContributingURL != "" || result.CodeOfConductURL != "" || result.LicenseURL != "" {
+			fmt.Fprintln(os.Stderr, "\nDiscovered existing files:")
+			if result.SecurityPolicyURL != "" {
+				fmt.Fprintf(os.Stderr, "  SECURITY.md: %s\n", result.SecurityPolicyURL)
+			}
+			if result.ContributingURL != "" {
+				fmt.Fprintf(os.Stderr, "  CONTRIBUTING.md: %s\n", result.ContributingURL)
+			}
+			if result.CodeOfConductURL != "" {
+				fmt.Fprintf(os.Stderr, "  CODE_OF_CONDUCT: %s\n", result.CodeOfConductURL)
+			}
+			if result.LicenseURL != "" {
+				fmt.Fprintf(os.Stderr, "  LICENSE: %s\n", result.LicenseURL)
+			}
+		}
 	}
 
 	// Show TODOs

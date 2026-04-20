@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
@@ -131,6 +132,42 @@ func TestFetchFromCLOMonitor(t *testing.T) {
 		_, err := fetchFromCLOMonitor("test", server.Client(), server.URL)
 		if err == nil {
 			t.Fatal("expected error for server error")
+		}
+	})
+
+	t.Run("handles numeric accepted_at and updated_at from API", func(t *testing.T) {
+		// The real CLOMonitor API returns accepted_at and updated_at as Unix
+		// timestamps (integers), not strings. This test sends raw JSON matching
+		// the real API format to verify unmarshalling works.
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			w.Write([]byte(`[{
+				"name": "aeraki-mesh",
+				"display_name": "Aeraki Mesh",
+				"description": "Manage any layer-7 protocol in Istio service mesh",
+				"home_url": "https://aeraki.net",
+				"maturity": "sandbox",
+				"foundation": "cncf",
+				"accepted_at": 1592438400,
+				"updated_at": 1773817304,
+				"category": "Orchestration & Management",
+				"subcategory": "Service Mesh"
+			}]`))
+		}))
+		defer server.Close()
+
+		result, err := fetchFromCLOMonitor("Aeraki Mesh", server.Client(), server.URL)
+		if err != nil {
+			t.Fatalf("fetchFromCLOMonitor() error = %v", err)
+		}
+		if result == nil {
+			t.Fatal("fetchFromCLOMonitor() returned nil")
+		}
+		if result.AcceptedAt != 1592438400 {
+			t.Errorf("AcceptedAt = %d, want 1592438400", result.AcceptedAt)
+		}
+		if result.UpdatedAt != 1773817304 {
+			t.Errorf("UpdatedAt = %d, want 1773817304", result.UpdatedAt)
 		}
 	})
 }
@@ -288,6 +325,53 @@ func TestFetchFromGitHub(t *testing.T) {
 		}
 		if gotAuthHeader != "token my-token" {
 			t.Errorf("Authorization header = %q, want %q", gotAuthHeader, "token my-token")
+		}
+	})
+}
+
+func TestCommunityProfileHTMLURLs(t *testing.T) {
+	t.Run("captures html_url from community profile files", func(t *testing.T) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			switch r.URL.Path {
+			case "/repos/test-org/test-repo":
+				json.NewEncoder(w).Encode(GitHubRepoData{Name: "test-repo", FullName: "test-org/test-repo", DefaultBranch: "main"})
+			case "/orgs/test-org":
+				json.NewEncoder(w).Encode(GitHubOrgData{Login: "test-org"})
+			case "/repos/test-org/test-repo/community/profile":
+				w.Write([]byte(`{
+					"health_percentage": 90,
+					"files": {
+						"code_of_conduct": {"key": "contributor_covenant", "name": "Contributor Covenant", "url": "https://api.github.com/codes_of_conduct/contributor_covenant", "html_url": "https://github.com/test-org/.github/blob/main/CODE_OF_CONDUCT.md"},
+						"code_of_conduct_file": {"url": "https://api.github.com/repos/test-org/.github/contents/CODE_OF_CONDUCT.md", "html_url": "https://github.com/test-org/.github/blob/main/CODE_OF_CONDUCT.md"},
+						"contributing": {"url": "https://api.github.com/repos/test-org/test-repo/contents/CONTRIBUTING.md", "html_url": "https://github.com/test-org/test-repo/blob/main/CONTRIBUTING.md"},
+						"license": {"key": "apache-2.0", "name": "Apache License 2.0", "spdx_id": "Apache-2.0", "url": "https://api.github.com/licenses/apache-2.0", "html_url": "https://github.com/test-org/test-repo/blob/main/LICENSE"}
+					}
+				}`))
+			case "/repos/test-org/test-repo/contents/":
+				json.NewEncoder(w).Encode([]GitHubContentEntry{})
+			case "/repos/test-org/test-repo/contents/.github":
+				w.WriteHeader(http.StatusNotFound)
+			case "/repos/test-org/.github/contents/":
+				w.WriteHeader(http.StatusNotFound)
+			default:
+				http.NotFound(w, r)
+			}
+		}))
+		defer server.Close()
+
+		result, err := fetchFromGitHub("test-org", "test-repo", "", server.Client(), server.URL)
+		if err != nil {
+			t.Fatalf("fetchFromGitHub() error = %v", err)
+		}
+		if result.ContributingURL != "https://github.com/test-org/test-repo/blob/main/CONTRIBUTING.md" {
+			t.Errorf("ContributingURL = %q, want CONTRIBUTING.md html_url", result.ContributingURL)
+		}
+		if result.CodeOfConductURL != "https://github.com/test-org/.github/blob/main/CODE_OF_CONDUCT.md" {
+			t.Errorf("CodeOfConductURL = %q, want CODE_OF_CONDUCT.md html_url", result.CodeOfConductURL)
+		}
+		if result.LicenseURL != "https://github.com/test-org/test-repo/blob/main/LICENSE" {
+			t.Errorf("LicenseURL = %q, want LICENSE html_url", result.LicenseURL)
 		}
 	})
 }
@@ -500,6 +584,187 @@ func TestFetchFromLandscape(t *testing.T) {
 	})
 }
 
+func TestFetchFromLandscape_ExtraFields(t *testing.T) {
+	t.Run("extracts slack_url and accepted date from extra", func(t *testing.T) {
+		landscapeYAML := `landscape:
+  - category:
+    name: Orchestration & Management
+    subcategories:
+      - subcategory:
+        name: Service Mesh
+        items:
+          - item:
+            name: Aeraki Mesh
+            homepage_url: https://www.aeraki.net/
+            repo_url: https://github.com/aeraki-mesh/aeraki
+            project: sandbox
+            extra:
+              slack_url: "https://cloud-native.slack.com/messages/aeraki-mesh"
+              chat_channel: "#aeraki-mesh"
+              accepted: "2022-06-17"
+              annual_review_url: "https://github.com/cncf/toc/pull/1143"
+              package_manager_url: "https://hub.docker.com/r/aeraki/aeraki"
+`
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte(landscapeYAML))
+		}))
+		defer server.Close()
+
+		result, err := fetchFromLandscape("Aeraki Mesh", &http.Client{}, server.URL)
+		if err != nil {
+			t.Fatalf("fetchFromLandscape() error = %v", err)
+		}
+		if result == nil {
+			t.Fatal("expected match")
+		}
+		if result.SlackURL != "https://cloud-native.slack.com/messages/aeraki-mesh" {
+			t.Errorf("SlackURL = %q, want slack URL", result.SlackURL)
+		}
+		if result.ChatChannel != "#aeraki-mesh" {
+			t.Errorf("ChatChannel = %q, want #aeraki-mesh", result.ChatChannel)
+		}
+		if result.AcceptedDate != "2022-06-17" {
+			t.Errorf("AcceptedDate = %q, want 2022-06-17", result.AcceptedDate)
+		}
+		if result.AnnualReviewURL != "https://github.com/cncf/toc/pull/1143" {
+			t.Errorf("AnnualReviewURL = %q, want review URL", result.AnnualReviewURL)
+		}
+		if result.PackageManagerURL != "https://hub.docker.com/r/aeraki/aeraki" {
+			t.Errorf("PackageManagerURL = %q, want docker URL", result.PackageManagerURL)
+		}
+	})
+}
+
+func TestDetectDCOCLA(t *testing.T) {
+	t.Run("detects DCO from signed-off-by in commits", func(t *testing.T) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			if strings.Contains(r.URL.Path, "/commits") {
+				json.NewEncoder(w).Encode([]map[string]interface{}{
+					{"commit": map[string]interface{}{"message": "feat: add feature\n\nSigned-off-by: Alice <alice@example.com>"}},
+					{"commit": map[string]interface{}{"message": "fix: bug fix\n\nSigned-off-by: Bob <bob@example.com>"}},
+					{"commit": map[string]interface{}{"message": "chore: update deps"}},
+				})
+				return
+			}
+			if strings.Contains(r.URL.Path, "/contents/.github") {
+				json.NewEncoder(w).Encode([]GitHubContentEntry{})
+				return
+			}
+			http.NotFound(w, r)
+		}))
+		defer server.Close()
+
+		hasDCO, hasCLA, err := detectDCOCLA("test-org", "test-repo", "", server.Client(), server.URL)
+		if err != nil {
+			t.Fatalf("detectDCOCLA() error = %v", err)
+		}
+		if !hasDCO {
+			t.Error("expected hasDCO = true")
+		}
+		if hasCLA {
+			t.Error("expected hasCLA = false")
+		}
+	})
+
+	t.Run("detects CLA from config file", func(t *testing.T) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			if strings.Contains(r.URL.Path, "/commits") {
+				json.NewEncoder(w).Encode([]map[string]interface{}{
+					{"commit": map[string]interface{}{"message": "feat: something"}},
+				})
+				return
+			}
+			if strings.Contains(r.URL.Path, "/contents/.github") {
+				json.NewEncoder(w).Encode([]GitHubContentEntry{
+					{Name: "cla.yml", Type: "file"},
+				})
+				return
+			}
+			http.NotFound(w, r)
+		}))
+		defer server.Close()
+
+		hasDCO, hasCLA, err := detectDCOCLA("test-org", "test-repo", "", server.Client(), server.URL)
+		if err != nil {
+			t.Fatalf("detectDCOCLA() error = %v", err)
+		}
+		if hasDCO {
+			t.Error("expected hasDCO = false")
+		}
+		if !hasCLA {
+			t.Error("expected hasCLA = true")
+		}
+	})
+
+	t.Run("handles API errors gracefully", func(t *testing.T) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.WriteHeader(http.StatusInternalServerError)
+		}))
+		defer server.Close()
+
+		hasDCO, hasCLA, err := detectDCOCLA("test-org", "test-repo", "", server.Client(), server.URL)
+		// Should not error — just return defaults
+		if err != nil {
+			t.Fatalf("detectDCOCLA() should not error, got %v", err)
+		}
+		if hasDCO || hasCLA {
+			t.Error("expected both false on API failure")
+		}
+	})
+}
+
+func TestSearchTOCIssues(t *testing.T) {
+	t.Run("finds onboarding issue in cncf/sandbox", func(t *testing.T) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			if strings.Contains(r.URL.Path, "/search/issues") {
+				json.NewEncoder(w).Encode(map[string]interface{}{
+					"total_count": 1,
+					"items": []map[string]interface{}{
+						{
+							"html_url": "https://github.com/cncf/sandbox/issues/174",
+							"title":    "[PROJECT ONBOARDING] Aeraki Mesh",
+							"number":   174,
+						},
+					},
+				})
+				return
+			}
+			http.NotFound(w, r)
+		}))
+		defer server.Close()
+
+		url, err := SearchTOCIssues("Aeraki Mesh", "aeraki-mesh", "", server.Client(), server.URL)
+		if err != nil {
+			t.Fatalf("SearchTOCIssues() error = %v", err)
+		}
+		if url != "https://github.com/cncf/sandbox/issues/174" {
+			t.Errorf("url = %q, want sandbox issue URL", url)
+		}
+	})
+
+	t.Run("returns empty when no results", func(t *testing.T) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(map[string]interface{}{
+				"total_count": 0,
+				"items":       []map[string]interface{}{},
+			})
+		}))
+		defer server.Close()
+
+		url, err := SearchTOCIssues("Nonexistent", "nonexistent", "", server.Client(), server.URL)
+		if err != nil {
+			t.Fatalf("SearchTOCIssues() error = %v", err)
+		}
+		if url != "" {
+			t.Errorf("expected empty URL, got %q", url)
+		}
+	})
+}
+
 func TestFuzzyMatch(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -557,6 +822,126 @@ func TestFuzzyMatch(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestMergeBootstrapData_DCOCLA(t *testing.T) {
+	t.Run("propagates DCO/CLA from GitHub data", func(t *testing.T) {
+		github := &GitHubData{
+			Repo:   &GitHubRepoData{Name: "test", FullName: "test-org/test"},
+			Org:    &GitHubOrgData{Login: "test-org"},
+			HasDCO: true,
+			HasCLA: false,
+		}
+
+		result := mergeBootstrapData("test", nil, nil, github)
+
+		if !result.HasDCO {
+			t.Error("HasDCO should be true")
+		}
+		if result.HasCLA {
+			t.Error("HasCLA should be false")
+		}
+		if result.Sources["identity_type"] != "github" {
+			t.Errorf("Sources[identity_type] = %q, want github", result.Sources["identity_type"])
+		}
+	})
+
+	t.Run("omits identity_type TODO when DCO detected", func(t *testing.T) {
+		github := &GitHubData{
+			Repo:   &GitHubRepoData{Name: "test", FullName: "test-org/test"},
+			Org:    &GitHubOrgData{Login: "test-org"},
+			HasDCO: true,
+		}
+
+		result := mergeBootstrapData("test", nil, nil, github)
+
+		for _, todo := range result.TODOs {
+			if strings.Contains(todo, "identity_type") {
+				t.Errorf("should not have identity_type TODO when DCO detected, got: %q", todo)
+			}
+		}
+	})
+
+	t.Run("keeps identity_type TODO when neither detected", func(t *testing.T) {
+		github := &GitHubData{
+			Repo: &GitHubRepoData{Name: "test", FullName: "test-org/test"},
+			Org:  &GitHubOrgData{Login: "test-org"},
+		}
+
+		result := mergeBootstrapData("test", nil, nil, github)
+
+		found := false
+		for _, todo := range result.TODOs {
+			if strings.Contains(todo, "identity_type") {
+				found = true
+			}
+		}
+		if !found {
+			t.Error("should have identity_type TODO when neither DCO nor CLA detected")
+		}
+	})
+}
+
+func TestMergeBootstrapData_ExtraFields(t *testing.T) {
+	t.Run("sets slack channel from landscape extra", func(t *testing.T) {
+		landscape := &LandscapeData{
+			Name:        "Test Project",
+			Maturity:    "sandbox",
+			SlackURL:    "https://cloud-native.slack.com/messages/test-project",
+			ChatChannel: "#test-project",
+		}
+
+		result := mergeBootstrapData("test-project", landscape, nil, nil)
+
+		if result.CNCFSlackChannel != "#test-project" {
+			t.Errorf("CNCFSlackChannel = %q, want #test-project", result.CNCFSlackChannel)
+		}
+	})
+
+	t.Run("derives slack channel from slack_url when chat_channel missing", func(t *testing.T) {
+		landscape := &LandscapeData{
+			Name:     "Test Project",
+			Maturity: "sandbox",
+			SlackURL: "https://cloud-native.slack.com/messages/test-project",
+		}
+
+		result := mergeBootstrapData("test-project", landscape, nil, nil)
+
+		if result.CNCFSlackChannel != "#test-project" {
+			t.Errorf("CNCFSlackChannel = %q, want #test-project", result.CNCFSlackChannel)
+		}
+	})
+
+	t.Run("sets accepted date from landscape extra", func(t *testing.T) {
+		landscape := &LandscapeData{
+			Name:         "Test Project",
+			Maturity:     "sandbox",
+			AcceptedDate: "2022-06-17",
+		}
+
+		result := mergeBootstrapData("test-project", landscape, nil, nil)
+
+		if result.AcceptedDate.IsZero() {
+			t.Error("AcceptedDate should be set")
+		}
+		if result.AcceptedDate.Format("2006-01-02") != "2022-06-17" {
+			t.Errorf("AcceptedDate = %v, want 2022-06-17", result.AcceptedDate)
+		}
+	})
+
+	t.Run("sets TOC issue URL from landscape annual_review_url", func(t *testing.T) {
+		landscape := &LandscapeData{
+			Name:            "Test Project",
+			Maturity:        "sandbox",
+			AnnualReviewURL: "https://github.com/cncf/toc/pull/1143",
+		}
+
+		result := mergeBootstrapData("test-project", landscape, nil, nil)
+
+		if result.TOCIssueURL != "https://github.com/cncf/toc/pull/1143" {
+			t.Errorf("TOCIssueURL = %q, want toc pull URL", result.TOCIssueURL)
+		}
+	})
 }
 
 func TestMergeBootstrapData(t *testing.T) {
@@ -661,6 +1046,124 @@ func TestMergeBootstrapData(t *testing.T) {
 		}
 		if result.Website != "https://test.io" {
 			t.Errorf("Website = %q, want %q (fallback to GitHub)", result.Website, "https://test.io")
+		}
+	})
+
+	t.Run("propagates discovered file URLs from GitHub", func(t *testing.T) {
+		github := &GitHubData{
+			Repo: &GitHubRepoData{
+				Name:     "test-repo",
+				FullName: "test-org/test-repo",
+				HTMLURL:  "https://github.com/test-org/test-repo",
+			},
+			Org: &GitHubOrgData{
+				Login: "test-org",
+			},
+			SecurityPolicyURL: "https://github.com/test-org/.github/blob/main/SECURITY.md",
+			ContributingURL:   "https://github.com/test-org/test-repo/blob/main/CONTRIBUTING.md",
+			CodeOfConductURL:  "https://github.com/test-org/.github/blob/main/CODE_OF_CONDUCT.md",
+			LicenseURL:        "https://github.com/test-org/test-repo/blob/main/LICENSE",
+		}
+
+		result := mergeBootstrapData("test-project", nil, nil, github)
+
+		if result.SecurityPolicyURL != "https://github.com/test-org/.github/blob/main/SECURITY.md" {
+			t.Errorf("SecurityPolicyURL = %q, want org .github URL", result.SecurityPolicyURL)
+		}
+		if !result.HasSecurityPolicy {
+			t.Error("HasSecurityPolicy should be true when SecurityPolicyURL is set")
+		}
+		if result.ContributingURL != "https://github.com/test-org/test-repo/blob/main/CONTRIBUTING.md" {
+			t.Errorf("ContributingURL = %q, want repo CONTRIBUTING.md URL", result.ContributingURL)
+		}
+		if result.CodeOfConductURL != "https://github.com/test-org/.github/blob/main/CODE_OF_CONDUCT.md" {
+			t.Errorf("CodeOfConductURL = %q, want org CODE_OF_CONDUCT.md URL", result.CodeOfConductURL)
+		}
+		if result.LicenseURL != "https://github.com/test-org/test-repo/blob/main/LICENSE" {
+			t.Errorf("LicenseURL = %q, want repo LICENSE URL", result.LicenseURL)
+		}
+		if result.Sources["security_policy"] != "github" {
+			t.Errorf("Sources[security_policy] = %q, want github", result.Sources["security_policy"])
+		}
+	})
+}
+
+func TestDiscoverSecurityPolicy(t *testing.T) {
+	t.Run("discovers SECURITY.md in repo root", func(t *testing.T) {
+		var serverURL string
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			switch r.URL.Path {
+			case "/repos/test-org/test-repo":
+				json.NewEncoder(w).Encode(GitHubRepoData{Name: "test-repo", FullName: "test-org/test-repo", DefaultBranch: "main"})
+			case "/orgs/test-org":
+				json.NewEncoder(w).Encode(GitHubOrgData{Login: "test-org"})
+			case "/repos/test-org/test-repo/community/profile":
+				json.NewEncoder(w).Encode(GitHubCommunityProfile{})
+			case "/repos/test-org/test-repo/contents/":
+				json.NewEncoder(w).Encode([]GitHubContentEntry{
+					{Name: "SECURITY.md", Path: "SECURITY.md", Type: "file",
+						DownloadURL: serverURL + "/raw/SECURITY.md",
+						HTMLURL:     "https://github.com/test-org/test-repo/blob/main/SECURITY.md"},
+				})
+			case "/raw/SECURITY.md":
+				w.Write([]byte("# Security Policy\nReport vulnerabilities..."))
+			case "/repos/test-org/test-repo/contents/.github":
+				w.WriteHeader(http.StatusNotFound)
+			case "/repos/test-org/.github/contents/":
+				w.WriteHeader(http.StatusNotFound)
+			default:
+				http.NotFound(w, r)
+			}
+		}))
+		defer server.Close()
+		serverURL = server.URL
+
+		result, err := fetchFromGitHub("test-org", "test-repo", "", server.Client(), server.URL)
+		if err != nil {
+			t.Fatalf("fetchFromGitHub() error = %v", err)
+		}
+		if result.SecurityPolicyURL != "https://github.com/test-org/test-repo/blob/main/SECURITY.md" {
+			t.Errorf("SecurityPolicyURL = %q, want repo root SECURITY.md URL", result.SecurityPolicyURL)
+		}
+	})
+
+	t.Run("discovers SECURITY.md in org .github repo", func(t *testing.T) {
+		var serverURL string
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			switch r.URL.Path {
+			case "/repos/test-org/test-repo":
+				json.NewEncoder(w).Encode(GitHubRepoData{Name: "test-repo", FullName: "test-org/test-repo", DefaultBranch: "main"})
+			case "/orgs/test-org":
+				json.NewEncoder(w).Encode(GitHubOrgData{Login: "test-org"})
+			case "/repos/test-org/test-repo/community/profile":
+				json.NewEncoder(w).Encode(GitHubCommunityProfile{})
+			case "/repos/test-org/test-repo/contents/":
+				json.NewEncoder(w).Encode([]GitHubContentEntry{})
+			case "/repos/test-org/test-repo/contents/.github":
+				json.NewEncoder(w).Encode([]GitHubContentEntry{})
+			case "/repos/test-org/.github/contents/":
+				json.NewEncoder(w).Encode([]GitHubContentEntry{
+					{Name: "SECURITY.md", Path: "SECURITY.md", Type: "file",
+						DownloadURL: serverURL + "/raw/org-SECURITY.md",
+						HTMLURL:     "https://github.com/test-org/.github/blob/main/SECURITY.md"},
+				})
+			case "/raw/org-SECURITY.md":
+				w.Write([]byte("# Org Security Policy"))
+			default:
+				http.NotFound(w, r)
+			}
+		}))
+		defer server.Close()
+		serverURL = server.URL
+
+		result, err := fetchFromGitHub("test-org", "test-repo", "", server.Client(), server.URL)
+		if err != nil {
+			t.Fatalf("fetchFromGitHub() error = %v", err)
+		}
+		if result.SecurityPolicyURL != "https://github.com/test-org/.github/blob/main/SECURITY.md" {
+			t.Errorf("SecurityPolicyURL = %q, want org .github SECURITY.md URL", result.SecurityPolicyURL)
 		}
 	})
 }
