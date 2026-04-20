@@ -542,7 +542,7 @@ func fuzzyMatch(query string, candidates []string) (best string, score float64) 
 				if len(candidateWords) > total {
 					total = len(candidateWords)
 				}
-				s = float64(matchCount) / float64(total) * 0.5
+				s = float64(matchCount) / float64(total) * DefaultFuzzyMatchWeight
 			}
 		}
 
@@ -578,7 +578,7 @@ func detectDCOCLA(org, repo, token string, client *http.Client, baseURL string) 
 	var hasDCO, hasCLA bool
 
 	// Check recent commits for DCO (Signed-off-by)
-	resp, err := doGet(fmt.Sprintf("/repos/%s/%s/commits?per_page=20", org, repo))
+	resp, err := doGet(fmt.Sprintf("/repos/%s/%s/commits?per_page=%d", org, repo, DefaultDCOCommitSampleSize))
 	if err == nil && resp.StatusCode == http.StatusOK {
 		var commits []struct {
 			Commit struct {
@@ -592,8 +592,8 @@ func detectDCOCLA(org, repo, token string, client *http.Client, baseURL string) 
 					signedCount++
 				}
 			}
-			// If >50% of commits have Signed-off-by, likely using DCO
-			if len(commits) > 0 && float64(signedCount)/float64(len(commits)) > 0.5 {
+			// If more than DefaultDCOSignedRatio of commits have Signed-off-by, likely using DCO
+			if len(commits) > 0 && float64(signedCount)/float64(len(commits)) > DefaultDCOSignedRatio {
 				hasDCO = true
 			}
 		}
