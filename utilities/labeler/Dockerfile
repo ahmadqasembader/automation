@@ -1,5 +1,5 @@
 # Use the official Golang image as a base image
-FROM golang:1.24.5 AS builder
+FROM golang:1.26.2 AS builder
 
 # Set the working directory
 WORKDIR /app
@@ -11,7 +11,7 @@ COPY * /app/
 RUN go mod download
 
 # Build the Go binary
-RUN go build -o labeler main.go
+RUN go build -o labeler .
 
 # Use a minimal base image for the final container
 FROM gcr.io/distroless/base-debian12

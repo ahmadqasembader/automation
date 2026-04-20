@@ -10,7 +10,7 @@ schema_version: "1.0.0"
 slug: "my-project"              # REQUIRED: lowercase identifier (a-z, 0-9, hyphens)
 name: "My Project"              # REQUIRED: display name
 description: ""                 # REQUIRED: one-line project description
-type: "project"                 # Optional: project, platform, specification, etc.
+type: "project"                 # REQUIRED: project, platform, specification, etc.
 project_lead: "github-handle"   # Optional: GitHub handle or team (org/team-name)
 cncf_slack_channel: "#my-project" # Optional: CNCF Slack channel
 
@@ -26,7 +26,7 @@ website: "https://my-project.io"
 artwork: "https://github.com/cncf/artwork/tree/master/projects/my-project"
 
 # adopters:                      # Optional: link to adopters list
-#   path: "ADOPTERS.md"
+#   path: "https://github.com/my-org/my-project/blob/main/ADOPTERS.md"
 
 # package_managers:              # Optional: registry identifiers
 #   docker: "my-org/my-project"
@@ -44,18 +44,19 @@ audits:                         # Optional (recommended for incubating+)
     type: "security"
     url: "https://example.com/audit-report.pdf"
 
-security:                       # Optional
+security:                       # Recommended
   policy:
-    path: "SECURITY.md"
+    path: "https://github.com/my-org/my-project/blob/main/SECURITY.md"
   contact:
-    email: "security@my-project.io"
-    # advisory_url: "https://github.com/my-org/my-project/security/advisories/new"
+    advisory_url: "https://github.com/my-org/my-project/security/advisories/new"
 
-governance:                     # Optional
+governance:                     # Recommended
   contributing:
-    path: "CONTRIBUTING.md"
-  codeowners:
-    path: "CODEOWNERS"
+    path: "https://github.com/my-org/my-project/blob/main/CONTRIBUTING.md"
+  code_of_conduct:
+    path: "https://github.com/cncf/foundation/blob/main/code-of-conduct.md"
+  # codeowners:
+  #   path: "https://github.com/my-org/my-project/blob/main/CODEOWNERS"
   # Governance DD items (optional):
   # vendor_neutrality_statement:
   #   path: "docs/vendor-neutrality.md"
@@ -63,8 +64,6 @@ governance:                     # Optional
   #   path: "docs/decision-making.md"
   # roles_and_teams:
   #   path: "docs/roles-and-teams.md"
-  # code_of_conduct:
-  #   path: "CODE_OF_CONDUCT.md"
   # sub_project_list:
   #   path: "docs/subprojects.md"
   # sub_project_docs:
@@ -89,20 +88,20 @@ governance:                     # Optional
   #   offboarding_policy:
   #     path: "docs/offboarding.md"
 
-legal:                          # Optional
+legal:                          # Recommended
   license:
-    path: "LICENSE"
-  # identity_type:               # Optional: contributor identity agreements
-  #   has_dco: true              # DCO can be used alone
-  #   has_cla: false             # CLA requires DCO
-  #   dco_url:
-  #     path: "https://developercertificate.org/"
-  #   cla_url:
-  #     path: "https://example.com/cla"
+    path: "https://github.com/my-org/my-project/blob/main/LICENSE"
+  identity_type:
+    has_dco: true
+    has_cla: false
+    dco_url:
+      path: "https://developercertificate.org/"
+    # cla_url:
+    #   path: "https://example.com/cla"
 
 documentation:                  # Optional
   readme:
-    path: "README.md"
+    path: "https://github.com/my-org/my-project/blob/main/README.md"
 
 # landscape:                    # Optional: CNCF Landscape location
 #   category: "App Definition and Development"

@@ -50,3 +50,4 @@ spec:
       namespace: clickhouse-altinity
       jsonPointers:
         - /spec/template/spec/containers/0/env
+        - /spec/template/spec/containers/1/env

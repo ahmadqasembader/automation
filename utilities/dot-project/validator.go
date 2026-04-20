@@ -38,7 +38,7 @@ func NewProjectValidator(configPath string) (*ProjectValidator, error) {
 	return &ProjectValidator{
 		config: config,
 		cache:  cache,
-		client: &http.Client{Timeout: 30 * time.Second},
+		client: &http.Client{Timeout: DefaultHTTPTimeout},
 	}, nil
 }
 
@@ -350,19 +350,19 @@ func validateProjectStruct(project Project) []string {
 		}
 	}
 
-	// Validate adopters
-	if project.Adopters != nil && project.Adopters.Path == "" {
-		errors = append(errors, "adopters.path is required")
-	}
+	// Validate PathRef fields: if a *PathRef is present, its path must not be empty.
+	// Top-level PathRef
+	errors = append(errors, validatePathRefs([]pathRefCheck{
+		{project.Adopters, "adopters"},
+	})...)
 
-	// Validate new fields
+	// Security section
 	if project.Security != nil {
-		if project.Security.Policy != nil && project.Security.Policy.Path == "" {
-			errors = append(errors, "security.policy.path is required")
-		}
-		if project.Security.ThreatModel != nil && project.Security.ThreatModel.Path == "" {
-			errors = append(errors, "security.threat_model.path is required")
-		}
+		errors = append(errors, validatePathRefs([]pathRefCheck{
+			{project.Security.Policy, "security.policy"},
+			{project.Security.ThreatModel, "security.threat_model"},
+		})...)
+
 		if project.Security.Contact != nil {
 			if project.Security.Contact.Email == "" && project.Security.Contact.AdvisoryURL == "" {
 				errors = append(errors, "security.contact must have at least one of email or advisory_url")
@@ -380,63 +380,30 @@ func validateProjectStruct(project Project) []string {
 		}
 	}
 
+	// Governance section
 	if project.Governance != nil {
-		if project.Governance.Contributing != nil && project.Governance.Contributing.Path == "" {
-			errors = append(errors, "governance.contributing.path is required")
-		}
-		if project.Governance.Codeowners != nil && project.Governance.Codeowners.Path == "" {
-			errors = append(errors, "governance.codeowners.path is required")
-		}
-		if project.Governance.GovernanceDoc != nil && project.Governance.GovernanceDoc.Path == "" {
-			errors = append(errors, "governance.governance_doc.path is required")
-		}
-
-		// Validate governance DD PathRef fields
-		if project.Governance.VendorNeutralityStatement != nil && project.Governance.VendorNeutralityStatement.Path == "" {
-			errors = append(errors, "governance.vendor_neutrality_statement.path is required")
-		}
-		if project.Governance.DecisionMakingProcess != nil && project.Governance.DecisionMakingProcess.Path == "" {
-			errors = append(errors, "governance.decision_making_process.path is required")
-		}
-		if project.Governance.RolesAndTeams != nil && project.Governance.RolesAndTeams.Path == "" {
-			errors = append(errors, "governance.roles_and_teams.path is required")
-		}
-		if project.Governance.CodeOfConduct != nil && project.Governance.CodeOfConduct.Path == "" {
-			errors = append(errors, "governance.code_of_conduct.path is required")
-		}
-		if project.Governance.SubProjectList != nil && project.Governance.SubProjectList.Path == "" {
-			errors = append(errors, "governance.sub_project_list.path is required")
-		}
-		if project.Governance.SubProjectDocs != nil && project.Governance.SubProjectDocs.Path == "" {
-			errors = append(errors, "governance.sub_project_docs.path is required")
-		}
-		if project.Governance.ContributorLadder != nil && project.Governance.ContributorLadder.Path == "" {
-			errors = append(errors, "governance.contributor_ladder.path is required")
-		}
-		if project.Governance.ChangeProcess != nil && project.Governance.ChangeProcess.Path == "" {
-			errors = append(errors, "governance.change_process.path is required")
-		}
-		if project.Governance.CommsChannels != nil && project.Governance.CommsChannels.Path == "" {
-			errors = append(errors, "governance.comms_channels.path is required")
-		}
-		if project.Governance.CommunityCalendar != nil && project.Governance.CommunityCalendar.Path == "" {
-			errors = append(errors, "governance.community_calendar.path is required")
-		}
-		if project.Governance.ContributorGuide != nil && project.Governance.ContributorGuide.Path == "" {
-			errors = append(errors, "governance.contributor_guide.path is required")
-		}
-
-		// Validate maintainer_lifecycle
 		ml := project.Governance.MaintainerLifecycle
-		if ml.OnboardingDoc != nil && ml.OnboardingDoc.Path == "" {
-			errors = append(errors, "governance.maintainer_lifecycle.onboarding_doc.path is required")
-		}
-		if ml.ProgressionLadder != nil && ml.ProgressionLadder.Path == "" {
-			errors = append(errors, "governance.maintainer_lifecycle.progression_ladder.path is required")
-		}
-		if ml.OffboardingPolicy != nil && ml.OffboardingPolicy.Path == "" {
-			errors = append(errors, "governance.maintainer_lifecycle.offboarding_policy.path is required")
-		}
+		errors = append(errors, validatePathRefs([]pathRefCheck{
+			{project.Governance.Contributing, "governance.contributing"},
+			{project.Governance.Codeowners, "governance.codeowners"},
+			{project.Governance.GovernanceDoc, "governance.governance_doc"},
+			{project.Governance.GitVoteConfig, "governance.gitvote_config"},
+			{project.Governance.VendorNeutralityStatement, "governance.vendor_neutrality_statement"},
+			{project.Governance.DecisionMakingProcess, "governance.decision_making_process"},
+			{project.Governance.RolesAndTeams, "governance.roles_and_teams"},
+			{project.Governance.CodeOfConduct, "governance.code_of_conduct"},
+			{project.Governance.SubProjectList, "governance.sub_project_list"},
+			{project.Governance.SubProjectDocs, "governance.sub_project_docs"},
+			{project.Governance.ContributorLadder, "governance.contributor_ladder"},
+			{project.Governance.ChangeProcess, "governance.change_process"},
+			{project.Governance.CommsChannels, "governance.comms_channels"},
+			{project.Governance.CommunityCalendar, "governance.community_calendar"},
+			{project.Governance.ContributorGuide, "governance.contributor_guide"},
+			{ml.OnboardingDoc, "governance.maintainer_lifecycle.onboarding_doc"},
+			{ml.ProgressionLadder, "governance.maintainer_lifecycle.progression_ladder"},
+			{ml.OffboardingPolicy, "governance.maintainer_lifecycle.offboarding_policy"},
+		})...)
+
 		for i, u := range ml.MentoringProgram {
 			if !isValidURL(u) {
 				errors = append(errors, fmt.Sprintf("governance.maintainer_lifecycle.mentoring_program[%d] is not a valid URL: %s", i, u))
@@ -444,10 +411,12 @@ func validateProjectStruct(project Project) []string {
 		}
 	}
 
+	// Legal section
 	if project.Legal != nil {
-		if project.Legal.License != nil && project.Legal.License.Path == "" {
-			errors = append(errors, "legal.license.path is required")
-		}
+		errors = append(errors, validatePathRefs([]pathRefCheck{
+			{project.Legal.License, "legal.license"},
+		})...)
+
 		if project.Legal.IdentityType != nil {
 			if project.Legal.IdentityType.HasCLA && !project.Legal.IdentityType.HasDCO && !project.Legal.IdentityType.CLAOnly {
 				errors = append(errors, "legal.identity_type: has_cla requires has_dco (CLA cannot be used without DCO; set cla_only: true if this project has an exception)")
@@ -455,16 +424,14 @@ func validateProjectStruct(project Project) []string {
 			if project.Legal.IdentityType.CLAOnly && !project.Legal.IdentityType.HasCLA {
 				errors = append(errors, "legal.identity_type: cla_only requires has_cla to be true")
 			}
-			if project.Legal.IdentityType.DCOURL != nil && project.Legal.IdentityType.DCOURL.Path == "" {
-				errors = append(errors, "legal.identity_type.dco_url.path is required")
-			}
-			if project.Legal.IdentityType.CLAURL != nil && project.Legal.IdentityType.CLAURL.Path == "" {
-				errors = append(errors, "legal.identity_type.cla_url.path is required")
-			}
+			errors = append(errors, validatePathRefs([]pathRefCheck{
+				{project.Legal.IdentityType.DCOURL, "legal.identity_type.dco_url"},
+				{project.Legal.IdentityType.CLAURL, "legal.identity_type.cla_url"},
+			})...)
 		}
 	}
 
-	// Validate landscape
+	// Landscape section
 	if project.Landscape != nil {
 		if project.Landscape.Category == "" {
 			errors = append(errors, "landscape.category is required when landscape section is present")
@@ -474,22 +441,34 @@ func validateProjectStruct(project Project) []string {
 		}
 	}
 
+	// Documentation section
 	if project.Documentation != nil {
-		if project.Documentation.Readme != nil && project.Documentation.Readme.Path == "" {
-			errors = append(errors, "documentation.readme.path is required")
-		}
-		if project.Documentation.Support != nil && project.Documentation.Support.Path == "" {
-			errors = append(errors, "documentation.support.path is required")
-		}
-		if project.Documentation.Architecture != nil && project.Documentation.Architecture.Path == "" {
-			errors = append(errors, "documentation.architecture.path is required")
-		}
-		if project.Documentation.API != nil && project.Documentation.API.Path == "" {
-			errors = append(errors, "documentation.api.path is required")
-		}
+		errors = append(errors, validatePathRefs([]pathRefCheck{
+			{project.Documentation.Readme, "documentation.readme"},
+			{project.Documentation.Support, "documentation.support"},
+			{project.Documentation.Architecture, "documentation.architecture"},
+			{project.Documentation.API, "documentation.api"},
+		})...)
 	}
 
 	return errors
+}
+
+// pathRefCheck pairs a *PathRef with its label for table-driven validation.
+type pathRefCheck struct {
+	ref   *PathRef
+	label string
+}
+
+// validatePathRefs checks that each non-nil PathRef has a non-empty path.
+func validatePathRefs(checks []pathRefCheck) []string {
+	var errs []string
+	for _, c := range checks {
+		if c.ref != nil && c.ref.Path == "" {
+			errs = append(errs, fmt.Sprintf("%s.path is required", c.label))
+		}
+	}
+	return errs
 }
 
 // isValidSlug checks if a string is a valid project slug (lowercase alphanumeric + hyphens)
@@ -571,7 +550,7 @@ func loadCache(dir string) (*Cache, error) {
 
 	// Ensure cache directory exists
 	if err := os.MkdirAll(dir, 0755); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create cache directory %q: %w", dir, err)
 	}
 
 	cachePath := filepath.Join(dir, "cache.json")
@@ -581,11 +560,16 @@ func loadCache(dir string) (*Cache, error) {
 
 	data, err := os.ReadFile(cachePath)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to read cache file %q: %w", cachePath, err)
 	}
 
 	if err := json.Unmarshal(data, &cache.Entries); err != nil {
-		return nil, err
+		log.Printf("Warning: cache file %q is corrupted, removing and starting fresh: %v", cachePath, err)
+		if removeErr := os.Remove(cachePath); removeErr != nil {
+			log.Printf("Warning: failed to remove corrupted cache file %q: %v", cachePath, removeErr)
+		}
+		cache.Entries = make(map[string]CacheEntry)
+		return cache, nil
 	}
 
 	return cache, nil
@@ -644,12 +628,19 @@ func NewValidator(cacheDir string) *ProjectValidator {
 		OutputFormat:   "text",
 	}
 
-	cache, _ := loadCache(cacheDir)
+	cache, err := loadCache(cacheDir)
+	if err != nil {
+		log.Printf("Warning: failed to load cache from %s, starting with empty cache: %v", cacheDir, err)
+		cache = &Cache{
+			Entries: make(map[string]CacheEntry),
+			dir:     cacheDir,
+		}
+	}
 
 	return &ProjectValidator{
 		config: config,
 		cache:  cache,
-		client: &http.Client{Timeout: 30 * time.Second},
+		client: &http.Client{Timeout: DefaultHTTPTimeout},
 	}
 }
 

@@ -139,7 +139,7 @@ DCO can be used alone, or DCO + CLA together. By default, CLA requires DCO (the 
 |-------|------|----------|-------------|
 | `path` | string | Yes | File path or URL |
 
-PathRef values can be either relative file paths (e.g., `SECURITY.md`) or full URLs (e.g., `https://github.com/org/repo/blob/main/SECURITY.md`).
+PathRef values should be **full GitHub URLs** (e.g., `https://github.com/org/repo/blob/main/SECURITY.md`). Relative file paths (e.g., `SECURITY.md`) are accepted for backward compatibility but full URLs are the standard for new repos. The bootstrap tool always generates full URLs.
 
 ## maintainers.yaml
 

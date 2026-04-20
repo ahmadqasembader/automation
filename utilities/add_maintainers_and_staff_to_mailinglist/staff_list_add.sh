@@ -106,7 +106,8 @@ if [ -f "$EMAIL_FILE" ]; then
   success_count=0
   fail_count=0
   
-  while IFS= read -r email; do
+  # Use "|| [[ -n "$email" ]]" so the last line is processed when the file has no trailing newline (common for pasted input).
+  while IFS= read -r email || [[ -n "$email" ]]; do
     # Trim leading and trailing whitespace from the line
     trimmed_email="${email#"${email%%[![:space:]]*}"}"
     trimmed_email="${trimmed_email%"${trimmed_email##*[![:space:]]}"}"

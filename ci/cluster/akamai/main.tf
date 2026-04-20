@@ -7,17 +7,17 @@ terraform {
     # Linode provider - pinned to minor version for stability
     linode = {
       source  = "linode/linode"
-      version = "~> 2.41.0"
+      version = "~> 3.11.0"
     }
     # Helm provider - pinned to minor version for stability
     helm = {
       source  = "hashicorp/helm"
-      version = "~> 2.17.0"
+      version = "~> 3.1.1"
     }
     # Kubernetes provider - pinned to minor version for stability
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 2.38.0"
+      version = "~> 3.0.1"
     }
   }
 }

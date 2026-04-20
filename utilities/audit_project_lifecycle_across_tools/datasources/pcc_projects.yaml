@@ -152,6 +152,12 @@ categories:
     status: Active
     project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/k8s/k8s-logo.svg?v=1769200475812
     repository_url: https://github.com/kubernetes
+  - name: Kyverno
+    slug: kyverno
+    category: Graduated
+    status: Active
+    project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/kyverno.svg
+    repository_url: https://github.com/kyverno/kyverno/
   - name: Linkerd
     slug: linkerd
     category: Graduated
@@ -272,7 +278,7 @@ categories:
     category: Incubating
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/fluid.svg
-    repository_url: https://github.com/Project-Fluid
+    repository_url: https://github.com/fluid-cloudnative/fluid
   - name: gRPC
     slug: grpc
     category: Incubating
@@ -321,12 +327,6 @@ categories:
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/kubevirt.svg
     repository_url: https://github.com/kubevirt
-  - name: Kyverno
-    slug: kyverno
-    category: Incubating
-    status: Active
-    project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/kyverno.svg
-    repository_url: https://github.com/kyverno/kyverno/
   - name: Lima
     slug: lima
     category: Incubating
@@ -362,7 +362,7 @@ categories:
     category: Incubating
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/notary.svg
-    repository_url: https://github.com/theupdateframework/notary
+    repository_url: https://github.com/notaryproject/notation
   - name: OpenCost
     slug: opencost
     category: Incubating
@@ -398,7 +398,7 @@ categories:
     category: Incubating
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/openyurt.svg
-    repository_url: https://github.com/OpenYurt
+    repository_url: https://github.com/openyurtio/openyurt
   - name: Operator Framework
     slug: operator-sdk
     category: Incubating
@@ -436,6 +436,12 @@ categories:
     status: Active
     project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/aerakimesh/aerakimesh-logo.svg?v=1709652871275
     repository_url: https://github.com/aeraki-mesh
+  - name: Agones
+    slug: agones
+    category: Sandbox
+    status: Active
+    project_logo: null
+    repository_url: https://github.com/agones-dev
   - name: Akri
     slug: akri
     category: Sandbox
@@ -742,6 +748,12 @@ categories:
     status: Active
     project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/kagent/kagent-logo.svg?v=1752776092793
     repository_url: https://github.com/kagent-dev/
+  - name: KAI Scheduler
+    slug: kai-scheduler
+    category: Sandbox
+    status: Active
+    project_logo: null
+    repository_url: https://github.com/kai-scheduler/
   - name: Kairos
     slug: kairos
     category: Sandbox
@@ -963,7 +975,7 @@ categories:
     category: Sandbox
     status: Active
     project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/microcks/microcks-logo.svg?v=1722530900928
-    repository_url: https://github.com/meshery/meshery
+    repository_url: https://github.com/microcks/microcks
   - name: ModelPack
     slug: modelpack
     category: Sandbox
@@ -998,7 +1010,7 @@ categories:
     slug: openchoreo
     category: Sandbox
     status: Active
-    project_logo: null
+    project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/openchoreo/openchoreo-logo.svg?v=1775157130793
     repository_url: https://github.com/openchoreo
   - name: OpenEBS
     slug: openebs
@@ -1006,6 +1018,12 @@ categories:
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/openebs.svg
     repository_url: https://github.com/openebs
+  - name: OpenEverest
+    slug: openeverest
+    category: Sandbox
+    status: Active
+    project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/openeverest/openeverest-logo.svg?v=1773851195647
+    repository_url: https://github.com/openeverest/
   - name: OpenFunction
     slug: openfunction
     category: Sandbox
@@ -1101,7 +1119,7 @@ categories:
     category: Sandbox
     status: Active
     project_logo: https://lf-master-project-logos-prod.s3.us-east-2.amazonaws.com/porter.svg
-    repository_url: https://github.com/Porter
+    repository_url: https://github.com/getporter/porter
   - name: Radius
     slug: radius
     category: Sandbox
@@ -1240,6 +1258,12 @@ categories:
     status: Active
     project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/urunc/urunc-logo.svg?v=1748883013645
     repository_url: https://github.com/urunc-dev
+  - name: Velero
+    slug: velero
+    category: Sandbox
+    status: Active
+    project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/velero/velero-logo.svg?v=1773763251650
+    repository_url: https://github.com/velero-io
   - name: Vineyard
     slug: vineyard
     category: Sandbox
@@ -1293,14 +1317,14 @@ forming_projects:
   status: Formation - Exploratory
   project_logo: null
   repository_url: https://github.com/Quantam-Open-Source/QHTTPX
-- name: Agones
-  status: Formation - Exploratory
-  project_logo: null
-  repository_url: https://github.com/googleforgames/agones
 - name: AIBrix
   status: Formation - Exploratory
   project_logo: null
   repository_url: https://github.com/vllm-project/aibrix
+- name: Apicurio Registry
+  status: Formation - Exploratory
+  project_logo: null
+  repository_url: https://github.com/Apicurio/apicurio-registry
 - name: BLAFS
   status: Formation - Exploratory
   project_logo: null
@@ -1309,6 +1333,10 @@ forming_projects:
   status: Formation - Exploratory
   project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/cedar-policy/cedar-policy-logo.svg?v=1764851829365
   repository_url: https://github.com/cedar-policy
+- name: CNCF Toolbox
+  status: Formation - Exploratory
+  project_logo: null
+  repository_url: null
 - name: Conveyor CI
   status: Formation - Exploratory
   project_logo: null
@@ -1341,10 +1369,6 @@ forming_projects:
   status: Formation - Exploratory
   project_logo: null
   repository_url: https://github.com/higress-group
-- name: KAI Scheduler
-  status: Formation - Exploratory
-  project_logo: null
-  repository_url: https://github.com/NVIDIA/KAI-Scheduler
 - name: Kmesh
   status: Formation - Exploratory
   project_logo: null
@@ -1353,6 +1377,10 @@ forming_projects:
   status: Formation - Exploratory
   project_logo: null
   repository_url: https://github.com/ksctl
+- name: kube-bind
+  status: Formation - Exploratory
+  project_logo: null
+  repository_url: https://github.com/kube-bind
 - name: KubeElasti
   status: Formation - Exploratory
   project_logo: null
@@ -1363,12 +1391,8 @@ forming_projects:
   repository_url: https://github.com/llm-d
 - name: NMstate
   status: Formation - Exploratory
-  project_logo: null
+  project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/nmstate/nmstate-logo.svg?v=1774279171272
   repository_url: https://github.com/nmstate/nmstate
-- name: OpenEverest
-  status: Formation - Exploratory
-  project_logo: null
-  repository_url: https://github.com/openeverest/
 - name: OptiFlow (AI‑OrchestrateX)
   status: Formation - Exploratory
   project_logo: null
@@ -1377,6 +1401,10 @@ forming_projects:
   status: Formation - Exploratory
   project_logo: null
   repository_url: https://github.com/sdcio
+- name: SecureBuild
+  status: Formation - Exploratory
+  project_logo: null
+  repository_url: https://github.com/securebuildhq
 - name: SemaMesh
   status: Formation - Exploratory
   project_logo: null
@@ -1393,10 +1421,6 @@ forming_projects:
   status: Formation - Exploratory
   project_logo: null
   repository_url: https://github.com/tenable/terrascan
-- name: Velero
-  status: Formation - Exploratory
-  project_logo: null
-  repository_url: https://github.com/velero-io
 archived_projects:
 - name: Brigade
   status: Archived
@@ -1411,11 +1435,6 @@ archived_projects:
 - name: CNCF Standards & Specifications
   status: Formation - Engaged
   category: null
-  project_logo: null
-  repository_url: null
-- name: CNCF Toolbox
-  status: Prospect
-  category: Sandbox
   project_logo: null
   repository_url: null
 - name: CNI-Genie
