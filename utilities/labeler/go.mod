@@ -1,6 +1,6 @@
 module labeler
 
-go 1.24.5
+go 1.26.1
 
 require (
 	github.com/google/go-github/v55 v55.0.0

@@ -32,7 +32,7 @@ spec:
             - /bin/bash
             args:
             - -c
-            - for i in $(oci compute instance list --compartment-id ${COMPARTMENT_ID} --lifecycle-state RUNNING --all | jq -r '.data[] | select(."display-name" | startswith("gha-runner-")) | select((now - 86400 * 2) > (."time-created"[:19] | strptime("%Y-%m-%dT%H:%M:%S") | mktime)) | .id'); do oci compute instance terminate --instance-id ${i} --force && echo "Deleted instance ${i}"; done
+            - for REGION in us-sanjose-1 us-ashburn-1; do for i in $(oci compute instance list --compartment-id ${COMPARTMENT_ID} --lifecycle-state RUNNING --region ${REGION} --all | jq -r '.data[] | select(."display-name" | startswith("gha-runner-")) | select((now - 86400 * 2) > (."time-created"[:19] | strptime("%Y-%m-%dT%H:%M:%S") | mktime)) | .id'); do oci compute instance terminate --instance-id ${i} --force --region ${REGION} && echo "Deleted instance ${i}"; done; done
             resources:
               limits:
                 cpu: 500m

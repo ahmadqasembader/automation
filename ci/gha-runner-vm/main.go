@@ -139,7 +139,7 @@ func run(cmd *cobra.Command, argv []string) error {
 	installRunnerPackage(baseDir)
 
 	//temp for the maven error, probably will be fixed on the next action-runner release
-	replaceArmPackageLinks(baseDir, "/images/ubuntu/toolsets/toolset-2404.json", "\"maven\": \"3.9.11\"", "\"maven\": \"3.9.12\"")
+	replaceArmPackageLinks(baseDir, "/images/ubuntu/toolsets/toolset-2404.json", "\"maven\": \"3.9.13\"", "\"maven\": \"3.9.14\"")
 
 	if args.arch == "arm64" {
 		replaceArmPackageLinks(baseDir, "/images/ubuntu/scripts/build/install-azcopy.sh", "https://aka.ms/downloadazcopy-v10-linux", "https://github.com/Azure/azure-storage-azcopy/releases/download/v10.29.1/azcopy_linux_arm64_10.29.1.tar.gz")
@@ -194,7 +194,12 @@ func run(cmd *cobra.Command, argv []string) error {
 
 	timestamp := strconv.FormatInt(time.Now().UTC().UnixNano(), 10)
 
-	command = exec.Command("oci", "os", "object", "put", "--parallel-upload-count", "100", "--bucket-name", args.bucketName, "--name", fmt.Sprintf("ubuntu-gha-image-%s", timestamp), "--file", imageFile)
+	objectName := fmt.Sprintf("ubuntu-gha-image-%s", timestamp)
+	command = exec.Command("oci", "os", "object", "put", "--parallel-upload-count", "100", "--bucket-name", args.bucketName, "--name", objectName, "--file", imageFile)
+	// expose object name to GitHub action
+	f1, _ := os.OpenFile("/tmp/object_name", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0600)
+	defer f1.Close()
+	fmt.Fprintln(f1, objectName)
 
 	command.Stdout = os.Stdout
 	if err := command.Run(); err != nil {
@@ -203,7 +208,7 @@ func run(cmd *cobra.Command, argv []string) error {
 	}
 
 	// Import image name starting with rc- (release-candidate) -- github action will update it if tests are successful.
-	command = exec.Command("oci", "compute", "image", "import", "from-object", "--bucket-name", args.bucketName, "--compartment-id", args.compartmentId, "--namespace", args.namespace, "--operating-system", "rc-" + imageName, "--display-name", "rc-" + imageName, "--name", fmt.Sprintf("ubuntu-gha-image-%s", timestamp), "--operating-system-version", *selectedRelease.TagName, "--launch-mode", "PARAVIRTUALIZED")
+	command = exec.Command("oci", "compute", "image", "import", "from-object", "--bucket-name", args.bucketName, "--compartment-id", args.compartmentId, "--namespace", args.namespace, "--operating-system", "rc-"+imageName, "--display-name", "rc-"+imageName, "--name", objectName, "--operating-system-version", *selectedRelease.TagName, "--launch-mode", "PARAVIRTUALIZED")
 	output, err := command.Output()
 	if err != nil {
 		log.Fatal("failed to run OCI command: ", err)
@@ -221,9 +226,14 @@ func run(cmd *cobra.Command, argv []string) error {
 	imageID := result.Data.ID
 
 	// expose Image Id to GitHub action
-	f, _ := os.OpenFile("/tmp/image_ocid", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0600)
-	defer f.Close()
-	fmt.Fprintln(f, imageID)
+	f2, _ := os.OpenFile("/tmp/image_ocid", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0600)
+	defer f2.Close()
+	fmt.Fprintln(f2, imageID)
+
+	// expose OS Image Tag to GitHub action
+	f3, _ := os.OpenFile("/tmp/image_tag", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0600)
+	defer f3.Close()
+	fmt.Fprintln(f3, *selectedRelease.TagName)
 
 	for {
 		state, err := getImageState(imageID)
@@ -240,19 +250,31 @@ func run(cmd *cobra.Command, argv []string) error {
 		time.Sleep(60 * time.Second)
 	}
 
+	ociConfigFile := os.Getenv("OCI_CONFIG_FILE")
+	if ociConfigFile == "" {
+		ociConfigFile = os.Getenv("HOME") + "/.oci/config"
+	}
+
 	// Need to update arm64 image capabilities
 	if args.arch == "arm64" {
-		// Add VM.Standard.A1.Flex compatibility
-		command = exec.Command("oci", "raw-request", "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/VM.Standard.A1.Flex", "--request-body", "{\"ocpuConstraints\":{\"min\":\"1\",\"max\":\"80\"},\"memoryConstraints\":{\"minInGBs\":\"1\",\"maxInGBs\":\"512\"},\"imageId\":\""+imageID+"\",\"shape\":\"VM.Standard.A1.Flex\"}")
-		output, err = command.CombinedOutput()
-		if err != nil {
-			log.Print(command.String())
-			log.Printf("OCI command failed. Output:\n%s", string(output))
-			log.Fatal("could not run command: ", err)
-			exec.Command("oci", "compute", "image", "delete", "--force", "--image-id", imageID)
-			return nil
+		// Add VM.Standard.A1.Flex, VM.Standard.A2.Flex, VM.Standard.A4.Flex
+		addListArm := []string{
+			"VM.Standard.A1.Flex",
+			"VM.Standard.A2.Flex",
+			"VM.Standard.A4.Flex",
 		}
-		log.Println("VM.Standard.A1.Flex compatibility added")
+		for _, machine := range addListArm {
+			command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"ocpuConstraints\":{\"min\":\"1\",\"max\":\"80\"},\"memoryConstraints\":{\"minInGBs\":\"1\",\"maxInGBs\":\"512\"},\"imageId\":\""+imageID+"\",\"shape\":\""+machine+"\"}")
+			output, err = command.CombinedOutput()
+			if err != nil {
+				log.Print(command.String())
+				log.Printf("OCI command failed. Output:\n%s", string(output))
+				log.Fatal("could not run command: ", err)
+				exec.Command("oci", "compute", "image", "delete", "--force", "--image-id", imageID)
+				return nil
+			}
+			log.Printf("%s compatibility added", machine)
+		}
 
 		// Remove other amd64/x86 compatibility
 		removeList := []string{
@@ -284,7 +306,7 @@ func run(cmd *cobra.Command, argv []string) error {
 		}
 
 		for _, machine := range removeList {
-			command = exec.Command("oci", "raw-request", "--http-method", "DELETE", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"imageId\":\""+imageID+"\"}")
+			command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "DELETE", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"imageId\":\""+imageID+"\"}")
 			output, err := command.CombinedOutput()
 			if err != nil {
 				log.Print(command.String())
@@ -300,7 +322,7 @@ func run(cmd *cobra.Command, argv []string) error {
 		// Update image capabilities
 		// I'm so sorry, the capability-update.json is embedded to the command here, I tried all sort of things before this. To make a change, you can run:
 		// cat capability-update.json | jq -c | jq -R '@json' | sed 's|\\\\\\|\\|g'
-		command = exec.Command("oci", "raw-request", "--http-method", "POST", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/computeImageCapabilitySchemas", "--request-body", "{\"schemaData\":{\"Compute.Firmware\":{\"values\":[\"BIOS\",\"UEFI_64\"],\"defaultValue\":\"UEFI_64\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.LaunchMode\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.AMD_SecureEncryptedVirtualization\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Compute.SecureBoot\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Network.AttachmentType\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Network.IPv6Only\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.BootVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.LocalDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.RemoteDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.ConsistentVolumeNaming\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.Iscsi.MultipathDeviceSupported\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.EncryptionInTransit\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.AttachmentVersion\":{\"values\":[\"1\",\"2\"],\"defaultValue\":\"2\",\"source\":\"IMAGE\",\"descriptorType\":\"enuminteger\"}},\"imageId\":\""+imageID+"\",\"compartmentId\":\""+args.compartmentId+"\",\"computeGlobalImageCapabilitySchemaVersionName\":\"a3c588d1-282b-4937-9928-2570b5133968\"}", "--config-file", "/home/ubuntu/.oci/config")
+		command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "POST", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/computeImageCapabilitySchemas", "--request-body", "{\"schemaData\":{\"Compute.Firmware\":{\"values\":[\"BIOS\",\"UEFI_64\"],\"defaultValue\":\"UEFI_64\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.LaunchMode\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Compute.AMD_SecureEncryptedVirtualization\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Compute.SecureBoot\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Network.AttachmentType\":{\"values\":[\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Network.IPv6Only\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.BootVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.LocalDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.RemoteDataVolumeType\":{\"values\":[\"ISCSI\",\"PARAVIRTUALIZED\"],\"defaultValue\":\"PARAVIRTUALIZED\",\"source\":\"IMAGE\",\"descriptorType\":\"enumstring\"},\"Storage.ConsistentVolumeNaming\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.Iscsi.MultipathDeviceSupported\":{\"defaultValue\":\"false\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.EncryptionInTransit\":{\"defaultValue\":\"true\",\"source\":\"IMAGE\",\"descriptorType\":\"boolean\"},\"Storage.ParaVirtualization.AttachmentVersion\":{\"values\":[\"1\",\"2\"],\"defaultValue\":\"2\",\"source\":\"IMAGE\",\"descriptorType\":\"enuminteger\"}},\"imageId\":\""+imageID+"\",\"compartmentId\":\""+args.compartmentId+"\",\"computeGlobalImageCapabilitySchemaVersionName\":\"a3c588d1-282b-4937-9928-2570b5133968\"}")
 		output, err = command.CombinedOutput()
 		if err != nil {
 			log.Print(command.String())
@@ -317,7 +339,7 @@ func run(cmd *cobra.Command, argv []string) error {
 			"VM.GPU.A10.2",
 		}
 		for _, machine := range addList {
-			command = exec.Command("oci", "raw-request", "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"imageId\":\""+imageID+"\",\"shape\":\""+machine+"\"}")
+			command = exec.Command("oci", "raw-request", "--config-file", ociConfigFile, "--http-method", "PUT", "--target-uri", "https://iaas.us-sanjose-1.oraclecloud.com/20160918/images/"+imageID+"/shapes/"+machine, "--request-body", "{\"imageId\":\""+imageID+"\",\"shape\":\""+machine+"\"}")
 			output, err = command.CombinedOutput()
 			if err != nil {
 				log.Print(command.String())
@@ -718,7 +740,9 @@ build {
       "sleep 30",
       "export HISTSIZE=0 && sync",
       "usermod -aG docker ubuntu",
-      "apt install -y libelf-dev"
+      "apt install -y libelf-dev",
+      "apt-get clean",
+      "rm -rf /var/lib/apt/lists/*"
     ]`
 
 	// At this point this is the only Ubuntu-specific hard coded blocks we have left.

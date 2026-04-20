@@ -13,13 +13,13 @@ spec:
   source:
     repoURL: quay.io/kubermatic/helm-charts
     chart: developer-platform-dashboard
-    targetRevision: 0.10.0-g59354fd5fc65904f138291ab18c0412f1e0bc931
+    targetRevision: 0.10.0-gc5b2e84771e30f881a98d356ad05cb802e4a16d4
     helm:
       releaseName: kdp-dashboard
       values: |
         dashboard:
           image:
-            tag: "59354fd5fc65904f138291ab18c0412f1e0bc931"
+            tag: "c5b2e84771e30f881a98d356ad05cb802e4a16d4"
           config:
             create: false
             secretRef: 

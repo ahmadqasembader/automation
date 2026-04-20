@@ -1,65 +1,69 @@
 # CNCF Project Status Audit
 
-| Project | [PCC status](./pcc_projects.yaml) | [Landscape status](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor status](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers CSV status](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats status](https://devstats.cncf.io/) | [Artwork status](https://github.com/cncf/artwork/blob/main/README.md) |
-|---|---|---|---|---|---|---|
-| CoHDI | sandbox | sandbox | sandbox | sandbox | sandbox | - |
-| composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - |
-| Copa | sandbox | sandbox | sandbox | sandbox | sandbox | - |
-| kube-vip | sandbox | sandbox | sandbox | sandbox | sandbox | - |
-| Oxia | sandbox | sandbox | sandbox | sandbox | sandbox | - |
-| Service Mesh Performance | sandbox | archived | - | - | - | archived |
-| TrestleGRC | sandbox | sandbox | - | - | sandbox | - |
-| <QHTTPX> | forming | - | - | - | - | - |
-| Agones | forming | - | - | - | - | - |
-| AIBrix | forming | - | - | - | - | - |
-| BLAFS | forming | - | - | - | - | - |
-| Cedar | forming | sandbox | - | sandbox | - | - |
-| CNCF Standards & Specifications | forming | - | - | - | - | - |
-| Conveyor CI | forming | - | - | - | - | - |
-| Cruise | forming | - | - | - | - | - |
-| CubeCOS | forming | - | - | - | - | - |
-| Curvine | forming | - | - | - | - | - |
-| DevOps AI Toolkit | forming | - | - | - | - | - |
-| Dexfile | forming | - | - | - | - | - |
-| Gthulhu | forming | - | - | - | - | - |
-| Higress | forming | - | - | - | - | - |
-| KAI Scheduler | forming | - | - | sandbox | sandbox | - |
-| Kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
-| ksctl | forming | - | - | - | - | - |
-| KubeElasti | forming | sandbox | - | sandbox | sandbox | - |
-| llm-d | forming | - | - | - | - | - |
-| NMstate | forming | - | - | - | - | - |
-| OpenEverest | forming | - | - | - | - | - |
-| OptiFlow (AI‑OrchestrateX) | forming | - | - | - | - | - |
-| Schema Driven Configuration | forming | - | - | - | - | - |
-| SemaMesh | forming | - | - | - | - | - |
-| Sermant | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
-| ServiceRadar | forming | - | - | - | - | - |
-| Terrascan | forming | - | - | - | - | - |
-| Velero | forming | - | - | - | - | - |
-| Brigade | archived | archived | - | - | - | archived |
-| CNI-Genie | archived | archived | - | - | - | - |
-| Curiefense | archived | archived | - | - | - | archived |
-| Curve | archived | archived | - | - | - | archived |
-| Devstream | archived | archived | - | - | - | archived |
-| FabEdge | archived | archived | - | - | - | archived |
-| Fonio | archived | archived | - | - | - | archived |
-| Keptn | archived | archived | - | - | - | archived |
-| Krator | archived | archived | - | - | - | archived |
-| Krustlet | archived | archived | - | - | - | archived |
-| KubeDL | archived | archived | - | - | - | archived |
-| Merbridge | archived | archived | - | - | - | archived |
-| Nocalhost | archived | archived | - | - | - | archived |
-| Open Service Mesh | archived | archived | - | - | - | archived |
-| OpenELB | archived | archived | - | - | - | archived |
-| OpenMetrics | archived | archived | - | - | - | archived |
-| OpenTracing | archived | archived | - | - | - | archived |
-| Pravega | archived | archived | - | - | - | archived |
-| RKT | archived | archived | - | - | - | archived |
-| sealer | archived | archived | - | - | - | archived |
-| Service Mesh Interface | archived | archived | - | - | - | archived |
-| skooner | archived | archived | - | - | - | archived |
-| SuperEdge | archived | archived | - | - | - | archived |
-| Teller | archived | archived | - | - | - | archived |
-| Xline | archived | archived | - | - | - | archived |
-| CNCF Toolbox | prospect | - | - | - | - | - |
+| Project | [PCC Slug](./pcc_projects.yaml) | [Landscape Slug](https://github.com/cncf/landscape/blob/master/landscape.yml) | [PCC Status](./pcc_projects.yaml) | [Landscape Status](https://github.com/cncf/landscape/blob/master/landscape.yml) | [CLOMonitor](https://github.com/cncf/clomonitor/blob/main/data/cncf.yaml) | [Maintainers](https://github.com/cncf/foundation/blob/main/project-maintainers.csv) | [DevStats](https://devstats.cncf.io/) | [Artwork](https://raw.githubusercontent.com/cncf/artwork/main/README.md) |
+|---|---|---|---|---|---|---|---|---|
+| Prometheus | prometheus | prometheus_del | graduated | graduated | graduated | graduated | graduated | graduated |
+| Agones | agones | agones | sandbox | sandbox | sandbox | sandbox | sandbox | - |
+| CoHDI | cohdi | cohdi | sandbox | sandbox | sandbox | sandbox | sandbox | - |
+| composefs | composefs | composefs | sandbox | sandbox | sandbox | sandbox | sandbox | - |
+| Copa | copacetic | copacetic | sandbox | sandbox | sandbox | sandbox | sandbox | - |
+| KAI Scheduler | kai-scheduler | kai-scheduler | sandbox | sandbox | sandbox | sandbox | sandbox | - |
+| kube-vip | kube-vip | kube-vip | sandbox | sandbox | sandbox | sandbox | sandbox | - |
+| OpenEverest | openeverest | openeverest | sandbox | sandbox | sandbox | sandbox | sandbox | - |
+| Oxia | oxia | oxia | sandbox | sandbox | sandbox | sandbox | sandbox | - |
+| Service Mesh Performance | service-mesh-performance | service-mesh-performance | sandbox | archived | - | - | - | archived |
+| TrestleGRC | trestlegrc | trestlegrc | sandbox | sandbox | - | - | sandbox | - |
+| Velero | velero | velero | sandbox | - | sandbox | - | sandbox | - |
+| <QHTTPX> | - | - | forming | - | - | - | - | - |
+| AIBrix | - | - | forming | - | - | - | - | - |
+| Apicurio Registry | - | - | forming | - | - | - | - | - |
+| BLAFS | - | - | forming | - | - | - | - | - |
+| Cedar | - | cedar | forming | sandbox | - | sandbox | - | - |
+| CNCF Standards & Specifications | - | - | forming | - | - | - | - | - |
+| CNCF Toolbox | - | - | forming | - | - | - | - | - |
+| Conveyor CI | - | - | forming | - | - | - | - | - |
+| Cruise | - | - | forming | - | - | - | - | - |
+| CubeCOS | - | - | forming | - | - | - | - | - |
+| Curvine | - | - | forming | - | - | - | - | - |
+| DevOps AI Toolkit | - | - | forming | - | - | - | - | - |
+| Dexfile | - | - | forming | - | - | - | - | - |
+| Gthulhu | - | - | forming | - | - | - | - | - |
+| Higress | - | - | forming | sandbox | - | - | sandbox | - |
+| Kmesh | - | kmesh | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
+| ksctl | - | - | forming | - | - | - | - | - |
+| kube-bind | - | - | forming | - | - | - | - | - |
+| KubeElasti | - | kubeelasti | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
+| llm-d | - | - | forming | - | - | - | - | - |
+| NMstate | - | nmstate | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
+| OptiFlow (AI‑OrchestrateX) | - | - | forming | - | - | - | - | - |
+| Schema Driven Configuration | - | - | forming | - | - | - | - | - |
+| SecureBuild | - | - | forming | - | - | - | - | - |
+| SemaMesh | - | - | forming | - | - | - | - | - |
+| Sermant | - | sermant | forming | sandbox | sandbox | sandbox | sandbox | sandbox |
+| ServiceRadar | - | - | forming | - | - | - | - | - |
+| Terrascan | - | - | forming | - | - | - | - | - |
+| Brigade | - | brigade | archived | archived | - | - | - | archived |
+| CNI-Genie | - | cni-genie | archived | archived | - | - | - | - |
+| Curiefense | - | curiefense | archived | archived | - | - | - | archived |
+| Curve | - | curve | archived | archived | - | - | - | archived |
+| Devstream | - | devstream | archived | archived | - | - | - | archived |
+| FabEdge | - | fabedge | archived | archived | - | - | - | archived |
+| Fonio | - | ingraind | archived | archived | - | - | - | archived |
+| Keptn | - | keptn | archived | archived | - | - | - | archived |
+| Krator | - | krator | archived | archived | - | - | - | archived |
+| Krustlet | - | krustlet | archived | archived | - | - | - | archived |
+| KubeDL | - | kubedl | archived | archived | - | - | - | archived |
+| Merbridge | - | merbridge | archived | archived | - | - | - | archived |
+| Nocalhost | - | nocalhost | archived | archived | - | - | - | archived |
+| Open Service Mesh | - | OSM | archived | archived | - | - | - | archived |
+| OpenELB | - | openelb | archived | archived | - | - | - | archived |
+| OpenMetrics | - | openmetrics | archived | archived | - | - | - | archived |
+| OpenTracing | - | opentracing | archived | archived | - | - | - | archived |
+| Pravega | - | pravega | archived | archived | - | - | - | archived |
+| RKT | - | rkt | archived | archived | - | - | - | archived |
+| sealer | - | sealer | archived | archived | - | - | - | archived |
+| Service Mesh Interface | - | smi | archived | archived | - | - | - | archived |
+| skooner | - | k8dash | archived | archived | - | - | - | archived |
+| SuperEdge | - | superedge | archived | archived | - | - | - | archived |
+| Teller | - | teller | archived | archived | - | - | - | archived |
+| Xline | - | xline | archived | archived | - | - | - | archived |

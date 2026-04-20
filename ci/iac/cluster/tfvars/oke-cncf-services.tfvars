@@ -1,7 +1,7 @@
 region                    = "us-sanjose-1"
 cluster_name              = "oke-cncf-services"
-node_pool_worker_size     = 5
-kubernetes_version        = "v1.34.2"
+node_pool_worker_size     = 4
+kubernetes_version        = "v1.35.0"
 cluster_autoscaler_min    = 3
 cluster_autoscaler_max    = 10
 oke_node_shape            = "VM.Standard.E6.Flex"
