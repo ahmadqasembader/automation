@@ -9,6 +9,29 @@ import secrets
 from typing import Dict, List, Tuple, Optional
 from datetime import datetime
 
+from AckKubestronautAndGKSwagShipped import (
+    column_index_to_letter,
+    column_letter_to_index,
+    get_header_row,
+    normalize_header,
+    resolve_infos_columns,
+)
+
+
+FALLBACK_GOLDEN_KUBESTRONAUT_COLUMN = "AA"
+
+
+def detect_golden_kubestronaut_column(headers: List[str]) -> Optional[str]:
+    for index, header in enumerate(headers):
+        if normalize_header(header) == "golden kubestronaut":
+            return column_index_to_letter(index + 1)
+    return None
+
+
+def resolve_golden_kubestronaut_column(infos_worksheet) -> str:
+    headers = get_header_row(infos_worksheet)
+    return detect_golden_kubestronaut_column(headers) or FALLBACK_GOLDEN_KUBESTRONAUT_COLUMN
+
 
 # ----------------------------
 # Manual matching cache
@@ -48,7 +71,7 @@ def norm_email(s: str) -> str:
     return (s or "").strip().lower()
 
 def prompt_manual_match(email: str, first_name: str, last_name: str,
-                       infos_worksheet) -> Optional[str]:
+                       infos_worksheet, email_column_index: int, email_column: str) -> Optional[str]:
     """
     Prompt user to manually match an email by searching in the infos sheet.
     Returns the matched email or None if user skips.
@@ -60,7 +83,7 @@ def prompt_manual_match(email: str, first_name: str, last_name: str,
     print("Please help match this person by providing their email from KUBESTRONAUTS_INFOS.")
     print("You can:")
     print("  1. Search in the KUBESTRONAUTS_INFOS sheet for this person")
-    print("  2. Copy their email (column M) and paste it here")
+    print(f"  2. Copy their email (column {email_column}) and paste it here")
     print("  3. Type 'skip' to skip this person for now")
     print("-" * 78)
 
@@ -75,7 +98,7 @@ def prompt_manual_match(email: str, first_name: str, last_name: str,
         # Check if it looks like an email
         if "@" in ans and "." in ans:
             # Verify this email exists in infos sheet
-            cells = infos_worksheet.find(pattern=ans, cols=(13, 13), matchEntireCell=True)
+            cells = infos_worksheet.find(pattern=ans, cols=(email_column_index, email_column_index), matchEntireCell=True)
             if len(cells) == 1:
                 row = cells[0].row
                 full_name = infos_worksheet.cell("B" + str(row)).value.strip()
@@ -87,7 +110,7 @@ def prompt_manual_match(email: str, first_name: str, last_name: str,
                     print("   Let's try again.")
                     continue
             elif len(cells) == 0:
-                print(f"⚠️  Email '{ans}' not found in KUBESTRONAUTS_INFOS (column M).")
+                print(f"⚠️  Email '{ans}' not found in KUBESTRONAUTS_INFOS (column {email_column}).")
                 retry = input("   Try another email? (y/n): ").strip().lower()
                 if retry not in ("y", "yes", ""):
                     return None
@@ -115,6 +138,18 @@ infos_sheet = gc.open_by_key(KUBESTRONAUTS_INFOS)
 weekly_temp_worksheet = golden_weekly_temp_sheet.sheet1
 welcome_worksheet = golden_welcome_sheet.sheet1
 infos_worksheet = infos_sheet.sheet1
+email_column, _, _ = resolve_infos_columns(
+    infos_worksheet,
+    email_column="",
+    kubestronaut_sent_column="",
+    golden_sent_columns=tuple(),
+)
+email_column_index = column_letter_to_index(email_column)
+golden_kubestronaut_column = resolve_golden_kubestronaut_column(infos_worksheet)
+print(
+    "KUBESTRONAUTS_INFOS columns: "
+    f"email={email_column}, golden_kubestronaut={golden_kubestronaut_column}"
+)
 
 # Get emails and welcome emails
 emails_to_check = weekly_temp_worksheet.get_col(4, include_tailing_empty=False)
@@ -154,7 +189,11 @@ for idx, email in enumerate(emails_to_check, start=1):
             break
 
         # Try direct lookup first
-        cells = infos_worksheet.find(pattern=email_sep, cols=(13, 13), matchEntireCell=True)
+        cells = infos_worksheet.find(
+            pattern=email_sep,
+            cols=(email_column_index, email_column_index),
+            matchEntireCell=True,
+        )
         if len(cells) == 1:
             row = cells[0].row
             full_name = infos_worksheet.cell("B" + str(row)).value.strip()
@@ -173,7 +212,11 @@ for idx, email in enumerate(emails_to_check, start=1):
         email_norm = norm_email(email_sep)
         if email_norm in manual_cache:
             cached_email = manual_cache[email_norm]
-            cells = infos_worksheet.find(pattern=cached_email, cols=(13, 13), matchEntireCell=True)
+            cells = infos_worksheet.find(
+                pattern=cached_email,
+                cols=(email_column_index, email_column_index),
+                matchEntireCell=True,
+            )
             if len(cells) == 1:
                 row = cells[0].row
                 full_name = infos_worksheet.cell("B" + str(row)).value.strip()
@@ -197,11 +240,22 @@ for idx, email in enumerate(emails_to_check, start=1):
 
         # Try manual matching
         print(f"[{idx:2}/{len(emails_to_check)}] {email:<40} ❌ not found ({first_name} {last_name})")
-        matched_email = prompt_manual_match(email, first_name, last_name, infos_worksheet)
+        matched_email = prompt_manual_match(
+            email,
+            first_name,
+            last_name,
+            infos_worksheet,
+            email_column_index,
+            email_column,
+        )
 
         if matched_email:
             # Found via manual matching
-            cells = infos_worksheet.find(pattern=matched_email, cols=(13, 13), matchEntireCell=True)
+            cells = infos_worksheet.find(
+                pattern=matched_email,
+                cols=(email_column_index, email_column_index),
+                matchEntireCell=True,
+            )
             if len(cells) == 1:
                 row = cells[0].row
                 full_name = infos_worksheet.cell("B" + str(row)).value.strip()
@@ -268,7 +322,7 @@ with rollback_guard(golden_welcome_sheet, main_worksheet_title='Sheet1', temp_wo
         print(f"✨ Welcoming Kubestronaut: {k['email']}")
 
         # Mark as GK in infos sheet
-        infos_worksheet.update_value("Z" + str(k["row"]), date_string_yyyymmdd)
+        infos_worksheet.update_value(golden_kubestronaut_column + str(k["row"]), date_string_yyyymmdd)
 
         # Format names with capitalized first letter
         name_parts = k["full_name"].strip().split()
@@ -310,4 +364,3 @@ if already_welcomed:
 print("\n✅ All valid Kubestronauts have been welcomed.")
 print("👉 Go to https://docs.google.com/spreadsheets/d/" + GOLDEN_KUBESTRONAUTS_WELCOME)
 print("📩 Use the mail merger with the draft: \"Welcome to the Golden Kubestronaut program !\"")
-

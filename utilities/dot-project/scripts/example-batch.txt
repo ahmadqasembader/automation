@@ -1,0 +1,14 @@
+# Example batch file for provision.sh / rollout.sh
+# Format: org|name|maturity (pipe-delimited)
+#
+# Usage with provision.sh:
+#   ./scripts/provision.sh --batch scripts/example-batch.txt --dry-run
+#
+# Usage with rollout.sh (auto-generates from landscape.yml):
+#   ./scripts/rollout.sh --landscape <path> --maturity graduated --list
+#   ./scripts/rollout.sh --landscape <path> --maturity graduated --dry-run
+#
+# Uncomment lines below to provision manually:
+# project-copacetic|Copacetic|copacetic
+# project-dalec|DALEC|dalec
+# grpc|gRPC|grpc

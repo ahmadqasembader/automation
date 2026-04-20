@@ -1,12 +1,12 @@
 region                 = "us-sanjose-1"
 cluster_name           = "oke-cncf-gha-runners"
-node_pool_worker_size  = 1
-kubernetes_version     = "v1.34.2"
-cluster_autoscaler_min = 1
-cluster_autoscaler_max = 2
-oke_node_shape         = "BM.Standard.E5.192"
-oke_node_memory        = 2304
-oke_node_cpu           = 192
+node_pool_worker_size  = 3
+kubernetes_version     = "v1.35.0"
+cluster_autoscaler_min = 3
+cluster_autoscaler_max = 5
+oke_node_shape         = "VM.Standard.E6.Flex"
+oke_node_memory        = 64
+oke_node_cpu           = 16
 vcn_cidr               = "10.0.0.0/16"
 k8s_api_cidr           = "10.0.0.0/28"
 svc_cidr               = "10.0.20.0/24"
@@ -63,6 +63,15 @@ svc_lb_ingress_rules = [
     stateless   = false
     tcp_max     = 8443
     tcp_min     = 8443
+  },
+  {
+    description = "Access port 22 from nodes for KubeVirt VM access"
+    protocol    = "6"
+    source      = "NODE_CIDR"
+    source_type = "CIDR_BLOCK"
+    stateless   = false
+    tcp_max     = 22
+    tcp_min     = 22
   }
 ]
 
@@ -161,13 +170,6 @@ node_egress_rules = [
     stateless        = false
   },
   {
-    description      = "Allow pods on one worker node to communicate with pods on other worker nodes"
-    destination      = "10.0.11.0/24"
-    destination_type = "CIDR_BLOCK"
-    protocol         = "all"
-    stateless        = false
-  },
-  {
     description      = "ICMP Access from Kubernetes Control Plane"
     destination      = "INTERNET"
     destination_type = "CIDR_BLOCK"
@@ -210,15 +212,6 @@ node_ingress_rules = [
     source      = "NODE_CIDR"
     source_type = "CIDR_BLOCK"
     stateless   = false
-  },
-  {
-    description = "Inbound SSH traffic to worker nodes"
-    protocol    = "6"
-    source      = "INTERNET"
-    source_type = "CIDR_BLOCK"
-    stateless   = false
-    tcp_max     = 22
-    tcp_min     = 22
   },
   {
     description = "Path discovery"

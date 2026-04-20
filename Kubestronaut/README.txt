@@ -23,7 +23,7 @@ cat Kubestronaut.json | jq --arg COUNTRY "$COUNTRY" '.[] | select (.Country==$CO
 # List every Kubestronaut from a country who have not their jacket sent
 cat Kubestronaut.json | jq --arg COUNTRY "$COUNTRY" '.[] | select ((.Country==$COUNTRY) and (.JacketSent=="")) | .Name +" - "+ .Email'
 
-cat Kubestronaut.json | jq --arg COUNTRY "$COUNTRY" '.[] | select ((.Country==$COUNTRY) and (.JacketSent=="")) | .Name +" - "+ .Email+" - "+ .Size+" - "+ .Address'
+cat Kubestronaut.json | jq -r --arg COUNTRY "$COUNTRY" '.[] | select ((.Country==$COUNTRY) and (.JacketSent=="")) | .Name +" - "+ .Email+" - "+ .Size+" - "+ .Address'
 cat Kubestronaut.json | jq --arg COUNTRY "$COUNTRY" '.[] | select ((.Country==$COUNTRY) and (.JacketSent=="")) | .Size' | sort | uniq -c
 
 
@@ -49,4 +49,3 @@ jq -r --argjson cutoff "$(date -u -v-4m +%s)" '.[]|(.JacketSent//"") as $js|(.Ti
 
 # Number of Kubestronauts per countries waiting for more than 4 months
 jq -r --argjson cutoff "$(date -u -v-4m +%s)" '[.[]|(.JacketSent//"") as $js|(.Timestamp//"") as $ts|(.Name//"") as $n|(.Email//"") as $e|(.Country//"Inconnu") as $c|((try($ts|strptime("%m/%d/%Y %H:%M:%S")|mktime)catch null)//(try($ts|strptime("%-m/%-d/%Y %H:%M:%S")|mktime)catch null)) as $t|select(($js=="") and ($t!=null and $t<$cutoff) and ($n!="" and $e!=""))|$c]|group_by(.)|map("\(.[0])\t\(length)")|.[]' Kubestronaut.json | sort -k2,2nr
-

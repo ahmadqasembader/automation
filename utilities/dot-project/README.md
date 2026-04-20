@@ -129,7 +129,25 @@ The `landscape-updater` tool automates the process of updating the CNCF Landscap
 
 ### Bootstrap
 
-The `bootstrap` tool auto-generates `project.yaml` and `maintainers.yaml` scaffolds by fetching data from CLOMonitor, GitHub, and the CNCF landscape. It discovers maintainer handles from CODEOWNERS, OWNERS, and MAINTAINERS files.
+The `bootstrap` tool auto-generates a complete `.project` scaffold by fetching data from CLOMonitor, GitHub, and the CNCF landscape. It discovers maintainer handles from CODEOWNERS, OWNERS, and MAINTAINERS files.
+
+**Generated files (8 total):**
+
+| File | Description |
+|------|-------------|
+| `project.yaml` | Core project metadata |
+| `maintainers.yaml` | Maintainer roster |
+| `README.md` | .project directory documentation |
+| `SECURITY.md` | Security reporting policy |
+| `CODEOWNERS` | PR review requirements |
+| `.gitignore` | Build/OS artifact exclusions |
+| `.github/workflows/validate.yaml` | CI validation workflow |
+| `.github/workflows/update-landscape.yml` | Landscape sync workflow |
+
+All generated files use:
+- **Full GitHub URLs** for all path references (not relative paths)
+- **SHA-pinned action refs** for deterministic CI
+- **`LANDSCAPE_REPO_TOKEN`** as the standardized secret name
 
 ```bash
 # Dry run: preview generated YAML on stdout
@@ -175,6 +193,60 @@ Maintainer discovery checks these files (in the repo root, `.github/`, and org `
 - `OWNERS` - parses Kubernetes-style YAML (approvers/reviewers)
 - `MAINTAINERS` / `MAINTAINERS.md` - heuristic extraction of handles, tables, GitHub URLs
 
+### Provisioning
+
+The `provision.sh` script automates the end-to-end process of creating a `.project` repo for a CNCF project: repo creation, bootstrap, push, secrets, and branch protection.
+
+```bash
+# Single project (dry run)
+./scripts/provision.sh --org project-copacetic --name Copacetic --dry-run
+
+# Single project (live)
+LANDSCAPE_REPO_TOKEN=ghp_xxx ./scripts/provision.sh --org project-copacetic --name Copacetic
+
+# Batch mode
+LANDSCAPE_REPO_TOKEN=ghp_xxx ./scripts/provision.sh --batch scripts/example-batch.txt
+
+# Via Makefile
+make provision ORG=project-copacetic NAME=Copacetic DRY_RUN=1
+```
+
+#### Required Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `LANDSCAPE_REPO_TOKEN` | Token with write access to `cncf/landscape` for PR creation |
+| `LFX_AUTH_TOKEN` | (Optional) Token for LFX maintainer handle verification |
+
+#### Options
+
+| Flag | Description |
+|------|-------------|
+| `--org <org>` | GitHub organization |
+| `--name <name>` | Project display name |
+| `--repo <repo>` | Primary repo name (defaults to org) |
+| `--batch <file>` | Pipe-delimited file: `org\|name\|repo` |
+| `--dry-run` | Print actions without executing |
+| `--skip-secrets` | Skip setting repo secrets |
+| `--skip-protection` | Skip branch protection setup |
+| `--bootstrap-bin <path>` | Path to bootstrap binary |
+
+#### Batch File Format
+
+```
+# Comments start with #
+# Format: org|name|repo
+project-copacetic|Copacetic|copacetic
+grpc|gRPC|grpc
+```
+
+#### Required Secrets (per .project repo)
+
+| Secret | Purpose |
+|--------|---------|
+| `LANDSCAPE_REPO_TOKEN` | Token for `update-landscape.yml` to open PRs against `cncf/landscape` |
+| `LFX_AUTH_TOKEN` | Token for `validate.yaml` to verify maintainer handles via LFX |
+
 ### Staleness Checker
 
 Checks if maintainer data hasn't been updated within a threshold.
@@ -193,10 +265,12 @@ Verifies all URLs referenced in a project are accessible.
 
 ## GitHub Actions
 
+All action references should be **SHA-pinned** for reproducibility.
+
 ### Using the Validate Project Action
 
 ```yaml
-- uses: cncf/automation/.github/actions/validate-project@main
+- uses: cncf/automation/.github/actions/validate-project@979abb1e07fa1b6f2b4e77200f6a698cdd86e59c
   with:
     project_file: 'project.yaml'
 ```
@@ -204,24 +278,12 @@ Verifies all URLs referenced in a project are accessible.
 ### Using the Validate Maintainers Action
 
 ```yaml
-- uses: cncf/automation/.github/actions/validate-maintainers@main
+- uses: cncf/automation/.github/actions/validate-maintainers@979abb1e07fa1b6f2b4e77200f6a698cdd86e59c
   with:
     maintainers_file: 'maintainers.yaml'
     verify_maintainers: 'true'
   env:
     LFX_AUTH_TOKEN: ${{ secrets.LFX_AUTH_TOKEN }}
-```
-
-### Reusable Workflow
-
-```yaml
-jobs:
-  validate:
-    uses: cncf/automation/.github/workflows/reusable-validate-maintainers.yaml@main
-    with:
-      maintainers-file: 'maintainers.yaml'
-    secrets:
-      LFX_AUTH_TOKEN: ${{ secrets.LFX_AUTH_TOKEN }}
 ```
 
 ### Landscape Update Action
@@ -230,22 +292,30 @@ jobs:
 name: Update Landscape
 on:
   push:
+    branches: [main]
     paths:
       - 'project.yaml'
-    branches:
-      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+        with:
+          fetch-depth: 0
 
       - name: Update Landscape
-        uses: cncf/automation/.github/actions/landscape-update@main
+        uses: cncf/automation/.github/actions/landscape-update@979abb1e07fa1b6f2b4e77200f6a698cdd86e59c
         with:
-          project_file: './project.yaml'
+          project_file: 'project.yaml'
           token: ${{ secrets.LANDSCAPE_REPO_TOKEN }}
 ```
 
@@ -269,6 +339,7 @@ make build          # Build all binaries to bin/
 make docker-build   # Build Docker image
 make test           # Run tests
 make test-coverage  # Run tests with coverage report
+make provision      # Provision a .project repo (prints usage)
 make fmt            # Format code
 make lint           # Run linter (requires golangci-lint)
 make security       # Run security checks (requires gosec)
