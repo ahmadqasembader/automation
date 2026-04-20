@@ -655,9 +655,16 @@ func SearchTOCIssues(projectName, orgName, token string, client *http.Client, ba
 		if err != nil {
 			continue
 		}
-		defer resp.Body.Close()
 
 		if resp.StatusCode != http.StatusOK {
+			resp.Body.Close()
+			continue
+		}
+
+		// Ensure the response body is closed after we're done reading it.
+		body, err := io.ReadAll(resp.Body)
+		resp.Body.Close()
+		if err != nil {
 			continue
 		}
 
@@ -669,7 +676,7 @@ func SearchTOCIssues(projectName, orgName, token string, client *http.Client, ba
 				Number  int    `json:"number"`
 			} `json:"items"`
 		}
-		if err := json.NewDecoder(resp.Body).Decode(&searchResult); err != nil {
+		if err := json.Unmarshal(body, &searchResult); err != nil {
 			continue
 		}
 
