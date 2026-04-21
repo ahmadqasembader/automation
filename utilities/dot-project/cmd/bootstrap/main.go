@@ -22,6 +22,7 @@ func main() {
 		skipCLO       = flag.Bool("skip-clomonitor", false, "Skip CLOMonitor API lookup")
 		skipGH        = flag.Bool("skip-github", false, "Skip GitHub API lookup")
 		dryRun        = flag.Bool("dry-run", false, "Print generated YAML to stdout without writing files")
+		force         = flag.Bool("force", false, "Overwrite auxiliary files (never overwrites project.yaml or maintainers.yaml)")
 	)
 	flag.Parse()
 
@@ -177,7 +178,11 @@ func main() {
 		fmt.Println(string(maintainersYAML))
 	} else {
 		fmt.Fprintf(os.Stderr, "  Writing scaffold to %s...\n", *outputDir)
-		if err := projects.WriteScaffold(*outputDir, result); err != nil {
+		var opts []projects.WriteScaffoldOption
+		if *force {
+			opts = append(opts, projects.WithForce())
+		}
+		if err := projects.WriteScaffold(*outputDir, result, opts...); err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
 		}

@@ -3,6 +3,7 @@ package projects
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -146,6 +147,10 @@ const codeownersTemplate = `# CODEOWNERS for .project metadata repository
 const gitignoreContent = `.cache/
 .DS_Store
 Thumbs.db
+.idea/
+.vscode/
+*~
+*.swp
 `
 
 // validateWorkflowContent is the SHA-pinned validate.yaml workflow.
@@ -258,6 +263,27 @@ var templateFuncs = template.FuncMap{
 	},
 }
 
+// writeScaffoldConfig holds options for WriteScaffold.
+type writeScaffoldConfig struct {
+	force bool
+}
+
+// WriteScaffoldOption configures WriteScaffold behaviour.
+type WriteScaffoldOption func(*writeScaffoldConfig)
+
+// WithForce allows WriteScaffold to overwrite auxiliary files (README.md,
+// .gitignore, workflows, SECURITY.md, CODEOWNERS) but never the core
+// metadata files (project.yaml, maintainers.yaml).
+func WithForce() WriteScaffoldOption {
+	return func(c *writeScaffoldConfig) { c.force = true }
+}
+
+// protectedFiles are never overwritten, even with --force.
+var protectedFiles = map[string]bool{
+	"project.yaml":     true,
+	"maintainers.yaml": true,
+}
+
 // GenerateProjectYAML produces the project.yaml content from a BootstrapResult.
 func GenerateProjectYAML(result *BootstrapResult) ([]byte, error) {
 	tmpl, err := template.New("project").Funcs(templateFuncs).Parse(projectYAMLTemplate)
@@ -319,8 +345,13 @@ func GenerateMaintainersYAML(result *BootstrapResult) ([]byte, error) {
 
 // WriteScaffold writes the complete .project scaffold (8 files) to the
 // specified directory. It will not overwrite existing project.yaml or
-// maintainers.yaml files.
-func WriteScaffold(dir string, result *BootstrapResult) error {
+// maintainers.yaml files. Other files are skipped if they exist unless
+// force is true.
+func WriteScaffold(dir string, result *BootstrapResult, opts ...WriteScaffoldOption) error {
+	cfg := writeScaffoldConfig{}
+	for _, o := range opts {
+		o(&cfg)
+	}
 	// Helper: generate content from a Go template string
 	tmplGen := func(tmplName, tmplContent string) func() ([]byte, error) {
 		return func() ([]byte, error) {
@@ -373,15 +404,74 @@ func WriteScaffold(dir string, result *BootstrapResult) error {
 		files = append(files, scaffoldFile{"CODEOWNERS", tmplGen("codeowners", codeownersTemplate)})
 	}
 
-	// Protect against overwriting core metadata files
-	for _, f := range []string{"project.yaml", "maintainers.yaml"} {
+	// Check if any protected files exist
+	protectedExist := false
+	for f := range protectedFiles {
 		if _, err := os.Stat(filepath.Join(dir, f)); err == nil {
-			return fmt.Errorf("%s already exists in %s; refusing to overwrite", f, dir)
+			protectedExist = true
+			break
+		}
+	}
+
+	// If protected files exist and force is NOT set, error out
+	if protectedExist && !cfg.force {
+		for f := range protectedFiles {
+			if _, err := os.Stat(filepath.Join(dir, f)); err == nil {
+				return fmt.Errorf("%s already exists in %s; refusing to overwrite (use --force to regenerate auxiliary files)", f, dir)
+			}
 		}
 	}
 
 	for _, f := range files {
 		fullPath := filepath.Join(dir, f.path)
+
+		// Check if file already exists on disk
+		existingData, existsErr := os.ReadFile(fullPath)
+		fileExists := existsErr == nil
+
+		if fileExists {
+			// Generate the content so we can compare
+			newContent, err := f.generate()
+			if err != nil {
+				return fmt.Errorf("generating %s: %w", f.path, err)
+			}
+
+			identical := bytes.Equal(existingData, newContent)
+
+			// Never overwrite protected files
+			if protectedFiles[f.path] {
+				if !identical {
+					log.Printf("Skipping %s: protected file differs from generated version", f.path)
+					logDiffSummary(f.path, existingData, newContent)
+				}
+				continue
+			}
+
+			// Skip existing auxiliary files unless force is set
+			if !cfg.force {
+				if !identical {
+					log.Printf("Skipping %s: file differs from generated version (use --force to overwrite)", f.path)
+					logDiffSummary(f.path, existingData, newContent)
+				}
+				continue
+			}
+
+			// force is set — overwrite auxiliary, but skip if identical
+			if identical {
+				continue
+			}
+			log.Printf("Overwriting %s (--force)", f.path)
+
+			if err := os.MkdirAll(filepath.Dir(fullPath), 0755); err != nil {
+				return fmt.Errorf("creating directory for %s: %w", f.path, err)
+			}
+			if err := os.WriteFile(fullPath, newContent, 0644); err != nil {
+				return fmt.Errorf("writing %s: %w", f.path, err)
+			}
+			continue
+		}
+
+		// File does not exist — generate and write
 		if err := os.MkdirAll(filepath.Dir(fullPath), 0755); err != nil {
 			return fmt.Errorf("creating directory for %s: %w", f.path, err)
 		}
@@ -394,6 +484,78 @@ func WriteScaffold(dir string, result *BootstrapResult) error {
 		}
 	}
 	return nil
+}
+
+// logDiffSummary logs a concise summary of differences between existing and
+// generated file content so the user can see what would change.
+func logDiffSummary(path string, existing, generated []byte) {
+	oldLines := strings.Split(string(existing), "\n")
+	newLines := strings.Split(string(generated), "\n")
+
+	// Count added/removed/changed lines with a simple LCS-free approach
+	added, removed := 0, 0
+	maxLen := len(oldLines)
+	if len(newLines) > maxLen {
+		maxLen = len(newLines)
+	}
+	for i := 0; i < maxLen; i++ {
+		var oldLine, newLine string
+		if i < len(oldLines) {
+			oldLine = oldLines[i]
+		}
+		if i < len(newLines) {
+			newLine = newLines[i]
+		}
+		if oldLine != newLine {
+			if i >= len(oldLines) {
+				added++
+			} else if i >= len(newLines) {
+				removed++
+			} else {
+				added++
+				removed++
+			}
+		}
+	}
+
+	if added == 0 && removed == 0 {
+		return
+	}
+
+	log.Printf("  %s: %d line(s) differ (+%d/-%d)", path, added+removed, added, removed)
+
+	// Show first few differing lines (max 5) as context
+	shown := 0
+	for i := 0; i < maxLen && shown < 5; i++ {
+		var oldLine, newLine string
+		if i < len(oldLines) {
+			oldLine = oldLines[i]
+		}
+		if i < len(newLines) {
+			newLine = newLines[i]
+		}
+		if oldLine != newLine {
+			if i < len(oldLines) && oldLine != "" {
+				log.Printf("  - %s", truncate(oldLine, 120))
+			}
+			if i < len(newLines) && newLine != "" {
+				log.Printf("  + %s", truncate(newLine, 120))
+			}
+			shown++
+		}
+	}
+	remaining := (added + removed) - shown
+	if remaining > 0 {
+		log.Printf("  ... and %d more difference(s)", remaining)
+	}
+}
+
+// truncate shortens a string to maxLen, appending "..." if truncated.
+func truncate(s string, maxLen int) string {
+	if len(s) <= maxLen {
+		return s
+	}
+	return s[:maxLen-3] + "..."
 }
 
 // cleanBlankLines reduces runs of 3+ consecutive blank lines to at most 2.

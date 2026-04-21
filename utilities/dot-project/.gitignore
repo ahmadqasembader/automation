@@ -9,3 +9,36 @@ coverage.html
 *.test
 .test-cache/
 testdata/test-projectlist.yaml
+
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+__debug_bin*
+
+# IDE / editor files
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# AI assistant config
+.claude/
+
+# Logs
+*.log
+
+# Go vendor (if someone runs go mod vendor)
+vendor/
+
+# Environment file variants
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
