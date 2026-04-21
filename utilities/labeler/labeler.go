@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -397,14 +398,16 @@ func (l *Labeler) getLabelDefinition(labelName string) (string, string, string) 
 }
 
 func (l *Labeler) ensureLabelExists(ctx context.Context, owner, repo, labelName, color, description string) error {
-	if !l.config.AutoCreate {
-		return fmt.Errorf("label %s does not exist and auto-create-labels is disabled", labelName)
-	}
-
 	lbl, _, err := l.client.GetLabel(ctx, owner, repo, labelName)
 	if err != nil {
-		// Create the label if it doesn't exist
-		lbl, _, err = l.client.CreateLabel(ctx, owner, repo, &github.Label{
+		if !isLabelNotFoundError(err) {
+			return fmt.Errorf("failed to check label %s: %v", labelName, err)
+		}
+		if !l.config.AutoCreate {
+			return fmt.Errorf("label %s does not exist and auto-create-labels is disabled", labelName)
+		}
+		// Create the label when missing and auto-create is enabled.
+		_, _, err = l.client.CreateLabel(ctx, owner, repo, &github.Label{
 			Name:        &labelName,
 			Color:       &color,
 			Description: &description,
@@ -412,6 +415,11 @@ func (l *Labeler) ensureLabelExists(ctx context.Context, owner, repo, labelName,
 		if err != nil {
 			return fmt.Errorf("failed to create label %s: %v", labelName, err)
 		}
+		return nil
+	}
+
+	if !l.config.AutoCreate {
+		return nil
 	}
 
 	// Update label if color or description differs
@@ -426,6 +434,17 @@ func (l *Labeler) ensureLabelExists(ctx context.Context, owner, repo, labelName,
 		}
 	}
 	return nil
+}
+
+func isLabelNotFoundError(err error) bool {
+	var ghErr *github.ErrorResponse
+	if errors.As(err, &ghErr) {
+		if ghErr.Response != nil && ghErr.Response.StatusCode == http.StatusNotFound {
+			return true
+		}
+		return strings.EqualFold(ghErr.Message, "Not Found")
+	}
+	return false
 }
 
 func (l *Labeler) ensureDefinedLabelsExist(ctx context.Context, owner, repo string) error {

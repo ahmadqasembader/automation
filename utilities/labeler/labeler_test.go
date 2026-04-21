@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"net/http"
 	"strings"
 	"testing"
 
@@ -17,6 +18,7 @@ type MockGitHubClient struct {
 	DeletedLabels []string
 	AppliedLabels map[int][]string
 	RemovedLabels map[int][]string
+	GetLabelError error
 }
 
 func NewMockGitHubClient() *MockGitHubClient {
@@ -106,6 +108,9 @@ func (m *MockGitHubClient) DeleteLabel(ctx context.Context, owner, repo, name st
 }
 
 func (m *MockGitHubClient) GetLabel(ctx context.Context, owner, repo, name string) (*github.Label, *github.Response, error) {
+	if m.GetLabelError != nil {
+		return nil, nil, m.GetLabelError
+	}
 	for _, lbl := range m.Labels {
 		if lbl.GetName() == name {
 			return lbl, nil, nil
@@ -435,6 +440,94 @@ And some more text`,
 	}
 	if !found {
 		t.Errorf("Expected 'triage/valid' label to be applied from multiline comment, got: %v", appliedLabels)
+	}
+}
+
+func TestEnsureLabelExists_ExistingLabel_AutoCreateDisabled(t *testing.T) {
+	client := NewMockGitHubClient()
+	config := createTestConfig()
+	config.AutoCreate = false
+	labeler := NewLabeler(client, config)
+
+	existingName := "needs-triage"
+	existingColor := "ededed"
+	existingDescription := "Needs triage"
+	client.Labels = []*github.Label{
+		{
+			Name:        &existingName,
+			Color:       &existingColor,
+			Description: &existingDescription,
+		},
+	}
+
+	err := labeler.ensureLabelExists(context.Background(), "test-owner", "test-repo", existingName, existingColor, existingDescription)
+	if err != nil {
+		t.Fatalf("expected no error for existing label with auto-create disabled, got: %v", err)
+	}
+	if len(client.CreatedLabels) != 0 {
+		t.Fatalf("expected no label creation, got: %v", client.CreatedLabels)
+	}
+}
+
+func TestEnsureLabelExists_MissingLabel_AutoCreateDisabled(t *testing.T) {
+	client := NewMockGitHubClient()
+	config := createTestConfig()
+	config.AutoCreate = false
+	labeler := NewLabeler(client, config)
+
+	err := labeler.ensureLabelExists(context.Background(), "test-owner", "test-repo", "missing-label", "ffffff", "Missing label")
+	if err == nil {
+		t.Fatal("expected error for missing label with auto-create disabled")
+	}
+	if !strings.Contains(err.Error(), "auto-create-labels is disabled") {
+		t.Fatalf("unexpected error: %v", err)
+	}
+}
+
+func TestEnsureLabelExists_MissingLabel_AutoCreateEnabled(t *testing.T) {
+	client := NewMockGitHubClient()
+	config := createTestConfig()
+	config.AutoCreate = true
+	labeler := NewLabeler(client, config)
+
+	labelName := "missing-label"
+	labelColor := "ffffff"
+	labelDescription := "Missing label"
+
+	err := labeler.ensureLabelExists(context.Background(), "test-owner", "test-repo", labelName, labelColor, labelDescription)
+	if err != nil {
+		t.Fatalf("expected no error creating missing label with auto-create enabled, got: %v", err)
+	}
+
+	createdLabel, ok := client.CreatedLabels[labelName]
+	if !ok {
+		t.Fatalf("expected label %s to be created", labelName)
+	}
+	if createdLabel.GetColor() != labelColor {
+		t.Fatalf("expected created label color %s, got %s", labelColor, createdLabel.GetColor())
+	}
+	if createdLabel.GetDescription() != labelDescription {
+		t.Fatalf("expected created label description %s, got %s", labelDescription, createdLabel.GetDescription())
+	}
+}
+
+func TestEnsureLabelExists_GetLabelNon404Error(t *testing.T) {
+	client := NewMockGitHubClient()
+	client.GetLabelError = &github.ErrorResponse{
+		Message:  "Internal Server Error",
+		Response: &http.Response{StatusCode: http.StatusInternalServerError},
+	}
+
+	config := createTestConfig()
+	config.AutoCreate = true
+	labeler := NewLabeler(client, config)
+
+	err := labeler.ensureLabelExists(context.Background(), "test-owner", "test-repo", "needs-triage", "ededed", "Needs triage")
+	if err == nil {
+		t.Fatal("expected error when GetLabel returns non-404 API error")
+	}
+	if !strings.Contains(err.Error(), "failed to check label") {
+		t.Fatalf("expected non-404 error to fail label check, got: %v", err)
 	}
 }
 
