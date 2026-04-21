@@ -40,7 +40,7 @@ jobs:
         with:
           go-version-file: ci/gha-runner-vm/go.mod
       - name: Change Ubuntu mirrors
-        uses: vegardit/fast-apt-mirror.sh@29a5ef3401107220fc3c32a0c659b6a1211f9e0f # v1.4.2
+        uses: vegardit/fast-apt-mirror.sh@776a8b231db309f0cd277d8be795af0de4a0a350 # v1.4.3
         with:
           exclude-current: true
       - name: Set up QEMU
