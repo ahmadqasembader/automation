@@ -147,6 +147,10 @@ const codeownersTemplate = `# CODEOWNERS for .project metadata repository
 const gitignoreContent = `.cache/
 .DS_Store
 Thumbs.db
+.idea/
+.vscode/
+*~
+*.swp
 `
 
 // validateWorkflowContent is the SHA-pinned validate.yaml workflow.
