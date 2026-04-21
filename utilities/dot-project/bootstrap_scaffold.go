@@ -421,22 +421,53 @@ func WriteScaffold(dir string, result *BootstrapResult, opts ...WriteScaffoldOpt
 	for _, f := range files {
 		fullPath := filepath.Join(dir, f.path)
 
-		// Never overwrite protected files
-		if protectedFiles[f.path] {
-			if _, err := os.Stat(fullPath); err == nil {
-				log.Printf("Skipping %s: protected file already exists", f.path)
+		// Check if file already exists on disk
+		existingData, existsErr := os.ReadFile(fullPath)
+		fileExists := existsErr == nil
+
+		if fileExists {
+			// Generate the content so we can compare
+			newContent, err := f.generate()
+			if err != nil {
+				return fmt.Errorf("generating %s: %w", f.path, err)
+			}
+
+			identical := bytes.Equal(existingData, newContent)
+
+			// Never overwrite protected files
+			if protectedFiles[f.path] {
+				if !identical {
+					log.Printf("Skipping %s: protected file differs from generated version", f.path)
+					logDiffSummary(f.path, existingData, newContent)
+				}
 				continue
 			}
-		}
 
-		// Skip existing auxiliary files unless force is set
-		if !cfg.force {
-			if _, err := os.Stat(fullPath); err == nil {
-				log.Printf("Skipping %s: file already exists (use --force to overwrite)", f.path)
+			// Skip existing auxiliary files unless force is set
+			if !cfg.force {
+				if !identical {
+					log.Printf("Skipping %s: file differs from generated version (use --force to overwrite)", f.path)
+					logDiffSummary(f.path, existingData, newContent)
+				}
 				continue
 			}
+
+			// force is set — overwrite auxiliary, but skip if identical
+			if identical {
+				continue
+			}
+			log.Printf("Overwriting %s (--force)", f.path)
+
+			if err := os.MkdirAll(filepath.Dir(fullPath), 0755); err != nil {
+				return fmt.Errorf("creating directory for %s: %w", f.path, err)
+			}
+			if err := os.WriteFile(fullPath, newContent, 0644); err != nil {
+				return fmt.Errorf("writing %s: %w", f.path, err)
+			}
+			continue
 		}
 
+		// File does not exist — generate and write
 		if err := os.MkdirAll(filepath.Dir(fullPath), 0755); err != nil {
 			return fmt.Errorf("creating directory for %s: %w", f.path, err)
 		}
@@ -449,6 +480,78 @@ func WriteScaffold(dir string, result *BootstrapResult, opts ...WriteScaffoldOpt
 		}
 	}
 	return nil
+}
+
+// logDiffSummary logs a concise summary of differences between existing and
+// generated file content so the user can see what would change.
+func logDiffSummary(path string, existing, generated []byte) {
+	oldLines := strings.Split(string(existing), "\n")
+	newLines := strings.Split(string(generated), "\n")
+
+	// Count added/removed/changed lines with a simple LCS-free approach
+	added, removed := 0, 0
+	maxLen := len(oldLines)
+	if len(newLines) > maxLen {
+		maxLen = len(newLines)
+	}
+	for i := 0; i < maxLen; i++ {
+		var oldLine, newLine string
+		if i < len(oldLines) {
+			oldLine = oldLines[i]
+		}
+		if i < len(newLines) {
+			newLine = newLines[i]
+		}
+		if oldLine != newLine {
+			if i >= len(oldLines) {
+				added++
+			} else if i >= len(newLines) {
+				removed++
+			} else {
+				added++
+				removed++
+			}
+		}
+	}
+
+	if added == 0 && removed == 0 {
+		return
+	}
+
+	log.Printf("  %s: %d line(s) differ (+%d/-%d)", path, added+removed, added, removed)
+
+	// Show first few differing lines (max 5) as context
+	shown := 0
+	for i := 0; i < maxLen && shown < 5; i++ {
+		var oldLine, newLine string
+		if i < len(oldLines) {
+			oldLine = oldLines[i]
+		}
+		if i < len(newLines) {
+			newLine = newLines[i]
+		}
+		if oldLine != newLine {
+			if i < len(oldLines) && oldLine != "" {
+				log.Printf("  - %s", truncate(oldLine, 120))
+			}
+			if i < len(newLines) && newLine != "" {
+				log.Printf("  + %s", truncate(newLine, 120))
+			}
+			shown++
+		}
+	}
+	remaining := (added + removed) - shown
+	if remaining > 0 {
+		log.Printf("  ... and %d more difference(s)", remaining)
+	}
+}
+
+// truncate shortens a string to maxLen, appending "..." if truncated.
+func truncate(s string, maxLen int) string {
+	if len(s) <= maxLen {
+		return s
+	}
+	return s[:maxLen-3] + "..."
 }
 
 // cleanBlankLines reduces runs of 3+ consecutive blank lines to at most 2.
