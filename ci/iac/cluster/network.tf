@@ -49,7 +49,7 @@ resource "oci_core_route_table" "private" {
 
   route_rules {
     description       = "traffic to OCI services"
-    destination       = "all-sjc-services-in-oracle-services-network"
+    destination       = var.regional_service_cidr_label
     destination_type  = "SERVICE_CIDR_BLOCK"
     network_entity_id = oci_core_service_gateway.service.id
   }
@@ -325,6 +325,7 @@ resource "oci_core_subnet" "node" {
 }
 
 resource "oci_core_public_ip" "ingress_ip" {
+  count          = var.deploy_ingress ? 1 : 0
   compartment_id = var.compartment_ocid
   lifetime       = "RESERVED"
   display_name   = "${var.cluster_name}-ingress-ip"

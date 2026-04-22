@@ -110,6 +110,11 @@ variable "node_cidr" {
   description = "CIDR for the worker nodes network"
 }
 
+variable "regional_service_cidr_label" {
+  type        = string
+  description = "The Service CIDR Labels follow a specific naming convention based on the regional key of the location"
+}
+
 variable "svc_lb_egress_rules" {
   description = "Egress security rules for the service LB security list"
   type = list(object({
@@ -204,6 +209,12 @@ variable "node_ingress_rules" {
     icmp_code   = optional(number)
   }))
   default = []
+}
+
+variable "deploy_ingress" {
+  type        = bool
+  description = "Deploy Ingress IP address"
+  default     = false
 }
 
 variable "deploy_kcp" {

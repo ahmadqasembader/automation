@@ -7,7 +7,7 @@ output "cluster" {
 }
 
 output "ingress_ip" {
-  value       = oci_core_public_ip.ingress_ip.ip_address
+  value       = var.deploy_ingress ? oci_core_public_ip.ingress_ip[0].ip_address : null
   description = "Static IP address of the Ingress"
 }
 

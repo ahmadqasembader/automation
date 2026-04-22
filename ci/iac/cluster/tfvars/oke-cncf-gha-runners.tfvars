@@ -12,6 +12,8 @@ k8s_api_cidr           = "10.0.0.0/28"
 svc_cidr               = "10.0.20.0/24"
 node_cidr              = "10.0.64.0/18"
 
+regional_service_cidr_label = "all-sjc-services-in-oracle-services-network"
+
 # CIDR_BLOCK   : is overriden to node_cidr in networks.tf file
 # K8S_API_CIDR : is overriden to k8s_api_cidr in networks.tf file
 # INTERNET     : is overriden to "0.8.8.8/0" in networks.tf file

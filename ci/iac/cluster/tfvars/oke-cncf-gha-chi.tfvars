@@ -1,22 +1,18 @@
-region                    = "us-sanjose-1"
-cluster_name              = "oke-cncf-services"
-node_pool_worker_size     = 4
-kubernetes_version        = "v1.35.0"
-cluster_autoscaler_min    = 3
-cluster_autoscaler_max    = 10
-oke_node_shape            = "VM.Standard.E6.Flex"
-oke_node_memory           = 64
-oke_node_cpu              = 16
-oke_node_boot_volume_size = 100
-deploy_kcp                = true
-ingress_private_ip_id     = "ocid1.privateip.oc1.us-sanjose-1.abzwuljr4i5var577r2aykc7eusqn3rpy5ciwqkvk67xpw7wmxhwdn3yw4cq"
-kcp_lb_private_ip_id      = "ocid1.privateip.oc1.us-sanjose-1.abzwuljrhuxff5dzmmwpovrwddlmh44m72b7cqgie2bvv3kkpbpq4aok2cpa"
-vcn_cidr                  = "10.0.0.0/16"
-k8s_api_cidr              = "10.0.0.0/28"
-svc_cidr                  = "10.0.20.0/24"
-node_cidr                 = "10.0.10.0/23"
+region                 = "us-chicago-1"
+cluster_name           = "oke-cncf-gha-chi"
+node_pool_worker_size  = 2
+kubernetes_version     = "v1.35.0"
+cluster_autoscaler_min = 2
+cluster_autoscaler_max = 5
+oke_node_shape         = "VM.Standard.E5.Flex"
+oke_node_memory        = 32
+oke_node_cpu           = 8
+vcn_cidr               = "10.0.0.0/16"
+k8s_api_cidr           = "10.0.0.0/28"
+svc_cidr               = "10.0.16.0/20"
+node_cidr              = "10.0.64.0/18"
 
-regional_service_cidr_label = "all-sjc-services-in-oracle-services-network"
+regional_service_cidr_label = "all-ord-services-in-oracle-services-network"
 
 # CIDR_BLOCK   : is overriden to node_cidr in networks.tf file
 # K8S_API_CIDR : is overriden to k8s_api_cidr in networks.tf file
@@ -69,6 +65,15 @@ svc_lb_ingress_rules = [
     stateless   = false
     tcp_max     = 8443
     tcp_min     = 8443
+  },
+  {
+    description = "Access port 22 from nodes for KubeVirt VM access"
+    protocol    = "6"
+    source      = "NODE_CIDR"
+    source_type = "CIDR_BLOCK"
+    stateless   = false
+    tcp_max     = 22
+    tcp_min     = 22
   }
 ]
 
@@ -82,7 +87,7 @@ k8s_api_endpoint_egress_rules = [
   },
   {
     description      = "Allow Kubernetes Control Plane to communicate with OKE"
-    destination      = "all-sjc-services-in-oracle-services-network"
+    destination      = "all-ord-services-in-oracle-services-network"
     destination_type = "SERVICE_CIDR_BLOCK"
     protocol         = "6"
     stateless        = false
@@ -151,7 +156,7 @@ node_egress_rules = [
   },
   {
     description      = "Allow nodes to communicate with OKE to ensure correct start-up and continued functioning"
-    destination      = "all-sjc-services-in-oracle-services-network"
+    destination      = "all-ord-services-in-oracle-services-network"
     destination_type = "SERVICE_CIDR_BLOCK"
     protocol         = "6"
     stateless        = false
@@ -162,13 +167,6 @@ node_egress_rules = [
   {
     description      = "Allow pods on one worker node to communicate with pods on other worker nodes"
     destination      = "NODE_CIDR"
-    destination_type = "CIDR_BLOCK"
-    protocol         = "all"
-    stateless        = false
-  },
-  {
-    description      = "Allow pods on one worker node to communicate with pods on other worker nodes"
-    destination      = "10.0.11.0/24"
     destination_type = "CIDR_BLOCK"
     protocol         = "all"
     stateless        = false
@@ -216,15 +214,6 @@ node_ingress_rules = [
     source      = "NODE_CIDR"
     source_type = "CIDR_BLOCK"
     stateless   = false
-  },
-  {
-    description = "Inbound SSH traffic to worker nodes"
-    protocol    = "6"
-    source      = "INTERNET"
-    source_type = "CIDR_BLOCK"
-    stateless   = false
-    tcp_max     = 22
-    tcp_min     = 22
   },
   {
     description = "Path discovery"
