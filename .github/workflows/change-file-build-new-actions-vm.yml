@@ -118,39 +118,6 @@ jobs:
           name: image-tag
           path: /tmp/image_tag
 
-  copy-image-to-regions:
-    runs-on: ubuntu-latest
-    needs: build
-    strategy:
-      matrix:
-        region: [us-phoenix-1, us-chicago-1]
-    env:
-      BUCKET_NAMESPACE: axtwf1hkrwcy
-      BUCKET_NAME: bucket-20250428-1925
-    steps:
-      - name: Download Object Name
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: object-name
-
-      - name: Install OCI CLI
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
-        with:
-          python-version: '3.13'
-          pip-install: oci-cli
-
-      - name: Sync image to other regions
-        run: |
-          OBJECT_NAME=$(cat object_name)
-          oci os object copy \
-            --wait-for-state COMPLETED \
-            --max-wait-seconds 3600 \
-            --bucket-name ${{ env.BUCKET_NAME }} \
-            --source-object-name ${OBJECT_NAME} \
-            --destination-bucket ${{ env.BUCKET_NAME }} \
-            --destination-region ${{ matrix.region }} \
-            --destination-namespace ${{ env.BUCKET_NAMESPACE }}
-
   run-kind-with-arc:
     runs-on: ubuntu-latest
     needs: build
@@ -265,9 +232,42 @@ jobs:
       - name: Run kind cluster
         run: ${{ github.workspace }}/.github/scripts/test_with_kind_cluster.sh
 
-  release-new-image:
+  copy-image-to-regions:
     runs-on: ubuntu-latest
     needs: [run-kind-with-arc, test-runner]
+    strategy:
+      matrix:
+        region: [us-phoenix-1, us-chicago-1]
+    env:
+      BUCKET_NAMESPACE: axtwf1hkrwcy
+      BUCKET_NAME: bucket-20250428-1925
+    steps:
+      - name: Download Object Name
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: object-name
+
+      - name: Install OCI CLI
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.13'
+          pip-install: oci-cli
+
+      - name: Sync image to other regions
+        run: |
+          OBJECT_NAME=$(cat object_name)
+          oci os object copy \
+            --wait-for-state COMPLETED \
+            --max-wait-seconds 3600 \
+            --bucket-name ${{ env.BUCKET_NAME }} \
+            --source-object-name ${OBJECT_NAME} \
+            --destination-bucket ${{ env.BUCKET_NAME }} \
+            --destination-region ${{ matrix.region }} \
+            --destination-namespace ${{ env.BUCKET_NAMESPACE }}
+
+  release-new-image:
+    runs-on: ubuntu-latest
+    needs: copy-image-to-regions
     env:
       OS_NAME: ubuntu-24.04-amd64-gha-image
     steps:
@@ -289,7 +289,7 @@ jobs:
 
   import-image-on-regions:
     runs-on: ubuntu-latest
-    needs: [release-new-image, copy-image-to-regions]
+    needs: release-new-image
     strategy:
       matrix:
         region: [us-ashburn-1, us-phoenix-1, us-chicago-1]
