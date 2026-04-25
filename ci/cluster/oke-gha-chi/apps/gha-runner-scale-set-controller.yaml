@@ -6,7 +6,7 @@ metadata:
   annotations:
     notifications.argoproj.io/subscribe.slack: internal-gha-argo
   labels:
-    cluster: oke-gha-phx
+    cluster: oke-gha-chi
 spec:
   project: default
   destination:
@@ -26,7 +26,7 @@ spec:
     helm:
       releaseName: cncf
       valueFiles:
-        - $values/ci/cluster/oke-gha-phx/manifests/gha-runner-scale-set-controller-values.yaml
+        - $values/ci/cluster/oke-gha-chi/manifests/gha-runner-scale-set-controller-values.yaml
   - ref: values
     repoURL: https://github.com/cncf/automation.git
     targetRevision: main
