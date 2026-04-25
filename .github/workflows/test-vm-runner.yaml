@@ -3,6 +3,11 @@ name: Test VM Runners
 on:
   workflow_dispatch:
     inputs:
+      runner:
+        description: 'Runner name.'
+        required: true
+        type: string
+        default: oracle-vm-2cpu-8gb-x86-64
       test_gpu:
         description: 'Test GPU Runners'
         required: false
@@ -17,12 +22,7 @@ permissions:
 
 jobs:
   test-runner:
-    strategy:
-      matrix:
-        #shape: [2cpu-8gb, 4cpu-16gb, 8cpu-32gb, 16cpu-64gb, 24cpu-384gb]
-        shape: [2cpu-8gb]
-        arch: ["x86-64", "arm64"]
-    runs-on: oracle-vm-${{ matrix.shape }}-${{ matrix.arch }}
+    runs-on: ${{ github.event.inputs.runner }}
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
