@@ -13,8 +13,8 @@ spec:
     creationPolicy: Owner
     template:
       data:
-        oci_api_key.pem: "{{ .oci-api-key | toString }}"
+        oci_api_key.pem: "{{ .oci_api_key | toString }}"
   data:
-  - secretKey: oci-api-key
+  - secretKey: oci_api_key
     remoteRef:
       key: oci-api-key
