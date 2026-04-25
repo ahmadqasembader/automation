@@ -1,6 +1,6 @@
 region                 = "us-phoenix-1"
 cluster_name           = "oke-cncf-gha-phx"
-node_pool_worker_size  = 2
+node_pool_worker_size  = 3
 kubernetes_version     = "v1.35.0"
 cluster_autoscaler_min = 2
 cluster_autoscaler_max = 5
@@ -67,9 +67,9 @@ svc_lb_ingress_rules = [
     tcp_min     = 8443
   },
   {
-    description = "Access port 22 from nodes for KubeVirt VM access"
+    description = "Access port 22"
     protocol    = "6"
-    source      = "NODE_CIDR"
+    source      = "INTERNET"
     source_type = "CIDR_BLOCK"
     stateless   = false
     tcp_max     = 22
