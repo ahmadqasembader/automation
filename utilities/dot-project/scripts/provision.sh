@@ -79,6 +79,51 @@ while [[ $# -gt 0 ]]; do
 done
 
 # ──────────────────────────────────────────────
+# Normalize GitHub URL inputs
+# ──────────────────────────────────────────────
+
+# normalize_github_url strips a full GitHub URL down to its org (and optionally repo) parts.
+# Accepts: https://github.com/org, https://github.com/org/repo, or plain "org"
+# Sets ORG (and REPO if a repo segment is present and REPO wasn't explicitly provided).
+normalize_github_url() {
+    local value="$1"
+    local field="$2"  # "org" or "repo"
+
+    # Strip trailing slashes
+    value="${value%/}"
+
+    if [[ "$value" =~ ^https?://github\.com/([^/]+)(/([^/]+))?$ ]]; then
+        local parsed_org="${BASH_REMATCH[1]}"
+        local parsed_repo="${BASH_REMATCH[3]}"
+
+        if [[ "$field" == "org" ]]; then
+            ORG="$parsed_org"
+            # If a repo segment was in the URL and --repo wasn't explicitly set, use it
+            if [[ -n "$parsed_repo" && -z "$REPO" ]]; then
+                REPO="$parsed_repo"
+                info "Extracted --repo '${REPO}' from GitHub URL"
+            fi
+            info "Extracted --org '${ORG}' from GitHub URL"
+        elif [[ "$field" == "repo" ]]; then
+            if [[ -n "$parsed_repo" ]]; then
+                REPO="$parsed_repo"
+            else
+                REPO="$parsed_org"  # URL was github.com/org, treat as repo name
+            fi
+            info "Extracted --repo '${REPO}' from GitHub URL"
+        fi
+    elif [[ "$value" =~ ^https?:// ]]; then
+        die "--${field} looks like a URL but is not a valid GitHub URL (expected https://github.com/<org>[/<repo>]): ${value}"
+    fi
+    # Otherwise it's already a plain name — no transformation needed
+}
+
+normalize_github_url "$ORG" "org"
+if [[ -n "$REPO" ]]; then
+    normalize_github_url "$REPO" "repo"
+fi
+
+# ──────────────────────────────────────────────
 # Prerequisites
 # ──────────────────────────────────────────────
 
@@ -121,6 +166,28 @@ provision_project() {
     local org="$1"
     local name="$2"
     local repo="${3:-$org}"
+
+    # Normalize org if it's a GitHub URL (e.g., https://github.com/tokenetes/tokenetes)
+    if [[ "$org" =~ ^https?://github\.com/([^/]+)(/([^/]+))?/?$ ]]; then
+        org="${BASH_REMATCH[1]}"
+        if [[ -n "${BASH_REMATCH[3]}" && ( -z "$repo" || "$repo" == "$1" ) ]]; then
+            repo="${BASH_REMATCH[3]}"
+        fi
+    elif [[ "$org" =~ ^https?:// ]]; then
+        warn "org '${org}' looks like a URL but is not a recognized GitHub URL; using as-is"
+    fi
+
+    # Normalize repo if it's a GitHub URL
+    if [[ "$repo" =~ ^https?://github\.com/([^/]+)(/([^/]+))?/?$ ]]; then
+        if [[ -n "${BASH_REMATCH[3]}" ]]; then
+            repo="${BASH_REMATCH[3]}"
+        else
+            repo="${BASH_REMATCH[1]}"
+        fi
+    elif [[ "$repo" =~ ^https?:// ]]; then
+        warn "repo '${repo}' looks like a URL but is not a recognized GitHub URL; using as-is"
+    fi
+
     local target_repo="${org}/.project"
 
     info "Provisioning: ${target_repo} (name: ${name}, primary repo: ${repo})"
