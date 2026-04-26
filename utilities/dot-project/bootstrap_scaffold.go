@@ -31,7 +31,7 @@ type: "project"
 maturity_log:
   - phase: "{{ or .MaturityPhase "sandbox" }}"
     date: "{{ formatTime .AcceptedDate }}"
-    {{ if .TOCIssueURL }}issue: "{{ .TOCIssueURL }}"{{ if isAutoDetected .Sources "toc_issue_url" }} # AUTO-DETECTED — please verify{{ end }}{{ else }}issue: "https://github.com/cncf/toc/issues/XXX" # TODO: Set TOC issue URL{{ end }}
+    {{ if .TOCIssueURL }}issue: "{{ .TOCIssueURL }}"{{ if isAutoDetected .Sources "toc_issue_url" }} # TODO: AUTO-DETECTED — please verify{{ end }}{{ else }}issue: "https://github.com/cncf/toc/issues/XXX" # TODO: Set TOC issue URL{{ end }}
 
 repositories:{{ if .Repositories }}{{ range .Repositories }}
   - "{{ . }}"{{ end }}{{ else }}
