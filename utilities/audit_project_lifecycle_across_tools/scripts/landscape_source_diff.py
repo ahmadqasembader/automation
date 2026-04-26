@@ -14,6 +14,7 @@ import os
 import sys
 import datetime
 import re
+import urllib.request
 from typing import Any, Dict, List, Optional, Tuple
 
 try:
@@ -147,6 +148,60 @@ def devstats_project_token(u: Any) -> str:
         return ""
     m = re.match(r"^https?://([^./]+)\.(?:devstats|teststats)\.cncf\.io", n)
     return canonical_token(m.group(1)) if m else ""
+
+
+# ---------------------------------------------------------------------------
+# GitHub redirect resolution helpers
+# ---------------------------------------------------------------------------
+
+_redirect_cache: Dict[str, str] = {}
+
+
+def resolve_final_url(url: str, timeout: int = 5) -> str:
+    """Follow HTTP redirects and return the final (normalized) destination URL.
+
+    Returns the original URL unchanged if the network request fails for any
+    reason, so callers degrade gracefully on connectivity issues.
+    """
+    if url in _redirect_cache:
+        return _redirect_cache[url]
+    try:
+        req = urllib.request.Request(
+            url,
+            method="HEAD",
+            headers={"User-Agent": "cncf-audit-redirect-check/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310
+            final = normalize_url(resp.geturl())
+    except Exception:
+        # Fallback to GET for servers that reject HEAD (e.g. some GitHub pages).
+        try:
+            req_get = urllib.request.Request(
+                url,
+                headers={"User-Agent": "cncf-audit-redirect-check/1.0"},
+            )
+            with urllib.request.urlopen(req_get, timeout=timeout) as resp:  # noqa: S310
+                final = normalize_url(resp.geturl())
+        except Exception:
+            final = normalize_url(url)
+    _redirect_cache[url] = final
+    return final
+
+
+def urls_resolve_to_same_destination(urls: List[str]) -> bool:
+    """Return True only when every non-empty URL resolves to the same final URL.
+
+    Only performs the check when all provided URLs are GitHub URLs — that is
+    the primary source of redirect noise (org renames, repo transfers). For
+    non-GitHub URLs this returns False so the existing finding is preserved.
+    """
+    distinct = [u for u in urls if u]
+    if len(distinct) < 2:
+        return False
+    if not all(is_github_url(u) for u in distinct):
+        return False
+    resolved = {resolve_final_url(u) for u in distinct}
+    return len(resolved) == 1
 
 
 def suppress_repo_mismatch_for_non_github_pcc(
@@ -470,7 +525,9 @@ def build_report() -> Dict[str, Any]:
         )
         if not suppress_repo:
             f1 = compare_field("repo_url", land_repo, pcc_repo, clo_repo, normalize_repo_identity)
-            if f1:
+            if f1 and not urls_resolve_to_same_destination(
+                [u for u in [land_repo, pcc_repo, clo_repo] if u]
+            ):
                 findings.append(f1)
 
         f2 = compare_slug_field(
