@@ -23,9 +23,9 @@ slug: "{{ .Slug }}"
 name: "{{ .Name }}"
 description: "{{ .Description }}"
 type: "project"
-{{ if .ProjectLead }}project_lead: "{{ .ProjectLead }}"{{ else }}# TODO: Set project lead GitHub handle
+{{ if .ProjectLead }}project_lead: "{{ .ProjectLead }}"{{ if isAutoDetected .Sources "project_lead" }} # TODO: AUTO-DETECTED — please verify{{ end }}{{ else }}# TODO: Set project lead GitHub handle
 # project_lead: "github-handle"{{ end }}
-{{ if .CNCFSlackChannel }}cncf_slack_channel: "{{ .CNCFSlackChannel }}"{{ if isAutoDetected .Sources "cncf_slack_channel" }} # AUTO-DETECTED — please verify{{ end }}{{ else }}# TODO: Set CNCF Slack channel
+{{ if .CNCFSlackChannel }}cncf_slack_channel: "{{ .CNCFSlackChannel }}"{{ if isAutoDetected .Sources "cncf_slack_channel" }} # TODO: AUTO-DETECTED — please verify{{ end }}{{ else }}# TODO: Set CNCF Slack channel
 # cncf_slack_channel: "#{{ .Slug }}"{{ end }}
 
 maturity_log:
