@@ -38,6 +38,15 @@ jobs:
           python scripts/fetch_lfx_insights_health.py
         working-directory: ./utilities/audit_project_lifecycle_across_tools
 
+      - name: Detect snapshot changes
+        id: snapshot_diff
+        run: |
+          if git diff --quiet -- utilities/audit_project_lifecycle_across_tools/datasources/lfx_insights_health.yaml; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Clean up git credentials
         run: |
           git config --local  --unset-all http.https://github.com/.extraheader || true
@@ -49,6 +58,7 @@ jobs:
           git remote set-url origin https://github.com/${{ github.repository }}.git
 
       - name: Create Pull Request
+        id: create_pr
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -65,3 +75,15 @@ jobs:
           branch: automation/lfx-insights-health
           add-paths: |
             utilities/audit_project_lifecycle_across_tools/datasources/lfx_insights_health.yaml
+
+      - name: Publish run summary
+        if: always()
+        run: |
+          {
+            echo "## LFX Insights sync summary"
+            echo
+            echo "- Snapshot changed: \`${{ steps.snapshot_diff.outputs.changed }}\`"
+            echo "- PR operation: \`${{ steps.create_pr.outputs.pull-request-operation || 'none' }}\`"
+            echo "- PR number: \`${{ steps.create_pr.outputs.pull-request-number || 'n/a' }}\`"
+            echo "- PR URL: ${{ steps.create_pr.outputs.pull-request-url || 'n/a' }}"
+          } >> "$GITHUB_STEP_SUMMARY"
