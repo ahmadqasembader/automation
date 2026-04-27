@@ -166,6 +166,7 @@ on:
     paths:
       - 'project.yaml'
       - 'maintainers.yaml'
+  workflow_dispatch:
 
 jobs:
   validate-project:
