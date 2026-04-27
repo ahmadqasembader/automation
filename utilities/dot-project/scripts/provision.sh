@@ -119,6 +119,29 @@ check_prerequisites() {
 }
 
 # ──────────────────────────────────────────────
+# Secret management
+# ──────────────────────────────────────────────
+
+# set_secret sets a GitHub Actions secret on a repo.
+# If it fails (e.g., enterprise policy blocks API access), prints manual instructions.
+set_secret() {
+    local repo="$1"
+    local secret_name="$2"
+    local secret_value="$3"
+
+    if echo "$secret_value" | gh secret set "$secret_name" --repo "$repo" 2>/dev/null; then
+        return 0
+    fi
+
+    warn "Could not set secret $secret_name on ${repo}"
+    warn "This is likely due to an enterprise policy blocking API-based secret management."
+    warn "Set it manually:"
+    warn "  Repo:  https://github.com/${repo}/settings/secrets/actions"
+    warn "  Org:   https://github.com/organizations/${repo%%/*}/settings/secrets/actions"
+    return 1
+}
+
+# ──────────────────────────────────────────────
 # Provision a single project
 # ──────────────────────────────────────────────
 
@@ -196,9 +219,11 @@ provision_project() {
             :
         else
             info "  Setting secrets..."
-            echo "$LANDSCAPE_REPO_TOKEN" | gh secret set LANDSCAPE_REPO_TOKEN --repo "$target_repo"
+            set_secret "$target_repo" "LANDSCAPE_REPO_TOKEN" "$LANDSCAPE_REPO_TOKEN" \
+                || warn "Could not set LANDSCAPE_REPO_TOKEN (set manually via GitHub UI)"
             if [[ -n "${LFX_AUTH_TOKEN:-}" ]]; then
-                echo "$LFX_AUTH_TOKEN" | gh secret set LFX_AUTH_TOKEN --repo "$target_repo"
+                set_secret "$target_repo" "LFX_AUTH_TOKEN" "$LFX_AUTH_TOKEN" \
+                    || warn "Could not set LFX_AUTH_TOKEN (set manually via GitHub UI)"
             else
                 warn "LFX_AUTH_TOKEN not set; skipping (maintainer verification won't work)"
             fi
