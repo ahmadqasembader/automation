@@ -44,17 +44,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "c7n",
-          "pcc": "c7n",
-          "clomonitor": "cloud-custodian",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('c7n') and CLOMonitor ('cloud-custodian') disagree. Landscape ('c7n') ≠ CLOMonitor ('cloud-custodian')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "DevStream",
@@ -172,17 +162,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "metal3",
-          "pcc": "metal3",
-          "clomonitor": "metal3-io",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('metal3') and CLOMonitor ('metal3-io') disagree. Landscape ('metal3') ≠ CLOMonitor ('metal3-io')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "NMstate",
@@ -200,17 +180,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "opentf",
-          "pcc": "opentf",
-          "clomonitor": "opentofu",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('opentf') and CLOMonitor ('opentofu') disagree. Landscape ('opentf') ≠ CLOMonitor ('opentofu')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "OpenYurt",
@@ -265,17 +235,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "cncf-distribution",
-          "pcc": "cncf-distribution",
-          "clomonitor": "distribution",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('cncf-distribution') and CLOMonitor ('distribution') disagree. Landscape ('cncf-distribution') ≠ CLOMonitor ('distribution')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Dragonfly",
@@ -284,17 +244,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "d7y",
-          "pcc": "d7y",
-          "clomonitor": "dragonfly",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('d7y') and CLOMonitor ('dragonfly') disagree. Landscape ('d7y') ≠ CLOMonitor ('dragonfly')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Harbor",
@@ -376,17 +326,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "confcont",
-          "pcc": "confcont",
-          "clomonitor": "confidential-containers",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('confcont') and CLOMonitor ('confidential-containers') disagree. Landscape ('confcont') ≠ CLOMonitor ('confidential-containers')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "ContainerSSH",
@@ -441,17 +381,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "externalsecretsoperator",
-          "pcc": "externalsecretsoperator",
-          "clomonitor": "external-secrets",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('externalsecretsoperator') and CLOMonitor ('external-secrets') disagree. Landscape ('externalsecretsoperator') ≠ CLOMonitor ('external-secrets')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Falco",
@@ -469,17 +399,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "hexa",
-          "pcc": "hexa",
-          "clomonitor": "hexapolicyorchestrator",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('hexa') and CLOMonitor ('hexapolicyorchestrator') disagree. Landscape ('hexa') ≠ CLOMonitor ('hexapolicyorchestrator')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "in-toto",
@@ -569,17 +489,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "openpolicyagent",
-          "pcc": "openpolicyagent",
-          "clomonitor": "opa",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('openpolicyagent') and CLOMonitor ('opa') disagree. Landscape ('openpolicyagent') ≠ CLOMonitor ('opa')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Open Policy Containers",
@@ -606,17 +516,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "trestlegrc",
-          "pcc": "trestlegrc",
-          "clomonitor": "oscal-compass",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('trestlegrc') and CLOMonitor ('oscal-compass') disagree. Landscape ('trestlegrc') ≠ CLOMonitor ('oscal-compass')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Paralus",
@@ -679,17 +579,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "tratteria",
-          "pcc": "tratteria",
-          "clomonitor": "tokenetes",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('tratteria') and CLOMonitor ('tokenetes') disagree. Landscape ('tratteria') ≠ CLOMonitor ('tokenetes')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Athenz",
@@ -815,17 +705,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "piraeus-datastore",
-          "pcc": "piraeus-datastore",
-          "clomonitor": "piraeus",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('piraeus-datastore') and CLOMonitor ('piraeus') disagree. Landscape ('piraeus-datastore') ≠ CLOMonitor ('piraeus')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Rook",
@@ -897,17 +777,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "inclavarecontainers",
-          "pcc": "inclavarecontainers",
-          "clomonitor": "inclavare",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('inclavarecontainers') and CLOMonitor ('inclavare') disagree. Landscape ('inclavarecontainers') ≠ CLOMonitor ('inclavare')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Krustlet",
@@ -998,17 +868,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "wasmedge-runtime",
-          "pcc": "wasmedge-runtime",
-          "clomonitor": "wasm-edge",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('wasmedge-runtime') and CLOMonitor ('wasm-edge') disagree. Landscape ('wasmedge-runtime') ≠ CLOMonitor ('wasm-edge')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "youki",
@@ -1089,17 +949,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "nsm",
-          "pcc": "nsm",
-          "clomonitor": "network-service-mesh",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('nsm') and CLOMonitor ('network-service-mesh') disagree. Landscape ('nsm') ≠ CLOMonitor ('network-service-mesh')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "OVN-Kubernetes",
@@ -1334,17 +1184,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "k8s",
-          "pcc": "k8s",
-          "clomonitor": "kubernetes",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('k8s') and CLOMonitor ('kubernetes') disagree. Landscape ('k8s') ≠ CLOMonitor ('kubernetes')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "KubeSlice",
@@ -1390,17 +1230,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "openclustermanagement",
-          "pcc": "openclustermanagement",
-          "clomonitor": "ocm",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('openclustermanagement') and CLOMonitor ('ocm') disagree. Landscape ('openclustermanagement') ≠ CLOMonitor ('ocm')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "OpenFunction",
@@ -1499,17 +1329,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "connect",
-          "pcc": "connect",
-          "clomonitor": "connect-rpc",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('connect') and CLOMonitor ('connect-rpc') disagree. Landscape ('connect') ≠ CLOMonitor ('connect-rpc')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "BFE",
@@ -1581,17 +1401,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "emissary",
-          "pcc": "emissary",
-          "clomonitor": "emissary-ingress",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('emissary') and CLOMonitor ('emissary-ingress') disagree. Landscape ('emissary') ≠ CLOMonitor ('emissary-ingress')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Higress",
@@ -2027,17 +1837,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "operator-sdk",
-          "pcc": "operator-sdk",
-          "clomonitor": "operator-framework",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('operator-sdk') and CLOMonitor ('operator-framework') disagree. Landscape ('operator-sdk') ≠ CLOMonitor ('operator-framework')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Podman Desktop",
@@ -2163,17 +1963,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "fluxcd",
-          "pcc": "fluxcd",
-          "clomonitor": "flux-project",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('fluxcd') and CLOMonitor ('flux-project') disagree. Landscape ('fluxcd') ≠ CLOMonitor ('flux-project')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Keptn",
@@ -2191,17 +1981,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "gitops-wg",
-          "pcc": "gitops-wg",
-          "clomonitor": "open-gitops",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('gitops-wg') and CLOMonitor ('open-gitops') disagree. Landscape ('gitops-wg') ≠ CLOMonitor ('open-gitops')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "OpenChoreo",
@@ -2454,17 +2234,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "extra.lfx_slug",
-          "landscape": "logging-operator",
-          "pcc": "logging-operator",
-          "clomonitor": "kube-logging",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('logging-operator') and CLOMonitor ('kube-logging') disagree. Landscape ('logging-operator') ≠ CLOMonitor ('kube-logging')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Monocle",
@@ -2532,10 +2302,10 @@
           "field": "extra.lfx_slug",
           "landscape": "prometheus_del",
           "pcc": "prometheus",
-          "clomonitor": "prometheus",
-          "pcc_clomonitor_agree": true,
-          "landscape_clomonitor_agree": false,
-          "message": "Landscape ('prometheus_del') ≠ PCC ('prometheus'). Landscape ('prometheus_del') ≠ CLOMonitor ('prometheus')."
+          "clomonitor": null,
+          "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": null,
+          "message": "Landscape ('prometheus_del') ≠ PCC ('prometheus')."
         }
       ]
     },
@@ -2591,15 +2361,6 @@
           "pcc_clomonitor_agree": null,
           "landscape_clomonitor_agree": false,
           "message": "Landscape ('https://github.com/spinframework/spin-operator') ≠ CLOMonitor ('https://github.com/spinkube/documentation')."
-        },
-        {
-          "field": "extra.lfx_slug",
-          "landscape": null,
-          "pcc": null,
-          "clomonitor": "spinkube",
-          "pcc_clomonitor_agree": null,
-          "landscape_clomonitor_agree": false,
-          "message": "Landscape missing; CLOMonitor has 'spinkube'."
         }
       ]
     },
