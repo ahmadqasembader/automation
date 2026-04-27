@@ -5,10 +5,10 @@ metadata:
   name: oracle-vm-32cpu-128gb-x86-64-gha-rs-no-permission
   namespace: arc-systems
   labels:
-    helm.sh/chart: gha-rs-0.11.0
+    helm.sh/chart: gha-rs-0.14.1
     app.kubernetes.io/name: oracle-vm-32cpu-128gb-x86-64
     app.kubernetes.io/instance: oracle-vm-32cpu-128gb-x86-64
-    app.kubernetes.io/version: "0.11.0"
+    app.kubernetes.io/version: "0.14.1"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: gha-rs
     actions.github.com/scale-set-name: oracle-vm-32cpu-128gb-x86-64
@@ -22,10 +22,10 @@ metadata:
   name: oracle-vm-32cpu-128gb-x86-64-gha-rs-manager
   namespace: arc-systems
   labels:
-    helm.sh/chart: gha-rs-0.11.0
+    helm.sh/chart: gha-rs-0.14.1
     app.kubernetes.io/name: oracle-vm-32cpu-128gb-x86-64
     app.kubernetes.io/instance: oracle-vm-32cpu-128gb-x86-64
-    app.kubernetes.io/version: "0.11.0"
+    app.kubernetes.io/version: "0.14.1"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: gha-rs
     actions.github.com/scale-set-name: oracle-vm-32cpu-128gb-x86-64
@@ -97,10 +97,10 @@ metadata:
   name: oracle-vm-32cpu-128gb-x86-64-gha-rs-manager
   namespace: arc-systems
   labels:
-    helm.sh/chart: gha-rs-0.11.0
+    helm.sh/chart: gha-rs-0.14.1
     app.kubernetes.io/name: oracle-vm-32cpu-128gb-x86-64
     app.kubernetes.io/instance: oracle-vm-32cpu-128gb-x86-64
-    app.kubernetes.io/version: "0.11.0"
+    app.kubernetes.io/version: "0.14.1"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: gha-rs
     actions.github.com/scale-set-name: oracle-vm-32cpu-128gb-x86-64
@@ -115,7 +115,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: 
-    cncf-gha-controller-gha-rs-controller
+    cncf-gha-rs-controller
   namespace: 
     arc-systems
 ---
@@ -126,10 +126,10 @@ metadata:
   namespace: arc-systems
   labels:
     app.kubernetes.io/component: "autoscaling-runner-set"
-    helm.sh/chart: gha-rs-0.11.0
+    helm.sh/chart: gha-rs-0.14.1
     app.kubernetes.io/name: oracle-vm-32cpu-128gb-x86-64
     app.kubernetes.io/instance: oracle-vm-32cpu-128gb-x86-64
-    app.kubernetes.io/version: "0.11.0"
+    app.kubernetes.io/version: "0.14.1"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: gha-rs
     actions.github.com/scale-set-name: oracle-vm-32cpu-128gb-x86-64
@@ -303,9 +303,9 @@ spec:
         - --shape-ocpus=32.0
         - --shape-memory-in-gbs=128.0
         - --compartment-id=ocid1.compartment.oc1..aaaaaaaa22icap66vxktktubjlhf6oxvfhev6n7udgje2chahyrtq65ga63a
-        - --region=us-sanjose-1
-        - --availability-domain=bzBe:US-SANJOSE-1-AD-1
-        - --subnet-id=ocid1.subnet.oc1.us-sanjose-1.aaaaaaaahgdslvujnywu3hvhqbvgz23souseseozvypng7ehnxgcotislubq
+        - --region=us-chicago-1
+        - --availability-domain=bzBe:US-CHICAGO-1-AD-3
+        - --subnet-id=ocid1.subnet.oc1.us-chicago-1.aaaaaaaas4g2hefjefsztbnmeorimlvceikt4mxel26f4yihuvuixn3hw5uq
         - --fallback-region=us-ashburn-1
         - --fallback-availability-domain=bzBe:US-ASHBURN-AD-1
         - --fallback-subnet-id=ocid1.subnet.oc1.iad.aaaaaaaagygdzd4xgbz4xhqhvnbxnoemhjd5ick7vodx4ghk4kg6a6c4xh5q
@@ -333,10 +333,3 @@ spec:
       - name: oci-api-key
         secret:
           secretName: oci-api-key
-      tolerations:
-      - key: "cncf.io/gha-runner"
-        operator: "Exists"
-        effect: "NoSchedule"
-      nodeSelector:
-        nodepool: karpenter
-
