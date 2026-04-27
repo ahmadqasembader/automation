@@ -534,7 +534,7 @@ def build_report() -> Dict[str, Any]:
             "extra.lfx_slug",
             land_slug,
             pcc_slug,
-            clo_name,
+            None,  # CLOMonitor does not provide lfx_slug; PCC is the only authority
         )
         if f2:
             findings.append(f2)
