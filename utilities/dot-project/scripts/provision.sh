@@ -13,6 +13,7 @@
 #   --dry-run             Print what would be done without making changes
 #   --skip-secrets        Skip setting repository secrets
 #   --skip-protection     Skip setting branch protection rules
+#   --force               Force regeneration of scaffold files (overwrites auxiliary files)
 #   --bootstrap-bin <p>   Path to bootstrap binary (default: ./bootstrap)
 #   -h, --help            Show this help message
 #
@@ -48,6 +49,7 @@ fi
 DRY_RUN=false
 SKIP_SECRETS=false
 SKIP_PROTECTION=false
+FORCE=false
 BOOTSTRAP_BIN="./bootstrap"
 BATCH_FILE=""
 ORG=""
@@ -74,6 +76,7 @@ while [[ $# -gt 0 ]]; do
         --dry-run)      DRY_RUN=true; shift ;;
         --skip-secrets) SKIP_SECRETS=true; shift ;;
         --skip-protection) SKIP_PROTECTION=true; shift ;;
+        --force)        FORCE=true; shift ;;
         --bootstrap-bin) BOOTSTRAP_BIN="$2"; shift 2 ;;
         -h|--help)      usage ;;
         *)              die "Unknown option: $1" ;;
@@ -164,11 +167,11 @@ provision_project() {
         :
     else
         info "  Running bootstrap..."
-        "$BOOTSTRAP_BIN" \
-            -name "$name" \
-            -github-org "$org" \
-            -github-repo "$repo" \
-            -output-dir "$tmp_dir" \
+        local bootstrap_args=(-name "$name" -github-org "$org" -github-repo "$repo" -output-dir "$tmp_dir")
+        if $FORCE; then
+            bootstrap_args+=(-force)
+        fi
+        "$BOOTSTRAP_BIN" "${bootstrap_args[@]}" \
             || die "Bootstrap failed for ${name}"
     fi
 
