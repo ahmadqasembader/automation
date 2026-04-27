@@ -142,7 +142,7 @@ metadata:
 spec:
   githubConfigUrl: https://github.com/enterprises/cncf
   githubConfigSecret: github-arc-secret
-  maxRunners: 50
+  maxRunners: 100
   minRunners: 0
   listenerMetrics:
     counters:
