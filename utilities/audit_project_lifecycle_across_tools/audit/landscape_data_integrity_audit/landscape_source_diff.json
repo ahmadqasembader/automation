@@ -8,17 +8,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/project-akri/akri",
-          "pcc": "https://github.com/deislabs/akri",
-          "clomonitor": "https://github.com/project-akri/akri",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/deislabs/akri') and CLOMonitor ('https://github.com/project-akri/akri') disagree. Landscape ('https://github.com/project-akri/akri') ≠ PCC ('https://github.com/deislabs/akri')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Atlantis",
@@ -109,17 +99,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/kitops-ml/kitops",
-          "pcc": "https://github.com/jozu-ai/kitops",
-          "clomonitor": "https://github.com/jozu-ai/kitops",
-          "pcc_clomonitor_agree": true,
-          "landscape_clomonitor_agree": false,
-          "message": "Landscape ('https://github.com/kitops-ml/kitops') ≠ PCC ('https://github.com/jozu-ai/kitops'). Landscape ('https://github.com/kitops-ml/kitops') ≠ CLOMonitor ('https://github.com/jozu-ai/kitops')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "kpt",
@@ -250,15 +230,6 @@
       "matched_clomonitor": true,
       "findings": [
         {
-          "field": "repo_url",
-          "landscape": "https://github.com/runmedev/runme",
-          "pcc": "https://github.com/stateful/runme",
-          "clomonitor": "https://github.com/runmedev/runme",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/stateful/runme') and CLOMonitor ('https://github.com/runmedev/runme') disagree. Landscape ('https://github.com/runmedev/runme') ≠ PCC ('https://github.com/stateful/runme')."
-        },
-        {
           "field": "extra.clomonitor_name",
           "landscape": "runme",
           "pcc": null,
@@ -368,17 +339,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/cartography-cncf/cartography",
-          "pcc": "https://github.com/cartography-cncf/cartography",
-          "clomonitor": "https://github.com/lyft/cartography",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('https://github.com/cartography-cncf/cartography') and CLOMonitor ('https://github.com/lyft/cartography') disagree. Landscape ('https://github.com/cartography-cncf/cartography') ≠ CLOMonitor ('https://github.com/lyft/cartography')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Cedar",
@@ -682,17 +643,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/ratify-project/ratify",
-          "pcc": "https://github.com/deislabs/ratify",
-          "clomonitor": "https://github.com/ratify-project/ratify",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/deislabs/ratify') and CLOMonitor ('https://github.com/ratify-project/ratify') disagree. Landscape ('https://github.com/ratify-project/ratify') ≠ PCC ('https://github.com/deislabs/ratify')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "SlimToolkit",
@@ -710,17 +661,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/getsops/sops",
-          "pcc": "https://github.com/mozilla/sops",
-          "clomonitor": "https://github.com/mozilla/sops",
-          "pcc_clomonitor_agree": true,
-          "landscape_clomonitor_agree": false,
-          "message": "Landscape ('https://github.com/getsops/sops') ≠ PCC ('https://github.com/mozilla/sops'). Landscape ('https://github.com/getsops/sops') ≠ CLOMonitor ('https://github.com/mozilla/sops')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "The Update Framework (TUF)",
@@ -784,17 +725,7 @@
       "match_note": "pcc_name",
       "matched_pcc": true,
       "matched_clomonitor": false,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/tellerops/teller",
-          "pcc": "https://github.com/SpectralOps/teller",
-          "clomonitor": null,
-          "pcc_clomonitor_agree": null,
-          "landscape_clomonitor_agree": null,
-          "message": "Landscape ('https://github.com/tellerops/teller') ≠ PCC ('https://github.com/SpectralOps/teller')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Carina",
@@ -812,17 +743,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/cubeFS/cubefs",
-          "pcc": "https://github.com/cubefs/cubefs",
-          "clomonitor": "https://github.com/chubaofs/chubaofs",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('https://github.com/cubefs/cubefs') and CLOMonitor ('https://github.com/chubaofs/chubaofs') disagree. Landscape ('https://github.com/cubeFS/cubefs') ≠ CLOMonitor ('https://github.com/chubaofs/chubaofs')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Curve",
@@ -940,17 +861,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/containers/composefs",
-          "pcc": "https://github.com/containers/composefs",
-          "clomonitor": "https://github.com/composefs/composefs",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('https://github.com/containers/composefs') and CLOMonitor ('https://github.com/composefs/composefs') disagree. Landscape ('https://github.com/containers/composefs') ≠ CLOMonitor ('https://github.com/composefs/composefs')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "bootc",
@@ -959,17 +870,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/bootc-dev/bootc",
-          "pcc": "https://github.com/containers/bootc",
-          "clomonitor": "https://github.com/bootc-dev/bootc",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/containers/bootc') and CLOMonitor ('https://github.com/bootc-dev/bootc') disagree. Landscape ('https://github.com/bootc-dev/bootc') ≠ PCC ('https://github.com/containers/bootc')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "CRI-O",
@@ -997,15 +898,6 @@
       "matched_pcc": true,
       "matched_clomonitor": true,
       "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/inclavare-containers/inclavare-containers",
-          "pcc": "https://github.com/inclavare-containers/inclavare-containers",
-          "clomonitor": "https://github.com/alibaba/inclavare-containers",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('https://github.com/inclavare-containers/inclavare-containers') and CLOMonitor ('https://github.com/alibaba/inclavare-containers') disagree. Landscape ('https://github.com/inclavare-containers/inclavare-containers') ≠ CLOMonitor ('https://github.com/alibaba/inclavare-containers')."
-        },
         {
           "field": "extra.lfx_slug",
           "landscape": "inclavarecontainers",
@@ -1125,17 +1017,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/youki-dev/youki",
-          "pcc": "https://github.com/containers/youki",
-          "clomonitor": "https://github.com/containers/youki",
-          "pcc_clomonitor_agree": true,
-          "landscape_clomonitor_agree": false,
-          "message": "Landscape ('https://github.com/youki-dev/youki') ≠ PCC ('https://github.com/containers/youki'). Landscape ('https://github.com/youki-dev/youki') ≠ CLOMonitor ('https://github.com/containers/youki')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Antrea",
@@ -1189,17 +1071,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/kubeovn/kube-ovn",
-          "pcc": "https://github.com/alauda/kube-ovn",
-          "clomonitor": "https://github.com/kubeovn/kube-ovn",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/alauda/kube-ovn') and CLOMonitor ('https://github.com/kubeovn/kube-ovn') disagree. Landscape ('https://github.com/kubeovn/kube-ovn') ≠ PCC ('https://github.com/alauda/kube-ovn')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "kube-vip",
@@ -1236,17 +1108,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/ovn-kubernetes/ovn-kubernetes",
-          "pcc": "https://github.com/ovn-org/ovn-kubernetes",
-          "clomonitor": "https://github.com/ovn-kubernetes/ovn-kubernetes",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/ovn-org/ovn-kubernetes') and CLOMonitor ('https://github.com/ovn-kubernetes/ovn-kubernetes') disagree. Landscape ('https://github.com/ovn-kubernetes/ovn-kubernetes') ≠ PCC ('https://github.com/ovn-org/ovn-kubernetes')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Spiderpool",
@@ -1327,17 +1189,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/cozystack/cozystack",
-          "pcc": "https://github.com/aenix-io/cozystack/",
-          "clomonitor": "https://github.com/cozystack/cozystack",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/aenix-io/cozystack/') and CLOMonitor ('https://github.com/cozystack/cozystack') disagree. Landscape ('https://github.com/cozystack/cozystack') ≠ PCC ('https://github.com/aenix-io/cozystack/')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Crossplane",
@@ -1355,17 +1207,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/eraser-dev/eraser",
-          "pcc": "https://github.com/eraser-dev/eraser",
-          "clomonitor": "https://github.com/Azure/eraser",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('https://github.com/eraser-dev/eraser') and CLOMonitor ('https://github.com/Azure/eraser') disagree. Landscape ('https://github.com/eraser-dev/eraser') ≠ CLOMonitor ('https://github.com/Azure/eraser')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Fluid",
@@ -1539,17 +1381,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/kubereboot/kured",
-          "pcc": "https://github.com/weaveworks/kured",
-          "clomonitor": "https://github.com/kubereboot/kured",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/weaveworks/kured') and CLOMonitor ('https://github.com/kubereboot/kured') disagree. Landscape ('https://github.com/kubereboot/kured') ≠ PCC ('https://github.com/weaveworks/kured')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Open Cluster Management",
@@ -1731,17 +1563,7 @@
       "match_note": "pcc_name",
       "matched_pcc": true,
       "matched_clomonitor": false,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/openelb/openelb",
-          "pcc": "https://github.com/kubesphere/openelb",
-          "clomonitor": null,
-          "pcc_clomonitor_agree": null,
-          "landscape_clomonitor_agree": null,
-          "message": "Landscape ('https://github.com/openelb/openelb') ≠ PCC ('https://github.com/kubesphere/openelb')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Easegress",
@@ -1750,17 +1572,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/easegress-io/easegress",
-          "pcc": "https://github.com/megaease/easegress",
-          "clomonitor": "https://github.com/megaease/easegress",
-          "pcc_clomonitor_agree": true,
-          "landscape_clomonitor_agree": false,
-          "message": "Landscape ('https://github.com/easegress-io/easegress') ≠ PCC ('https://github.com/megaease/easegress'). Landscape ('https://github.com/easegress-io/easegress') ≠ CLOMonitor ('https://github.com/megaease/easegress')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Emissary-Ingress",
@@ -2106,17 +1918,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/devspace-sh/devspace",
-          "pcc": "https://github.com/loft-sh/devspace",
-          "clomonitor": "https://github.com/loft-sh/devspace",
-          "pcc_clomonitor_agree": true,
-          "landscape_clomonitor_agree": false,
-          "message": "Landscape ('https://github.com/devspace-sh/devspace') ≠ PCC ('https://github.com/loft-sh/devspace'). Landscape ('https://github.com/devspace-sh/devspace') ≠ CLOMonitor ('https://github.com/loft-sh/devspace')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Helm",
@@ -2207,17 +2009,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/modelpack/model-spec",
-          "pcc": "https://github.com/CloudNativeAI/model-spec",
-          "clomonitor": "https://github.com/modelpack/model-spec",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/CloudNativeAI/model-spec') and CLOMonitor ('https://github.com/modelpack/model-spec') disagree. Landscape ('https://github.com/modelpack/model-spec') ≠ PCC ('https://github.com/CloudNativeAI/model-spec')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Nocalhost",
@@ -2290,17 +2082,7 @@
       "match_note": "pcc_name",
       "matched_pcc": true,
       "matched_clomonitor": false,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/sealerio/sealer",
-          "pcc": "https://github.com/alibaba/sealer",
-          "clomonitor": null,
-          "pcc_clomonitor_agree": null,
-          "landscape_clomonitor_agree": null,
-          "message": "Landscape ('https://github.com/sealerio/sealer') ≠ PCC ('https://github.com/alibaba/sealer')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Serverless Workflow",
@@ -2345,17 +2127,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools",
-          "pcc": "https://github.com/Azure/vscode-kubernetes-tools",
-          "clomonitor": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/Azure/vscode-kubernetes-tools') and CLOMonitor ('https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools') disagree. Landscape ('https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools') ≠ PCC ('https://github.com/Azure/vscode-kubernetes-tools')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "xRegistry",
@@ -2519,17 +2291,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/SlimPlanet/SlimFaas",
-          "pcc": "https://github.com/AxaFrance/SlimFaas",
-          "clomonitor": "https://github.com/AxaFrance/SlimFaas",
-          "pcc_clomonitor_agree": true,
-          "landscape_clomonitor_agree": false,
-          "message": "Landscape ('https://github.com/SlimPlanet/SlimFaas') ≠ PCC ('https://github.com/AxaFrance/SlimFaas'). Landscape ('https://github.com/SlimPlanet/SlimFaas') ≠ CLOMonitor ('https://github.com/AxaFrance/SlimFaas')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "OpenFeature",
@@ -2583,17 +2345,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/opencost/opencost",
-          "pcc": "https://github.com/kubecost/cost-model",
-          "clomonitor": "https://github.com/opencost/opencost",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/kubecost/cost-model') and CLOMonitor ('https://github.com/opencost/opencost') disagree. Landscape ('https://github.com/opencost/opencost') ≠ PCC ('https://github.com/kubecost/cost-model')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Cortex",
@@ -2629,17 +2381,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/kubernetes-sigs/headlamp",
-          "pcc": "https://github.com/kubernetes-sigs/headlamp",
-          "clomonitor": "https://github.com/headlamp-k8s/headlamp",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": false,
-          "message": "PCC ('https://github.com/kubernetes-sigs/headlamp') and CLOMonitor ('https://github.com/headlamp-k8s/headlamp') disagree. Landscape ('https://github.com/kubernetes-sigs/headlamp') ≠ CLOMonitor ('https://github.com/headlamp-k8s/headlamp')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "HolmesGPT",
@@ -2776,17 +2518,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/pixie-io/pixie",
-          "pcc": "https://github.com/pixie-labs/pixie",
-          "clomonitor": "https://github.com/pixie-io/pixie",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/pixie-labs/pixie') and CLOMonitor ('https://github.com/pixie-io/pixie') disagree. Landscape ('https://github.com/pixie-io/pixie') ≠ PCC ('https://github.com/pixie-labs/pixie')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Prometheus",
@@ -2832,17 +2564,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/trickstercache/trickster",
-          "pcc": "https://github.com/tricksterproxy/trickster",
-          "clomonitor": "https://github.com/trickstercache/trickster",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/tricksterproxy/trickster') and CLOMonitor ('https://github.com/trickstercache/trickster') disagree. Landscape ('https://github.com/trickstercache/trickster') ≠ PCC ('https://github.com/tricksterproxy/trickster')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "Spin",
@@ -2851,17 +2573,7 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/spinframework/spin",
-          "pcc": "https://github.com/fermyon/spin",
-          "clomonitor": "https://github.com/spinframework/spin",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/fermyon/spin') and CLOMonitor ('https://github.com/spinframework/spin') disagree. Landscape ('https://github.com/spinframework/spin') ≠ PCC ('https://github.com/fermyon/spin')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "SpinKube",
@@ -2898,44 +2610,53 @@
       "match_note": "clomonitor_name+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
-      "findings": [
-        {
-          "field": "repo_url",
-          "landscape": "https://github.com/container2wasm/container2wasm",
-          "pcc": "https://github.com/ktock/container2wasm",
-          "clomonitor": "https://github.com/container2wasm/container2wasm",
-          "pcc_clomonitor_agree": false,
-          "landscape_clomonitor_agree": true,
-          "message": "PCC ('https://github.com/ktock/container2wasm') and CLOMonitor ('https://github.com/container2wasm/container2wasm') disagree. Landscape ('https://github.com/container2wasm/container2wasm') ≠ PCC ('https://github.com/ktock/container2wasm')."
-        }
-      ]
+      "findings": []
     },
     {
       "name": "KAITO",
-      "path": "CNAI / ML Serving",
+      "path": "Inference / Framework",
       "maturity": "sandbox",
-      "match_note": "clomonitor_name+lfx_slug",
+      "match_note": "clo_via_pcc_slug+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
       "findings": [
         {
-          "field": "repo_url",
-          "landscape": "https://github.com/kaito-project/kaito",
-          "pcc": "https://github.com/Azure/kaito",
-          "clomonitor": "https://github.com/Azure/kaito",
-          "pcc_clomonitor_agree": true,
+          "field": "extra.clomonitor_name",
+          "landscape": null,
+          "pcc": null,
+          "clomonitor": "kaito",
+          "pcc_clomonitor_agree": null,
           "landscape_clomonitor_agree": false,
-          "message": "Landscape ('https://github.com/kaito-project/kaito') ≠ PCC ('https://github.com/Azure/kaito'). Landscape ('https://github.com/kaito-project/kaito') ≠ CLOMonitor ('https://github.com/Azure/kaito')."
+          "message": "Landscape missing; CLOMonitor has 'kaito'."
         }
       ]
     },
     {
       "name": "KServe",
-      "path": "CNAI / ML Serving",
+      "path": "Inference / Framework",
       "maturity": "incubating",
-      "match_note": "clomonitor_name+lfx_slug",
+      "match_note": "clo_via_pcc_slug+lfx_slug",
       "matched_pcc": true,
       "matched_clomonitor": true,
+      "findings": [
+        {
+          "field": "extra.clomonitor_name",
+          "landscape": null,
+          "pcc": null,
+          "clomonitor": "kserve",
+          "pcc_clomonitor_agree": null,
+          "landscape_clomonitor_agree": false,
+          "message": "Landscape missing; CLOMonitor has 'kserve'."
+        }
+      ]
+    },
+    {
+      "name": "Volcano-Kthena",
+      "path": "Inference / Framework",
+      "maturity": "incubating",
+      "match_note": "none",
+      "matched_pcc": false,
+      "matched_clomonitor": false,
       "findings": []
     }
   ]
