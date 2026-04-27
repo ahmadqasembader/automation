@@ -175,7 +175,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: cncf/automation/.github/actions/validate-project@979abb1e07fa1b6f2b4e77200f6a698cdd86e59c
+      - uses: cncf/automation/.github/actions/validate-project@95d25b12337a14e4a74f690c856f6903584e839e
         with:
           project_file: 'project.yaml'
 
@@ -186,7 +186,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: cncf/automation/.github/actions/validate-maintainers@979abb1e07fa1b6f2b4e77200f6a698cdd86e59c
+      - uses: cncf/automation/.github/actions/validate-maintainers@95d25b12337a14e4a74f690c856f6903584e839e
         with:
           maintainers_file: 'maintainers.yaml'
           verify_maintainers: 'true'
@@ -216,7 +216,7 @@ jobs:
           fetch-depth: 0
 
       - name: Update Landscape
-        uses: cncf/automation/.github/actions/landscape-update@979abb1e07fa1b6f2b4e77200f6a698cdd86e59c
+        uses: cncf/automation/.github/actions/landscape-update@95d25b12337a14e4a74f690c856f6903584e839e
         with:
           project_file: 'project.yaml'
           token: ${{ secrets.LANDSCAPE_REPO_TOKEN }}
