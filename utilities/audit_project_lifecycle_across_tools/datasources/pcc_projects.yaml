@@ -1203,7 +1203,7 @@ categories:
     category: Sandbox
     status: Active
     project_logo: https://lfx-cdn-prod.s3.us-east-1.amazonaws.com/project-artifacts/spin/spin-logo.svg?v=1741869484646
-    repository_url: https://github.com/fermyon/spin
+    repository_url: https://github.com/spinframework/spin-operator
   - name: stacker
     slug: stacker
     category: Sandbox
