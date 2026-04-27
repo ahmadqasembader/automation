@@ -33,6 +33,8 @@ set -euo pipefail
 # Load .env from CWD if present (KEY=VALUE, skips comments and blank lines)
 if [[ -f .env ]]; then
     while IFS= read -r line || [[ -n "$line" ]]; do
+        # Strip Windows carriage returns (\r)
+        line="${line//$'\r'/}"
         # Skip blank lines and comments
         [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
         # Export only valid KEY=VALUE lines (no eval, no command substitution)
