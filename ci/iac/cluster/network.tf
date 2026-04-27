@@ -68,7 +68,8 @@ locals {
   svc_lb_egress_rules = [
     for r in var.svc_lb_egress_rules : merge(
       r,
-      r.destination == "NODE_CIDR"     ? { destination = var.node_cidr } : {}
+      r.destination == "NODE_CIDR"     ? { destination = var.node_cidr } : {},
+      r.destination == "INTERNET"      ? { destination = local.INTERNET } : {}
     )
   ]
   svc_lb_ingress_rules = [

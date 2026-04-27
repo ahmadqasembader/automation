@@ -35,6 +35,13 @@ svc_lb_egress_rules = [
     stateless        = false
     tcp_max          = 32767
     tcp_min          = 30000
+  },
+  {
+    description      = "Access to Internet"
+    destination      = "INTERNET"
+    destination_type = "CIDR_BLOCK"
+    protocol         = "all"
+    stateless        = false
   }
 ]
 
