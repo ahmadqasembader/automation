@@ -297,7 +297,7 @@ spec:
     spec:
       containers:
       - name: runner
-        image: ghcr.io/cncf/gha-cloudrunner@sha256:87ea01834ef6762b2a77dbc8e95ce4ecbca52107d2ec1a7f2198920512a22add
+        image: ghcr.io/cncf/gha-cloudrunner@sha256:ae7e02b92f737823ebbf3e147becd2a57886b5eef934f253ee3db1fdd69a8f2e
         args:
         - --arch=amd64
         - --shape=VM.GPU.A10.2
