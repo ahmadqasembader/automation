@@ -6,7 +6,9 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/cncf/automation/cloudrunners/oci/pkg/oci"
@@ -98,7 +100,8 @@ func findImage(ctx context.Context, computeClient core.ComputeClient, compartmen
 }
 
 func run(cmd *cobra.Command, argv []string) error {
-	ctx := context.Background()
+	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGINT)
+	defer cancel()
 
 	// Parse the comma-separated shape list (single value is fine too).
 	shapes := strings.Split(args.shape, ",")
@@ -148,10 +151,22 @@ func run(cmd *cobra.Command, argv []string) error {
 				return fmt.Errorf("failed to create machine (region=%s, shape=%s): %w", region.Region, shape, err)
 			}
 
-			// Instance created — make sure it gets cleaned up.
-			defer func() {
+			// Instance created — make sure it gets cleaned up on
+			// normal exit *and* on SIGTERM / SIGINT (pod termination).
+			cleanup := func() {
+				log.Println("cleaning up: delete machine", machine.ExternalIP())
 				if err := machine.Delete(context.Background()); err != nil {
 					log.Printf("failed to delete machine: %v", err)
+				}
+			}
+			defer cleanup()
+
+			// If the context was cancelled by a signal, clean up immediately.
+			go func() {
+				<-ctx.Done()
+				if ctx.Err() == context.Canceled {
+					log.Println("received shutdown signal, deleting machine")
+					cleanup()
 				}
 			}()
 
