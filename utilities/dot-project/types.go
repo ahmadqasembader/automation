@@ -131,8 +131,9 @@ type MaintainerEntry struct {
 
 // Team represents a GitHub team and its members
 type Team struct {
-	Name    string   `json:"name" yaml:"name"`
-	Members []string `json:"members" yaml:"members"`
+	Name       string   `json:"name" yaml:"name"`
+	Members    []string `json:"members" yaml:"members"`
+	GitHubTeam string   `json:"github_team,omitempty" yaml:"github_team,omitempty"` // optional: actual GitHub org team slug (e.g., "project-maintainers-team")
 }
 
 // MaintainerLifecycle represents maintainer lifecycle documentation
@@ -203,4 +204,19 @@ type ProjectListEntry struct {
 // ProjectListConfig represents the structure of the project list file
 type ProjectListConfig struct {
 	Projects []ProjectListEntry `json:"projects" yaml:"projects"`
+}
+
+// DriftResult captures the outcome of a single maintainer drift check run.
+type DriftResult struct {
+	ProjectID              string    `json:"project_id"`
+	Org                    string    `json:"org"`
+	TeamName               string    `json:"team_name"`
+	AddedUpstream          []string  `json:"added_upstream,omitempty"`   // present upstream, missing in .project
+	RemovedUpstream        []string  `json:"removed_upstream,omitempty"` // in .project, gone from upstream
+	HasDrift               bool      `json:"has_drift"`
+	IsStale                bool      `json:"is_stale"`
+	DaysSinceUpdate        int       `json:"days_since_update"`
+	StalenessDaysThreshold int       `json:"staleness_days_threshold"`   // threshold used for IsStale
+	UpstreamSources        []string  `json:"upstream_sources,omitempty"` // governance files that were found
+	CheckedAt              time.Time `json:"checked_at"`
 }

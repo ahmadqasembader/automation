@@ -199,6 +199,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  - .gitignore\n")
 		fmt.Fprintf(os.Stderr, "  - .github/workflows/validate.yaml\n")
 		fmt.Fprintf(os.Stderr, "  - .github/workflows/update-landscape.yml\n")
+		fmt.Fprintf(os.Stderr, "  - .github/workflows/maintainer-drift.yml\n")
 
 		// Report discovered file URLs
 		if result.SecurityPolicyURL != "" || result.ContributingURL != "" || result.CodeOfConductURL != "" || result.LicenseURL != "" {

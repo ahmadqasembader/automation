@@ -194,6 +194,136 @@ jobs:
           LFX_AUTH_TOKEN: ${{ secrets.LFX_AUTH_TOKEN }}
 `
 
+// maintainerDriftWorkflowTemplate is the raw template for maintainer-drift.yml.
+// It contains a single literal placeholder {TIMEOUT_MINUTES} that is replaced
+// at package init time with DefaultDriftJobTimeoutMinutes.
+const maintainerDriftWorkflowTemplate = `name: Maintainer Drift Detection
+
+on:
+  schedule:
+    - cron: '0 8 1 * *'  # Monthly on the 1st at 08:00 UTC
+  workflow_dispatch:       # Also triggerable on demand
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  detect-and-sync:
+    runs-on: ubuntu-latest
+    # timeout = DefaultHTTPTimeout (30s) × 30 = 900s = 15 min (defaults.go)
+    # Managed by bootstrap_scaffold.go — do not edit this value directly.
+    timeout-minutes: {TIMEOUT_MINUTES}
+    steps:
+      - name: Checkout .project repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+        with:
+          fetch-depth: 0  # needed for git log age calculation
+
+      - name: Checkout cncf/automation (drift tooling)
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+        with:
+          repository: cncf/automation
+          # Pinned to the SHA that introduced this workflow.
+          # Update this SHA when pulling in upstream drift tooling changes.
+          ref: 74b6112a55fe17053d90c4856037436ce6d01b85
+          path: .cncf-automation
+          sparse-checkout: utilities/dot-project
+
+      - name: Set up Go
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v5
+        with:
+          go-version-file: .cncf-automation/utilities/dot-project/go.mod
+
+      - name: Build drift binary
+        run: |
+          cd .cncf-automation/utilities/dot-project
+          go build -o /usr/local/bin/drift ./cmd/drift
+
+      - name: Get days since maintainers.yaml last changed
+        id: git_age
+        run: |
+          LAST_TS=$(git log -1 --format=%ct -- maintainers.yaml 2>/dev/null || echo "")
+          if [ -z "$LAST_TS" ]; then
+            DAYS=0
+          else
+            DAYS=$(( ( $(date +%s) - LAST_TS ) / 86400 ))
+          fi
+          echo "days=${DAYS}" >> "$GITHUB_OUTPUT"
+
+      - name: Run drift detection
+        id: drift
+        run: |
+          DATE=$(date +%Y-%m-%d)
+          echo "date=${DATE}" >> "$GITHUB_OUTPUT"
+
+          EXIT_CODE=0
+          drift \
+            -project-yaml project.yaml \
+            -maintainers-yaml maintainers.yaml \
+            -report /tmp/drift-report.md \
+            -output-patched /tmp/maintainers-patched.yaml \
+            -last-updated-days ${{ steps.git_age.outputs.days }} \
+            -staleness-days 90 \
+          || EXIT_CODE=$?
+
+          # exit 1 = drift/staleness detected (open PR)
+          # exit 2 = tool error (log clearly, don't open PR)
+          # exit 0 = clean
+          if [ "$EXIT_CODE" -eq 1 ]; then
+            echo "has_drift=true" >> "$GITHUB_OUTPUT"
+          elif [ "$EXIT_CODE" -eq 2 ]; then
+            echo "has_drift=false" >> "$GITHUB_OUTPUT"
+            echo "::error::drift tool exited with code 2 — check step logs above for the root cause (bad project.yaml / maintainers.yaml / GitHub API error)"
+          else
+            echo "has_drift=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true  # prevent tool errors from failing the workflow
+
+      - name: Create drift PR
+        if: steps.drift.outputs.has_drift == 'true'
+        run: |
+          DATE="${{ steps.drift.outputs.date }}"
+          BRANCH="chore/maintainer-drift-${DATE}"
+
+          # Skip if a drift PR for today is already open.
+          EXISTING=$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$EXISTING" ]; then
+            echo "Drift PR already open for ${BRANCH} (#${EXISTING}), skipping."
+            exit 0
+          fi
+
+          git config user.name "cncf-automation[bot]"
+          git config user.email "projects@cncf.io"
+          git checkout -b "${BRANCH}"
+          cp /tmp/maintainers-patched.yaml maintainers.yaml
+          git add maintainers.yaml
+          git commit -m "chore: sync maintainers with upstream (drift detected ${DATE})"
+          git push origin "${BRANCH}"
+
+          gh pr create \
+            --title "chore: sync maintainers with upstream (drift detected ${DATE})" \
+            --body-file /tmp/drift-report.md \
+            --base main \
+            --head "${BRANCH}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+`
+
+// maintainerDriftWorkflowContent is maintainerDriftWorkflowTemplate with the
+// {TIMEOUT_MINUTES} placeholder replaced by the job timeout derived from
+// DefaultHTTPTimeout.  The job must accommodate a Go build plus several
+// sequential GitHub API calls, so we allow 30× the per-request HTTP timeout:
+//
+//	DefaultHTTPTimeout (30s) × 30 = 900s = 15 minutes
+var maintainerDriftWorkflowContent = strings.ReplaceAll(
+	maintainerDriftWorkflowTemplate,
+	"{TIMEOUT_MINUTES}",
+	fmt.Sprintf("%d", int((DefaultHTTPTimeout*30).Minutes())),
+)
+
 // updateLandscapeWorkflowContent is the SHA-pinned update-landscape.yml workflow.
 const updateLandscapeWorkflowContent = `name: Update Landscape
 on:
@@ -392,6 +522,7 @@ func WriteScaffold(dir string, result *BootstrapResult, opts ...WriteScaffoldOpt
 		{".gitignore", staticGen(gitignoreContent)},
 		{".github/workflows/validate.yaml", staticGen(validateWorkflowContent)},
 		{".github/workflows/update-landscape.yml", staticGen(updateLandscapeWorkflowContent)},
+		{".github/workflows/maintainer-drift.yml", staticGen(maintainerDriftWorkflowContent)},
 	}
 
 	// Conditional: SECURITY.md — skip if an existing security policy was discovered
