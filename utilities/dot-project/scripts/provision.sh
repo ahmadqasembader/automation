@@ -14,6 +14,7 @@
 #   --skip-secrets        Skip setting repository secrets
 #   --skip-protection     Skip setting branch protection rules
 #   --skip-issue          Skip creating onboarding issue
+#   --force               Force regeneration of scaffold files (overwrites auxiliary files)
 #   --bootstrap-bin <p>   Path to bootstrap binary (default: ./bootstrap)
 #   -h, --help            Show this help message
 #
@@ -34,6 +35,8 @@ set -euo pipefail
 # Load .env from CWD if present (KEY=VALUE, skips comments and blank lines)
 if [[ -f .env ]]; then
     while IFS= read -r line || [[ -n "$line" ]]; do
+        # Strip Windows carriage returns (\r)
+        line="${line//$'\r'/}"
         # Skip blank lines and comments
         [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
         # Export only valid KEY=VALUE lines (no eval, no command substitution)
@@ -48,6 +51,7 @@ DRY_RUN=false
 SKIP_SECRETS=false
 SKIP_PROTECTION=false
 SKIP_ISSUE=false
+FORCE=false
 BOOTSTRAP_BIN="./bootstrap"
 BATCH_FILE=""
 ORG=""
@@ -74,12 +78,58 @@ while [[ $# -gt 0 ]]; do
         --dry-run)      DRY_RUN=true; shift ;;
         --skip-secrets) SKIP_SECRETS=true; shift ;;
         --skip-protection) SKIP_PROTECTION=true; shift ;;
+        --force)        FORCE=true; shift ;;
         --skip-issue)   SKIP_ISSUE=true; shift ;;
         --bootstrap-bin) BOOTSTRAP_BIN="$2"; shift 2 ;;
         -h|--help)      usage ;;
         *)              die "Unknown option: $1" ;;
     esac
 done
+
+# ──────────────────────────────────────────────
+# Normalize GitHub URL inputs
+# ──────────────────────────────────────────────
+
+# normalize_github_url strips a full GitHub URL down to its org (and optionally repo) parts.
+# Accepts: https://github.com/org, https://github.com/org/repo, or plain "org"
+# Sets ORG (and REPO if a repo segment is present and REPO wasn't explicitly provided).
+normalize_github_url() {
+    local value="$1"
+    local field="$2"  # "org" or "repo"
+
+    # Strip trailing slashes
+    value="${value%/}"
+
+    if [[ "$value" =~ ^https?://github\.com/([^/]+)(/([^/]+))?$ ]]; then
+        local parsed_org="${BASH_REMATCH[1]}"
+        local parsed_repo="${BASH_REMATCH[3]}"
+
+        if [[ "$field" == "org" ]]; then
+            ORG="$parsed_org"
+            # If a repo segment was in the URL and --repo wasn't explicitly set, use it
+            if [[ -n "$parsed_repo" && -z "$REPO" ]]; then
+                REPO="$parsed_repo"
+                info "Extracted --repo '${REPO}' from GitHub URL"
+            fi
+            info "Extracted --org '${ORG}' from GitHub URL"
+        elif [[ "$field" == "repo" ]]; then
+            if [[ -n "$parsed_repo" ]]; then
+                REPO="$parsed_repo"
+            else
+                REPO="$parsed_org"  # URL was github.com/org, treat as repo name
+            fi
+            info "Extracted --repo '${REPO}' from GitHub URL"
+        fi
+    elif [[ "$value" =~ ^https?:// ]]; then
+        die "--${field} looks like a URL but is not a valid GitHub URL (expected https://github.com/<org>[/<repo>]): ${value}"
+    fi
+    # Otherwise it's already a plain name — no transformation needed
+}
+
+normalize_github_url "$ORG" "org"
+if [[ -n "$REPO" ]]; then
+    normalize_github_url "$REPO" "repo"
+fi
 
 # ──────────────────────────────────────────────
 # Prerequisites
@@ -117,6 +167,29 @@ check_prerequisites() {
 }
 
 # ──────────────────────────────────────────────
+# Secret management
+# ──────────────────────────────────────────────
+
+# set_secret sets a GitHub Actions secret on a repo.
+# If it fails (e.g., enterprise policy blocks API access), prints manual instructions.
+set_secret() {
+    local repo="$1"
+    local secret_name="$2"
+    local secret_value="$3"
+
+    if echo "$secret_value" | gh secret set "$secret_name" --repo "$repo" 2>/dev/null; then
+        return 0
+    fi
+
+    warn "Could not set secret $secret_name on ${repo}"
+    warn "This is likely due to an enterprise policy blocking API-based secret management."
+    warn "Set it manually:"
+    warn "  Repo:  https://github.com/${repo}/settings/secrets/actions"
+    warn "  Org:   https://github.com/organizations/${repo%%/*}/settings/secrets/actions"
+    return 1
+}
+
+# ──────────────────────────────────────────────
 # Provision a single project
 # ──────────────────────────────────────────────
 
@@ -124,6 +197,28 @@ provision_project() {
     local org="$1"
     local name="$2"
     local repo="${3:-$org}"
+
+    # Normalize org if it's a GitHub URL (e.g., https://github.com/tokenetes/tokenetes)
+    if [[ "$org" =~ ^https?://github\.com/([^/]+)(/([^/]+))?/?$ ]]; then
+        org="${BASH_REMATCH[1]}"
+        if [[ -n "${BASH_REMATCH[3]}" && ( -z "$repo" || "$repo" == "$1" ) ]]; then
+            repo="${BASH_REMATCH[3]}"
+        fi
+    elif [[ "$org" =~ ^https?:// ]]; then
+        warn "org '${org}' looks like a URL but is not a recognized GitHub URL; using as-is"
+    fi
+
+    # Normalize repo if it's a GitHub URL
+    if [[ "$repo" =~ ^https?://github\.com/([^/]+)(/([^/]+))?/?$ ]]; then
+        if [[ -n "${BASH_REMATCH[3]}" ]]; then
+            repo="${BASH_REMATCH[3]}"
+        else
+            repo="${BASH_REMATCH[1]}"
+        fi
+    elif [[ "$repo" =~ ^https?:// ]]; then
+        warn "repo '${repo}' looks like a URL but is not a recognized GitHub URL; using as-is"
+    fi
+
     local target_repo="${org}/.project"
 
     info "Provisioning: ${target_repo} (name: ${name}, primary repo: ${repo})"
@@ -165,11 +260,11 @@ provision_project() {
         :
     else
         info "  Running bootstrap..."
-        "$BOOTSTRAP_BIN" \
-            -name "$name" \
-            -github-org "$org" \
-            -github-repo "$repo" \
-            -output-dir "$tmp_dir" \
+        local bootstrap_args=(-name "$name" -github-org "$org" -github-repo "$repo" -output-dir "$tmp_dir")
+        if $FORCE; then
+            bootstrap_args+=(-force)
+        fi
+        "$BOOTSTRAP_BIN" "${bootstrap_args[@]}" \
             || die "Bootstrap failed for ${name}"
     fi
 
@@ -194,9 +289,11 @@ provision_project() {
             :
         else
             info "  Setting secrets..."
-            echo "$LANDSCAPE_REPO_TOKEN" | gh secret set LANDSCAPE_REPO_TOKEN --repo "$target_repo"
+            set_secret "$target_repo" "LANDSCAPE_REPO_TOKEN" "$LANDSCAPE_REPO_TOKEN" \
+                || warn "Could not set LANDSCAPE_REPO_TOKEN (set manually via GitHub UI)"
             if [[ -n "${LFX_AUTH_TOKEN:-}" ]]; then
-                echo "$LFX_AUTH_TOKEN" | gh secret set LFX_AUTH_TOKEN --repo "$target_repo"
+                set_secret "$target_repo" "LFX_AUTH_TOKEN" "$LFX_AUTH_TOKEN" \
+                    || warn "Could not set LFX_AUTH_TOKEN (set manually via GitHub UI)"
             else
                 warn "LFX_AUTH_TOKEN not set; skipping (maintainer verification won't work)"
             fi
