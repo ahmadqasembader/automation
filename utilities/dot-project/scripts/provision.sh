@@ -13,6 +13,7 @@
 #   --dry-run             Print what would be done without making changes
 #   --skip-secrets        Skip setting repository secrets
 #   --skip-protection     Skip setting branch protection rules
+#   --force               Force regeneration of scaffold files (overwrites auxiliary files)
 #   --bootstrap-bin <p>   Path to bootstrap binary (default: ./bootstrap)
 #   -h, --help            Show this help message
 #
@@ -33,6 +34,8 @@ set -euo pipefail
 # Load .env from CWD if present (KEY=VALUE, skips comments and blank lines)
 if [[ -f .env ]]; then
     while IFS= read -r line || [[ -n "$line" ]]; do
+        # Strip Windows carriage returns (\r)
+        line="${line//$'\r'/}"
         # Skip blank lines and comments
         [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
         # Export only valid KEY=VALUE lines (no eval, no command substitution)
@@ -46,6 +49,7 @@ fi
 DRY_RUN=false
 SKIP_SECRETS=false
 SKIP_PROTECTION=false
+FORCE=false
 BOOTSTRAP_BIN="./bootstrap"
 BATCH_FILE=""
 ORG=""
@@ -72,6 +76,7 @@ while [[ $# -gt 0 ]]; do
         --dry-run)      DRY_RUN=true; shift ;;
         --skip-secrets) SKIP_SECRETS=true; shift ;;
         --skip-protection) SKIP_PROTECTION=true; shift ;;
+        --force)        FORCE=true; shift ;;
         --bootstrap-bin) BOOTSTRAP_BIN="$2"; shift 2 ;;
         -h|--help)      usage ;;
         *)              die "Unknown option: $1" ;;
@@ -159,6 +164,29 @@ check_prerequisites() {
 }
 
 # ──────────────────────────────────────────────
+# Secret management
+# ──────────────────────────────────────────────
+
+# set_secret sets a GitHub Actions secret on a repo.
+# If it fails (e.g., enterprise policy blocks API access), prints manual instructions.
+set_secret() {
+    local repo="$1"
+    local secret_name="$2"
+    local secret_value="$3"
+
+    if echo "$secret_value" | gh secret set "$secret_name" --repo "$repo" 2>/dev/null; then
+        return 0
+    fi
+
+    warn "Could not set secret $secret_name on ${repo}"
+    warn "This is likely due to an enterprise policy blocking API-based secret management."
+    warn "Set it manually:"
+    warn "  Repo:  https://github.com/${repo}/settings/secrets/actions"
+    warn "  Org:   https://github.com/organizations/${repo%%/*}/settings/secrets/actions"
+    return 1
+}
+
+# ──────────────────────────────────────────────
 # Provision a single project
 # ──────────────────────────────────────────────
 
@@ -229,11 +257,11 @@ provision_project() {
         :
     else
         info "  Running bootstrap..."
-        "$BOOTSTRAP_BIN" \
-            -name "$name" \
-            -github-org "$org" \
-            -github-repo "$repo" \
-            -output-dir "$tmp_dir" \
+        local bootstrap_args=(-name "$name" -github-org "$org" -github-repo "$repo" -output-dir "$tmp_dir")
+        if $FORCE; then
+            bootstrap_args+=(-force)
+        fi
+        "$BOOTSTRAP_BIN" "${bootstrap_args[@]}" \
             || die "Bootstrap failed for ${name}"
     fi
 
@@ -258,9 +286,11 @@ provision_project() {
             :
         else
             info "  Setting secrets..."
-            echo "$LANDSCAPE_REPO_TOKEN" | gh secret set LANDSCAPE_REPO_TOKEN --repo "$target_repo"
+            set_secret "$target_repo" "LANDSCAPE_REPO_TOKEN" "$LANDSCAPE_REPO_TOKEN" \
+                || warn "Could not set LANDSCAPE_REPO_TOKEN (set manually via GitHub UI)"
             if [[ -n "${LFX_AUTH_TOKEN:-}" ]]; then
-                echo "$LFX_AUTH_TOKEN" | gh secret set LFX_AUTH_TOKEN --repo "$target_repo"
+                set_secret "$target_repo" "LFX_AUTH_TOKEN" "$LFX_AUTH_TOKEN" \
+                    || warn "Could not set LFX_AUTH_TOKEN (set manually via GitHub UI)"
             else
                 warn "LFX_AUTH_TOKEN not set; skipping (maintainer verification won't work)"
             fi
