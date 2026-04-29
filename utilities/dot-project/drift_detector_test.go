@@ -4,96 +4,10 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"strings"
 	"testing"
+	"time"
 )
-
-// ── DetectDrift ───────────────────────────────────────────────────────────────
-
-func TestDetectDrift(t *testing.T) {
-	tests := []struct {
-		name            string
-		projectHandles  []string
-		upstreamHandles []string
-		wantAdded       []string
-		wantRemoved     []string
-	}{
-		{
-			name:            "no drift — identical sets",
-			projectHandles:  []string{"alice", "bob"},
-			upstreamHandles: []string{"alice", "bob"},
-			wantAdded:       nil,
-			wantRemoved:     nil,
-		},
-		{
-			name:            "upstream adds a handle",
-			projectHandles:  []string{"alice"},
-			upstreamHandles: []string{"alice", "carol"},
-			wantAdded:       []string{"carol"},
-			wantRemoved:     nil,
-		},
-		{
-			name:            "upstream removes a handle",
-			projectHandles:  []string{"alice", "bob"},
-			upstreamHandles: []string{"alice"},
-			wantAdded:       nil,
-			wantRemoved:     []string{"bob"},
-		},
-		{
-			name:            "both added and removed",
-			projectHandles:  []string{"alice", "bob"},
-			upstreamHandles: []string{"alice", "carol"},
-			wantAdded:       []string{"carol"},
-			wantRemoved:     []string{"bob"},
-		},
-		{
-			name:            "case-insensitive comparison",
-			projectHandles:  []string{"Alice", "BOB"},
-			upstreamHandles: []string{"alice", "bob"},
-			wantAdded:       nil,
-			wantRemoved:     nil,
-		},
-		{
-			name:            "empty upstream — all project handles flagged removed",
-			projectHandles:  []string{"alice", "bob"},
-			upstreamHandles: []string{},
-			wantAdded:       nil,
-			wantRemoved:     []string{"alice", "bob"},
-		},
-		{
-			name:            "empty project — all upstream handles flagged added",
-			projectHandles:  []string{},
-			upstreamHandles: []string{"alice", "bob"},
-			wantAdded:       []string{"alice", "bob"},
-			wantRemoved:     nil,
-		},
-		{
-			name:            "both empty — no drift",
-			projectHandles:  []string{},
-			upstreamHandles: []string{},
-			wantAdded:       nil,
-			wantRemoved:     nil,
-		},
-		{
-			name:            "results are sorted",
-			projectHandles:  []string{"zebra", "apple"},
-			upstreamHandles: []string{"mango", "apple"},
-			wantAdded:       []string{"mango"},
-			wantRemoved:     []string{"zebra"},
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			added, removed := DetectDrift(tt.projectHandles, tt.upstreamHandles)
-			if !reflect.DeepEqual(added, tt.wantAdded) {
-				t.Errorf("added: got %v, want %v", added, tt.wantAdded)
-			}
-			if !reflect.DeepEqual(removed, tt.wantRemoved) {
-				t.Errorf("removed: got %v, want %v", removed, tt.wantRemoved)
-			}
-		})
-	}
-}
 
 // ── LoadProjectHandlesForTeam ─────────────────────────────────────────────────
 
@@ -185,167 +99,62 @@ maintainers:
 	})
 }
 
-// ── PatchMaintainersYAML ─────────────────────────────────────────────────────
+// ── ParseAllRepos ─────────────────────────────────────────────────────────────
 
-func TestPatchMaintainersYAML(t *testing.T) {
-	const original = `# Header comment
-# second line
-
-maintainers:
-  - project_id: "proj"
-    org: "myorg"
-    teams:
-      - name: "project-maintainers"
-        members:
-          - alice
-          - bob
-      - name: "reviewers"
-        members:
-          - dave
-`
-
-	dir := t.TempDir()
-	write := func(content string) string {
-		p := filepath.Join(dir, "maintainers.yaml")
-		_ = os.WriteFile(p, []byte(content), 0o644)
-		return p
-	}
-
-	t.Run("removes a handle", func(t *testing.T) {
-		p := write(original)
-		out, err := PatchMaintainersYAML(p, "project-maintainers", nil, []string{"bob"})
-		if err != nil {
-			t.Fatal(err)
-		}
-		s := string(out)
-		if contains(s, "bob") {
-			t.Error("expected bob to be removed")
-		}
-		if !contains(s, "alice") {
-			t.Error("expected alice to be retained")
-		}
-		// Other teams untouched
-		if !contains(s, "dave") {
-			t.Error("expected dave (reviewers team) to be retained")
-		}
-	})
-
-	t.Run("adds a handle", func(t *testing.T) {
-		p := write(original)
-		out, err := PatchMaintainersYAML(p, "project-maintainers", []string{"carol"}, nil)
-		if err != nil {
-			t.Fatal(err)
-		}
-		s := string(out)
-		if !contains(s, "carol") {
-			t.Error("expected carol to be added")
-		}
-		if !contains(s, "alice") || !contains(s, "bob") {
-			t.Error("expected existing members to be retained")
-		}
-	})
-
-	t.Run("add and remove in one pass", func(t *testing.T) {
-		p := write(original)
-		out, err := PatchMaintainersYAML(p, "project-maintainers", []string{"carol"}, []string{"bob"})
-		if err != nil {
-			t.Fatal(err)
-		}
-		s := string(out)
-		if contains(s, "bob") {
-			t.Error("expected bob to be removed")
-		}
-		if !contains(s, "carol") {
-			t.Error("expected carol to be added")
-		}
-	})
-
-	t.Run("no-op preserves all members", func(t *testing.T) {
-		p := write(original)
-		out, err := PatchMaintainersYAML(p, "project-maintainers", nil, nil)
-		if err != nil {
-			t.Fatal(err)
-		}
-		s := string(out)
-		if !contains(s, "alice") || !contains(s, "bob") {
-			t.Error("expected no members to be removed on no-op")
-		}
-	})
-
-	t.Run("header comments are preserved", func(t *testing.T) {
-		p := write(original)
-		out, err := PatchMaintainersYAML(p, "project-maintainers", nil, nil)
-		if err != nil {
-			t.Fatal(err)
-		}
-		s := string(out)
-		if !contains(s, "# Header comment") {
-			t.Error("expected header comment to be preserved")
-		}
-	})
-
-	t.Run("output uses 2-space indentation", func(t *testing.T) {
-		p := write(original)
-		out, err := PatchMaintainersYAML(p, "project-maintainers", []string{"carol"}, nil)
-		if err != nil {
-			t.Fatal(err)
-		}
-		// The YAML body should NOT contain 4-space-indented list items.
-		if contains(string(out), "    - project_id") {
-			t.Error("expected 2-space indentation, got 4-space")
-		}
-	})
-
-	t.Run("add is idempotent — no duplicate on re-add", func(t *testing.T) {
-		p := write(original)
-		out, err := PatchMaintainersYAML(p, "project-maintainers", []string{"alice"}, nil)
-		if err != nil {
-			t.Fatal(err)
-		}
-		count := countOccurrences(string(out), "alice")
-		if count != 1 {
-			t.Errorf("expected alice to appear exactly once, got %d", count)
-		}
-	})
-}
-
-// ── isLikelyTeamSlug ─────────────────────────────────────────────────────────
-
-func TestIsLikelyTeamSlug(t *testing.T) {
+func TestParseAllRepos(t *testing.T) {
 	tests := []struct {
-		handle string
-		want   bool
+		name         string
+		repositories []string
+		want         []RepoRef
 	}{
-		// Should be filtered (team slugs)
-		{"sig-release", true},
-		{"sig-contributor-experience-approvers", true},
-		{"wg-security", true},
-		{"committee-steering", true},
-		{"toc-bootstrap", true},
-		{"tag-security", true},
-		{"cncf-ambassador", true},
-		{"k8s-infra-owners", true},
-		{"core-approvers", true},
-		{"repo-reviewers", true},
-		{"project-maintainers", true},
-		{"team-leads", true},
-		{"org-members", true},
-		{"cluster-admins", true},
-		{"foo-bar-baz-qux", true}, // 4 segments
-		// Should NOT be filtered (real usernames)
-		{"alice", false},
-		{"bob-smith", false}, // 2 segments — could be a username
-		{"john-doe", false},  // common hyphenated username
-		{"alice-bot", false}, // 2 segments, does not match any suffix
-		{"thockin", false},
-		{"liggitt", false},
+		{
+			name:         "single repo",
+			repositories: []string{"https://github.com/kubernetes/kubernetes"},
+			want:         []RepoRef{{Org: "kubernetes", Repo: "kubernetes"}},
+		},
+		{
+			name: "multiple repos preserve order",
+			repositories: []string{
+				"https://github.com/org/first",
+				"https://github.com/org/second",
+				"https://github.com/org/third",
+			},
+			want: []RepoRef{
+				{Org: "org", Repo: "first"},
+				{Org: "org", Repo: "second"},
+				{Org: "org", Repo: "third"},
+			},
+		},
+		{
+			name: "skips non-github URLs",
+			repositories: []string{
+				"https://gitlab.com/org/repo",
+				"https://github.com/org/repo",
+			},
+			want: []RepoRef{{Org: "org", Repo: "repo"}},
+		},
+		{
+			name:         "trailing slash stripped",
+			repositories: []string{"https://github.com/argoproj/argo-cd/"},
+			want:         []RepoRef{{Org: "argoproj", Repo: "argo-cd"}},
+		},
+		{
+			name:         "deep path — only org/repo extracted",
+			repositories: []string{"https://github.com/org/repo/tree/main/subdir"},
+			want:         []RepoRef{{Org: "org", Repo: "repo"}},
+		},
+		{
+			name:         "empty list",
+			repositories: []string{},
+			want:         nil,
+		},
 	}
 
 	for _, tt := range tests {
-		t.Run(tt.handle, func(t *testing.T) {
-			got := isLikelyTeamSlug(tt.handle)
-			if got != tt.want {
-				t.Errorf("isLikelyTeamSlug(%q) = %v, want %v", tt.handle, got, tt.want)
+		t.Run(tt.name, func(t *testing.T) {
+			got := ParseAllRepos(tt.repositories)
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("got %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -422,6 +231,176 @@ func TestParsePrimaryRepo(t *testing.T) {
 	}
 }
 
+// ── BuildHealthCheckActivityLists ────────────────────────────────────────────
+
+func TestBuildHealthCheckActivityLists(t *testing.T) {
+	t0 := time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC)
+	activity := map[string]*ActivitySummary{
+		"alice": {Handle: "alice", Commits: 50, MergedPRs: 10, ReposTouched: []string{"repo"}, LastSeen: t0},
+		"bob":   {Handle: "bob", Commits: 5, MergedPRs: 1, ReposTouched: []string{"repo"}, LastSeen: t0},
+		"dave":  {Handle: "dave", Commits: 30, MergedPRs: 8, ReposTouched: []string{"repo"}, LastSeen: t0},
+		"eve":   {Handle: "eve", Commits: 20, MergedPRs: 5, ReposTouched: []string{"repo"}, LastSeen: t0},
+	}
+
+	t.Run("maintainers sorted by activity desc", func(t *testing.T) {
+		maintainers, _ := BuildHealthCheckActivityLists(activity, []string{"alice", "bob"}, 10)
+		if len(maintainers) != 2 {
+			t.Fatalf("got %d maintainers, want 2", len(maintainers))
+		}
+		if maintainers[0].Handle != "alice" {
+			t.Errorf("expected alice first (most active), got %s", maintainers[0].Handle)
+		}
+	})
+
+	t.Run("inactive maintainer still shown with zero activity", func(t *testing.T) {
+		maintainers, _ := BuildHealthCheckActivityLists(activity, []string{"alice", "carol"}, 10)
+		found := false
+		for _, m := range maintainers {
+			if m.Handle == "carol" && m.Commits == 0 && m.MergedPRs == 0 {
+				found = true
+			}
+		}
+		if !found {
+			t.Error("expected carol with zero activity to appear in maintainer list")
+		}
+	})
+
+	t.Run("top contributors excludes maintainers", func(t *testing.T) {
+		_, top := BuildHealthCheckActivityLists(activity, []string{"alice", "bob"}, 10)
+		for _, c := range top {
+			if c.Handle == "alice" || c.Handle == "bob" {
+				t.Errorf("maintainer %s should not appear in top contributors", c.Handle)
+			}
+		}
+	})
+
+	t.Run("top contributors capped at topN", func(t *testing.T) {
+		_, top := BuildHealthCheckActivityLists(activity, []string{"alice"}, 1)
+		if len(top) > 1 {
+			t.Errorf("expected at most 1 top contributor, got %d", len(top))
+		}
+	})
+
+	t.Run("top contributors sorted by activity desc", func(t *testing.T) {
+		_, top := BuildHealthCheckActivityLists(activity, []string{"alice"}, 10)
+		for i := 1; i < len(top); i++ {
+			prev := top[i-1].Commits + top[i-1].MergedPRs
+			curr := top[i].Commits + top[i].MergedPRs
+			if curr > prev {
+				t.Errorf("top contributors not sorted: %s(%d) before %s(%d)",
+					top[i-1].Handle, prev, top[i].Handle, curr)
+			}
+		}
+	})
+
+	t.Run("team slugs excluded from top contributors", func(t *testing.T) {
+		actWithSlug := map[string]*ActivitySummary{
+			"alice":         {Handle: "alice", Commits: 5, MergedPRs: 1},
+			"sig-approvers": {Handle: "sig-approvers", Commits: 100, MergedPRs: 50},
+		}
+		_, top := BuildHealthCheckActivityLists(actWithSlug, []string{}, 10)
+		for _, c := range top {
+			if c.Handle == "sig-approvers" {
+				t.Error("team slug sig-approvers should be excluded from top contributors")
+			}
+		}
+	})
+}
+
+// ── FormatActivityIssue ───────────────────────────────────────────────────────
+
+func TestFormatActivityIssue(t *testing.T) {
+	result := HealthCheckResult{
+		ProjectID:              "myproject",
+		Org:                    "myorg",
+		TeamName:               "project-maintainers",
+		IsStale:                true,
+		DaysSinceUpdate:        200,
+		StalenessDaysThreshold: 180,
+		MentionHandles:         []string{"alice", "bob"},
+		MaintainerActivity: []ActivitySummary{
+			{Handle: "alice", Commits: 10, MergedPRs: 2, ReposTouched: []string{"myproject"},
+				LastSeen: time.Date(2026, 1, 15, 0, 0, 0, 0, time.UTC)},
+			{Handle: "bob", Commits: 0, MergedPRs: 0}, // zero LastSeen → "—"
+		},
+		TopNewContributors: []ActivitySummary{
+			{Handle: "carol", Commits: 8, MergedPRs: 3, ReposTouched: []string{"myproject-sdk"}},
+		},
+		CheckedAt: time.Date(2026, 4, 29, 8, 0, 0, 0, time.UTC),
+	}
+
+	body := FormatActivityIssue(result)
+
+	checks := []struct {
+		desc     string
+		mustHave string
+	}{
+		{"project ID in heading", "myproject"},
+		{"mention alice in greeting", "@alice"},
+		{"mention bob in greeting", "@bob"},
+		{"greeting emoji", "👋"},
+		{"staleness days", "200 days"},
+		{"threshold days", "180 days"},
+		{"maintainer alice in table", "| `@alice`"},
+		{"maintainer bob (zero activity)", "| `@bob`"},
+		{"alice last seen date", "2026-01-15"},
+		{"bob last seen dash", "| — |"},
+		{"top contributor carol", "@carol"},
+		{"no auto-changes note", "No changes are required automatically"},
+		{"activity window", "6 months"},
+	}
+
+	for _, c := range checks {
+		t.Run(c.desc, func(t *testing.T) {
+			if !strings.Contains(body, c.mustHave) {
+				t.Errorf("issue body missing %q", c.mustHave)
+			}
+		})
+	}
+}
+
+// ── isLikelyTeamSlug ─────────────────────────────────────────────────────────
+
+func TestIsLikelyTeamSlug(t *testing.T) {
+	tests := []struct {
+		handle string
+		want   bool
+	}{
+		// Should be filtered (team slugs)
+		{"sig-release", true},
+		{"sig-contributor-experience-approvers", true},
+		{"wg-security", true},
+		{"committee-steering", true},
+		{"toc-bootstrap", true},
+		{"tag-security", true},
+		{"cncf-ambassador", true},
+		{"k8s-infra-owners", true},
+		{"core-approvers", true},
+		{"repo-reviewers", true},
+		{"project-maintainers", true},
+		{"team-leads", true},
+		{"org-members", true},
+		{"cluster-admins", true},
+		{"foo-bar-baz-qux", true}, // 4 segments
+		// Should NOT be filtered (real usernames)
+		{"alice", false},
+		{"bob-smith", false}, // 2 segments — could be a username
+		{"john-doe", false},  // common hyphenated username
+		{"alice-bot", false}, // 2 segments, does not match any suffix
+		{"thockin", false},
+		{"liggitt", false},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.handle, func(t *testing.T) {
+			got := isLikelyTeamSlug(tt.handle)
+			if got != tt.want {
+				t.Errorf("isLikelyTeamSlug(%q) = %v, want %v", tt.handle, got, tt.want)
+			}
+		})
+	}
+}
+
 // ── parseLinkNext ─────────────────────────────────────────────────────────────
 
 func TestParseLinkNext(t *testing.T) {
@@ -462,27 +441,30 @@ func TestParseLinkNext(t *testing.T) {
 	}
 }
 
-// ── helpers ───────────────────────────────────────────────────────────────────
+// ── sortActivityDesc ──────────────────────────────────────────────────────────
 
-func contains(s, substr string) bool {
-	return len(s) > 0 && len(substr) > 0 &&
-		(s == substr || len(s) >= len(substr) &&
-			func() bool {
-				for i := 0; i <= len(s)-len(substr); i++ {
-					if s[i:i+len(substr)] == substr {
-						return true
-					}
-				}
-				return false
-			}())
-}
-
-func countOccurrences(s, substr string) int {
-	count := 0
-	for i := 0; i <= len(s)-len(substr); i++ {
-		if s[i:i+len(substr)] == substr {
-			count++
-		}
+func TestSortActivityDesc(t *testing.T) {
+	summaries := []ActivitySummary{
+		{Handle: "z", Commits: 1, MergedPRs: 0},
+		{Handle: "a", Commits: 10, MergedPRs: 5},
+		{Handle: "m", Commits: 5, MergedPRs: 5},
 	}
-	return count
+	sortActivityDesc(summaries)
+
+	if summaries[0].Handle != "a" {
+		t.Errorf("expected 'a' first (total=15), got %s", summaries[0].Handle)
+	}
+	if summaries[1].Handle != "m" {
+		t.Errorf("expected 'm' second (total=10), got %s", summaries[1].Handle)
+	}
+
+	// Tiebreaker: alphabetical handle
+	tied := []ActivitySummary{
+		{Handle: "zebra", Commits: 5, MergedPRs: 0},
+		{Handle: "apple", Commits: 5, MergedPRs: 0},
+	}
+	sortActivityDesc(tied)
+	if tied[0].Handle != "apple" {
+		t.Errorf("expected alphabetical tiebreaker, got %s first", tied[0].Handle)
+	}
 }

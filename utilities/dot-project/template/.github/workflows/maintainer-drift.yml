@@ -1,4 +1,4 @@
-name: Maintainer Drift Detection
+name: Maintainer Health Check
 
 on:
   schedule:
@@ -6,11 +6,10 @@ on:
   workflow_dispatch:       # Also triggerable on demand
 
 permissions:
-  contents: write
-  pull-requests: write
+  issues: write            # open / update health-check issues
 
 jobs:
-  detect-and-sync:
+  health-check:
     runs-on: ubuntu-latest
     # timeout = DefaultHTTPTimeout (30s) × 30 = 900s = 15 min (defaults.go)
     # Managed by bootstrap_scaffold.go — do not edit this value directly.
@@ -21,15 +20,16 @@ jobs:
         with:
           fetch-depth: 0  # needed for git log age calculation
 
-      - name: Checkout cncf/automation (drift tooling)
+      - name: Checkout cncf/automation (health-check tooling)
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
         with:
           repository: cncf/automation
           # Pinned to the SHA that introduced this workflow.
-          # Update this SHA when pulling in upstream drift tooling changes.
+          # Update this SHA when pulling in upstream health-check tooling changes.
           ref: 74b6112a55fe17053d90c4856037436ce6d01b85
           path: .cncf-automation
           sparse-checkout: utilities/dot-project
+          persist-credentials: false
 
       - name: Set up Go
         uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v5
@@ -52,63 +52,62 @@ jobs:
           fi
           echo "days=${DAYS}" >> "$GITHUB_OUTPUT"
 
-      - name: Run drift detection
-        id: drift
+      - name: Run maintainer health check
+        id: healthcheck
         run: |
-          DATE=$(date +%Y-%m-%d)
-          echo "date=${DATE}" >> "$GITHUB_OUTPUT"
-
           EXIT_CODE=0
           drift \
             -project-yaml project.yaml \
             -maintainers-yaml maintainers.yaml \
-            -report /tmp/drift-report.md \
-            -output-patched /tmp/maintainers-patched.yaml \
-            -last-updated-days ${{ steps.git_age.outputs.days }} \
-            -staleness-days 90 \
+            -report /tmp/health-report.md \
+            -last-updated-days "${{ steps.git_age.outputs.days }}" \
           || EXIT_CODE=$?
 
-          # exit 1 = drift/staleness detected (open PR)
-          # exit 2 = tool error (log clearly, don't open PR)
-          # exit 0 = clean
+          # exit 0 = not stale, no action needed
+          # exit 1 = stale, issue body written to /tmp/health-report.md
+          # exit 2 = tool error — log and don't open an issue
           if [ "$EXIT_CODE" -eq 1 ]; then
-            echo "has_drift=true" >> "$GITHUB_OUTPUT"
+            echo "is_stale=true" >> "$GITHUB_OUTPUT"
           elif [ "$EXIT_CODE" -eq 2 ]; then
-            echo "has_drift=false" >> "$GITHUB_OUTPUT"
-            echo "::error::drift tool exited with code 2 — check step logs above for the root cause (bad project.yaml / maintainers.yaml / GitHub API error)"
+            echo "is_stale=false" >> "$GITHUB_OUTPUT"
+            echo "::error::health-check tool exited with code 2 — check step logs above for the root cause (bad project.yaml / maintainers.yaml / GitHub API error)"
           else
-            echo "has_drift=false" >> "$GITHUB_OUTPUT"
+            echo "is_stale=false" >> "$GITHUB_OUTPUT"
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true  # prevent tool errors from failing the workflow
 
-      - name: Create drift PR
-        if: steps.drift.outputs.has_drift == 'true'
+      - name: Open or update health-check issue
+        if: steps.healthcheck.outputs.is_stale == 'true'
         run: |
-          DATE="${{ steps.drift.outputs.date }}"
-          BRANCH="chore/maintainer-drift-${DATE}"
+          LABEL="maintainer-health"
+          TITLE="Maintainer list health check — please review"
 
-          # Skip if a drift PR for today is already open.
-          EXISTING=$(gh pr list --head "${BRANCH}" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+          # Ensure the label exists (idempotent).
+          gh label create "$LABEL" \
+            --description "Automated maintainer health-check ping" \
+            --color "e4e669" 2>/dev/null || true
+
+          # Check for an existing open issue with this label.
+          EXISTING=$(gh issue list \
+            --label "$LABEL" \
+            --state open \
+            --json number \
+            --jq '.[0].number' 2>/dev/null || echo "")
+
           if [ -n "$EXISTING" ]; then
-            echo "Drift PR already open for ${BRANCH} (#${EXISTING}), skipping."
-            exit 0
+            echo "Updating existing health-check issue #${EXISTING}"
+            gh issue edit "$EXISTING" \
+              --body-file /tmp/health-report.md
+            gh issue comment "$EXISTING" \
+              --body "🔄 Health check re-run on $(date +%Y-%m-%d) — issue body updated above."
+          else
+            echo "Opening new health-check issue"
+            gh issue create \
+              --title "$TITLE" \
+              --body-file /tmp/health-report.md \
+              --label "$LABEL"
           fi
-
-          git config user.name "cncf-automation[bot]"
-          git config user.email "projects@cncf.io"
-          git checkout -b "${BRANCH}"
-          cp /tmp/maintainers-patched.yaml maintainers.yaml
-          git add maintainers.yaml
-          git commit -m "chore: sync maintainers with upstream (drift detected ${DATE})"
-          git push origin "${BRANCH}"
-
-          gh pr create \
-            --title "chore: sync maintainers with upstream (drift detected ${DATE})" \
-            --body-file /tmp/drift-report.md \
-            --base main \
-            --head "${BRANCH}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-

@@ -15,7 +15,6 @@ import (
 const (
 	cloMonitorSearchPath    = "/api/projects/search"
 	defaultCLOMonitorURL    = "https://clomonitor.io"
-	defaultGitHubAPIURL     = "https://api.github.com"
 	defaultLandscapeYAMLURL = "https://raw.githubusercontent.com/cncf/landscape/master/landscape.yml"
 	landscapeLogoBaseURL    = "https://landscape.cncf.io/logos/"
 )

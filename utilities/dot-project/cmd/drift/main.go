@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"net/http"
 	"os"
+	"os/signal"
 	"time"
 
 	"gopkg.in/yaml.v3"
@@ -12,25 +14,37 @@ import (
 	"projects"
 )
 
+// main is the entry point for the drift health-check CLI.
+//
 // Exit codes:
 //
-//	0 — no drift detected, maintainers are in sync
-//	1 — drift (or staleness) detected
-//	2 — fatal error (bad flags, unreadable file, etc.)
+//	0 — not stale, no action needed
+//	1 — stale; issue body written to -report (workflow should open/update issue)
+//	2 — fatal error (bad flags, unreadable file, GitHub API failure)
 func main() {
 	var (
 		projectYAMLPath = flag.String("project-yaml", "project.yaml", "Path to project.yaml")
 		maintainersPath = flag.String("maintainers-yaml", "maintainers.yaml", "Path to maintainers.yaml")
 		githubToken     = flag.String("github-token", "", "GitHub personal access token (or set GITHUB_TOKEN env var)")
-		teamName        = flag.String("team", "project-maintainers", "Team name in maintainers.yaml to compare against upstream")
-		checkOnly       = flag.Bool("check-only", false, "Print drift summary; exit 1 if drift found, exit 0 if clean (no files written)")
-		reportPath      = flag.String("report", "", "Write Markdown PR-body to this file path")
-		outputPatched   = flag.String("output-patched", "", "Write patched maintainers.yaml to this file path (implies patch)")
-		stalenessDays   = flag.Int("staleness-days", 90, "Days without an update before the staleness warning fires")
-		lastUpdatedDays = flag.Int("last-updated-days", -1, "Days since maintainers.yaml was last git-committed (-1 = use file mtime)")
-		githubTeamSlug  = flag.String("github-team-slug", "", "Optional: GitHub org team slug to use as upstream source instead of governance files")
+		teamName        = flag.String("team", "project-maintainers", "Team name in maintainers.yaml to read")
+		reportPath      = flag.String("report", "", "Write Markdown issue body to this file path")
+		stalenessDays   = flag.Int("staleness-days", projects.DefaultStalenessThresholdDays,
+			"Days without an update before the health-check issue fires")
+		lastUpdatedDays = flag.Int("last-updated-days", -1,
+			"Days since maintainers.yaml was last git-committed (-1 = use file mtime)")
+		activityMonths = flag.Int("activity-months", projects.DefaultActivityWindowMonths,
+			"How many months back to look for contributor activity")
+		concurrency = flag.Int("concurrency", projects.DefaultConcurrency,
+			"Max parallel GitHub API repo fetches")
+		topContributors = flag.Int("top-contributors", projects.DefaultTopContributors,
+			"How many non-maintainer contributors to surface in the issue body")
 	)
 	flag.Parse()
+
+	// Context is cancelled on SIGINT (Ctrl-C), which propagates to all
+	// in-flight HTTP requests and lets the process exit cleanly.
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer stop()
 
 	token := *githubToken
 	if token == "" {
@@ -39,14 +53,32 @@ func main() {
 
 	client := &http.Client{Timeout: projects.DefaultHTTPTimeout}
 
-	// ── Load project handles from maintainers.yaml ────────────────────────────
-	projectHandles, projectID, org, err := projects.LoadProjectHandlesForTeam(*maintainersPath, *teamName)
+	// ── Staleness check ───────────────────────────────────────────────────────
+	daysSince := *lastUpdatedDays
+	if daysSince < 0 {
+		// Fall back to file mtime (unreliable in CI; prefer git log via -last-updated-days).
+		if fi, err := os.Stat(*maintainersPath); err == nil {
+			daysSince = int(time.Since(fi.ModTime()).Hours() / 24)
+		}
+	}
+
+	isStale := daysSince >= 0 && daysSince > *stalenessDays
+	if !isStale {
+		fmt.Fprintf(os.Stderr, "not stale (%d/%d days) — no action needed\n",
+			daysSince, *stalenessDays)
+		os.Exit(0)
+	}
+
+	fmt.Fprintf(os.Stderr, "stale: %d days since last update (threshold: %d)\n",
+		daysSince, *stalenessDays)
+
+	// ── Load project data ─────────────────────────────────────────────────────
+	maintainerHandles, projectID, org, err := projects.LoadProjectHandlesForTeam(*maintainersPath, *teamName)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(2)
 	}
 
-	// ── Resolve primary GitHub org/repo from project.yaml ────────────────────
 	projData, err := os.ReadFile(*projectYAMLPath)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error reading %s: %v\n", *projectYAMLPath, err)
@@ -58,146 +90,83 @@ func main() {
 		os.Exit(2)
 	}
 
-	primaryOrg, primaryRepo, err := projects.ParsePrimaryRepo(project.Repositories)
-	if err != nil {
-		// Fall back: use org from maintainers.yaml and slug as repo name.
+	repos := projects.ParseAllRepos(project.Repositories)
+	if len(repos) == 0 {
+		// Fall back: use org from maintainers.yaml as single repo.
 		if org != "" {
-			primaryOrg = org
-			primaryRepo = org
-			fmt.Fprintf(os.Stderr, "warning: %v; falling back to org=%s repo=%s\n", err, primaryOrg, primaryRepo)
+			repos = []projects.RepoRef{{Org: org, Repo: org}}
+			fmt.Fprintf(os.Stderr, "warning: no GitHub repos in project.yaml; falling back to %s/%s\n", org, org)
 		} else {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
+			fmt.Fprintln(os.Stderr, "error: no GitHub repositories found in project.yaml")
 			os.Exit(2)
 		}
 	}
 
-	fmt.Fprintf(os.Stderr, "checking drift: project=%s team=%s upstream=%s/%s\n",
-		projectID, *teamName, primaryOrg, primaryRepo)
+	fmt.Fprintf(os.Stderr, "scanning %d repo(s) for activity (window: %d months, concurrency: %d)\n",
+		len(repos), *activityMonths, *concurrency)
 
-	// ── Fetch upstream handles ────────────────────────────────────────────────
-	var upstreamHandles []string
-	var sources []string
+	// ── Fetch contributor activity across all repos ───────────────────────────
+	since := time.Now().UTC().AddDate(0, -*activityMonths, 0)
+	activity, scanned, fetchErrs := projects.FetchAllRepoActivity(
+		ctx, repos, since, token, client, "", *concurrency,
+	)
 
-	if *githubTeamSlug != "" {
-		// Use GitHub Teams API as upstream source (requires read:org scope).
-		fmt.Fprintf(os.Stderr, "using GitHub Teams API: %s/%s\n", primaryOrg, *githubTeamSlug)
-		upstreamHandles, err = projects.FetchGitHubTeamMembers(primaryOrg, *githubTeamSlug, token, client, "")
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "warning: GitHub Teams fetch failed: %v (falling back to governance files)\n", err)
-			upstreamHandles, sources, err = projects.FetchUpstreamHandles(primaryOrg, primaryRepo, token, client, "")
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "warning: governance files fetch also failed: %v\n", err)
-			}
-		} else {
-			sources = []string{fmt.Sprintf("GitHub team: %s/%s", primaryOrg, *githubTeamSlug)}
-		}
-	} else {
-		upstreamHandles, sources, err = projects.FetchUpstreamHandles(primaryOrg, primaryRepo, token, client, "")
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "warning: upstream fetch failed: %v\n", err)
-			// Non-fatal: treat as empty upstream — will flag all .project handles as "removed".
-			// This is intentionally conservative; the PR body will make the source clear.
-		}
+	// Log fetch errors as warnings — they're non-fatal (partial data is still useful).
+	for _, e := range fetchErrs {
+		fmt.Fprintf(os.Stderr, "warning: %v\n", e)
 	}
 
-	fmt.Fprintf(os.Stderr, "found %d project handle(s), %d upstream handle(s)\n",
-		len(projectHandles), len(upstreamHandles))
+	fmt.Fprintf(os.Stderr, "fetched activity for %d repo(s), found %d unique contributor(s)\n",
+		len(scanned), len(activity))
 
-	// ── Compute drift ─────────────────────────────────────────────────────────
-	added, removed := projects.DetectDrift(projectHandles, upstreamHandles)
+	// ── Build activity lists ──────────────────────────────────────────────────
+	maintainerActivity, topActive := projects.BuildHealthCheckActivityLists(
+		activity, maintainerHandles, *topContributors,
+	)
 
-	// ── Staleness check ───────────────────────────────────────────────────────
-	daysSince := *lastUpdatedDays
-	if daysSince < 0 {
-		// Fall back to file mtime (unreliable in CI but useful locally).
-		if fi, statErr := os.Stat(*maintainersPath); statErr == nil {
-			daysSince = int(time.Since(fi.ModTime()).Hours() / 24)
+	// Pick up to 3 handles to @mention in the issue greeting, choosing the
+	// most active maintainers first (maintainerActivity is already sorted by
+	// activity desc).  This mirrors the onboarding issue convention in
+	// provision.sh::create_onboarding_issue() while preferring handles that
+	// are clearly still engaged with the project.
+	const maxMentions = 3
+	var mentionHandles []string
+	for _, a := range maintainerActivity {
+		if len(mentionHandles) >= maxMentions {
+			break
 		}
+		mentionHandles = append(mentionHandles, a.Handle)
 	}
-	isStale := daysSince >= 0 && daysSince > *stalenessDays
 
-	result := projects.DriftResult{
+	result := projects.HealthCheckResult{
 		ProjectID:              projectID,
 		Org:                    org,
 		TeamName:               *teamName,
-		AddedUpstream:          added,
-		RemovedUpstream:        removed,
-		HasDrift:               len(added) > 0 || len(removed) > 0,
-		IsStale:                isStale,
+		IsStale:                true,
 		DaysSinceUpdate:        daysSince,
 		StalenessDaysThreshold: *stalenessDays,
-		UpstreamSources:        sources,
+		MentionHandles:         mentionHandles,
+		MaintainerActivity:     maintainerActivity,
+		TopNewContributors:     topActive,
 		CheckedAt:              time.Now().UTC(),
 	}
 
-	hasDrift := result.HasDrift || result.IsStale
-
-	// ── Check-only mode (used by PR/push validation step) ─────────────────────
-	if *checkOnly {
-		if !hasDrift {
-			fmt.Fprintln(os.Stderr, "no drift detected — maintainers are in sync")
-			os.Exit(0)
-		}
-		if len(added) > 0 {
-			fmt.Fprintf(os.Stderr, "drift: %d handle(s) added upstream but missing in .project: %v\n", len(added), added)
-		}
-		if len(removed) > 0 {
-			fmt.Fprintf(os.Stderr, "drift: %d handle(s) in .project but gone from upstream: %v\n", len(removed), removed)
-		}
-		if isStale {
-			fmt.Fprintf(os.Stderr, "stale: maintainers.yaml not updated in %d days (threshold: %d)\n",
-				daysSince, *stalenessDays)
-		}
-		os.Exit(1)
-	}
-
-	// ── Generate PR body report ───────────────────────────────────────────────
-	report := projects.FormatDriftReport(result, primaryOrg, primaryRepo)
+	// ── Write issue body ──────────────────────────────────────────────────────
+	issueBody := projects.FormatActivityIssue(result)
 
 	if *reportPath != "" {
-		if err := os.WriteFile(*reportPath, []byte(report), 0o644); err != nil {
+		if err := os.WriteFile(*reportPath, []byte(issueBody), 0o644); err != nil {
 			fmt.Fprintf(os.Stderr, "error writing report to %s: %v\n", *reportPath, err)
 			os.Exit(2)
 		}
-		fmt.Fprintf(os.Stderr, "PR body written to %s\n", *reportPath)
+		fmt.Fprintf(os.Stderr, "issue body written to %s\n", *reportPath)
+	} else {
+		fmt.Print(issueBody)
 	}
 
-	// ── Patch maintainers.yaml ────────────────────────────────────────────────
-	if *outputPatched != "" {
-		if result.HasDrift {
-			patched, err := projects.PatchMaintainersYAML(*maintainersPath, *teamName, added, removed)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "error patching maintainers.yaml: %v\n", err)
-				os.Exit(2)
-			}
-			if err := os.WriteFile(*outputPatched, patched, 0o644); err != nil {
-				fmt.Fprintf(os.Stderr, "error writing patched file to %s: %v\n", *outputPatched, err)
-				os.Exit(2)
-			}
-			fmt.Fprintf(os.Stderr, "patched maintainers.yaml written to %s\n", *outputPatched)
-		} else {
-			// No handle drift (may still be stale) — copy file unchanged so the
-			// workflow can always reference the output-patched path safely.
-			data, _ := os.ReadFile(*maintainersPath)
-			_ = os.WriteFile(*outputPatched, data, 0o644)
-			fmt.Fprintln(os.Stderr, "no handle drift to patch (file copied unchanged)")
-		}
-	}
+	// ── Summary ───────────────────────────────────────────────────────────────
+	fmt.Fprintf(os.Stderr, "summary: project=%s stale=%d days maintainers=%d active-contributors=%d\n",
+		projectID, daysSince, len(maintainerHandles), len(topActive))
 
-	// ── Final exit ────────────────────────────────────────────────────────────
-	if hasDrift {
-		if len(added) > 0 {
-			fmt.Fprintf(os.Stderr, "summary: %d added upstream: %v\n", len(added), added)
-		}
-		if len(removed) > 0 {
-			fmt.Fprintf(os.Stderr, "summary: %d removed from upstream: %v\n", len(removed), removed)
-		}
-		if isStale {
-			fmt.Fprintf(os.Stderr, "summary: stale (%d days since last update)\n", daysSince)
-		}
-		os.Exit(1)
-	}
-
-	fmt.Fprintln(os.Stderr, "no drift detected — maintainers are in sync")
-	os.Exit(0)
+	os.Exit(1) // stale — caller (workflow) should open/update the issue
 }

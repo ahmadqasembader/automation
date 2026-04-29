@@ -13,15 +13,18 @@ utilities/dot-project/
 │   ├── landscape-updater/      # Tool to convert project.yaml to landscape format
 │   ├── staleness-checker/      # Tool to check maintainer data freshness
 │   ├── audit-checker/          # Tool to verify referenced URLs are accessible
-│   └── bootstrap/              # Tool to auto-generate project scaffolds from external data
+│   ├── bootstrap/              # Tool to auto-generate project scaffolds from external data
+│   └── drift/                  # Maintainer health-check tool (opens GitHub issues for stale maintainers.yaml)
 ├── template/                   # Template files for new .project repositories
 │   ├── project.yaml
 │   ├── maintainers.yaml
-│   └── .github/workflows/validate.yaml
+│   ├── .github/workflows/validate.yaml
+│   └── .github/workflows/maintainer-drift.yml  # Scaffolded health-check workflow
 ├── example/                    # Realistic filled-in example (Kubernetes-like)
 │   ├── project.yaml
 │   ├── maintainers.yaml
-│   └── .github/workflows/validate.yaml
+│   ├── .github/workflows/validate.yaml
+│   └── maintainer-health-check-issue.md  # Reference rendering of a health-check issue
 ├── testdata/                   # Test fixtures and sample configs
 ├── bin/                        # Build output (gitignored)
 ├── .cache/                     # Validation cache directory (gitignored)
@@ -30,6 +33,9 @@ utilities/dot-project/
 ├── bootstrap_parsers.go        # CODEOWNERS, OWNERS, MAINTAINERS file parsers
 ├── bootstrap_sources.go        # Landscape/CLOMonitor/GitHub API clients, fuzzy matching, data merge
 ├── bootstrap_scaffold.go       # Scaffold generator (project.yaml, maintainers.yaml templates)
+├── drift_detector.go           # Issue formatter, sortActivityDesc, formatRepoList
+├── drift_sources.go            # GitHub API fetching: multi-repo activity, PR pagination, team members
+├── drift_detector_test.go      # Tests for drift detection and formatting
 ├── validator.go                # Project validation logic
 ├── maintainers.go              # Maintainer validation logic with LFX integration
 ├── landscape.go                # Landscape entry conversion and comparison
@@ -97,12 +103,13 @@ docker build -t dot-project-validator .
 make clean
 ```
 
-Note: The Makefile `build` target builds the `validator`, `landscape-updater`, and `bootstrap` binaries. The other CLI tools (`staleness-checker`, `audit-checker`) must be built manually:
+Note: The Makefile `build` target builds the `validator`, `landscape-updater`, and `bootstrap` binaries. The other CLI tools (`staleness-checker`, `audit-checker`, `drift`) must be built manually:
 
 ```bash
 go build -o bin/landscape-updater ./cmd/landscape-updater
 go build -o bin/staleness-checker ./cmd/staleness-checker
 go build -o bin/audit-checker ./cmd/audit-checker
+go build -o bin/drift ./cmd/drift
 ```
 
 ### Running the Validator
@@ -213,6 +220,45 @@ Verifies that all URLs referenced in a project (website, artwork, repositories, 
 ```
 
 Exit code 1 if any URL check fails.
+
+### Running the Maintainer Health-Check (drift)
+
+Fires when `maintainers.yaml` has not been updated in more than the configured number of days. Fetches contributor activity across all repos in `project.yaml` and writes a Markdown issue body.
+
+```bash
+# Check staleness and print issue body to stdout
+./bin/drift \
+  -project-yaml project.yaml \
+  -maintainers-yaml maintainers.yaml \
+  -last-updated-days 194
+
+# Write issue body to a file (used by the GitHub Actions workflow)
+./bin/drift \
+  -project-yaml project.yaml \
+  -maintainers-yaml maintainers.yaml \
+  -last-updated-days 194 \
+  -report /tmp/health-report.md
+
+# Custom staleness threshold (default: 180 days)
+./bin/drift -last-updated-days 200 -staleness-days 90
+
+# Adjust activity window and concurrency
+./bin/drift -activity-months 3 -concurrency 5 -top-contributors 10
+```
+
+**drift** (`cmd/drift/main.go`):
+- `-project-yaml` — Path to `project.yaml` (default: `project.yaml`)
+- `-maintainers-yaml` — Path to `maintainers.yaml` (default: `maintainers.yaml`)
+- `-github-token` — GitHub PAT (or set `GITHUB_TOKEN` env var)
+- `-team` — Team name in `maintainers.yaml` to read (default: `project-maintainers`)
+- `-report` — Write Markdown issue body to this file path (default: stdout)
+- `-staleness-days` — Days without update before the health-check fires (default: `180`)
+- `-last-updated-days` — Days since `maintainers.yaml` was last git-committed (`-1` = use file mtime)
+- `-activity-months` — How many months back to look for contributor activity (default: `6`)
+- `-concurrency` — Max parallel GitHub API repo fetches (default: `10`)
+- `-top-contributors` — How many non-maintainer contributors to surface (default: `5`)
+
+Exit codes: `0` = not stale; `1` = stale (issue body written); `2` = fatal error.
 
 ## Testing
 
@@ -353,6 +399,8 @@ Additional types in domain-specific files:
 - `--output` - Output format: text, json, yaml (default: `text`)
 - `--timeout` - HTTP request timeout in seconds (default: 10)
 
+**drift** (`cmd/drift/main.go`): see [Running the Maintainer Health-Check](#running-the-maintainer-health-check-drift) above.
+
 ## Docker
 
 ### Build
@@ -475,8 +523,109 @@ Edit the corresponding `cmd/*/main.go` file. All CLIs use the standard `flag` pa
 3. Use `flag` for argument parsing
 4. Support `--output` with text/json/yaml formats for consistency
 
-## Exit Codes
+## Testing the Maintainer Health-Check Feature
 
-- `0` - All checks passed
-- `1` - One or more checks failed (validation errors, stale data, failed URL checks)
-- Non-zero for other errors (file not found, parse errors, etc.)
+The cron trigger fires once a month and only once `maintainers.yaml` is 180 days old, so the feature needs to be tested via four complementary layers:
+
+### Layer 1 — Unit tests (no network, always fast)
+
+`go test -short ./...` runs all unit tests. The relevant files are:
+
+| File | What it covers |
+|------|----------------|
+| `drift_detector_test.go` | `FormatActivityIssue` rendering, `BuildHealthCheckActivityLists` sorting/filtering, `ParseAllRepos`, `sortActivityDesc`, `isLikelyTeamSlug`, `parseLinkNext`, `LoadProjectHandlesForTeam` |
+| `drift_sources_test.go` | HTTP API layer — uses `httptest.NewServer` mocks (no real network calls). Covers: contributor-stats window filtering, 204 no-content, 202 retry logic (skipped with `-short`), non-200 errors, PR merged/unmerged/out-of-window filtering, early-exit pagination, multi-repo fan-out, non-fatal fetch errors, context cancellation, team-members pagination, 403/404 error messages |
+
+```bash
+# Fast: all unit tests, skips the 3-second 202-retry test
+make test-short
+
+# Full: includes the 202-retry slow path
+make test
+```
+
+### Layer 2 — Offline smoke test (no token needed)
+
+Tests file parsing + staleness detection without touching the GitHub API. Because `-last-updated-days 1` (1 day) is less than the default 180-day threshold, the binary exits `0` ("not stale") before making any network requests.
+
+```bash
+make smoke-drift-offline
+# Equivalent:
+./bin/drift \
+  -project-yaml example/project.yaml \
+  -maintainers-yaml example/maintainers.yaml \
+  -last-updated-days 1
+```
+
+To test the staleness-detection logic specifically (the `daysSince > stalenessDays` gate):
+
+```bash
+# Should exit 0 — 1 day < 180-day threshold
+./bin/drift -last-updated-days 1   -staleness-days 180
+
+# Should exit 0 — equal is NOT stale (strict greater-than)
+./bin/drift -last-updated-days 180 -staleness-days 180
+
+# Should exit 1 — 181 > 180, stale, BUT will also call GitHub API
+# (use make smoke-drift for this, which needs GITHUB_TOKEN)
+./bin/drift -last-updated-days 181 -staleness-days 180
+```
+
+### Layer 3 — Live smoke test (needs `GITHUB_TOKEN`)
+
+Uses `-staleness-days 0` to force the stale path regardless of file age, then runs the full pipeline against the real GitHub API using the Kubernetes example fixtures. Exit code `1` is the expected ("stale") outcome.
+
+```bash
+export GITHUB_TOKEN=ghp_...
+make smoke-drift
+
+# Or manually, writing the issue body to a file for inspection:
+GITHUB_TOKEN=$GITHUB_TOKEN ./bin/drift \
+  -project-yaml  example/project.yaml \
+  -maintainers-yaml example/maintainers.yaml \
+  -last-updated-days 1 \
+  -staleness-days 0 \
+  -top-contributors 3 \
+  -report /tmp/health-report.md \
+  ; echo "exit: $?"
+cat /tmp/health-report.md
+```
+
+### Layer 4 — GitHub Actions workflow (needs a real `.project` repo)
+
+The scaffolded `template/.github/workflows/maintainer-drift.yml` has a `workflow_dispatch` trigger so the workflow can be triggered manually at any time without waiting for the cron schedule.
+
+```bash
+# Trigger manually from your .project repo's Actions tab, or via CLI:
+gh workflow run maintainer-drift.yml \
+  --repo <org>/<project>.project \
+  --field ref=main
+```
+
+**To test the full issue-open/update path without a real repo**, use the `act` local runner:
+
+```bash
+brew install act        # macOS / Linux
+act workflow_dispatch \
+  --secret GITHUB_TOKEN="$GITHUB_TOKEN" \
+  --workflows .github/workflows/maintainer-drift.yml
+```
+
+### Cheat-sheet: what each layer covers
+
+| Layer | Network | Token | What it proves |
+|-------|---------|-------|----------------|
+| `make test-short` | ✗ | ✗ | All logic paths via mocks — fast, runs in CI |
+| `make test` | ✗ | ✗ | Same + 202-retry backoff path |
+| `make smoke-drift-offline` | ✗ | ✗ | Binary builds, parses real YAML, exits 0 correctly |
+| `make smoke-drift` | ✓ | ✓ | Real GitHub API, full issue body rendered |
+| `workflow_dispatch` / `act` | ✓ | ✓ | Full GitHub Actions workflow, issue create/edit |
+
+
+
+| Code | Meaning |
+|------|---------|
+| `0` | All checks passed / not stale — no action needed |
+| `1` | One or more checks failed (validation errors, stale data, failed URL checks) **or** `drift`: `maintainers.yaml` is stale — issue body written to `-report` |
+| `2` | `drift` only: fatal error (bad flags, unreadable file, GitHub API failure) — do **not** open an issue |
+| Non-zero | Other errors (file not found, parse errors, etc.) |

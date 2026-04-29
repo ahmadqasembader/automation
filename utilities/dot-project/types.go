@@ -206,17 +206,32 @@ type ProjectListConfig struct {
 	Projects []ProjectListEntry `json:"projects" yaml:"projects"`
 }
 
-// DriftResult captures the outcome of a single maintainer drift check run.
-type DriftResult struct {
-	ProjectID              string    `json:"project_id"`
-	Org                    string    `json:"org"`
-	TeamName               string    `json:"team_name"`
-	AddedUpstream          []string  `json:"added_upstream,omitempty"`   // present upstream, missing in .project
-	RemovedUpstream        []string  `json:"removed_upstream,omitempty"` // in .project, gone from upstream
-	HasDrift               bool      `json:"has_drift"`
-	IsStale                bool      `json:"is_stale"`
-	DaysSinceUpdate        int       `json:"days_since_update"`
-	StalenessDaysThreshold int       `json:"staleness_days_threshold"`   // threshold used for IsStale
-	UpstreamSources        []string  `json:"upstream_sources,omitempty"` // governance files that were found
-	CheckedAt              time.Time `json:"checked_at"`
+// ActivitySummary captures aggregated GitHub activity for a single contributor
+// across all repos tracked by a project, over a rolling time window.
+type ActivitySummary struct {
+	Handle       string    `json:"handle"`
+	Commits      int       `json:"commits"`       // total commits authored in the window
+	MergedPRs    int       `json:"merged_prs"`    // total merged PRs authored in the window
+	ReposTouched []string  `json:"repos_touched"` // repos where activity was recorded
+	LastSeen     time.Time `json:"last_seen"`     // most recent commit or PR merge date
+}
+
+// RepoRef is a parsed GitHub org/repo pair derived from a repositories[] URL.
+type RepoRef struct {
+	Org  string
+	Repo string
+}
+
+// HealthCheckResult captures the outcome of a single maintainer health-check run.
+type HealthCheckResult struct {
+	ProjectID              string            `json:"project_id"`
+	Org                    string            `json:"org"`
+	TeamName               string            `json:"team_name"`
+	IsStale                bool              `json:"is_stale"`
+	DaysSinceUpdate        int               `json:"days_since_update"`
+	StalenessDaysThreshold int               `json:"staleness_days_threshold"`
+	MentionHandles         []string          `json:"mention_handles,omitempty"` // up to 3 handles to @mention in the issue greeting
+	MaintainerActivity     []ActivitySummary `json:"maintainer_activity"`
+	TopNewContributors     []ActivitySummary `json:"top_new_contributors"`
+	CheckedAt              time.Time         `json:"checked_at"`
 }
