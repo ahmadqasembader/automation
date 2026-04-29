@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 	"time"
 
@@ -392,7 +393,8 @@ var governanceFiles = []governanceFile{
 }
 
 // discoverGovernanceFiles looks for CODEOWNERS, OWNERS, MAINTAINERS in the repo root,
-// .github/ subdirectory, and the org-level .github repo.
+// .github/ subdirectory, and the org-level .github repo, then scans all repos in the
+// org to collect maintainer handles across the entire org.
 func discoverGovernanceFiles(result *GitHubData, org, repo string, doGet func(string) (*http.Response, error), client *http.Client) {
 	// Locations to search, in order of priority
 	contentPaths := []string{
@@ -424,6 +426,99 @@ func discoverGovernanceFiles(result *GitHubData, org, repo string, doGet func(st
 					if err == nil && content != "" {
 						gf.parseFunc(result, content, entry.HTMLURL)
 					}
+				}
+			}
+		}
+	}
+
+	// Scan all org repos to collect maintainer handles across the entire org.
+	scanOrgReposForGovernance(result, org, repo, doGet, client)
+}
+
+// scanOrgReposForGovernance lists all repositories in the org and searches each one
+// for governance files, skipping the primary repo root already checked by discoverGovernanceFiles.
+// Handles found across all repos are merged and deduplicated into result.Maintainers.
+func scanOrgReposForGovernance(result *GitHubData, org, primaryRepo string, doGet func(string) (*http.Response, error), client *http.Client) {
+	// Already-checked repos — skip them to avoid duplicate work
+	alreadyChecked := map[string]bool{
+		strings.ToLower(primaryRepo): true,
+		".github":                    true,
+	}
+
+	fmt.Fprintf(os.Stderr, "  Scanning all repos in %s org for maintainer handles...\n", org)
+	before := len(result.Maintainers)
+
+	page := 1
+	for {
+		path := fmt.Sprintf("/orgs/%s/repos?per_page=100&page=%d", org, page)
+		resp, err := doGet(path)
+		if err != nil || resp.StatusCode != http.StatusOK {
+			if resp != nil {
+				resp.Body.Close()
+			}
+			fmt.Fprintf(os.Stderr, "  Warning: could not list repos for org %s\n", org)
+			return
+		}
+
+		var repos []struct {
+			Name string `json:"name"`
+		}
+		if err := json.NewDecoder(resp.Body).Decode(&repos); err != nil {
+			resp.Body.Close()
+			return
+		}
+		resp.Body.Close()
+
+		if len(repos) == 0 {
+			return
+		}
+
+		for _, r := range repos {
+			if alreadyChecked[strings.ToLower(r.Name)] {
+				continue
+			}
+
+			fmt.Fprintf(os.Stderr, "    Checking %s/%s...\n", org, r.Name)
+			scanRepoRootForGovernance(result, org, r.Name, doGet, client)
+		}
+
+		// No more pages
+		if len(repos) < 100 {
+			break
+		}
+		page++
+	}
+
+	found := len(result.Maintainers) - before
+	if found > 0 {
+		fmt.Fprintf(os.Stderr, "  Found %d maintainer(s) across org repos\n", found)
+	}
+}
+
+// scanRepoRootForGovernance lists the root contents of a single repo and parses
+// any governance files found there.
+func scanRepoRootForGovernance(result *GitHubData, org, repo string, doGet func(string) (*http.Response, error), client *http.Client) {
+	resp, err := doGet(fmt.Sprintf("/repos/%s/%s/contents/", org, repo))
+	if err != nil || resp.StatusCode != http.StatusOK {
+		if resp != nil {
+			resp.Body.Close()
+		}
+		return
+	}
+
+	var entries []GitHubContentEntry
+	if err := json.NewDecoder(resp.Body).Decode(&entries); err != nil {
+		resp.Body.Close()
+		return
+	}
+	resp.Body.Close()
+
+	for _, entry := range entries {
+		for _, gf := range governanceFiles {
+			if strings.EqualFold(entry.Name, gf.name) && entry.Type == "file" && entry.DownloadURL != "" {
+				content, err := fetchFileContent(client, entry.DownloadURL)
+				if err == nil && content != "" {
+					gf.parseFunc(result, content, entry.HTMLURL)
 				}
 			}
 		}
