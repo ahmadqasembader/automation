@@ -20,8 +20,9 @@ const (
 	landscapeLogoBaseURL    = "https://landscape.cncf.io/logos/"
 )
 
-// fetchFromCLOMonitor queries the CLOMonitor API for a CNCF project by display name.
-// It fuzzy-matches the display_name, filtering for foundation=cncf.
+// fetchFromCLOMonitor queries the CLOMonitor search API for a CNCF project by display name.
+// It passes text and foundation=cncf as query parameters so the server filters results,
+// then fuzzy-matches the display_name among the returned candidates.
 // baseURL overrides the CLOMonitor API base (use "" for default).
 // Returns nil if no match is found.
 func fetchFromCLOMonitor(name string, client *http.Client, baseURL string) (*CLOMonitorProject, error) {
@@ -29,8 +30,12 @@ func fetchFromCLOMonitor(name string, client *http.Client, baseURL string) (*CLO
 		baseURL = defaultCLOMonitorURL
 	}
 
-	url := baseURL + cloMonitorSearchPath
-	resp, err := client.Get(url)
+	params := url.Values{}
+	params.Set("text", name)
+	params.Set("foundation", "cncf")
+	fullURL := baseURL + cloMonitorSearchPath + "?" + params.Encode()
+
+	resp, err := client.Get(fullURL)
 	if err != nil {
 		return nil, fmt.Errorf("CLOMonitor request failed: %w", err)
 	}
@@ -50,21 +55,13 @@ func fetchFromCLOMonitor(name string, client *http.Client, baseURL string) (*CLO
 		return nil, fmt.Errorf("parsing CLOMonitor response: %w", err)
 	}
 
-	// Filter to CNCF foundation only
-	var cncfProjects []CLOMonitorProject
-	for _, p := range results {
-		if strings.EqualFold(p.Foundation, "cncf") {
-			cncfProjects = append(cncfProjects, p)
-		}
-	}
-
-	if len(cncfProjects) == 0 {
+	if len(results) == 0 {
 		return nil, nil
 	}
 
-	// Fuzzy match by display name
+	// Fuzzy match by display name among the server-filtered results
 	var candidates []string
-	for _, p := range cncfProjects {
+	for _, p := range results {
 		candidates = append(candidates, p.DisplayName)
 	}
 
@@ -73,9 +70,9 @@ func fetchFromCLOMonitor(name string, client *http.Client, baseURL string) (*CLO
 		return nil, nil
 	}
 
-	for i, p := range cncfProjects {
+	for i, p := range results {
 		if p.DisplayName == best {
-			return &cncfProjects[i], nil
+			return &results[i], nil
 		}
 	}
 
