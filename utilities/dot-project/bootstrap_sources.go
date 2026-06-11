@@ -433,7 +433,7 @@ func discoverGovernanceFiles(result *GitHubData, org, repo string, doGet func(st
 		fmt.Sprintf("/repos/%s/.github/contents/", org),
 	}
 
-	for idx, contentPath := range contentPaths {
+	for _, contentPath := range contentPaths {
 		resp, err := doGet(contentPath)
 		if err != nil || resp.StatusCode != http.StatusOK {
 			if resp != nil {
@@ -457,10 +457,6 @@ func discoverGovernanceFiles(result *GitHubData, org, repo string, doGet func(st
 						gf.parseFunc(result, content, entry.HTMLURL)
 					}
 				}
-			}
-			// Detect package manager manifests in the primary repo root only (idx == 0)
-			if idx == 0 && entry.Type == "file" {
-				detectAndParseManifest(result, entry, client)
 			}
 		}
 	}
@@ -566,38 +562,6 @@ func scanRepoRootForGovernance(result *GitHubData, org, repo string, doGet func(
 				result.SlackChannels = mergeStringSlices(result.SlackChannels, channels)
 			}
 		}
-		// Detect package manager manifests
-		if entry.Type == "file" {
-			detectAndParseManifest(result, entry, client)
-		}
-	}
-}
-
-// detectAndParseManifest checks if a directory entry is a known package manager
-// manifest file. If so, it downloads the file, parses it for the package
-// identifier, and adds the result to data.PackageManagers.
-// Only records entries where the identifier was successfully extracted.
-func detectAndParseManifest(data *GitHubData, entry GitHubContentEntry, client *http.Client) {
-	registry := detectPackageManagerFromFilename(entry.Name)
-	if registry == "" {
-		return
-	}
-	// Already have this registry — skip the download
-	if data.PackageManagers != nil {
-		if _, exists := data.PackageManagers[registry]; exists {
-			return
-		}
-	}
-	// Download and parse the manifest to extract the package identifier
-	if entry.DownloadURL == "" {
-		return
-	}
-	content, err := fetchFileContent(client, entry.DownloadURL)
-	if err != nil || content == "" {
-		return
-	}
-	if id := parseManifestForIdentifier(registry, content); id != "" {
-		data.addPackageManager(registry, id)
 	}
 }
 
