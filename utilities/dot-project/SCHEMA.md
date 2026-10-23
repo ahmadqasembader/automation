@@ -361,3 +361,92 @@ These rules apply additionally when `org.yaml` is present; see
 10. **Declared and present must agree** -- every declared project needs a directory with both files, and every undeclared project-shaped directory is an error
 11. **Identity must match the directory** -- `slug` and `project_id` must both equal the project's `id`
 12. **Slugs are unique** -- no two projects in the repository may share a slug
+
+## committees.yaml
+
+`committees.yaml` describes an organization's governance bodies (for CNCF: the
+TOC, TAGs and their subprojects, the End User TAB, the Governing Board and
+staff), the role teams inside each body, and who holds each role and for which
+term. It lives in the organization's `.project` repository (for CNCF,
+`cncf/.project`) and is independent of `project.yaml`/`maintainers.yaml`.
+Nothing in the schema is CNCF-specific, so another organization can adopt it
+unchanged. Requirements and design rationale are in
+[COMMITTEES.md](COMMITTEES.md); a complete example is
+[example/committees.yaml](example/committees.yaml).
+
+Validate with `validator -committees committees.yaml`, or in CI with the
+[`validate-committees`](../../.github/actions/validate-committees/action.yml)
+action. Both check that every member handle is an existing GitHub account and
+every `url` resolves (404/410 fails); pass `-check-links=false` (or
+`check_links: 'false'`) to skip this offline. The validator reads the GitHub
+token from `GITHUB_TOKEN` or `GH_TOKEN`, then the `-env-file` (default `.env`),
+then `gh auth token`; without one, rate-limited lookups are only warnings.
+
+### Top-Level
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `schema_version` | string | Yes | Must be `"1.0.0"` |
+| `org` | string | No | GitHub organization that owns the `github_teams` |
+| `committees` | Committee[] | Yes | At least one entry |
+
+### Committee
+
+| Field | Type | Required | Description | Constraints |
+|-------|------|----------|-------------|-------------|
+| `id` | string | Yes | Stable identifier | Slug; unique in the file |
+| `name` | string | Yes | Display name | |
+| `description` | string | No | One-line purpose | |
+| `type` | string | No | Free-form category, e.g. `toc`, `tag`, `subproject`, `board`, `staff` | |
+| `url` | string | No | Home page or charter | `http(s)` URL |
+| `teams` | CommitteeTeam[] | Yes | Roles in the committee | At least one; at least one must be non-emeritus |
+
+### CommitteeTeam
+
+A team is a **role** (members, alternates, tech-leads, ...). The same person
+may hold several roles, so may appear in several teams. A position held within
+a team, such as chair of the TOC members, is a member's `role` rather than a
+separate team, and a member's liaison duties to other committees are its
+`liaison` list.
+
+| Field | Type | Required | Description | Constraints |
+|-------|------|----------|-------------|-------------|
+| `name` | string | Yes | Role name | Slug; unique within the committee |
+| `github_teams` | string[] | No | GitHub team slugs this role grants | Slugs; no duplicates. A GitHub team's intended membership is the union of the current members of every non-emeritus role that lists it |
+| `emeritus` | bool | No | Past role holders, kept for the record | Default `false`; cannot have `github_teams`; every member needs an `end` |
+| `members` | CommitteeMember[] | Yes | Role holders | At least one; leave a role out until it is filled |
+
+### CommitteeMember
+
+Members are always mappings; a bare handle string is an error. Members are
+identified by GitHub handle only: names and affiliations come from the
+member's LFID profile, not from this file.
+
+| Field | Type | Required | Description | Constraints |
+|-------|------|----------|-------------|-------------|
+| `github` | string | Yes | GitHub handle | No leading `@`; valid GitHub login |
+| `role` | string | No | Position within the team, e.g. `chair`, `vice-chair` | Slug |
+| `liaison` | string[] | No | Committees the member is liaison to, e.g. `[tag-infrastructure, tag-workloads-foundation]` | Non-empty list; each entry is the `id` of another committee in the file, listed once |
+| `elected_by` | string | Yes | Body or constituency that elected/appointed the person (e.g. `Governing Board`, `End User TAB`, `TOC`) | Non-empty free text |
+| `start` | date | Yes | Term start | `YYYY-MM-DD` |
+| `end` | date | No | Term end; omit it when the term has no fixed end (staff, board seats) | `YYYY-MM-DD` after `start`; required in emeritus teams |
+
+No other member fields are accepted (including `name` and `company`), so
+emails and other personal data cannot be added by accident.
+
+### committees.yaml validation rules
+
+Errors fail validation:
+
+1. A file with more than one YAML document; unknown fields at any level, duplicate keys, and bare-string members
+2. Missing required fields, bad slugs, bad handles, bad dates, `end` not after `start`
+3. Duplicate committee `id`s, duplicate team names in a committee; a `liaison` entry that is repeated, is not a committee `id` in the file, or is the member's own committee
+4. A team with no members, or a committee whose teams are all emeritus
+5. Emeritus teams that grant GitHub teams, or emeritus members without an `end`
+6. A handle repeated within one team with **overlapping** terms (case-insensitive); a missing `end` counts as open. Repeats with disjoint terms record re-elections or separate stints
+
+Warnings never fail validation, so a file does not start failing CI just
+because time passed:
+
+- A non-emeritus member whose `end` is in the past (renew the term or move them to the emeritus team)
+- An emeritus member whose `end` is in the future
